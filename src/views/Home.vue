@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <NavBar :currentUser="{ currentUser: 'connor' }" :userSignedIn="true"></NavBar>
+    <NavBar :currentUser="{ currentUser: 'connor' }" :userSignedIn="false"></NavBar>
     <img alt="Vue logo" src="../assets/logo.png">
   </div>
 </template>
