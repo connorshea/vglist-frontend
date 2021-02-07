@@ -16,9 +16,7 @@
       <div class="navbar-start">
         <!-- Placeholder search input until the Vue component loads. -->
         <div class="navbar-item has-dropdown field mt-10">
-          <p class="control">
-            Search
-          </p>
+          <Search :searchIcon="'foo'"></Search>
         </div>
 
         <!-- Link to the global activity if the user isn't logged in. -->
@@ -119,9 +117,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import Search from '@/components/Search.vue';
 
 export default Vue.extend({
   name: 'NavBar',
+  components: {
+    Search
+  },
   props: {
     userSignedIn: Boolean,
     currentUser: Object
@@ -156,8 +158,8 @@ export default Vue.extend({
             },
             {
               title: 'Sign out', // TODO: This should trigger a DELETE.
-              path: '/sign_out',
-              router: true
+              path: '/users/sign_out',
+              router: false
             },
             {
               title: null,
