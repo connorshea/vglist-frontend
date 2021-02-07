@@ -1,0 +1,1048 @@
+@import './bulma-variables.scss';
+@import '~bulma/bulma';
+
+:root {
+  color-scheme: light dark;
+
+  --vglist-theme: #5856d6;
+  --home-page-subtitle-text: #fff;
+  --home-section-background-color: var(--vglist-theme);
+  --home-section-background-brightness: 85%;
+
+  --vglist-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  --custom-card-drop-shadow-color: #000;
+  --custom-card-drop-shadow-color-rgb: 10, 10, 10;
+  --dropdown-link-no-highlight: #000;
+  --navbar-dropdown-item-color: #333;
+  --navbar-item-background-hover: var(--scheme-secondary);
+  --library-edit-bar-border: #dcdfe6;
+  --input-radius: 4px;
+  --scheme-alt: #fff;
+  --scheme-secondary: #eeeded;
+  --input-placeholder-color: #333;
+
+  --dropdown-icon-fill: $dropdown-content-arrow;
+
+  --text-muted: var(--grey, #7a7a7a);
+
+  --vglist-default-fill: #585858;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --white: #fff;
+    --white-rgb: 255, 255, 255;
+
+    --text: var(--white);
+    --text-strong: var(--text);
+    --scheme-main: #2c394f;
+    --scheme-alt: #324057;
+    --scheme-secondary: #445168;
+    --scheme-invert-rgb: 255, 255, 255;
+
+    --card-background-color: var(--scheme-alt);
+    --dropdown-link-no-highlight: var(--white);
+    --home-section-background-color: var(--scheme-main);
+    --home-section-background-brightness: 75%;
+    --navbar-dropdown-item-color: var(--white);
+    --navbar-item-background-hover: var(--scheme-secondary);
+    --vglist-shadow: 0 2px 3px rgba(12, 12, 12, 0.1), 0 0 0 1px rgba(12, 12, 12, 0.1);
+    --library-edit-bar-border: #435169;
+    --input-color: var(--white);
+    --input-disabled-color: rgba(255, 255, 255, 0.5);
+    --input-border-color: transparent;
+    --input-placeholder-color: var(--white);
+    --input-hover-border-color: transparent;
+    --input-focus-border-color: #dbdbdb;
+    --input-disabled-border-color: transparent;
+    --input-background-color: #445168;
+    --input-disabled-background-color: #445168;
+    --code-background: var(--scheme-secondary);
+    --code: var(--white);
+    --link: #209ad9;
+    --link-hover: var(--white);
+
+    --text-muted: var(--grey-lighter, #dbdbdb);
+
+    --vglist-default-fill: var(--white);
+    --dropdown-icon-fill: var(--vglist-default-fill);
+
+    // This is used in flash messages and a few other places.
+    --background: var(--scheme-secondary);
+  }
+
+  .navbar {
+    --navbar-shadow-color: rgba(10.2, 10.2, 10.2, 0.1);
+    --navbar-dropdown-item-hover-background-color: #5178bc;
+  }
+
+  .navbar-dropdown {
+    --navbar-dropdown-background-color: var(--scheme-alt);
+  }
+
+  .navbar-divider {
+    --navbar-divider-background-color: #afafaf;
+  }
+
+  .table {
+    --table-color: var(--white);
+    --table-head-cell-color: var(--table-color);
+    --table-foot-cell-color: var(--table-color);
+    --table-striped-row-even-background-color: var(--table-body-background-color);
+  }
+
+  .box {
+    --box-background-color: var(--scheme-alt);
+    --box-shadow: var(--vglist-shadow);
+  }
+
+  .card {
+    --card-background-color: var(--scheme-alt);
+    --card-shadow: var(--vglist-shadow);
+  }
+
+  .title {
+    --title-color: var(--white);
+  }
+
+  .content {
+    --content-heading-color: var(--white);
+  }
+
+  body {
+    color: var(--text);
+  }
+
+  .label {
+    --label-color: var(--white);
+  }
+
+  .notification {
+    --notification-background-color: var(--scheme-alt);
+  }
+
+  .button {
+    --button-background-color: var(--scheme-alt);
+    --button-color: var(--white);
+    --button-hover-color: var(--white);
+    --button-active-color: var(--white);
+    --button-focus-color: var(--white);
+    --button-active-border-color: var(--white);
+    --button-focus-border-color: var(--white);
+    --button-border-color: rgba(var(--white-rgb), 0.25);
+
+    box-shadow: var(--vglist-shadow);
+  }
+
+  .tabs {
+    --tabs-link-hover-border-bottom-color: var(--white);
+    --tabs-link-hover-color: var(--white);
+  }
+
+  .menu {
+    --menu-item-hover-background-color: var(--scheme-secondary);
+    --menu-item-hover-color: var(--white);
+    --menu-label-color: var(--white);
+  }
+
+  .modal {
+    --modal-card-head-background-color: var(--scheme-main);
+    --modal-card-title-color: var(--white);
+  }
+
+  .delete::before,
+  .modal-close::before,
+  .delete::after,
+  .modal-close::after {
+    background-color: var(--white);
+  }
+
+  .modal-background {
+    --modal-background-background-color: rgba(10.2, 10.2, 10.2, 0.86);
+  }
+
+  .dropdown {
+    --dropdown-content-background-color: var(--scheme-alt);
+    --dropdown-item-hover-background-color: var(--scheme-secondary);
+    --dropdown-item-hover-color: var(--white);
+  }
+}
+
+html {
+  background-color: var(--scheme-main, #fff);
+}
+
+nav.navbar {
+  --navbar-menu-background-color: var(--vglist-theme);
+
+  background: var(--vglist-theme);
+  // Subtle box-shadow for nav bar.
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.3);
+  padding: 0 20px;
+
+  // Override burger icon color when hovered.
+  // There doesn't seem to be a Bulma variable for this.
+  .navbar-burger:hover {
+    color: #fff;
+  }
+
+  // Show underlines on-hover on desktop.
+  @include from($desktop) {
+    // Don't apply the borders to items with dropdowns or fields (the search bar).
+    .navbar-item:not(.has-dropdown),
+    .navbar-item:not(.field) {
+      // This prevents the navbar items from moving up and down when hovered.
+      border-bottom: 2px solid transparent;
+      transition: border-bottom 200ms;
+
+      &:hover, &:focus {
+        border-bottom: 2px solid rgba(255, 255, 255, 0.8);
+      }
+    }
+
+    .navbar-dropdown {
+      .navbar-item {
+        transition: border-bottom 0ms;
+        transition: background-color 200ms;
+        transition: color 0ms;
+        border-bottom: 0;
+        color: var(--navbar-dropdown-item-color);
+
+        &:hover, &:focus {
+          border-bottom: 0;
+        }
+      }
+
+      a.navbar-item:hover {
+        background-color: var(--navbar-item-background-hover);
+      }
+
+      a.navbar-item.is-active {
+        background-color: #5178bc;
+        color: #fff;
+      }
+    }
+  }
+
+  .navbar-dropdown {
+    font-size: 1rem;
+  }
+
+  .navbar-item img.user-avatar {
+    max-height: 1.8rem;
+    max-width: 1.8rem;
+    object-fit: scale-down;
+    border: 1px solid #fff;
+  }
+
+  .navbar-dropdown-header {
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  // For game covers in the search dropdown.
+  img.game-cover {
+    max-height: 48px;
+    overflow: clip;
+    object-fit: cover;
+  }
+}
+
+.v-select {
+  display: block;
+}
+
+.navbar-search-dropdown {
+  max-height: 400px;
+  height: auto;
+  overflow: scroll;
+}
+
+// Customization for bulma dropdowns.
+// Based on https://github.com/jgthms/bulma/pull/2142
+// Don't apply these styles to vue-select dropdowns.
+.dropdown:not(.v-select) {
+  button > .icon {
+    fill: var(--dropdown-icon-fill);
+    z-index: 4;
+    transition: transform 150ms;
+    margin-top: 2px;
+  }
+
+  &.is-active {
+    button > .icon {
+      fill: var(--dropdown-icon-fill);
+      transform: rotate(-180deg);
+      margin-top: 0;
+    }
+  }
+
+  &.is-fullwidth-mobile {
+    @include touch {
+      display: flex;
+      width: 100%;
+    }
+  }
+
+  .dropdown-item.no-link-highlight a {
+    color: var(--dropdown-link-no-highlight);
+  }
+}
+
+.buttons {
+  align-items: initial;
+
+  &.buttons-vertical {
+    flex-direction: column;
+  }
+}
+
+.dropdown-trigger {
+  &.is-fullwidth {
+    display: flex;
+    width: 100%;
+  }
+
+  &.is-fullwidth-mobile {
+    @include touch {
+      display: flex;
+      width: 100%;
+      margin-right: 0;
+    }
+  }
+
+  button {
+    &.is-fullwidth {
+      display: flex;
+      width: 100%;
+    }
+
+    &.is-fullwidth-mobile {
+      @include touch {
+        display: flex;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.dropdown-menu {
+  &.is-fullwidth {
+    width: 100%;
+  }
+
+  &.is-fullwidth-mobile {
+    @include touch {
+      width: 100%;
+    }
+  }
+}
+
+.file-select > input[type='file'] {
+  display: none;
+}
+
+.file-select > .select-button {
+  padding: 1rem;
+
+  color: white;
+  background-color: #2ea169;
+
+  border-radius: 0.3rem;
+
+  text-align: center;
+  font-weight: bold;
+}
+
+.hero-area {
+  display: flex;
+  flex-flow: column wrap;
+
+  @include from($desktop) {
+    flex-flow: row nowrap;
+
+    .text-block {
+      flex: 1 1 100%;
+      padding-left: 15px;
+    }
+  }
+
+  @include touch {
+    .text-block {
+      text-align: center;
+    }
+  }
+
+  .hero-image {
+    flex: 1 1 200px;
+
+    img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: top left;
+      
+      @include touch {
+        object-position: top center;
+        max-height: 300px;
+      }
+    }
+
+    &.hero-image-150 {
+      img {
+        height: 200px;
+        width: auto;
+        max-width: 100%;
+      }
+    }
+
+    @include touch {
+      margin: auto;
+    }
+  }
+}
+
+.game-card-list,
+.user-card-list {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+  @include from($tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
+}
+
+.custom-card {
+  --card-radius: var(--radius);
+
+  background-color: var(--card-background-color, #fff);
+  box-shadow: var(--vglist-shadow);
+  border-radius: var(--card-radius);
+  color: hsl(0, 0%, 21%);
+  width: auto;
+  position: relative;
+  overflow: hidden;
+
+  &.game-card {
+    height: 200px;
+  }
+
+  &.user-card {
+    height: 80px;
+
+    .card-content {
+      overflow: hidden;
+    }
+
+    .title {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      word-break: normal;
+    }
+
+    img {
+      width: 80px;
+      min-width: 80px;
+      height: 80px;
+    }
+  }
+
+  .card-container {
+    padding: 0;
+    display: flex;
+    flex-flow: row nowrap;
+    height: 100%;
+  }
+
+  .card-content {
+    padding: 15px;
+  }
+
+  .game-cover {
+    height: 100%;
+    width: 140px;
+    max-width: 140px;
+    min-width: 140px;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.game-card-dropdown {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+// Center the game cover if the sidebar is full-width (specifically useful for mobile).
+.game-sidebar .game-cover img {
+  display: block;
+  margin: auto;
+}
+
+// Remove the radius and modify padding on notifications so they can be used
+// for Rails flashes.
+.notification.flash-notification {
+  border-radius: 0;
+  padding: 1rem 2.5rem 1rem 1.5rem;
+  display: flex;
+
+  // Make sure it wraps so the user can always see the notification text
+  // without it running over the 'close' button.
+  > p {
+    flex-grow: 1;
+    white-space: normal;
+  }
+
+  // Reset the positioning of the delete element within the
+  // notification container.
+  > .delete {
+    position: relative;
+    right: auto;
+    top: auto;
+  }
+}
+
+.notification.errors-notification {
+  li {
+    list-style: initial;
+    margin-left: 20px;
+  }
+}
+
+.modal-card {
+  max-height: calc(100vh - 120px);
+  overflow: scroll;
+
+  // When the modal card title is too long, make sure it
+  // gets a trailing ellipsis instead of causing horizontal scrolling.
+  // Also add bottom padding to prevent characters that go below the baseline
+  // from being clipped (e.g. the letter 'g').
+  .modal-card-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: calc(100% - 20px);
+    padding-right: 10px;
+    padding-bottom: 4px;
+  }
+}
+
+.modal-card-body-allow-overflow {
+  overflow: initial;
+}
+
+// Make input placeholder text darker by default.
+.input::placeholder {
+  color: var(--input-placeholder-color);
+  opacity: 0.5;
+}
+
+.infobox {
+  width: 100%;
+
+  column-count: 3;
+  column-width: 250px;
+  column-gap: 20px;
+  column-fill: balance;
+
+  // Make it so the infobox sections aren't split between columns.
+  .infobox-section {
+    break-inside: avoid;
+  }
+
+  @include touch {
+    column-count: 1;
+  }
+}
+
+.stats-card {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  padding: 15px;
+}
+
+.button.is-fullwidth-mobile {
+  @include touch {
+    display: flex;
+    width: 100%;
+  }
+}
+
+.is-fullwidth-mobile {
+  @include touch {
+    width: 100%;
+  }
+}
+
+.level {
+  .level-item {
+    white-space: nowrap;
+    flex-basis: 100px;
+    margin: 0;
+    padding: 5px;
+  }
+}
+
+.more-from-this-series-card {
+  max-width: 500px;
+
+  .games {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+
+    a {
+      display: inline-block;
+      position: relative;
+    }
+  }
+
+  .game-cover {
+    height: 200px;
+    width: 140px;
+    max-width: 140px;
+    min-width: 140px;
+
+    @include touch {
+      width: 100%;
+      max-width: 100%;
+      min-width: 100%;
+    }
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      position: absolute;
+    }
+
+    p {
+      color: #fff;
+      padding: 8px;
+      position: absolute;
+      bottom: 0;
+      background-color: rgba(#333, 0.7);
+      width: 100%;
+    }
+  }
+}
+
+// Hide pagination except Previous/Next on mobile.
+@include touch {
+  .pagination-list {
+    display: none;
+  }
+}
+
+.stats-card {
+  .level {
+    width: 100%;
+  }
+}
+
+.percentage-bar {
+  height: 18px;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+
+  .percentage-bar-portion {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    color: #fff;
+
+    &.color-1 {
+      background-color: #03a9f4;
+    }
+    &.color-2 {
+      background-color: #ff5252;
+    }
+    &.color-3 {
+      background-color: #e91e63;
+    }
+    &.color-4 {
+      background-color: #ff5722;
+    }
+    &.color-5 {
+      background-color: #8bc34a;
+    }
+    &.color-6 {
+      background-color: #3f51b5;
+    }
+    &.color-7 {
+      background-color: #7c4dff;
+    }
+    // Last color is 'Unknown'
+    &.color-8 {
+      background-color: #d1cfcf;
+    }
+  }
+}
+
+// Tooltip styling for v-tooltip.
+.tooltip {
+  display: block !important;
+  z-index: 10000;
+
+  .tooltip-inner {
+    background: rgba(#333, 0.9);
+    color: white;
+    border-radius: 4px;
+    padding: 5px 10px 4px;
+  }
+
+  .tooltip-arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    margin: 5px;
+    border-color: rgba(#333, 0.9);
+    z-index: 1;
+  }
+
+  &[x-placement^='top'] {
+    margin-bottom: 5px;
+
+    .tooltip-arrow {
+      border-width: 5px 5px 0 5px;
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
+      border-bottom-color: transparent !important;
+      bottom: -5px;
+      left: calc(50% - 5px);
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  &[x-placement^='bottom'] {
+    margin-top: 5px;
+
+    .tooltip-arrow {
+      border-width: 0 5px 5px 5px;
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
+      border-top-color: transparent !important;
+      top: -5px;
+      left: calc(50% - 5px);
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  &[x-placement^='right'] {
+    margin-left: 5px;
+
+    .tooltip-arrow {
+      border-width: 5px 5px 5px 0;
+      border-left-color: transparent !important;
+      border-top-color: transparent !important;
+      border-bottom-color: transparent !important;
+      left: -5px;
+      top: calc(50% - 5px);
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  &[x-placement^='left'] {
+    margin-right: 5px;
+
+    .tooltip-arrow {
+      border-width: 5px 0 5px 5px;
+      border-top-color: transparent !important;
+      border-right-color: transparent !important;
+      border-bottom-color: transparent !important;
+      right: -5px;
+      top: calc(50% - 5px);
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  &[aria-hidden='true'] {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.25s, visibility 0.25s;
+  }
+
+  &[aria-hidden='false'] {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.25s;
+  }
+}
+
+.library-edit-bar.level {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: var(--scheme-main, #fff);
+  border: 1px solid var(--library-edit-bar-border);
+  margin-bottom: 5px;
+  // Modal overlay is 40, make sure to stay below it.
+  z-index: 39;
+  padding: 8px 5px 8px 15px;
+
+  // Set width to auto to make the input field display the placeholder value.
+  // By default, width is set to 0 for some reason.
+  .vs__search,
+  .vs__search:focus {
+    width: auto;
+  }
+}
+
+// Turn the button red and add a shaking animation when there's an error.
+.js-submit-button-error {
+  background-color: #ff3860 !important;
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+// Spacing between elements and make sure the dropdowns are fullwidth.
+.games-search-sidebar {
+  .games-filters > div {
+    margin-top: 10px;
+  }
+
+  .dropdown {
+    display: block;
+  }
+
+  .dropdown-menu {
+    position: relative;
+  }
+}
+
+// For easily selecting the whole piece of text, e.g. for easy copy-paste.
+.user-select-all {
+  user-select: all;
+}
+
+// Limit the width of the sign-in container.
+.sign-in-container {
+  max-width: 500px;
+
+  @include touch {
+    box-shadow: none;
+  }
+}
+
+// Toggles the display of icon-1 and icon-2 child elements when hovering on this element.
+.toggle-icon-on-hover {
+  &:hover > .svg-icon.icon-1 {
+    display: none;
+  }
+
+  > .svg-icon.icon-2 {
+    display: none;
+  }
+
+  &:hover > .svg-icon.icon-2 {
+    display: initial;
+  }
+}
+
+// Styling for the navbar search field, mostly the icon.
+.navbar-search-input {
+  --input-color: #fff;
+
+  background-color: rgba(255, 255, 255, 0.25);
+  border: 0;
+  border-radius: 3px;
+  transition: background-color 250ms, color 250ms;
+
+  &::placeholder {
+    color: #fff;
+  }
+
+  + span.icon {
+    fill: rgba(255, 255, 255, 0.5);
+    transition: fill 250ms;
+  }
+
+  &:focus {
+    --input-color: #000;
+
+    background-color: rgba(255, 255, 255, 1);
+
+    + span.icon {
+      fill: darken($grey-light, 30%);
+    }
+
+    &::placeholder {
+      color: #333;
+    }
+  }
+}
+
+.is-vertical-align-middle {
+  vertical-align: middle;
+}
+
+.is-borderless {
+  border: 0px;
+}
+
+// Custom vue-select styles.
+.v-select {
+  background-color: var(--input-background-color);
+
+  .vs__search {
+    color: var(--input-color);
+
+    &:focus {
+      color: var(--input-focus-color);
+    }
+  }
+
+  .vs__dropdown-menu {
+    background-color: var(--scheme-alt);
+    color: var(--text);
+  }
+
+  .vs__dropdown-toggle {
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--input-radius);
+
+    &:hover {
+      border: 1px solid var(--input-hover-border-color);
+    }
+
+    &:focus,
+    &.vs--open {
+      border: 1px solid var(--input-focus-border-color);
+    }
+  }
+
+  .vs__selected {
+    color: var(--text);
+  }
+
+  &:not(.vs--single) .vs__selected-options .vs__selected {
+    color: var(--text);
+    background-color: var(--scheme-alt);
+  }
+
+  .vs__dropdown-option {
+    color: var(--text);
+
+    // When highlighted, it should have white text since it always has a blue
+    // background.
+    &.vs__dropdown-option--highlight {
+      color: var(--white);
+    }
+  }
+
+  // Set the fill of the icons in v-select inputs.
+  .vs__open-indicator,
+  .vs__clear,
+  .vs__spinner,
+  .vs__deselect {
+    fill: var(--vglist-default-fill);
+  }
+
+  &.vs--disabled {
+    background-color: var(--input-disabled-background-color);
+    border-color: var(--input-disabled-border-color);
+  }
+
+  &.vs--disabled .vs__clear,
+  &.vs--disabled .vs__dropdown-toggle,
+  &.vs--disabled .vs__open-indicator,
+  &.vs--disabled .vs__search,
+  &.vs--disabled .vs__selected {
+    color: var(--input-disabled-color);
+    background-color: transparent;
+  }
+}
+
+// For text that should have a more muted color, e.g. extra information in
+// a card.
+.has-text-muted {
+  color: var(--text-muted);
+}
+
+.box {
+  --box-radius: var(--radius);
+}
+
+.card {
+  --card-radius: var(--radius);
+}
+
+// FIXME: A temporary hack until the vue-good-table dark theme styling is
+// fixed. Without this, it'll try to use a light grey background for the
+// headers on the compare library page.
+.vgt-table th.vgt-row-header {
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--scheme-main) !important;
+  }
+}
+
+// Grid of avatars on the Game page.
+.avatar-image-grid {
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(auto-fill, 64px);
+
+  @include touch {
+    // Display rows of three on mobile.
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .avatar-image-grid-item {
+    // Special styling for the "+123" element.
+    &.avatar-image-grid-item-overflow {
+      display: inline-grid; // this is necessary for centering the text to work.
+      background-color: var(--scheme-alt);
+      width: 100%;
+      height: 100%;
+      border: 1px solid var(--border);
+
+      // No borders if the user has dark theme.
+      @media (prefers-color-scheme: dark) {
+        border: 0;
+      }
+
+      p {
+        margin: auto;
+        font-size: 1.2rem;
+      }
+    }
+
+    a {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
