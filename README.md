@@ -1,4 +1,4 @@
-# vglist-frontend-test
+# vglist-frontend
 
 ## Project setup
 ```
