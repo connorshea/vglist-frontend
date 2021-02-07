@@ -1,12 +1,21 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <NavBar :currentUser="{ username: 'connor' }" :userSignedIn="false"></NavBar>
     <router-view/>
   </div>
 </template>
+
+<script lang="ts">
+import Vue from 'vue';
+import NavBar from '@/components/NavBar.vue'; // @ is an alias to /src
+
+export default Vue.extend({
+  name: 'Home',
+  components: {
+    NavBar
+  },
+});
+</script>
 
 <style lang="scss">
 #app {
