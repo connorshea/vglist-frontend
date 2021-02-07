@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
+import Activity from '../views/Activity.vue'
 import Engines from '../views/Engines.vue'
 import Games from '../views/Games.vue'
 import Genres from '../views/Genres.vue'
 import Platforms from '../views/Platforms.vue'
-import Series from '../views/Series.vue'
+import SeriesList from '../views/SeriesList.vue'
 import Stores from '../views/Stores.vue'
 import Users from '../views/Users.vue'
+import User from '../views/User.vue'
 
 Vue.use(VueRouter)
 
@@ -24,6 +26,11 @@ const routes: Array<RouteConfig> = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/activity',
+    name: 'Activity',
+    component: Activity
   },
   {
     path: '/engines',
@@ -48,7 +55,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/series',
     name: 'Series',
-    component: Series
+    component: SeriesList
   },
   {
     path: '/stores',
@@ -59,6 +66,11 @@ const routes: Array<RouteConfig> = [
     path: '/users',
     name: 'Users',
     component: Users
+  },
+  {
+    path: '/users/:username',
+    name: 'User',
+    component: User
   }
 ]
 

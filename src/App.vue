@@ -1,7 +1,12 @@
 <template>
   <div id="app">
     <NavBar :currentUser="{ username: 'connor' }" :userSignedIn="false"></NavBar>
-    <router-view/>
+
+    <div class="section">
+      <div class="container is-fluid pr-0-mobile pl-0-mobile">
+        <router-view/>
+      </div>
+    </div>
   </div>
 </template>
 

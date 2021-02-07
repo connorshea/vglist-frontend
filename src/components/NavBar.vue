@@ -22,10 +22,10 @@
         </div>
 
         <!-- Link to the global activity if the user isn't logged in. -->
-        <a class="navbar-item" :href="userSignedIn ? '/activity' : '/activity/following'">Activity</a>
+        <router-link :to="userSignedIn ? '/activity/following' : '/activity'" class="navbar-item">Activity</router-link>
         <router-link to="/games" class="navbar-item">Games</router-link>
         <router-link to="/users" class="navbar-item">Users</router-link>
-        
+
         <!-- Include these on mobile. -->
         <router-link to="/platforms" class="navbar-item is-hidden-desktop">Platforms</router-link>
         <router-link to="/genres" class="navbar-item is-hidden-desktop">Genres</router-link>
@@ -65,7 +65,7 @@
                 <a class="navbar-item" v-else-if="navBarItem.router === false" :href="navBarItem.path">
                   {{ navBarItem.title }}
                 </a>
-                <router-link class="navbar-item" v-else :to="navBarItem.path">
+                <router-link :to="navBarItem.path" class="navbar-item" v-else>
                   {{ navBarItem.title }}
                 </router-link>
               </div>
@@ -77,21 +77,21 @@
               <a class="navbar-item is-hidden-desktop" v-if="navBarItem.router === false" :href="navBarItem.path">
                 {{ navBarItem.title }}
               </a>
-              <router-link class="navbar-item is-hidden-desktop" v-else :to="navBarItem.path">
+              <router-link :to="navBarItem.path" class="navbar-item is-hidden-desktop" v-else>
                 {{ navBarItem.title }}
               </router-link>
             </template>
           </div>
         </template>
         <template v-else>
-          <router-link href="/sign_up" class="navbar-item">Sign up</router-link>
-          <router-link href="/sign_in" class="navbar-item">Sign in</router-link>
+          <router-link to="/sign_up" class="navbar-item">Sign up</router-link>
+          <router-link to="/sign_in" class="navbar-item">Sign in</router-link>
           <div v-for="navBarItem in this.navBarItems" :key="navBarItem.path">
             <template v-if="navBarItem.title !== null">
               <a class="navbar-item is-hidden-desktop" v-if="navBarItem.router === false" :href="navBarItem.path">
                 {{ navBarItem.title }}
               </a>
-              <router-link class="navbar-item is-hidden-desktop" v-else :to="navBarItem.path">
+              <router-link :to="navBarItem.path" class="navbar-item is-hidden-desktop" v-else>
                 {{ navBarItem.title }}
               </router-link>
             </template>
@@ -105,7 +105,7 @@
                 <a class="navbar-item" v-else-if="navBarItem.router === false" :href="navBarItem.path">
                   {{ navBarItem.title }}
                 </a>
-                <router-link class="navbar-item" v-else :to="navBarItem.path">
+                <router-link :to="navBarItem.path" class="navbar-item" v-else>
                   {{ navBarItem.title }}
                 </router-link>
               </div>
@@ -138,7 +138,7 @@ export default Vue.extend({
           router: true
         })
 
-        // TODO: Fix this check
+        // TODO: Fix this check so it checks whether the user should have permission.
         if (this.currentUser) {
           items.concat({
             title: 'Admin',
