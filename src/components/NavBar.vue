@@ -2,8 +2,7 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item has-text-weight-semibold" href="/" title='vglist Home'>
-        vglist
-        <!-- <%= image_tag('vglist-logo.svg', width: '80px', class: 'mt-5', aria: { hidden: true }) %> -->
+        <img alt="vglist logo" src="../assets/vglist-logo.svg" width="80px" class="mt-5" aria-hidden="true">
       </a>
       <!-- Hamburger menu for mobile -->
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
