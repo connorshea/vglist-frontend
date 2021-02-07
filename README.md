@@ -1,5 +1,7 @@
 # vglist-frontend
 
+An experimental frontend made entirely in Vue for [vglist](https://github.com/connorshea/vglist).
+
 ## Project setup
 ```
 yarn install
