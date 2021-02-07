@@ -60,43 +60,56 @@
             </a>
 
             <div class="navbar-dropdown is-right">
-              <!-- <% navbar_items.each do |navbar_item| %>
-                <% if navbar_item[:title].nil? %>
-                  <hr class="navbar-divider">
-                <% elsif !navbar_item[:method].nil? %>
-                  <%= link_to(navbar_item[:title], navbar_item[:path], method: navbar_item[:method], class: "navbar-item") %>
-                <% else %>
-                  <%= link_to(navbar_item[:title], navbar_item[:path], class: "navbar-item") %>
-                <% end %>
-              <% end %> -->
+              <div v-for="navBarItem in this.navBarItems" :key="navBarItem.path">
+                <hr class="navbar-divider" v-if="navBarItem.title === null">
+                <a class="navbar-item" v-else-if="navBarItem.router === false" :href="navBarItem.path">
+                  {{ navBarItem.title }}
+                </a>
+                <router-link class="navbar-item" v-else :to="navBarItem.path">
+                  {{ navBarItem.title }}
+                </router-link>
+              </div>
             </div>
           </div>
 
-          <!-- <% navbar_items.each do |navbar_item| %>
-            <% unless navbar_item[:title].nil? %>
-              <% if navbar_item[:method].nil? %>
-                <%= link_to(navbar_item[:title], navbar_item[:path], class: "navbar-item is-hidden-desktop") %>
-              <% else %>
-                <%= link_to(navbar_item[:title], navbar_item[:path], method: navbar_item[:method], class: "navbar-item is-hidden-desktop") %>
-              <% end %>
-            <% end %>
-          <% end %> -->
+          <div v-for="navBarItem in this.navBarItems" :key="navBarItem.path">
+            <template v-if="navBarItem.title !== null">
+              <a class="navbar-item is-hidden-desktop" v-if="navBarItem.router === false" :href="navBarItem.path">
+                {{ navBarItem.title }}
+              </a>
+              <router-link class="navbar-item is-hidden-desktop" v-else :to="navBarItem.path">
+                {{ navBarItem.title }}
+              </router-link>
+            </template>
+          </div>
         </template>
         <template v-else>
           <router-link href="/sign_up" class="navbar-item">Sign up</router-link>
           <router-link href="/sign_in" class="navbar-item">Sign in</router-link>
-          <!-- <% navbar_items.each do |navbar_item| %>
-            <%= link_to(navbar_item[:title], navbar_item[:path], class: "navbar-item is-hidden-desktop") %>
-          <% end %> -->
+          <div v-for="navBarItem in this.navBarItems" :key="navBarItem.path">
+            <template v-if="navBarItem.title !== null">
+              <a class="navbar-item is-hidden-desktop" v-if="navBarItem.router === false" :href="navBarItem.path">
+                {{ navBarItem.title }}
+              </a>
+              <router-link class="navbar-item is-hidden-desktop" v-else :to="navBarItem.path">
+                {{ navBarItem.title }}
+              </router-link>
+            </template>
+          </div>
           
           <div class="navbar-item has-dropdown is-hoverable is-hidden-touch">
             <a class="navbar-link" aria-haspopup="menu" aria-controls="navbar-dropdown-more-desktop">More</a>
-            <!--
             <div id="navbar-dropdown-more-desktop" class="navbar-dropdown is-right">
-              <% navbar_items.each do |navbar_item| %>
-                <%= link_to(navbar_item[:title], navbar_item[:path], class: "navbar-item") %>
-              <% end %>
-            </div> -->
+              <div v-for="navBarItem in this.navBarItems" :key="navBarItem.path">
+                <hr class="navbar-divider" v-if="navBarItem.title === null">
+                <a class="navbar-item" v-else-if="navBarItem.router === false" :href="navBarItem.path">
+                  {{ navBarItem.title }}
+                </a>
+                <router-link class="navbar-item" v-else :to="navBarItem.path">
+                  {{ navBarItem.title }}
+                </router-link>
+              </div>
+            </div>
           </div>
         </template>
       </div>
@@ -113,6 +126,88 @@ export default Vue.extend({
     userSignedIn: Boolean,
     currentUser: Object
   },
+  computed: {
+    navBarItems: function() {
+      let items: Array<{ title: string | null; path: string | null; router: boolean }> = [];
+
+      // Include profile, admin, settings, and sign out if the user is logged in.
+      if (this.userSignedIn) {
+        items.concat({
+          title: 'Profile',
+          path: '/users/1', // TODO: Fix this so it uses the current user.
+          router: true
+        })
+
+        // TODO: Fix this check
+        if (this.currentUser) {
+          items.concat({
+            title: 'Admin',
+            path: '/admin',
+            router: true
+          })
+        }
+
+        items = items.concat(
+          [
+            {
+              title: 'Settings',
+              path: '/settings',
+              router: true
+            },
+            {
+              title: 'Sign out', // TODO: This should trigger a DELETE.
+              path: '/sign_out',
+              router: true
+            },
+            {
+              title: null,
+              path: null,
+              router: false
+            }
+          ]
+        )
+      }
+
+      // Always provide the links to extra information no matter if the user is
+      // logged in or not.
+      items = items.concat(
+        [
+          {
+            title: 'About',
+            path: '/about',
+            router: true
+          },
+          {
+            title: 'Changelog',
+            path: 'https://github.com/connorshea/vglist/blob/master/CHANGELOG.md',
+            router: false
+          },
+          {
+            title: 'GitHub',
+            path: 'https://github.com/connorshea/vglist',
+            router: false
+          },
+          {
+            title: 'API Docs',
+            path: 'https://github.com/connorshea/vglist/blob/master/API.md',
+            router: false
+          },
+          {
+            title: 'GraphiQL',
+            path: '/graphiql',
+            router: false
+          },
+          {
+            title: 'Discord',
+            path: 'https://discord.gg/Ma8Ztcc',
+            router: false
+          }
+        ]
+      )
+
+      return items;
+    }
+  }
 });
 </script>
 
