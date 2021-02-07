@@ -7,6 +7,7 @@ import Genres from '../views/Genres.vue'
 import Platforms from '../views/Platforms.vue'
 import Series from '../views/Series.vue'
 import Stores from '../views/Stores.vue'
+import Users from '../views/Users.vue'
 
 Vue.use(VueRouter)
 
@@ -53,6 +54,11 @@ const routes: Array<RouteConfig> = [
     path: '/stores',
     name: 'Stores',
     component: Stores
+  },
+  {
+    path: '/users',
+    name: 'Users',
+    component: Users
   }
 ]
 

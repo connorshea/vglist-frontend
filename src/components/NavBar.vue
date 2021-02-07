@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item has-text-weight-semibold" href="/" title='vglist Home'>
+      <router-link to="/" class="navbar-item has-text-weight-semibold" title='vglist Home'>
         <img alt="vglist logo" src="../assets/vglist-logo.svg" width="80px" class="mt-5" aria-hidden="true">
-      </a>
+      </router-link>
       <!-- Hamburger menu for mobile -->
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
         <span aria-hidden="true"></span>
@@ -23,28 +23,28 @@
 
         <!-- Link to the global activity if the user isn't logged in. -->
         <a class="navbar-item" :href="userSignedIn ? '/activity' : '/activity/following'">Activity</a>
-        <a class="navbar-item" href="/games">Games</a>
-        <a class="navbar-item" href="/users">Users</a>
+        <router-link to="/games" class="navbar-item">Games</router-link>
+        <router-link to="/users" class="navbar-item">Users</router-link>
         
         <!-- Include these on mobile. -->
-        <a class="navbar-item is-hidden-desktop" href="/platforms">Platforms</a>
-        <a class="navbar-item is-hidden-desktop" href="/genres">Genres</a>
-        <a class="navbar-item is-hidden-desktop" href="/companies">Companies</a>
-        <a class="navbar-item is-hidden-desktop" href="/engines">Engines</a>
-        <a class="navbar-item is-hidden-desktop" href="/series">Series</a>
-        <a class="navbar-item is-hidden-desktop" href="/stores">Stores</a>
+        <router-link to="/platforms" class="navbar-item is-hidden-desktop">Platforms</router-link>
+        <router-link to="/genres" class="navbar-item is-hidden-desktop">Genres</router-link>
+        <router-link to="/companies" class="navbar-item is-hidden-desktop">Companies</router-link>
+        <router-link to="/engines" class="navbar-item is-hidden-desktop">Engines</router-link>
+        <router-link to="/series" class="navbar-item is-hidden-desktop">Series</router-link>
+        <router-link to="/stores" class="navbar-item is-hidden-desktop">Stores</router-link>
 
         <!-- Hide these behind a dropdown on desktop. -->
         <div class="navbar-item has-dropdown is-hoverable is-hidden-touch">
           <a class="navbar-link" aria-haspopup="menu" aria-controls="navbar-dropdown-more-mobile">More</a>
 
           <div id="navbar-dropdown-more-mobile" class="navbar-dropdown is-right">
-            <a class="navbar-item" href="/platforms">Platforms</a>
-            <a class="navbar-item" href="/genres">Genres</a>
-            <a class="navbar-item" href="/companies">Companies</a>
-            <a class="navbar-item" href="/engines">Engines</a>
-            <a class="navbar-item" href="/series">Series</a>
-            <a class="navbar-item" href="/stores">Stores</a>
+            <router-link to="/platforms" class="navbar-item">Platforms</router-link>
+            <router-link to="/genres" class="navbar-item">Genres</router-link>
+            <router-link to="/companies" class="navbar-item">Companies</router-link>
+            <router-link to="/engines" class="navbar-item">Engines</router-link>
+            <router-link to="/series" class="navbar-item">Series</router-link>
+            <router-link to="/stores" class="navbar-item">Stores</router-link>
           </div>
         </div>
       </div>
@@ -53,7 +53,7 @@
           and replace them with normal items so stuff doesn't look as weird. -->
       <div class="navbar-end">
         <template v-if="userSignedIn">
-          <div class="navbar-item has-dropdown is-hoverable is-hidden-touch" v-if="userSignedIn">
+          <div class="navbar-item has-dropdown is-hoverable is-hidden-touch">
             <a class="navbar-link">
               <!-- userAvatar(currentUser, size: :small) -->
               <span class='pl-10'>{{ currentUser.username }}</span>
@@ -83,8 +83,8 @@
           <% end %> -->
         </template>
         <template v-else>
-          <a class="navbar-item" href="/sign_up">Sign up</a>
-          <a class="navbar-item" href="/sign_in">Sign in</a>
+          <router-link href="/sign_up" class="navbar-item">Sign up</router-link>
+          <router-link href="/sign_in" class="navbar-item">Sign in</router-link>
           <!-- <% navbar_items.each do |navbar_item| %>
             <%= link_to(navbar_item[:title], navbar_item[:path], class: "navbar-item is-hidden-desktop") %>
           <% end %> -->
