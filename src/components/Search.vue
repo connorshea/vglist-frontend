@@ -122,11 +122,16 @@ export default defineComponent({
       moreAlreadyLoaded: false
     } as SearchData;
   },
+  created() {
+    // Resolve an issue with TypeScript getting confused when wrapping the
+    // function definition in `_.debounce`.
+    // https://forum.vuejs.org/t/lodash-debounce-not-working-when-placed-inside-a-method/86334/5
+    this.onSearch = _.debounce(this.onSearch, 400);
+  },
   methods: {
     // Debounce the search for 400ms before showing results, to prevent
     // searching from sending a ton of requests.
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    onSearch: _.debounce(function(this: any) {
+    onSearch: function() {
       if (this.query.length > 1) {
         fetch(`${this.searchUrl}?query=${this.query}`)
           .then(response => {
@@ -137,7 +142,7 @@ export default defineComponent({
             this.activeSearchResult = -1;
           });
       }
-    }, 400),
+    },
     onUpArrow() {
       if (this.activeSearchResult >= 0) {
         this.activeSearchResult = this.activeSearchResult - 1;

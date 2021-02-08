@@ -58,7 +58,7 @@
             </a>
 
             <div class="navbar-dropdown is-right">
-              <div v-for="navBarItem in this.navBarItems" :key="navBarItem.path">
+              <div v-for="navBarItem in navBarItems" :key="navBarItem.path">
                 <hr class="navbar-divider" v-if="navBarItem.title === null">
                 <a class="navbar-item" v-else-if="navBarItem.router === false" :href="navBarItem.path">
                   {{ navBarItem.title }}
@@ -70,7 +70,7 @@
             </div>
           </div>
 
-          <div v-for="navBarItem in this.navBarItems" :key="navBarItem.path">
+          <div v-for="navBarItem in navBarItems" :key="navBarItem.path">
             <template v-if="navBarItem.title !== null">
               <a class="navbar-item is-hidden-desktop" v-if="navBarItem.router === false" :href="navBarItem.path">
                 {{ navBarItem.title }}
@@ -84,7 +84,7 @@
         <template v-else>
           <router-link to="/sign_up" class="navbar-item">Sign up</router-link>
           <router-link to="/sign_in" class="navbar-item">Sign in</router-link>
-          <div v-for="navBarItem in this.navBarItems" :key="navBarItem.path">
+          <div v-for="navBarItem in navBarItems" :key="navBarItem.path">
             <template v-if="navBarItem.title !== null">
               <a class="navbar-item is-hidden-desktop" v-if="navBarItem.router === false" :href="navBarItem.path">
                 {{ navBarItem.title }}
@@ -98,7 +98,7 @@
           <div class="navbar-item has-dropdown is-hoverable is-hidden-touch">
             <a class="navbar-link" aria-haspopup="menu" aria-controls="navbar-dropdown-more-desktop">More</a>
             <div id="navbar-dropdown-more-desktop" class="navbar-dropdown is-right">
-              <div v-for="navBarItem in this.navBarItems" :key="navBarItem.path">
+              <div v-for="navBarItem in navBarItems" :key="navBarItem.path">
                 <hr class="navbar-divider" v-if="navBarItem.title === null">
                 <a class="navbar-item" v-else-if="navBarItem.router === false" :href="navBarItem.path">
                   {{ navBarItem.title }}
