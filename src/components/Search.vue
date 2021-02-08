@@ -73,13 +73,41 @@
 import { defineComponent } from 'vue';
 import * as _ from 'lodash';
 
+type SearchableType = 'Game' | 'Series' | 'Company' | 'Platform' | 'Engine' | 'Genre' | 'User';
+
+interface SearchResult {
+  searchable_id: number;
+  searchable_type: SearchableType;
+  url: string | null;
+  slug?: string;
+  content: string;
+}
+
+interface SearchData {
+  searchUrl: string,
+  query: string,
+  searchResults: Record<SearchableType, SearchResult[]>,
+  plurals: Record<SearchableType, string>,
+  activeSearchResult: number,
+  currentPage: number,
+  moreAlreadyLoaded: boolean
+}
+
 export default defineComponent({
   name: 'Search',
   data: function() {
     return {
       searchUrl: '/search.json',
       query: '',
-      searchResults: {},
+      searchResults: {
+        'Game': [],
+        'Series': [],
+        'Company': [],
+        'Platform': [],
+        'Engine': [],
+        'Genre': [],
+        'User': []
+      },
       plurals: {
         'Game': 'games',
         'Series': 'series',
@@ -92,12 +120,13 @@ export default defineComponent({
       activeSearchResult: -1,
       currentPage: 1,
       moreAlreadyLoaded: false
-    };
+    } as SearchData;
   },
   methods: {
     // Debounce the search for 400ms before showing results, to prevent
     // searching from sending a ton of requests.
-    onSearch: _.debounce(function() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onSearch: _.debounce(function(this: any) {
       if (this.query.length > 1) {
         fetch(`${this.searchUrl}?query=${this.query}`)
           .then(response => {
@@ -127,7 +156,7 @@ export default defineComponent({
         '.navbar-search-dropdown .navbar-item.is-active'
       );
       if (activeItem !== null) {
-        this.$router.push(activeItem?.href);
+        this.$router.push(activeItem.href);
       }
     },
     scrollToActiveItem() {
@@ -176,7 +205,7 @@ export default defineComponent({
     // e.g. "Games", "Companies", etc.
     capitalizedPlurals: function(): { [k: string]: string; } {
       const capitalizedPluralEntries: [string, string][] = Object.entries(this.plurals).map(
-        (type: [string, any]) => {
+        (type: [string, string]) => {
           type[1] = type[1].charAt(0).toUpperCase() + type[1].slice(1);
           return type;
         }
@@ -185,14 +214,13 @@ export default defineComponent({
       return Object.fromEntries(capitalizedPluralEntries);
     },
     betterSearchResults: function() {
-      const betterSearchResults = this.searchResults;
-      Object.keys(betterSearchResults).forEach(key => {
+      let betterSearchResults: SearchData['searchResults'] = this.searchResults;
+      let keys = Object.keys(betterSearchResults) as SearchableType[];
+      keys.forEach(key => {
         if (betterSearchResults[key].length == 0) {
           delete betterSearchResults[key];
-          return true;
         }
-        type SearchableType = 'Game' | 'Series' | 'Company' | 'Platform' | 'Engine' | 'Genre' | 'User';
-        betterSearchResults[key].map((result: { slug: string; searchable_id: number; searchable_type: SearchableType; url: string | null; }) => {
+        betterSearchResults[key].map((result: SearchResult) => {
           // Use the slug in the URL if it's a user.
           const urlKey = result.searchable_type === 'User' ? result.slug : result.searchable_id;
           const searchableType: string = this.plurals[result.searchable_type];
@@ -203,7 +231,7 @@ export default defineComponent({
 
       return betterSearchResults;
     },
-    flattenedSearchResults: function(): Array<any> {
+    flattenedSearchResults: function(): Array<SearchResult> {
       return Object.values(this.searchResults).flat();
     }
   }
