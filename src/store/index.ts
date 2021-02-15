@@ -39,7 +39,10 @@ export default createStore<State>({
 
       return fetch(url, options)
         .then(response => response.json())
-        .then(data => commit('accessToken', data.access_token));
+        .then(data => {
+          // `data` in this case is an object with an access_token, expires_in integer, etc.
+          commit('accessToken', data.access_token)
+        });
     }
   },
   modules: {
