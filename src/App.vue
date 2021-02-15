@@ -19,6 +19,12 @@ export default defineComponent({
   components: {
     NavBar
   },
+  created: function() {
+    this.$store.dispatch('acquireAccessToken').then(() => {
+      // Remove the 'code' parameter from the current URL.
+      this.$router.replace(this.$route.path);
+    });
+  }
 });
 </script>
 
