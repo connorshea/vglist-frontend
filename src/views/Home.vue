@@ -10,6 +10,6 @@ export default defineComponent({
   name: 'Home',
   components: {
     // Foo
-  },
+  }
 });
 </script>
