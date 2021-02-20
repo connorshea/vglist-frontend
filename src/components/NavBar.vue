@@ -82,7 +82,9 @@
           </div>
         </template>
         <template v-else>
-          <a class="navbar-item" :href="oauthUrl">Authenticate</a>
+          <template v-if="showAuthenticate">
+            <a class="navbar-item" :href="oauthUrl">Authenticate</a>
+          </template>
           <router-link to="/sign_up" class="navbar-item">Sign up</router-link>
           <router-link to="/sign_in" class="navbar-item">Sign in</router-link>
           <div v-for="navBarItem in navBarItems" :key="navBarItem.path">
@@ -212,6 +214,12 @@ export default defineComponent({
     },
     oauthUrl: function(): string {
       return `https://vglist.co/settings/oauth/authorize?client_id=${this.$store.state.clientId}&redirect_uri=${this.$store.state.redirectUri}&response_type=code`;
+    },
+    /**
+     * Whether to show the authenticate button.
+     */
+    showAuthenticate: function(): boolean {
+      return this.$store.state.accessToken === null;
     }
   }
 });

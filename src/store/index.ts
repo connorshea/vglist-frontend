@@ -20,6 +20,12 @@ export default createStore<State>({
   },
   actions: {
     acquireAccessToken({ commit, state }) {
+      // Commit and return early if we already have the access token.
+      const accessTokenFromStorage = localStorage.getItem('vglistFrontend:accessToken');
+      if (accessTokenFromStorage !== null) {
+        commit('accessToken', accessTokenFromStorage);
+        return;
+      }
       const authorizationCode = window.location.href.match(/code=(.*)/)?.[1];
       if (authorizationCode === undefined) { return; }
 
@@ -40,6 +46,7 @@ export default createStore<State>({
       return fetch(url, options)
         .then(response => response.json())
         .then(data => {
+          localStorage.setItem('vglistFrontend:accessToken', data.access_token);
           // `data` in this case is an object with an access_token, expires_in integer, etc.
           commit('accessToken', data.access_token)
         });
