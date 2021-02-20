@@ -11,7 +11,9 @@
   "dependencies": {
     "bulma": "https://github.com/connorshea/bulma#css-variables-with-fallback",
     "core-js": "^3.6.5",
+    "graphql": "^15.5.0",
     "lodash": "^4.17.20",
+    "villus": "^1.0.0-rc.12",
     "vue": "^3.0.5",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
