@@ -1,5 +1,5 @@
 <template>
-  <div class="user">
+  <div class="companies">
   </div>
 </template>
 
@@ -7,7 +7,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'User',
+  name: 'Companies',
   components: {}
 });
 </script>
