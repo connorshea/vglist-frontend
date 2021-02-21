@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import Vue from 'vue';
 import Vuex from 'vuex';
 
@@ -14,7 +15,7 @@ export type State = {
   redirectUri: string;
   accessToken: string | null;
   userSignedIn: boolean;
-  currentUser: { username: string, role: UserRole } | null;
+  currentUser: { username: string; role: UserRole } | null;
 }
 
 // AccessToken is returned by the backend when authenticating with OAuth.
@@ -39,7 +40,7 @@ export default new Vuex.Store<State>({
     accessToken(state, payload: string) {
       state.accessToken = payload;
     },
-    signIn(state, payload: { username: string, role: UserRole }) {
+    signIn(state, payload: { username: string; role: UserRole }) {
       state.currentUser = payload;
       state.userSignedIn = true;
     },
@@ -75,7 +76,7 @@ export default new Vuex.Store<State>({
       const authorizationCode = window.location.href.match(/code=(.*)/)?.[1];
       if (authorizationCode === undefined) { return; }
 
-      const url = 'https://vglist.co/settings/oauth/token';
+      const url = `${process.env.VUE_APP_VGLIST_HOST_URL}/settings/oauth/token`;
       const options = {
         method: 'POST',
         headers: {

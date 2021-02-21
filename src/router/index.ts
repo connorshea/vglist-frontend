@@ -12,7 +12,7 @@ import Stores from '../views/Stores.vue'
 import Users from '../views/Users.vue'
 import User from '../views/User.vue'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
@@ -78,12 +78,12 @@ const routes: Array<RouteConfig> = [
     name: 'User',
     component: User
   }
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+export default router;

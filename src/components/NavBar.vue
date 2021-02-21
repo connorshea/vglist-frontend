@@ -166,7 +166,7 @@ export default Vue.extend({
   },
   computed: {
     navBarItems: function() {
-      let items: Array<{ id?: number, title: string | null; path: RawLocation | null; clickAction?: clickAction; router: boolean }> = [];
+      let items: Array<{ id?: number; title: string | null; path: RawLocation | null; clickAction?: clickAction; router: boolean }> = [];
 
       // Include profile, admin, settings, and sign out if the user is logged in.
       if (this.userSignedIn) {
@@ -251,7 +251,7 @@ export default Vue.extend({
       return items;
     },
     oauthUrl: function(): string {
-      return `https://vglist.co/settings/oauth/authorize?client_id=${this.$store.state.clientId}&redirect_uri=${this.$store.state.redirectUri}&response_type=code`;
+      return `${process.env.VUE_APP_VGLIST_HOST_URL}/settings/oauth/authorize?client_id=${this.$store.state.clientId}&redirect_uri=${this.$store.state.redirectUri}&response_type=code`;
     },
     /**
      * Whether to show the authenticate button.
