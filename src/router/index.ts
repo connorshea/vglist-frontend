@@ -81,9 +81,10 @@ const routes: Array<RouteConfig> = [
     component: Users
   },
   {
-    path: '/users/:username',
+    path: '/users/:slug',
     name: 'User',
-    component: User
+    component: User,
+    props: true
   }
 ];
 

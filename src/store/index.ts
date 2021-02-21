@@ -1,18 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import { User } from '@/generated/graphql';
+
 Vue.use(Vuex);
-
-enum UserRole {
-  'member',
-  'moderator',
-  'admin'
-}
-
-type User = {
-  username: string;
-  role: UserRole
-}
 
 export type State = {
   clientId: string;

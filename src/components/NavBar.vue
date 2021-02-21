@@ -151,6 +151,7 @@ export default defineComponent({
         'signIn',
         {
           username: 'connor',
+          slug: 'connor',
           role: 'admin'
         }
       );
@@ -173,7 +174,7 @@ export default defineComponent({
         items = items.concat({
           title: 'Profile',
           path: {
-            path: `/users/${this.currentUser.username}`
+            path: `/users/${this.currentUser.slug}`
           },
           router: true
         })
