@@ -1,0 +1,9 @@
+query {
+  games {
+    nodes {
+      id
+      name
+      releaseDate
+    }
+  }
+}

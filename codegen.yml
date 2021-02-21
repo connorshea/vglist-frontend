@@ -1,0 +1,10 @@
+overwrite: true
+schema: "schema.graphql" # TODO: Figure out how to get this from vglist automatically.
+documents: "src/**/*.graphql"
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
