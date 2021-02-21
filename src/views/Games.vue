@@ -7,9 +7,9 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 import GraphQL from '../graphql';
 import gql from 'graphql-tag';
+import { defineComponent } from '@vue/composition-api';
 
 const query = gql`
   query {
@@ -23,7 +23,7 @@ const query = gql`
   }
 `;
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Games',
   data: function() {
     return {

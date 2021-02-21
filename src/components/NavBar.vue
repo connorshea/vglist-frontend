@@ -131,7 +131,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from '@vue/composition-api';
 import { mapState } from 'vuex';
 import Search from '@/components/Search.vue';
 import { RawLocation } from 'vue-router';
@@ -139,7 +139,7 @@ import { RawLocation } from 'vue-router';
 // Update this to include other valid click actions later.
 type clickAction = 'signOut';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'NavBar',
   components: {
     Search

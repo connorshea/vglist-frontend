@@ -70,8 +70,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 import * as _ from 'lodash';
+import { defineComponent } from '@vue/composition-api';
 
 type SearchableType = 'Game' | 'Series' | 'Company' | 'Platform' | 'Engine' | 'Genre' | 'User';
 
@@ -93,7 +93,7 @@ interface SearchData {
   moreAlreadyLoaded: boolean
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Search',
   data: function() {
     return {
