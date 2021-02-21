@@ -57,7 +57,7 @@
             </a>
 
             <div class="navbar-dropdown is-right">
-              <div v-for="navBarItem in navBarItems" :key="navBarItem.path">
+              <div v-for="navBarItem in navBarItems" :key="navBarItem.id">
                 <hr class="navbar-divider" v-if="navBarItem.title === null">
                 <a class="navbar-item" v-else-if="navBarItem.clickAction !== undefined" @click="resolveClickAction(navBarItem.clickAction)">
                   {{ navBarItem.title }}
@@ -72,7 +72,7 @@
             </div>
           </div>
 
-          <div v-for="navBarItem in navBarItems" :key="navBarItem.path">
+          <div v-for="navBarItem in navBarItems" :key="navBarItem.id">
             <template v-if="navBarItem.title !== null">
               <a class="navbar-item is-hidden-desktop" v-if="navBarItem.clickAction !== undefined" @click="resolveClickAction(navBarItem.clickAction)">
                 {{ navBarItem.title }}
@@ -93,7 +93,7 @@
           <!-- "Sign up" intentionally does nothing for now. -->
           <a class="navbar-item">Sign up</a>
           <a class="navbar-item" @click="signIn">Sign in</a>
-          <div v-for="navBarItem in navBarItems" :key="navBarItem.path">
+          <div v-for="navBarItem in navBarItems" :key="navBarItem.id">
             <template v-if="navBarItem.title !== null">
               <a class="navbar-item is-hidden-desktop" v-if="navBarItem.clickAction !== undefined" @click="resolveClickAction(navBarItem.clickAction)">
                 {{ navBarItem.title }}
@@ -110,7 +110,7 @@
           <div class="navbar-item has-dropdown is-hoverable is-hidden-touch">
             <a class="navbar-link" aria-haspopup="menu" aria-controls="navbar-dropdown-more-desktop">More</a>
             <div id="navbar-dropdown-more-desktop" class="navbar-dropdown is-right">
-              <div v-for="navBarItem in navBarItems" :key="navBarItem.path">
+              <div v-for="navBarItem in navBarItems" :key="navBarItem.id">
                 <hr class="navbar-divider" v-if="navBarItem.title === null">
                 <a class="navbar-item" v-else-if="navBarItem.clickAction !== undefined" @click="resolveClickAction(navBarItem.clickAction)">
                   {{ navBarItem.title }}
@@ -134,6 +134,7 @@
 import Vue from 'vue';
 import { mapState } from 'vuex';
 import Search from '@/components/Search.vue';
+import { RawLocation } from 'vue-router';
 
 // Update this to include other valid click actions later.
 type clickAction = 'signOut';
@@ -158,19 +159,21 @@ export default Vue.extend({
   },
   computed: {
     navBarItems: function() {
-      let items: Array<{ title: string | null; path?: string | null; clickAction?: clickAction; router: boolean }> = [];
+      let items: Array<{ id?: number, title: string | null; path: RawLocation | null; clickAction?: clickAction; router: boolean }> = [];
 
       // Include profile, admin, settings, and sign out if the user is logged in.
       if (this.userSignedIn) {
-        items.concat({
+        items = items.concat({
           title: 'Profile',
-          path: '/users/1', // TODO: Fix this so it uses the current user.
+          path: {
+            path: `/users/${this.currentUser.username}`
+          },
           router: true
         })
 
         // TODO: Fix this check so it checks whether the user should have permission.
         if (this.currentUser) {
-          items.concat({
+          items = items.concat({
             title: 'Admin',
             path: '/admin',
             router: true
@@ -187,6 +190,7 @@ export default Vue.extend({
             {
               title: 'Sign out',
               clickAction: 'signOut',
+              path: null,
               router: false
             },
             {
@@ -234,6 +238,9 @@ export default Vue.extend({
           }
         ]
       )
+
+      // Add `id` to all items in the items array so we can use it as the key.
+      items = items.map((item, i) => ({ id: i, ...item }));
 
       return items;
     },
