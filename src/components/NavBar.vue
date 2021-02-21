@@ -259,10 +259,14 @@ export default defineComponent({
     showAuthenticate: function(): boolean {
       return this.$store.state.accessToken === null;
     },
-    ...mapState([
-      'userSignedIn',
-      'currentUser'
-    ])
+    ...mapState({
+      // These are `any` because TypeScript flips out if you tell it the actual
+      // types.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      userSignedIn: (state: any) => state.userSignedIn,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      currentUser: (state: any) => state.currentUser
+    })
   }
 });
 </script>
