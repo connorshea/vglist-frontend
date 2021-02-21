@@ -1,0 +1,3 @@
+# This is for the GraphQL VS Code extension, so it understands the code.
+schema: "schema.graphql"
+documents: "src/**/*.{graphql,ts,vue}"
