@@ -73,13 +73,41 @@
 import Vue from 'vue';
 import * as _ from 'lodash';
 
+type SearchableType = 'Game' | 'Series' | 'Company' | 'Platform' | 'Engine' | 'Genre' | 'User';
+
+interface SearchResult {
+  searchable_id: number;
+  searchable_type: SearchableType;
+  url: string | null;
+  slug?: string;
+  content: string;
+}
+
+interface SearchData {
+  searchUrl: string,
+  query: string,
+  searchResults: Record<SearchableType, SearchResult[]>,
+  plurals: Record<SearchableType, string>,
+  activeSearchResult: number,
+  currentPage: number,
+  moreAlreadyLoaded: boolean
+}
+
 export default Vue.extend({
   name: 'Search',
   data: function() {
     return {
       searchUrl: '/search.json',
       query: '',
-      searchResults: {},
+      searchResults: {
+        'Game': [],
+        'Series': [],
+        'Company': [],
+        'Platform': [],
+        'Engine': [],
+        'Genre': [],
+        'User': []
+      },
       plurals: {
         'Game': 'games',
         'Series': 'series',
@@ -92,12 +120,16 @@ export default Vue.extend({
       activeSearchResult: -1,
       currentPage: 1,
       moreAlreadyLoaded: false
-    };
+    } as SearchData;
+  },
+  created() {
+    // Resolve an issue with TypeScript getting confused when wrapping the
+    // function definition in `_.debounce`.
+    // https://forum.vuejs.org/t/lodash-debounce-not-working-when-placed-inside-a-method/86334/5
+    this.onSearch = _.debounce(this.onSearch, 400);
   },
   methods: {
-    // Debounce the search for 400ms before showing results, to prevent
-    // searching from sending a ton of requests.
-    onSearch: _.debounce(function() {
+    onSearch: function() {
       if (this.query.length > 1) {
         fetch(`${this.searchUrl}?query=${this.query}`)
           .then(response => {
@@ -108,7 +140,7 @@ export default Vue.extend({
             this.activeSearchResult = -1;
           });
       }
-    }, 400),
+    },
     onUpArrow() {
       if (this.activeSearchResult >= 0) {
         this.activeSearchResult = this.activeSearchResult - 1;
@@ -127,7 +159,7 @@ export default Vue.extend({
         '.navbar-search-dropdown .navbar-item.is-active'
       );
       if (activeItem !== null) {
-        this.$router.push(activeItem?.href);
+        this.$router.push(activeItem.href);
       }
     },
     scrollToActiveItem() {
@@ -176,7 +208,7 @@ export default Vue.extend({
     // e.g. "Games", "Companies", etc.
     capitalizedPlurals: function(): { [k: string]: string; } {
       const capitalizedPluralEntries: [string, string][] = Object.entries(this.plurals).map(
-        (type: [string, any]) => {
+        (type: [string, string]) => {
           type[1] = type[1].charAt(0).toUpperCase() + type[1].slice(1);
           return type;
         }
@@ -185,14 +217,14 @@ export default Vue.extend({
       return Object.fromEntries(capitalizedPluralEntries);
     },
     betterSearchResults: function() {
-      const betterSearchResults = this.searchResults;
-      Object.keys(betterSearchResults).forEach(key => {
+      let betterSearchResults: SearchData['searchResults'] = this.searchResults;
+      let keys = Object.keys(betterSearchResults) as SearchableType[];
+      keys.forEach(key => {
         if (betterSearchResults[key].length == 0) {
           delete betterSearchResults[key];
           return true;
         }
-        type SearchableType = 'Game' | 'Series' | 'Company' | 'Platform' | 'Engine' | 'Genre' | 'User';
-        betterSearchResults[key].map((result: { slug: string; searchable_id: number; searchable_type: SearchableType; url: string | null; }) => {
+        betterSearchResults[key].map((result: SearchResult) => {
           // Use the slug in the URL if it's a user.
           const urlKey = result.searchable_type === 'User' ? result.slug : result.searchable_id;
           const searchableType: string = this.plurals[result.searchable_type];
@@ -203,7 +235,7 @@ export default Vue.extend({
 
       return betterSearchResults;
     },
-    flattenedSearchResults: function(): Array<any> {
+    flattenedSearchResults: function(): Array<SearchResult> {
       return Object.values(this.searchResults).flat();
     }
   }
