@@ -15,7 +15,7 @@
     <div class="navbar-menu is-shadowless" id="navMenu">
       <div class="navbar-start">
         <div class="navbar-item has-dropdown field mt-10">
-          <Search :searchIcon="'foo'"></Search>
+          <Search/>
         </div>
 
         <!-- Link to the global activity if the user isn't logged in. -->
