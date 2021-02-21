@@ -1,6 +1,6 @@
 <template>
-  <div class="games">
-    <div v-for="game in data.games" :key="game.id">
+  <div class="games" v-if="data">
+    <div v-for="game in data.games.nodes" :key="game.id">
       {{ game.name }}
     </div>
   </div>
