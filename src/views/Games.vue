@@ -7,27 +7,18 @@
 </template>
 
 <script lang="ts">
-import gql from 'graphql-tag';
+import { GamesDocument } from '@/generated/graphql.ts';
 import { defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
-
-const GamesQuery = gql`
-  query {
-    games {
-      nodes {
-        id
-        name
-        releaseDate
-      }
-    }
-  }
-`;
 
 export default defineComponent({
   name: 'Games',
   setup() {
     const { data } = useQuery({
-      query: GamesQuery,
+      query: GamesDocument,
+      variables: {
+        cursor: ''
+      }
     });
 
     return { data };

@@ -22,7 +22,12 @@
     "vuex": "^3.6.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "1.20.1",
+    "@graphql-codegen/cli": "^1.20.1",
+    "@graphql-codegen/introspection": "1.18.1",
+    "@graphql-codegen/typed-document-node": "^1.18.2",
+    "@graphql-codegen/typescript": "^1.21.0",
+    "@graphql-codegen/typescript-operations": "^1.17.14",
+    "@graphql-typed-document-node/core": "^3.1.0",
     "@types/chai": "^4.2.11",
     "@types/lodash": "^4.14.168",
     "@types/mocha": "^5.2.4",
@@ -43,8 +48,6 @@
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.2",
     "typescript": "^4.1.5",
-    "vue-template-compiler": "^2.6.12",
-    "@graphql-codegen/typescript": "1.21.0",
-    "@graphql-codegen/introspection": "1.18.1"
+    "vue-template-compiler": "^2.6.12"
   }
 }

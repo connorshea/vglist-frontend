@@ -4,7 +4,7 @@ module.exports = {
     // GraphQL Loader
     config.module
       .rule('graphql')
-      .test(/\.graphql$/)
+      .test(/\.(graphql|gql)$/)
       .use('graphql-tag/loader')
       .loader('graphql-tag/loader')
       .end()
