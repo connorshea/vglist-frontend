@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
 import Activity from '../views/Activity.vue'
