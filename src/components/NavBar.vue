@@ -147,12 +147,19 @@ export default Vue.extend({
   methods: {
     signIn() {
       // This is pretty much just a fake sign in for a user.
-      this.$store.commit('signIn', 'connor');
+      this.$store.commit(
+        'signIn',
+        {
+          username: 'connor',
+          role: 'admin'
+        }
+      );
     },
     signOut() {
       // This is pretty much just a fake sign out for a user.
       this.$store.commit('signOut');
     },
+    // Bit of a hack to allow a dynamic click action.
     resolveClickAction(funcName: clickAction) {
       this[funcName]();
     }
@@ -171,8 +178,7 @@ export default Vue.extend({
           router: true
         })
 
-        // TODO: Fix this check so it checks whether the user should have permission.
-        if (this.currentUser) {
+        if (this.currentUser.role == 'admin') {
           items = items.concat({
             title: 'Admin',
             path: '/admin',

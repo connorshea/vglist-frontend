@@ -3,12 +3,18 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
+enum UserRole {
+  'member',
+  'moderator',
+  'admin'
+}
+
 export type State = {
   clientId: string;
   redirectUri: string;
   accessToken: string | null;
   userSignedIn: boolean;
-  currentUser: { username: string } | null;
+  currentUser: { username: string, role: UserRole } | null;
 }
 
 // AccessToken is returned by the backend when authenticating with OAuth.
@@ -33,8 +39,8 @@ export default new Vuex.Store<State>({
     accessToken(state, payload: string) {
       state.accessToken = payload;
     },
-    signIn(state, payload: string) {
-      state.currentUser = { username: payload };
+    signIn(state, payload: { username: string, role: UserRole }) {
+      state.currentUser = payload;
       state.userSignedIn = true;
     },
     signOut(state) {
