@@ -9,6 +9,19 @@
 <script lang="ts">
 import Vue from 'vue';
 import GraphQL from '../graphql';
+import gql from 'graphql-tag';
+
+const query = gql`
+  query {
+    games {
+      nodes {
+        id
+        name
+        releaseDate
+      }
+    }
+  }
+`;
 
 export default Vue.extend({
   name: 'Games',
@@ -18,17 +31,6 @@ export default Vue.extend({
     };
   },
   created: function() {
-    let query = `
-      query {
-        games {
-          nodes {
-            id
-            name
-            releaseDate
-          }
-        }
-      }
-    `;
     GraphQL.query(query, {}, this.$store.state.accessToken).then((resp: any) => {
       this.games = resp.data.games.nodes;
     });
