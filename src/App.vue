@@ -13,9 +13,11 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 import NavBar from '@/components/NavBar.vue'; // @ is an alias to /src
+import { useClient, defaultPlugins } from 'villus';
+import { authPlugin } from './auth-plugin';
 
 export default defineComponent({
-  name: 'Home',
+  name: 'App',
   components: {
     NavBar
   },
@@ -28,6 +30,14 @@ export default defineComponent({
       if (window.location.href.match(/code=(.*)/)?.[1] !== undefined) {
         context.root.$router.replace(context.root.$route.path);
       }
+    });
+
+    useClient({
+      url: `${process.env.VUE_APP_VGLIST_HOST_URL}/graphql`,
+      use: [
+        authPlugin({ accessToken: context.root.$store.state.accessToken }),
+        ...defaultPlugins()
+      ]
     });
 
     return {};

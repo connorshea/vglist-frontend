@@ -1,17 +1,17 @@
 <template>
   <div class="games">
-    <div v-for="game in games" :key="game.id">
+    <div v-for="game in data.games" :key="game.id">
       {{ game.name }}
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import GraphQL from '../graphql';
 import gql from 'graphql-tag';
 import { defineComponent } from '@vue/composition-api';
+import { useQuery } from 'villus';
 
-const query = gql`
+const GamesQuery = gql`
   query {
     games {
       nodes {
@@ -25,15 +25,12 @@ const query = gql`
 
 export default defineComponent({
   name: 'Games',
-  data: function() {
-    return {
-      games: []
-    };
-  },
-  created: function() {
-    GraphQL.query(query, {}, this.$store.state.accessToken).then((resp: any) => {
-      this.games = resp.data.games.nodes;
+  setup() {
+    const { data } = useQuery({
+      query: GamesQuery,
     });
+
+    return { data };
   }
 });
 </script>
