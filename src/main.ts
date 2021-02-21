@@ -4,11 +4,13 @@ import router from './router'
 import store from './store'
 
 import './assets/scss/main.scss';
+import { createProvider } from './vue-apollo'
 
 Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
+  apolloProvider: createProvider(),
   render: h => h(App)
 }).$mount('#app')

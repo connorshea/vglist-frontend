@@ -9,12 +9,17 @@ enum UserRole {
   'admin'
 }
 
+type User = {
+  username: string;
+  role: UserRole
+}
+
 export type State = {
   clientId: string;
   redirectUri: string;
   accessToken: string | null;
   userSignedIn: boolean;
-  currentUser: { username: string, role: UserRole } | null;
+  currentUser: User | null;
 }
 
 // AccessToken is returned by the backend when authenticating with OAuth.
@@ -39,7 +44,7 @@ export default new Vuex.Store<State>({
     accessToken(state, payload: string) {
       state.accessToken = payload;
     },
-    signIn(state, payload: { username: string, role: UserRole }) {
+    signIn(state, payload: User) {
       state.currentUser = payload;
       state.userSignedIn = true;
     },

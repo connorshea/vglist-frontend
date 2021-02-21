@@ -166,7 +166,7 @@ export default Vue.extend({
   },
   computed: {
     navBarItems: function() {
-      let items: Array<{ id?: number, title: string | null; path: RawLocation | null; clickAction?: clickAction; router: boolean }> = [];
+      let items: Array<{ id?: number; title: string | null; path: RawLocation | null; clickAction?: clickAction; router: boolean }> = [];
 
       // Include profile, admin, settings, and sign out if the user is logged in.
       if (this.userSignedIn) {
