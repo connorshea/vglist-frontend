@@ -3,9 +3,13 @@ query Games($cursor: String!) {
     nodes {
       id
       name
-      releaseDate
       coverUrl(size: MEDIUM)
       platforms(first: 3) {
+        nodes {
+          name
+        }
+      }
+      developers(first: 3) {
         nodes {
           name
         }
