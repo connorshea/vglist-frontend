@@ -59,6 +59,9 @@
             <div class="navbar-dropdown is-right">
               <div v-for="navBarItem in navBarItems" :key="navBarItem.path">
                 <hr class="navbar-divider" v-if="navBarItem.title === null">
+                <a class="navbar-item" v-else-if="navBarItem.clickAction !== undefined" @click="resolveClickAction(navBarItem.clickAction)">
+                  {{ navBarItem.title }}
+                </a>
                 <a class="navbar-item" v-else-if="navBarItem.router === false" :href="navBarItem.path">
                   {{ navBarItem.title }}
                 </a>
@@ -71,7 +74,10 @@
 
           <div v-for="navBarItem in navBarItems" :key="navBarItem.path">
             <template v-if="navBarItem.title !== null">
-              <a class="navbar-item is-hidden-desktop" v-if="navBarItem.router === false" :href="navBarItem.path">
+              <a class="navbar-item is-hidden-desktop" v-if="navBarItem.clickAction !== undefined" @click="resolveClickAction(navBarItem.clickAction)">
+                {{ navBarItem.title }}
+              </a>
+              <a class="navbar-item is-hidden-desktop" v-else-if="navBarItem.router === false" :href="navBarItem.path">
                 {{ navBarItem.title }}
               </a>
               <router-link :to="navBarItem.path" class="navbar-item is-hidden-desktop" v-else>
@@ -84,11 +90,15 @@
           <template v-if="showAuthenticate">
             <a class="navbar-item" :href="oauthUrl">Authenticate</a>
           </template>
-          <router-link to="/sign_up" class="navbar-item">Sign up</router-link>
-          <router-link to="/sign_in" class="navbar-item">Sign in</router-link>
+          <!-- "Sign up" intentionally does nothing for now. -->
+          <a class="navbar-item">Sign up</a>
+          <a class="navbar-item" @click="signIn">Sign in</a>
           <div v-for="navBarItem in navBarItems" :key="navBarItem.path">
             <template v-if="navBarItem.title !== null">
-              <a class="navbar-item is-hidden-desktop" v-if="navBarItem.router === false" :href="navBarItem.path">
+              <a class="navbar-item is-hidden-desktop" v-if="navBarItem.clickAction !== undefined" @click="resolveClickAction(navBarItem.clickAction)">
+                {{ navBarItem.title }}
+              </a>
+              <a class="navbar-item is-hidden-desktop" v-else-if="navBarItem.router === false" :href="navBarItem.path">
                 {{ navBarItem.title }}
               </a>
               <router-link :to="navBarItem.path" class="navbar-item is-hidden-desktop" v-else>
@@ -102,6 +112,9 @@
             <div id="navbar-dropdown-more-desktop" class="navbar-dropdown is-right">
               <div v-for="navBarItem in navBarItems" :key="navBarItem.path">
                 <hr class="navbar-divider" v-if="navBarItem.title === null">
+                <a class="navbar-item" v-else-if="navBarItem.clickAction !== undefined" @click="resolveClickAction(navBarItem.clickAction)">
+                  {{ navBarItem.title }}
+                </a>
                 <a class="navbar-item" v-else-if="navBarItem.router === false" :href="navBarItem.path">
                   {{ navBarItem.title }}
                 </a>
@@ -119,20 +132,33 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { mapState } from 'vuex';
 import Search from '@/components/Search.vue';
+
+// Update this to include other valid click actions later.
+type clickAction = 'signOut';
 
 export default Vue.extend({
   name: 'NavBar',
   components: {
     Search
   },
-  props: {
-    userSignedIn: Boolean,
-    currentUser: Object
+  methods: {
+    signIn() {
+      // This is pretty much just a fake sign in for a user.
+      this.$store.commit('signIn', 'connor');
+    },
+    signOut() {
+      // This is pretty much just a fake sign out for a user.
+      this.$store.commit('signOut');
+    },
+    resolveClickAction(funcName: clickAction) {
+      this[funcName]();
+    }
   },
   computed: {
     navBarItems: function() {
-      let items: Array<{ title: string | null; path: string | null; router: boolean }> = [];
+      let items: Array<{ title: string | null; path?: string | null; clickAction?: clickAction; router: boolean }> = [];
 
       // Include profile, admin, settings, and sign out if the user is logged in.
       if (this.userSignedIn) {
@@ -159,8 +185,8 @@ export default Vue.extend({
               router: true
             },
             {
-              title: 'Sign out', // TODO: This should trigger a DELETE.
-              path: '/users/sign_out',
+              title: 'Sign out',
+              clickAction: 'signOut',
               router: false
             },
             {
@@ -219,7 +245,11 @@ export default Vue.extend({
      */
     showAuthenticate: function(): boolean {
       return this.$store.state.accessToken === null;
-    }
+    },
+    ...mapState([
+      'userSignedIn',
+      'currentUser'
+    ])
   }
 });
 </script>

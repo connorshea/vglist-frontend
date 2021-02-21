@@ -7,6 +7,8 @@ export type State = {
   clientId: string;
   redirectUri: string;
   accessToken: string | null;
+  userSignedIn: boolean;
+  currentUser: { username: string } | null;
 }
 
 // AccessToken is returned by the backend when authenticating with OAuth.
@@ -23,11 +25,21 @@ export default new Vuex.Store<State>({
   state: {
     clientId: process.env.VUE_APP_OAUTH_CLIENT_ID,
     redirectUri: process.env.VUE_APP_REDIRECT_URL,
-    accessToken: null
+    accessToken: null,
+    userSignedIn: false,
+    currentUser: null
   },
   mutations: {
     accessToken(state, payload: string) {
       state.accessToken = payload;
+    },
+    signIn(state, payload: string) {
+      state.currentUser = { username: payload };
+      state.userSignedIn = true;
+    },
+    signOut(state) {
+      state.currentUser = null;
+      state.userSignedIn = false;
     }
   },
   actions: {

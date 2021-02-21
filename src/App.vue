@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <NavBar :currentUser="{ username: 'connor' }" :userSignedIn="false"></NavBar>
+    <NavBar></NavBar>
 
     <div class="section">
       <div class="container is-fluid pr-0-mobile pl-0-mobile">
@@ -22,8 +22,10 @@ export default Vue.extend({
   created: function() {
     // On create, attempt to acquire an access token if possible.
     this.$store.dispatch('acquireAccessToken').then(() => {
-      // Remove the 'code' parameter from the current URL.
-      this.$router.replace(this.$route.path);
+      // Remove the 'code' parameter from the current URL, if the parameter exists.
+      if (window.location.href.match(/code=(.*)/)?.[1] !== undefined) {
+        this.$router.replace(this.$route.path);
+      }
     });
   }
 });
