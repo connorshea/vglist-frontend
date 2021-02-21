@@ -39,7 +39,6 @@ export default new Vuex.Store<State>({
         // not then we can just commit it to state and return. `Date.now()`
         // returns milliseconds so we have to divide it by 1000 to get a
         // comparable value.
-        // TODO: Set up logic for refreshing the token later.
         const expirationTimestamp = (parsedAccessToken.created_at + parsedAccessToken.expires_in);
         const currentTime = Math.floor(Date.now() / 1000);
         // console.log(`access token will expire in ${expirationTimestamp - currentTime}.`);
@@ -47,8 +46,10 @@ export default new Vuex.Store<State>({
           commit('accessToken', parsedAccessToken.access_token);
           return;
         } else {
+          // TODO: Set up logic for refreshing the token.
           console.log('ACCESS TOKEN EXPIRED AHHH');
-          return;
+          // For now just remove it, I guess
+          localStorage.removeItem('vglistFrontend:accessToken');
         }
       }
 
