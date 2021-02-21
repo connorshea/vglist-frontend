@@ -2,12 +2,13 @@
   <div class="custom-card game-card">
     <router-link :to="{ name: 'Game', params: { id: game.id } }" class="card-container">
       <figure class="game-cover">
-        <!-- <%= game_cover(game, size: :medium) %> -->
+        <!-- TODO: Use a default cover image if the coverUrl is null. -->
+        <img :src="game.coverUrl" v-if="game.coverUrl"/>
       </figure>
       <div class="card-content">
         <p class="title is-4 mr-10">{{ game.name }}</p>
-        <p class="subtitle is-6">{{ platforms }}</p>
-        <p class="subtitle is-6">{{ developers }}</p>
+        <p class="subtitle is-6" v-if="platforms !== null">{{ platforms }}</p>
+        <p class="subtitle is-6" v-if="developers !== null">{{ developers }}</p>
       </div>
     </router-link>
     <!-- Game card Dropdown -->
@@ -15,6 +16,7 @@
 </template>
 
 <script lang="ts">
+import { Company, Platform } from '@/generated/graphql';
 import { computed, defineComponent } from '@vue/composition-api';
 
 export default defineComponent({
@@ -27,12 +29,12 @@ export default defineComponent({
   },
   setup(props) {
     const platforms = computed(() => {
-      if (props.game.platforms.nodes.size === 0) { return ''; }
-      return props.game.platforms.nodes.map((p: any) => p.name).join(', ');
+      if (props.game.platforms.nodes.size === 0) { return null; }
+      return props.game.platforms.nodes.map((p: Platform) => p.name).join(', ');
     });
     const developers = computed(() => {
-      if (props.game.developers.nodes.size === 0) { return ''; }
-      return props.game.developers.nodes.map((d: any) => d.name).join(', ');
+      if (props.game.developers.nodes.size === 0) { return null; }
+      return props.game.developers.nodes.map((d: Company) => d.name).join(', ');
     });
 
     return {
