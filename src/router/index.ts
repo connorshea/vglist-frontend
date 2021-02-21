@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
 import Activity from '../views/Activity.vue'
+import Companies from '../views/Companies.vue'
 import Engines from '../views/Engines.vue'
 import Games from '../views/Games.vue'
 import Genres from '../views/Genres.vue'
@@ -36,6 +37,11 @@ const routes: Array<RouteConfig> = [
     path: '/engines',
     name: 'Engines',
     component: Engines
+  },
+  {
+    path: '/companies',
+    name: 'Companies',
+    component: Companies
   },
   {
     path: '/games',
