@@ -14,7 +14,6 @@
 
     <div class="navbar-menu is-shadowless" id="navMenu">
       <div class="navbar-start">
-        <!-- Placeholder search input until the Vue component loads. -->
         <div class="navbar-item has-dropdown field mt-10">
           <Search :searchIcon="'foo'"></Search>
         </div>
