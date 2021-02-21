@@ -5,6 +5,7 @@ import Activity from '../views/Activity.vue'
 import Companies from '../views/Companies.vue'
 import Engines from '../views/Engines.vue'
 import Games from '../views/Games.vue'
+import Game from '../views/Game.vue'
 import Genres from '../views/Genres.vue'
 import Platforms from '../views/Platforms.vue'
 import SeriesList from '../views/SeriesList.vue'
@@ -47,6 +48,12 @@ const routes: Array<RouteConfig> = [
     path: '/games',
     name: 'Games',
     component: Games
+  },
+  {
+    path: '/games/:id',
+    name: 'Game',
+    component: Game,
+    props: true
   },
   {
     path: '/genres',

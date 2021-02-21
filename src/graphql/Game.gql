@@ -1,0 +1,32 @@
+query Game($id: ID!) {
+  game(id: $id) {
+    id
+    name
+    releaseDate
+    coverUrl(size: LARGE)
+    avgRating
+    genres {
+      nodes {
+        id
+        name
+      }
+    }
+    platforms {
+      nodes {
+        id
+        name
+      }
+    }
+    series {
+      id
+      name
+    }
+    wikidataId
+    igdbId
+    gogId
+    steamAppIds
+    epicGamesStoreId
+    mobygamesId
+    giantbombId
+  }
+}

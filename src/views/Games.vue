@@ -1,7 +1,9 @@
 <template>
   <div class="games" v-if="data">
     <div v-for="game in data.games.nodes" :key="game.id">
-      {{ game.name }}
+      <router-link :to="{ name: 'Game', params: { id: game.id } }">
+        {{ game.name }}
+      </router-link>
     </div>
   </div>
 </template>
