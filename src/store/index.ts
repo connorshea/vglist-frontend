@@ -19,6 +19,7 @@ type AccessToken = {
 }
 
 export default new Vuex.Store<State>({
+  strict: process.env.NODE_ENV !== 'production',
   state: {
     clientId: process.env.VUE_APP_OAUTH_CLIENT_ID,
     redirectUri: process.env.VUE_APP_REDIRECT_URL,
