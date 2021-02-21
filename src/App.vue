@@ -20,6 +20,9 @@ export default defineComponent({
     NavBar
   },
   setup(_props, context) {
+    // TODO: Replace `root.$store` with `useStore` in Vue 3.
+    // TODO: Replace `root.$router` and `root.$route` with `useRouter` and
+    //       `useRoute` in Vue 3.
     context.root.$store.dispatch('acquireAccessToken').then(() => {
       // Remove the 'code' parameter from the current URL, if the parameter exists.
       if (window.location.href.match(/code=(.*)/)?.[1] !== undefined) {
