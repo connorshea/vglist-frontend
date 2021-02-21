@@ -58,7 +58,7 @@
             </a>
 
             <div class="navbar-dropdown is-right">
-              <div v-for="navBarItem in this.navBarItems" :key="navBarItem.path">
+              <div v-for="navBarItem in navBarItems" :key="navBarItem.path">
                 <hr class="navbar-divider" v-if="navBarItem.title === null">
                 <a class="navbar-item" v-else-if="navBarItem.router === false" :href="navBarItem.path">
                   {{ navBarItem.title }}
@@ -70,7 +70,7 @@
             </div>
           </div>
 
-          <div v-for="navBarItem in this.navBarItems" :key="navBarItem.path">
+          <div v-for="navBarItem in navBarItems" :key="navBarItem.path">
             <template v-if="navBarItem.title !== null">
               <a class="navbar-item is-hidden-desktop" v-if="navBarItem.router === false" :href="navBarItem.path">
                 {{ navBarItem.title }}
@@ -82,9 +82,12 @@
           </div>
         </template>
         <template v-else>
+          <template v-if="showAuthenticate">
+            <a class="navbar-item" :href="oauthUrl">Authenticate</a>
+          </template>
           <router-link to="/sign_up" class="navbar-item">Sign up</router-link>
           <router-link to="/sign_in" class="navbar-item">Sign in</router-link>
-          <div v-for="navBarItem in this.navBarItems" :key="navBarItem.path">
+          <div v-for="navBarItem in navBarItems" :key="navBarItem.path">
             <template v-if="navBarItem.title !== null">
               <a class="navbar-item is-hidden-desktop" v-if="navBarItem.router === false" :href="navBarItem.path">
                 {{ navBarItem.title }}
@@ -98,7 +101,7 @@
           <div class="navbar-item has-dropdown is-hoverable is-hidden-touch">
             <a class="navbar-link" aria-haspopup="menu" aria-controls="navbar-dropdown-more-desktop">More</a>
             <div id="navbar-dropdown-more-desktop" class="navbar-dropdown is-right">
-              <div v-for="navBarItem in this.navBarItems" :key="navBarItem.path">
+              <div v-for="navBarItem in navBarItems" :key="navBarItem.path">
                 <hr class="navbar-divider" v-if="navBarItem.title === null">
                 <a class="navbar-item" v-else-if="navBarItem.router === false" :href="navBarItem.path">
                   {{ navBarItem.title }}
@@ -208,25 +211,16 @@ export default Vue.extend({
       )
 
       return items;
+    },
+    oauthUrl: function(): string {
+      return `https://vglist.co/settings/oauth/authorize?client_id=${this.$store.state.clientId}&redirect_uri=${this.$store.state.redirectUri}&response_type=code`;
+    },
+    /**
+     * Whether to show the authenticate button.
+     */
+    showAuthenticate: function(): boolean {
+      return this.$store.state.accessToken === null;
     }
   }
 });
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-/* h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-} */
-</style>
