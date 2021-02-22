@@ -5,5 +5,8 @@ query User($slug: String!) {
     slug
     bio
     avatarUrl(size: MEDIUM)
+    privacy
+    banned
+    role
   }
 }
