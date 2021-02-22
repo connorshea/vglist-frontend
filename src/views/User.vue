@@ -22,10 +22,10 @@
           <p class='tag is-medium has-text-weight-bold is-danger' v-if="data.user.banned === true">This user has been banned.</p>
         </template>
 
-        <p v-if="data.user.role === 'admin'">
+        <p v-if="data.user.role === 'ADMIN'">
           <span class="tag is-primary has-text-weight-semibold">Admin</span>
         </p>
-        <p v-else-if="data.user.role === 'moderator'">
+        <p v-else-if="data.user.role === 'MODERATOR'">
           <span class="tag is-primary has-text-weight-semibold">Moderator</span>
         </p>
       </div>
