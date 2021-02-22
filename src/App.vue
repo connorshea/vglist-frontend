@@ -2,16 +2,23 @@
   <div id="app">
     <NavBar></NavBar>
 
-    <div class="section">
-      <div class="container is-fluid pr-0-mobile pl-0-mobile">
-        <router-view/>
+    <!-- This is a bit of a hack to make it so the Home page uses a layout
+         without padding/margins. -->
+    <template v-if="currentRouteName === 'Home'">
+      <router-view/>
+    </template>
+    <template v-else>
+      <div class="section">
+        <div class="container is-fluid pr-0-mobile pl-0-mobile">
+          <router-view/>
+        </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from '@vue/composition-api';
 import NavBar from '@/components/NavBar.vue'; // @ is an alias to /src
 import { useClient, defaultPlugins } from 'villus';
 import { authPlugin } from './auth-plugin';
@@ -32,6 +39,10 @@ export default defineComponent({
       }
     });
 
+    const currentRouteName = computed(() => {
+      return context.root.$route.name;
+    });
+
     useClient({
       url: `${process.env.VUE_APP_VGLIST_HOST_URL}/graphql`,
       use: [
@@ -40,7 +51,9 @@ export default defineComponent({
       ]
     });
 
-    return {};
+    return {
+      currentRouteName
+    };
   }
 });
 </script>
