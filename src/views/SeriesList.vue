@@ -1,5 +1,12 @@
 <template>
-  <div class="series-list">
+  <div class="series" v-if="data">
+    <ul>
+      <li v-for="series in data.seriesList.nodes" :key="series.id">
+        <router-link :to="{ name: 'Series', params: { id: series.id }}">
+          {{ series.name }}
+        </router-link>
+      </li>
+    </ul>
   </div>
 </template>
 
