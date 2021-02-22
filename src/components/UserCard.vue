@@ -2,7 +2,8 @@
   <div class="user-card custom-card">
     <router-link :to="{ name: 'UserProfile', params: { slug: user.slug }}" class='card-container'>
       <figure class="user-avatar">
-        <img :src="user.avatarUrl" />
+        <img v-if="user.avatarUrl !== null" :src="user.avatarUrl" />
+        <img v-else src="@/assets/images/default-avatar.png"/>
       </figure>
       <div class="card-content">
         <p class="title is-4 mb-5 is-vertical-align-middle">

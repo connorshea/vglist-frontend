@@ -2,8 +2,8 @@
   <div class="custom-card game-card">
     <router-link :to="{ name: 'Game', params: { id: game.id } }" class="card-container">
       <figure class="game-cover">
-        <!-- TODO: Use a default cover image if the coverUrl is null. -->
-        <img :src="game.coverUrl" v-if="game.coverUrl"/>
+        <img v-if="game.coverUrl !== null" :src="game.coverUrl" />
+        <img v-else src="@/assets/images/no-cover.png"/>
       </figure>
       <div class="card-content">
         <p class="title is-4 mr-10">{{ game.name }}</p>

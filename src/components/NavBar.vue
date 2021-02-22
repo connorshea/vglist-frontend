@@ -2,7 +2,7 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <router-link to="/" class="navbar-item has-text-weight-semibold" title='vglist Home'>
-        <img alt="vglist logo" src="@/assets/vglist-logo.svg" width="80px" class="mt-5" aria-hidden="true">
+        <img alt="vglist logo" src="@/assets/images/vglist-logo.svg" width="80px" class="mt-5" aria-hidden="true">
       </router-link>
       <!-- Hamburger menu for mobile -->
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
