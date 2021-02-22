@@ -2,7 +2,8 @@
   <div class="user" v-if="data">
     <div class="hero-area">
       <div class="hero-image hero-image-150 user-avatar">
-        <img :src="data.user.avatarUrl"/>
+        <img v-if="data.user.avatarUrl !== null" :src="data.user.avatarUrl" />
+        <img v-else src="@/assets/images/default-avatar.png"/>
       </div>
 
       <div class="text-block">
