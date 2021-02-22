@@ -1,0 +1,6 @@
+query Store($id: ID!) {
+  store(id: $id) {
+    id
+    name
+  }
+}

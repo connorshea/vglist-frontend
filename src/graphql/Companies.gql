@@ -1,0 +1,12 @@
+query Companies($cursor: String!) {
+  companies(after: $cursor) {
+    nodes {
+      id
+      name
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}

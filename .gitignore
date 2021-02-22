@@ -21,3 +21,8 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Ignore GraphQL schema files that are necessary for graphql-code-generator
+# to work, but which we do not want to be in our codebase.
+schema.graphql
+graphql.schema.json

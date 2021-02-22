@@ -6,17 +6,28 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "@vue/composition-api": "^1.0.0-rc.2",
     "bulma": "https://github.com/connorshea/bulma#css-variables-with-fallback",
     "core-js": "^3.6.5",
+    "graphql": "^15.5.0",
+    "graphql-tag": "^2.11.0",
     "lodash": "^4.17.20",
+    "villus": "^1.0.0-rc.12",
     "vue": "^2.6.12",
     "vue-router": "^3.5.0",
     "vuex": "^3.6.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.20.1",
+    "@graphql-codegen/introspection": "1.18.1",
+    "@graphql-codegen/typed-document-node": "^1.18.2",
+    "@graphql-codegen/typescript": "^1.21.0",
+    "@graphql-codegen/typescript-operations": "^1.17.14",
+    "@graphql-typed-document-node/core": "^3.1.0",
     "@types/chai": "^4.2.11",
     "@types/lodash": "^4.14.168",
     "@types/mocha": "^5.2.4",

@@ -1,0 +1,12 @@
+query Genres($cursor: String!) {
+  genres(after: $cursor) {
+    nodes {
+      id
+      name
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}

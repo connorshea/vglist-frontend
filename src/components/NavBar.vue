@@ -2,7 +2,7 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <router-link to="/" class="navbar-item has-text-weight-semibold" title='vglist Home'>
-        <img alt="vglist logo" src="../assets/vglist-logo.svg" width="80px" class="mt-5" aria-hidden="true">
+        <img alt="vglist logo" src="@/assets/images/vglist-logo.svg" width="80px" class="mt-5" aria-hidden="true">
       </router-link>
       <!-- Hamburger menu for mobile -->
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
@@ -15,7 +15,7 @@
     <div class="navbar-menu is-shadowless" id="navMenu">
       <div class="navbar-start">
         <div class="navbar-item has-dropdown field mt-10">
-          <Search :searchIcon="'foo'"></Search>
+          <Search/>
         </div>
 
         <!-- Link to the global activity if the user isn't logged in. -->
@@ -131,7 +131,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from '@vue/composition-api';
 import { mapState } from 'vuex';
 import Search from '@/components/Search.vue';
 import { RawLocation } from 'vue-router';
@@ -139,7 +139,7 @@ import { RawLocation } from 'vue-router';
 // Update this to include other valid click actions later.
 type clickAction = 'signOut';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'NavBar',
   components: {
     Search
@@ -151,6 +151,7 @@ export default Vue.extend({
         'signIn',
         {
           username: 'connor',
+          slug: 'connor',
           role: 'admin'
         }
       );
@@ -173,7 +174,7 @@ export default Vue.extend({
         items = items.concat({
           title: 'Profile',
           path: {
-            path: `/users/${this.currentUser.username}`
+            path: `/users/${this.currentUser.slug}`
           },
           router: true
         })
@@ -259,10 +260,14 @@ export default Vue.extend({
     showAuthenticate: function(): boolean {
       return this.$store.state.accessToken === null;
     },
-    ...mapState([
-      'userSignedIn',
-      'currentUser'
-    ])
+    ...mapState({
+      // These are `any` because TypeScript flips out if you tell it the actual
+      // types.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      userSignedIn: (state: any) => state.userSignedIn,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      currentUser: (state: any) => state.currentUser
+    })
   }
 });
 </script>

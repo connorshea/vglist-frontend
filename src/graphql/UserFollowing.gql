@@ -1,0 +1,20 @@
+query UserFollowing($userId: ID!, $cursor: String!) {
+  user(id: $userId) {
+    following(after: $cursor) {
+      nodes {
+        id
+        username
+        slug
+        bio
+        avatarUrl(size: MEDIUM)
+        privacy
+        banned
+        role
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+    }
+  }
+}

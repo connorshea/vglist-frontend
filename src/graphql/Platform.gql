@@ -1,0 +1,7 @@
+query Platform($id: ID!) {
+  platform(id: $id) {
+    id
+    name
+    wikidataId
+  }
+}

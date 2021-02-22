@@ -1,0 +1,23 @@
+query Games($cursor: String!) {
+  games(after: $cursor) {
+    nodes {
+      id
+      name
+      coverUrl(size: MEDIUM)
+      platforms(first: 3) {
+        nodes {
+          name
+        }
+      }
+      developers(first: 3) {
+        nodes {
+          name
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}

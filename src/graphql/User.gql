@@ -1,0 +1,12 @@
+query User($slug: String!) {
+  user(slug: $slug) {
+    id
+    username
+    slug
+    bio
+    avatarUrl(size: MEDIUM)
+    privacy
+    banned
+    role
+  }
+}

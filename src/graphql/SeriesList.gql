@@ -1,0 +1,12 @@
+query SeriesList($cursor: String!) {
+  seriesList(after: $cursor) {
+    nodes {
+      id
+      name
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}

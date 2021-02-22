@@ -1,0 +1,7 @@
+query Genre($id: ID!) {
+  genre(id: $id) {
+    id
+    name
+    wikidataId
+  }
+}
