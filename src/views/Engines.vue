@@ -1,5 +1,7 @@
 <template>
   <div class="engines" v-if="data">
+    <h1 class="title">Engines</h1>
+
     <ul>
       <li v-for="engine in data.engines.nodes" :key="engine.id">
         <router-link :to="{ name: 'Engine', params: { id: engine.id }}">
