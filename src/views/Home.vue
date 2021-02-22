@@ -61,7 +61,7 @@
         </div>
       </nav>
 
-      <div class="game-card-list mt-20">
+      <div class="game-card-list mt-20" v-if="data">
         <div v-for="game in data.games.nodes" :key="game.id">
           <GameCard :game="game"/>
         </div>
