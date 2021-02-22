@@ -1,0 +1,12 @@
+query Platforms($cursor: String!) {
+  platforms(after: $cursor) {
+    nodes {
+      id
+      name
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}

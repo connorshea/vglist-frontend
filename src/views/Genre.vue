@@ -1,20 +1,27 @@
 <template>
-  <div class="series-list">
+  <div class="genre" v-if="data">
+    Genre: {{ data.genre.name }}
   </div>
 </template>
 
 <script lang="ts">
-import { SeriesListDocument } from '@/generated/graphql.ts';
+import { GenreDocument } from '@/generated/graphql.ts';
 import { defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 
 export default defineComponent({
-  name: 'SeriesList',
-  setup() {
+  name: 'Genre',
+  props: {
+    id: {
+      required: true,
+      type: String
+    }
+  },
+  setup(props) {
     const { data } = useQuery({
-      query: SeriesListDocument,
+      query: GenreDocument,
       variables: {
-        cursor: ''
+        id: props.id
       }
     });
 

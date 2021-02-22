@@ -1,0 +1,7 @@
+query Company($id: ID!) {
+  company(id: $id) {
+    id
+    name
+    wikidataId
+  }
+}
