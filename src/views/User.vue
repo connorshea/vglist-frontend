@@ -33,6 +33,8 @@
     <div class="tabs" v-if="isPublic">
       <ul>
         <template v-for="tab in tabs">
+          <!-- The janky v-slot workaround is necessary for the parent <li> to
+               have the active class applied to it. -->
           <router-link :key="tab.id" :to="tab.path" v-slot="{ href, navigate, isExactActive }">
             <li :class="[isExactActive && 'is-active']">
               <a :href="href" @click="navigate">{{ tab.name }}</a>
@@ -74,7 +76,7 @@ export default defineComponent({
       return data.value?.user?.privacy === 'PUBLIC_ACCOUNT';
     });
 
-    // TODO: Add couns back to the Following/Followers tab names.
+    // TODO: Add counts back to the Following/Followers tab names.
     const tabs = computed(() => {
       return [
         {
