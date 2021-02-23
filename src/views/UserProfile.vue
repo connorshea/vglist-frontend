@@ -1,9 +1,8 @@
 <template>
   <div class="profile">
-    <p>Profile</p>
     <!-- Display a message if the user's account is private or has been banned, and hide everything else. -->
-    <!-- <% if policy(@user).show? %>
-      <% if current_user && @user != current_user %>
+    <template v-if="user.banned === false && user.privacy === 'PUBLIC_ACCOUNT'">
+      <!-- <% if current_user && @user != current_user %>
         <% if current_user_following?(@user) %>
           <%= link_to user_unfollow_path(user_id: @user.id), method: :delete, class: "is-danger button is-fullwidth-mobile mr-5 mr-0-mobile mt-10" do %>
             <span class="icon pl-5 mr-5">
@@ -101,12 +100,14 @@
             chevronDownIcon: svg_icon('chevron-down', height: 15, aria: false)
           }.to_json
         %>"
-      ></div>
-    <% elsif @user.banned? %>
+      ></div> -->
+    </template>
+    <template v-else-if='user.banned === true'>
       <h2 class='subtitle has-text-centered has-text-weight-semibold mt-30'>This user's account has been banned.</h2>
-    <% else %>
+    </template>
+    <template v-else>
       <h2 class='subtitle has-text-centered has-text-weight-semibold mt-30'>This user's account is private.</h2>
-    <% end %> -->
+    </template>
   </div>
 </template>
 
