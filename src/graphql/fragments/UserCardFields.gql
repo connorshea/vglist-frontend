@@ -1,0 +1,10 @@
+fragment userCardFields on User {
+  id
+  username
+  slug
+  bio
+  avatarUrl(size: MEDIUM)
+  privacy
+  banned
+  role
+}

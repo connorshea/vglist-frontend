@@ -1,16 +1,10 @@
 query Users($cursor: String!) {
   users(after: $cursor) {
     nodes {
-      id
-      username
-      slug
-      bio
-      avatarUrl(size: MEDIUM)
-      privacy
-      banned
-      role
+      ...userCardFields
     }
     pageInfo {
+      hasPreviousPage
       hasNextPage
       endCursor
     }

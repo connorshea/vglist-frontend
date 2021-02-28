@@ -1,0 +1,15 @@
+fragment gameCardFields on Game {
+  id
+  name
+  coverUrl(size: MEDIUM)
+  platforms(first: 3) {
+    nodes {
+      name
+    }
+  }
+  developers(first: 3) {
+    nodes {
+      name
+    }
+  }
+}

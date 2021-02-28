@@ -2,14 +2,7 @@ query UserFollowers($userId: ID!, $cursor: String!) {
   user(id: $userId) {
     followers(after: $cursor) {
       nodes {
-        id
-        username
-        slug
-        bio
-        avatarUrl(size: MEDIUM)
-        privacy
-        banned
-        role
+        ...userCardFields
       }
       pageInfo {
         hasNextPage

@@ -3,5 +3,15 @@ query Series($id: ID!) {
     id
     name
     wikidataId
+    games {
+      nodes {
+        ...gameCardFields
+      }
+      pageInfo {
+        startCursor
+        hasNextPage
+        hasPreviousPage
+      }
+    }
   }
 }

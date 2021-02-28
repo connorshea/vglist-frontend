@@ -2,21 +2,10 @@ query UserFavorites($userId: ID!, $cursor: String!) {
   user(id: $userId) {
     favoritedGames(after: $cursor) {
       nodes {
-        id
-        name
-        coverUrl(size: MEDIUM)
-        platforms(first: 3) {
-          nodes {
-            name
-          }
-        }
-        developers(first: 3) {
-          nodes {
-            name
-          }
-        }
+        ...gameCardFields
       }
       pageInfo {
+        hasPreviousPage
         hasNextPage
         endCursor
       }

@@ -3,5 +3,25 @@ query Company($id: ID!) {
     id
     name
     wikidataId
+    developedGames {
+      nodes {
+        ...gameCardFields
+      }
+      pageInfo {
+        startCursor
+        hasNextPage
+        hasPreviousPage
+      }
+    }
+    publishedGames {
+      nodes {
+        ...gameCardFields
+      }
+      pageInfo {
+        startCursor
+        hasNextPage
+        hasPreviousPage
+      }
+    }
   }
 }
