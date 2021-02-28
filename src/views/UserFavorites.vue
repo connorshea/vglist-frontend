@@ -11,7 +11,7 @@
     </template>
     <template v-else>
       <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile">
-        <p class="has-text-centered">This user doesn't have any favorites yet.</p>
+        <p class="has-text-centered has-text-muted">This user doesn't have any favorites yet.</p>
       </div>
     </template>
   </div>
