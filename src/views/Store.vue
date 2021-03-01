@@ -1,6 +1,6 @@
 <template>
   <div class="store" v-if="data">
-    Store: {{ data.store.name }}
+    <h1 class="title">{{ data.store.name }}</h1>
   </div>
 </template>
 
