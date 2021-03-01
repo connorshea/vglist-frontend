@@ -45,11 +45,7 @@ export default defineComponent({
     });
 
     const wikidataUrl = computed(() => {
-      if (data.value?.platform?.wikidataId === null) {
-        return null;
-      } else {
-        return `https://www.wikidata.org/wiki/Q${data.value?.platform?.wikidataId}`;
-      }
+      return `https://www.wikidata.org/wiki/Q${data.value?.platform?.wikidataId}`;
     });
 
     return {

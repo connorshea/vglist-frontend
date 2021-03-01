@@ -64,11 +64,7 @@ export default defineComponent({
     });
 
     const wikidataUrl = computed(() => {
-      if (data.value?.company?.wikidataId === null) {
-        return null;
-      } else {
-        return `https://www.wikidata.org/wiki/Q${data.value?.company?.wikidataId}`;
-      }
+      return `https://www.wikidata.org/wiki/Q${data.value?.company?.wikidataId}`;
     });
 
     return {
