@@ -56,7 +56,6 @@ export default new Vuex.Store<State>({
         // comparable value.
         const expirationTimestamp = (parsedAccessToken.created_at + parsedAccessToken.expires_in);
         const currentTime = Math.floor(Date.now() / 1000);
-        // console.log(`access token will expire in ${expirationTimestamp - currentTime}.`);
         if (expirationTimestamp >= currentTime) {
           commit('accessToken', parsedAccessToken.access_token);
           return;
