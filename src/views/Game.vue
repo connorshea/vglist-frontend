@@ -2,7 +2,8 @@
   <div class="columns" v-if="data.game">
     <div class="game-sidebar column is-3-desktop is-5-tablet is-12-mobile">
       <div class="hero-image game-cover mb-10">
-        <!-- <%= game_cover(@game, size: :large) %> -->
+        <img v-if="data.game.coverUrl !== null" :src="data.game.coverUrl" />
+        <img v-else src="@/assets/images/no-cover.png"/>
       </div>
 
       <div class="field buttons buttons-vertical">
@@ -15,7 +16,7 @@
     <div class="column">
       <div class="text-block mb-10-mobile">
         <h1 class="title">{{ data.game.name }}</h1>
-        <!-- <%= render 'infobox', game: @game %> -->
+        <GameInfobox :game="data.game"></GameInfobox>
       </div>
 
       <!-- <% if @owners_count.positive? %>
@@ -92,9 +93,13 @@
 import { GameDocument } from '@/generated/graphql.ts';
 import { defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
+import GameInfobox from '@/components/GameInfobox.vue';
 
 export default defineComponent({
   name: 'Game',
+  components: {
+    GameInfobox
+  },
   props: {
     id: {
       required: true,

@@ -21,6 +21,24 @@ query Game($id: ID!) {
       id
       name
     }
+    developers {
+      nodes {
+        id
+        name
+      }
+    }
+    publishers {
+      nodes {
+        id
+        name
+      }
+    }
+    engines {
+      nodes {
+        id
+        name
+      }
+    }
     wikidataId
     igdbId
     gogId
