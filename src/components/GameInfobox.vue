@@ -89,22 +89,22 @@
       </ul>
     </div>
 
-    <template v-if="externalUrlsExist">
+    <template v-if="externalIdsExist">
       <div class="infobox-section">
         <p class="infobox-header has-text-weight-semibold">External links</p>
         <ul>
-          <li v-if="wikidataUrl !== null"><a :href="wikidataUrl">Wikidata</a></li>
-          <li v-if="pcgamingwikiUrl !== null"><a :href="pcgamingwikiUrl">PCGamingWiki</a></li>
+          <li v-if="game.wikidataId !== null"><a :href="wikidataUrl">Wikidata</a></li>
+          <li v-if="game.pcgamingwikiId !== null"><a :href="pcgamingwikiUrl">PCGamingWiki</a></li>
           <template v-for="(steamUrl, index) in steamUrls">
             <li :key="steamUrl">
               <a :href="steamUrl">Steam {{ index > 0 ? '(alt)' : '' }}</a>
             </li>
           </template>
-          <li v-if="epicGamesStoreUrl !== null"><a :href="epicGamesStoreUrl">Epic Games Store</a></li>
-          <li v-if="gogUrl !== null"><a :href="gogUrl">GOG.com</a></li>
-          <li v-if="mobygamesUrl !== null"><a :href="mobygamesUrl">MobyGames</a></li>
-          <li v-if="giantbombUrl !== null"><a :href="giantbombUrl">GiantBomb</a></li>
-          <li v-if="igdbUrl !== null"><a :href="igdbUrl">IGDB</a></li>
+          <li v-if="game.epicGamesStoreId !== null"><a :href="epicGamesStoreUrl">Epic Games Store</a></li>
+          <li v-if="game.gogId !== null"><a :href="gogUrl">GOG.com</a></li>
+          <li v-if="game.mobygamesId !== null"><a :href="mobygamesUrl">MobyGames</a></li>
+          <li v-if="game.giantbombId !== null"><a :href="giantbombUrl">GiantBomb</a></li>
+          <li v-if="game.igdbId !== null"><a :href="igdbUrl">IGDB</a></li>
         </ul>
       </div>
     </template>
@@ -155,9 +155,18 @@ export default defineComponent({
       return `https://pcgamingwiki.com/wiki/${props.game.pcgamingwikiId}`;
     });
 
-    const externalUrlsExist = computed(() => {
-      // TODO: Handle Steam URLs here.
-      return [wikidataUrl, pcgamingwikiUrl, mobygamesUrl, giantbombUrl, epicGamesStoreUrl, gogUrl, igdbUrl].some((el) => el !== null);
+    const externalIdsExist = computed(() => {
+      let idsExist = [
+        props.game.wikidataId,
+        props.game.pcgamingwikiId,
+        props.game.mobygamesId,
+        props.game.giantbombId,
+        props.game.epicGamesStoreId,
+        props.game.gogId,
+        props.game.igdbId
+      ].some((el) => el !== null);
+
+      return idsExist || props.game.steamAppIds.length > 0;
     });
 
     return {
@@ -170,7 +179,7 @@ export default defineComponent({
       giantbombUrl,
       igdbUrl,
       pcgamingwikiUrl,
-      externalUrlsExist
+      externalIdsExist
     };
   }
 });

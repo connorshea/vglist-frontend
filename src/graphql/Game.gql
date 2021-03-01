@@ -45,6 +45,7 @@ query Game($id: ID!) {
     steamAppIds
     epicGamesStoreId
     mobygamesId
+    pcgamingwikiId
     giantbombId
   }
 }
