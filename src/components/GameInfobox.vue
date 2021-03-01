@@ -15,7 +15,7 @@
 
     <div v-if="game.developers.nodes.length > 0" class="infobox-section">
       <p class="infobox-header has-text-weight-semibold">
-        Developer(s)
+        Developer{{ game.developers.nodes.length > 1 ? 's' : '' }}
       </p>
       <ul>
         <li v-for="developer in game.developers.nodes" :key="developer.id">
@@ -28,7 +28,7 @@
 
     <div v-if="game.publishers.nodes.length > 0" class="infobox-section">
       <p class="infobox-header has-text-weight-semibold">
-        Publisher(s)
+        Publisher{{ game.publishers.nodes.length > 1 ? 's' : '' }}
       </p>
       <ul>
         <li v-for="publisher in game.publishers.nodes" :key="publisher.id">
@@ -41,7 +41,7 @@
 
     <div v-if="game.platforms.nodes.length > 0" class="infobox-section">
       <p class="infobox-header has-text-weight-semibold">
-        Platform(s)
+        Platform{{ game.platforms.nodes.length > 1 ? 's' : '' }}
       </p>
       <ul>
         <li v-for="platform in game.platforms.nodes" :key="platform.id">
@@ -65,7 +65,7 @@
 
     <div v-if="game.genres.nodes.length > 0" class="infobox-section">
       <p class="infobox-header has-text-weight-semibold">
-        Genre(s)
+        Genre{{ game.genres.nodes.length > 1 ? 's' : '' }}
       </p>
       <ul>
         <li v-for="genre in game.genres.nodes" :key="genre.id">
@@ -78,7 +78,7 @@
 
     <div v-if="game.engines.nodes.length > 0" class="infobox-section">
       <p class="infobox-header has-text-weight-semibold">
-        Engine(s)
+        Engine{{ game.engines.nodes.length > 1 ? 's' : '' }}
       </p>
       <ul>
         <li v-for="engine in game.engines.nodes" :key="engine.id">
@@ -97,14 +97,7 @@
           <li v-if="pcgamingwikiUrl !== null"><a :href="pcgamingwikiUrl">PCGamingWiki</a></li>
           <template v-for="(steamUrl, index) in steamUrls">
             <li :key="steamUrl">
-              <a :href="steamUrl">
-                <template v-if="index === 0">
-                  Steam
-                </template>
-                <template v-else>
-                  Steam (alt)
-                </template>
-              </a>
+              <a :href="steamUrl">Steam {{ index > 0 ? '(alt)' : '' }}</a>
             </li>
           </template>
           <li v-if="epicGamesStoreUrl !== null"><a :href="epicGamesStoreUrl">Epic Games Store</a></li>
