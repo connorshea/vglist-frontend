@@ -5,6 +5,13 @@
  * 
  * Based on this Gist:
  * https://gist.github.com/ndabAP/d7a338407bb22794418bc64875af14ee
+ *
+ * Example:
+ * 
+ *     pluralize(1, 'cookie'); // => cookie
+ *     pluralize(2, 'cookie'); // => cookies
+ *     pluralize(1, 'octopus', 'octopi'); // => octopus
+ *     pluralize(2, 'octopus', 'octopi'); // => octopi
  */
 export const pluralize = (amount: number, singular: string, plural: string | null = null): string => {
   if (plural === null) {
