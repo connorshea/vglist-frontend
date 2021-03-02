@@ -14,7 +14,7 @@
           <span v-if="user.banned === true" class="tag is-danger has-text-weight-semibold ml-5">Banned</span>
         </p>
         <p class="has-text-muted">
-          {{ user.gamePurchases.totalCount }} Game{{ user.gamePurchases.totalCount !== 1 ? 's' : '' }}
+          {{ user.gamePurchases.totalCount }} {{ user.gamePurchases.totalCount | pluralize('Game') }}
         </p>
       </div>
     </router-link>

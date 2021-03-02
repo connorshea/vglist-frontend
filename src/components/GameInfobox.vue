@@ -15,7 +15,7 @@
 
     <div v-if="game.developers.nodes.length > 0" class="infobox-section">
       <p class="infobox-header has-text-weight-semibold">
-        Developer{{ game.developers.nodes.length > 1 ? 's' : '' }}
+        {{ game.developers.nodes.length | pluralize('Developer') }}
       </p>
       <ul>
         <li v-for="developer in game.developers.nodes" :key="developer.id">
@@ -28,7 +28,7 @@
 
     <div v-if="game.publishers.nodes.length > 0" class="infobox-section">
       <p class="infobox-header has-text-weight-semibold">
-        Publisher{{ game.publishers.nodes.length > 1 ? 's' : '' }}
+        {{ game.publishers.nodes.length | pluralize('Publisher') }}
       </p>
       <ul>
         <li v-for="publisher in game.publishers.nodes" :key="publisher.id">
@@ -41,7 +41,7 @@
 
     <div v-if="game.platforms.nodes.length > 0" class="infobox-section">
       <p class="infobox-header has-text-weight-semibold">
-        Platform{{ game.platforms.nodes.length > 1 ? 's' : '' }}
+        {{ game.platforms.nodes.length | pluralize('Platform') }}
       </p>
       <ul>
         <li v-for="platform in game.platforms.nodes" :key="platform.id">
@@ -65,7 +65,7 @@
 
     <div v-if="game.genres.nodes.length > 0" class="infobox-section">
       <p class="infobox-header has-text-weight-semibold">
-        Genre{{ game.genres.nodes.length > 1 ? 's' : '' }}
+        {{ game.genres.nodes.length | pluralize('Genre') }}
       </p>
       <ul>
         <li v-for="genre in game.genres.nodes" :key="genre.id">
@@ -78,7 +78,7 @@
 
     <div v-if="game.engines.nodes.length > 0" class="infobox-section">
       <p class="infobox-header has-text-weight-semibold">
-        Engine{{ game.engines.nodes.length > 1 ? 's' : '' }}
+        {{ game.engines.nodes.length | pluralize('Engine') }}
       </p>
       <ul>
         <li v-for="engine in game.engines.nodes" :key="engine.id">
