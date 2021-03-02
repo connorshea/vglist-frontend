@@ -9,11 +9,11 @@
       </div>
     </div>
 
-    <div class="section section-home-overlap-card">
+    <div class="section section-home-overlap-card" v-if="statsData">
       <nav class="level card home-card stats-card column is-two-thirds m-auto">
         <div class="level-item has-text-centered">
           <div>
-            <p class="title">{{ stats.games }}</p>
+            <p class="title">{{ statsData.basicSiteStatistics.games.toLocaleString('en-US') }}</p>
             <p class="heading">
               <router-link to="/games">Games</router-link>
             </p>
@@ -21,7 +21,7 @@
         </div>
         <div class="level-item has-text-centered">
           <div>
-            <p class="title">{{ stats.series }}</p>
+            <p class="title">{{ statsData.basicSiteStatistics.series.toLocaleString('en-US') }}</p>
             <p class="heading">
               <router-link to="/series">Series</router-link>
             </p>
@@ -29,7 +29,7 @@
         </div>
         <div class="level-item has-text-centered">
           <div>
-            <p class="title">{{ stats.platforms }}</p>
+            <p class="title">{{ statsData.basicSiteStatistics.platforms.toLocaleString('en-US') }}</p>
             <p class="heading">
               <router-link to="/platforms">Platforms</router-link>
             </p>
@@ -37,7 +37,7 @@
         </div>
         <div class="level-item has-text-centered">
           <div>
-            <p class="title">{{ stats.companies }}</p>
+            <p class="title">{{ statsData.basicSiteStatistics.companies.toLocaleString('en-US') }}</p>
             <p class="heading">
               <router-link to="/companies">Companies</router-link>
             </p>
@@ -45,7 +45,7 @@
         </div>
         <div class="level-item has-text-centered">
           <div>
-            <p class="title">{{ stats.engines }}</p>
+            <p class="title">{{ statsData.basicSiteStatistics.engines.toLocaleString('en-US') }}</p>
             <p class="heading">
               <router-link to="/engines">Engines</router-link>
             </p>
@@ -53,7 +53,7 @@
         </div>
         <div class="level-item has-text-centered">
           <div>
-            <p class="title">{{ stats.genres }}</p>
+            <p class="title">{{ statsData.basicSiteStatistics.genres.toLocaleString('en-US') }}</p>
             <p class="heading">
               <router-link to="/genres">Genres</router-link>
             </p>
@@ -61,8 +61,8 @@
         </div>
       </nav>
 
-      <div class="game-card-list mt-20" v-if="data">
-        <div v-for="game in data.games.nodes" :key="game.id">
+      <div class="game-card-list mt-20" v-if="gamesData">
+        <div v-for="game in gamesData.games.nodes" :key="game.id">
           <GameCard :game="game"/>
         </div>
       </div>
@@ -71,8 +71,8 @@
 </template>
 
 <script lang="ts">
-import { GamesDocument } from '@/generated/graphql.ts';
-import { computed, defineComponent } from '@vue/composition-api';
+import { GamesDocument, HomeStatisticsDocument } from '@/generated/graphql.ts';
+import { defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
 
@@ -82,29 +82,20 @@ export default defineComponent({
     GameCard
   },
   setup() {
-    const { data } = useQuery({
+    const { data: gamesData } = useQuery({
       query: GamesDocument,
       variables: {
         cursor: ''
       }
     });
 
-    // TODO: Replace these hardcoded values with dynamic values once there's a
-    // GraphQL endpoint for these stats (and add thousands separators).
-    const stats = computed(() => {
-      return {
-        games: 123,
-        series: 123,
-        platforms: 123,
-        companies: 123,
-        engines: 123,
-        genres: 123
-      }
+    const { data: statsData } = useQuery({
+      query: HomeStatisticsDocument
     });
 
     return {
-      data,
-      stats
+      gamesData,
+      statsData
     };
   }
 });

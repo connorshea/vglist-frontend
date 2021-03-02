@@ -1,0 +1,10 @@
+query HomeStatistics {
+  basicSiteStatistics {
+    companies
+    engines
+    games
+    genres
+    platforms
+    series
+  }
+}
