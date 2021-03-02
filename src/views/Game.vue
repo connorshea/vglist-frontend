@@ -19,51 +19,51 @@
         <GameInfobox :game="data.game"></GameInfobox>
       </div>
 
-      <!-- <% if @owners_count.positive? %>
-        <h3 class="title is-5 mb-5 mt-15">Owners (<%= @owners_count %>)</h3>
+      <template v-if="data.game.owners.totalCount > 0">
+        <h3 class="title is-5 mb-5 mt-15">Owners ({{ data.game.owners.totalCount }})</h3>
         <ul class='avatar-image-grid mt-10'>
-          <% @owners.each do |owner| %>
-            <li class='avatar-image-grid-item'>
-              <%= link_to(user_path(owner), class: 'image') do %>
-                <%= user_avatar(owner, size: :small, title: owner.username) %>
-              <% end %>
-            </li>
-          <% end %>
-          <% unless @owners_count == @owners.count %>
+          <li v-for="owner in data.game.owners.nodes" :key="owner.id" class='avatar-image-grid-item'>
+            <router-link :to="{ name: 'UserProfile', params: { slug: owner.slug }}" class="image">
+              <img v-if="owner.avatarUrl !== null" :src="owner.avatarUrl" :title="owner.username" />
+              <img v-else src="@/assets/images/default-avatar.png" />
+            </router-link>
+          </li>
+          <template v-if="data.game.owners.totalCount > 10">
             <li class='avatar-image-grid-item avatar-image-grid-item-overflow'>
               <p class="has-text-weight-semibold">
-                <%= "+#{@owners_count - @owners.count}" %>
+                +{{ data.game.owners.totalCount - 10 }}
               </p>
             </li>
-          <% end %>
+          </template>
         </ul>
-      <% else %>
+      </template>
+      <template v-else>
         <h3 class="title is-5 mb-5 mt-15">Owners</h3>
         <p class="has-text-muted">No one has this game in their library yet.</p>
-      <% end %> -->
+      </template>
 
-      <!-- <% if @favoriters_count.positive? %>
-        <h3 class="title is-5 mb-5 mt-15">Favorites (<%= @favoriters_count %>)</h3>
+      <template v-if="data.game.favoriters.totalCount > 0">
+        <h3 class="title is-5 mb-5 mt-15">Favorites ({{ data.game.favoriters.totalCount }})</h3>
         <ul class='avatar-image-grid mt-10'>
-          <% @favoriters.each do |favoriter| %>
-            <li class='avatar-image-grid-item'>
-              <%= link_to(user_path(favoriter), class: 'image') do %>
-                <%= user_avatar(favoriter, size: :small, title: favoriter.username) %>
-              <% end %>
-            </li>
-          <% end %>
-          <% unless @favoriters_count == @favoriters.count %>
+          <li v-for="favoriter in data.game.favoriters.nodes" :key="favoriter.id" class='avatar-image-grid-item'>
+            <router-link :to="{ name: 'UserProfile', params: { slug: favoriter.slug }}" class="image">
+              <img v-if="favoriter.avatarUrl !== null" :src="favoriter.avatarUrl" :title="favoriter.username" />
+              <img v-else src="@/assets/images/default-avatar.png" />
+            </router-link>
+          </li>
+          <template v-if="data.game.favoriters.totalCount > 10">
             <li class='avatar-image-grid-item avatar-image-grid-item-overflow'>
               <p class="has-text-weight-semibold">
-                <%= "+#{@favoriters_count - @favoriters.count}" %>
+                +{{ data.game.favoriters.totalCount - 10 }}
               </p>
             </li>
-          <% end %>
+          </template>
         </ul>
-      <% else %>
+      </template>
+      <template v-else>
         <h3 class="title is-5 mb-5 mt-15">Favorites</h3>
         <p class="has-text-muted">No one has favorited this game yet.</p>
-      <% end %> -->
+      </template>
 
       <!-- <% if @games_in_series && @games_in_series.count.positive? %>
         <div class="card more-from-this-series-card mt-15">

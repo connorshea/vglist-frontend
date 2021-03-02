@@ -39,6 +39,24 @@ query Game($id: ID!) {
         name
       }
     }
+    owners(first: 10) {
+      nodes {
+        id
+        username
+        slug
+        avatarUrl(size: SMALL)
+      }
+      totalCount
+    }
+    favoriters(first: 10) {
+      nodes {
+        id
+        username
+        slug
+        avatarUrl(size: SMALL)
+      }
+      totalCount
+    }
     wikidataId
     igdbId
     gogId
