@@ -50,6 +50,13 @@ yarn test:unit
 yarn lint
 ```
 
+### Updating the generated GraphQL types
+
+- In your copy of the `vglist` Rails app, run `bundle exec rake graphql:schema:dump` to generate a dump of the GraphQL schema.
+- Copy the newly-generated `schema.graphql` file to the vglist-frontend directory, probably with `cp schema.graphql ../vglist-frontend`.
+- In vglist-frontend, run `yarn run generate` to regenerate the GraphQL types.
+- Commit changes!
+
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
