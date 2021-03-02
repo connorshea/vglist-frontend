@@ -77,7 +77,6 @@ export default defineComponent({
       return data.value?.user?.privacy === 'PUBLIC_ACCOUNT';
     });
 
-    // TODO: Add counts back to the Following/Followers tab names.
     const tabs = computed(() => {
       return [
         {
@@ -102,14 +101,14 @@ export default defineComponent({
           }
         },
         {
-          name: 'Following',
+          name: `Following (${data.value?.user?.following?.totalCount})`,
           path: {
             name: 'UserFollowing',
             slug: props.slug
           }
         },
         {
-          name: 'Followers',
+          name: `Followers (${data.value?.user?.followers?.totalCount})`,
           path: {
             name: 'UserFollowers',
             slug: props.slug
