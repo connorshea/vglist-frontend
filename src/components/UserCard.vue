@@ -13,8 +13,9 @@
           <span v-if="user.privacy === 'PRIVATE_ACCOUNT'" class="tag is-light has-text-weight-semibold ml-5">Private</span>
           <span v-if="user.banned === true" class="tag is-danger has-text-weight-semibold ml-5">Banned</span>
         </p>
-        <!-- TODO: Make this actually check the number of games. -->
-        <p class="has-text-muted">123 Games</p>
+        <p class="has-text-muted">
+          {{ user.gamePurchases.totalCount }} Game{{ user.gamePurchases.totalCount !== 1 ? 's' : '' }}
+        </p>
       </div>
     </router-link>
   </div>
