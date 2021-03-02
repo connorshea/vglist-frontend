@@ -77,6 +77,8 @@ export type CompanyConnection = {
   nodes?: Maybe<Array<Maybe<Company>>>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
+  /** The total number of records returned by this query. */
+  totalCount: Scalars['Int'];
 };
 
 /** An edge in a connection. */
@@ -130,6 +132,8 @@ export type EngineConnection = {
   nodes?: Maybe<Array<Maybe<Engine>>>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
+  /** The total number of records returned by this query. */
+  totalCount: Scalars['Int'];
 };
 
 /** An edge in a connection. */
@@ -181,6 +185,8 @@ export type EventConnection = {
   nodes?: Maybe<Array<Maybe<Event>>>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
+  /** The total number of records returned by this query. */
+  totalCount: Scalars['Int'];
 };
 
 /** An edge in a connection. */
@@ -353,6 +359,8 @@ export type GameConnection = {
   nodes?: Maybe<Array<Maybe<Game>>>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
+  /** The total number of records returned by this query. */
+  totalCount: Scalars['Int'];
 };
 
 /**
@@ -465,6 +473,8 @@ export type GamePurchaseConnection = {
   nodes?: Maybe<Array<Maybe<GamePurchase>>>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
+  /** The total number of records returned by this query. */
+  totalCount: Scalars['Int'];
 };
 
 /** An edge in a connection. */
@@ -531,6 +541,8 @@ export type GenreConnection = {
   nodes?: Maybe<Array<Maybe<Genre>>>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
+  /** The total number of records returned by this query. */
+  totalCount: Scalars['Int'];
 };
 
 /** An edge in a connection. */
@@ -682,6 +694,8 @@ export type PlatformConnection = {
   nodes?: Maybe<Array<Maybe<Platform>>>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
+  /** The total number of records returned by this query. */
+  totalCount: Scalars['Int'];
 };
 
 /** An edge in a connection. */
@@ -738,6 +752,8 @@ export type Query = {
   seriesList?: Maybe<SeriesConnection>;
   /** Find a series by searching based on its name. */
   seriesSearch?: Maybe<SeriesConnection>;
+  /** List all statistics. **This information is only available to admins.** */
+  siteStatistics?: Maybe<SiteStatisticConnection>;
   /** Find a store by ID. */
   store?: Maybe<Store>;
   /** Find a store by searching based on its name. */
@@ -931,6 +947,15 @@ export type QuerySeriesSearchArgs = {
 
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
+export type QuerySiteStatisticsArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+/** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryStoreArgs = {
   id: Scalars['ID'];
 };
@@ -1038,6 +1063,8 @@ export type SeriesConnection = {
   nodes?: Maybe<Array<Maybe<Series>>>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
+  /** The total number of records returned by this query. */
+  totalCount: Scalars['Int'];
 };
 
 /** An edge in a connection. */
@@ -1047,6 +1074,97 @@ export type SeriesEdge = {
   cursor: Scalars['String'];
   /** The item at the end of the edge. */
   node?: Maybe<Series>;
+};
+
+/**
+ * Historical site statistics for vglist. Most of these values cannot be
+ * `null`, but some may be if you go back far enough. Make sure to handle
+ * `null` where necessary.
+ */
+export type SiteStatistic = {
+  __typename?: 'SiteStatistic';
+  /** The number of Banned Users at this point in time. */
+  bannedUsers: Scalars['Int'];
+  /** The number of Companies at this point in time. */
+  companies: Scalars['Int'];
+  /** The number of Company Versions at this point in time. */
+  companyVersions?: Maybe<Scalars['Int']>;
+  /** The number of Engine Versions at this point in time. */
+  engineVersions?: Maybe<Scalars['Int']>;
+  /** The number of Engines at this point in time. */
+  engines: Scalars['Int'];
+  /** The number of Epic Games Store IDs at this point in time. */
+  epicGamesStoreIds: Scalars['Int'];
+  /** The number of Events at this point in time. */
+  events: Scalars['Int'];
+  /** The number of Game Purchases at this point in time. */
+  gamePurchases: Scalars['Int'];
+  /** The number of Game Versions at this point in time. */
+  gameVersions?: Maybe<Scalars['Int']>;
+  /** The number of Games at this point in time. */
+  games: Scalars['Int'];
+  /** The number of Games with covers at this point in time. */
+  gamesWithCovers: Scalars['Int'];
+  /** The number of Games with release dates at this point in time. */
+  gamesWithReleaseDates: Scalars['Int'];
+  /** The number of Genre Versions at this point in time. */
+  genreVersions?: Maybe<Scalars['Int']>;
+  /** The number of Genres at this point in time. */
+  genres: Scalars['Int'];
+  /** The number of GiantBomb IDs at this point in time. */
+  giantbombIds: Scalars['Int'];
+  /** The number of GOG.com IDs at this point in time. */
+  gogIds: Scalars['Int'];
+  /** ID of the statistic record. */
+  id: Scalars['ID'];
+  /** The number of IGDB IDs at this point in time. */
+  igdbIds?: Maybe<Scalars['Int']>;
+  /** The number of MobyGames IDs at this point in time. */
+  mobygamesIds: Scalars['Int'];
+  /** The number of PCGamingWiki IDs at this point in time. */
+  pcgamingwikiIds: Scalars['Int'];
+  /** The number of Platform Versions at this point in time. */
+  platformVersions?: Maybe<Scalars['Int']>;
+  /** The number of Platforms at this point in time. */
+  platforms: Scalars['Int'];
+  /** The number of Relationships at this point in time. */
+  relationships: Scalars['Int'];
+  /** The number of Series at this point in time. */
+  series: Scalars['Int'];
+  /** The number of Series Versions at this point in time. */
+  seriesVersions?: Maybe<Scalars['Int']>;
+  /** The number of Steam App IDs at this point in time. */
+  steamAppIds: Scalars['Int'];
+  /** The number of Stores at this point in time. */
+  stores: Scalars['Int'];
+  /** The point in time at which these statistics were logged, always UTC. */
+  timestamp: Scalars['ISO8601DateTime'];
+  /** The number of Users at this point in time. */
+  users: Scalars['Int'];
+  /** The number of Wikidata IDs at this point in time. */
+  wikidataIds: Scalars['Int'];
+};
+
+/** The connection type for SiteStatistic. */
+export type SiteStatisticConnection = {
+  __typename?: 'SiteStatisticConnection';
+  /** A list of edges. */
+  edges?: Maybe<Array<Maybe<SiteStatisticEdge>>>;
+  /** A list of nodes. */
+  nodes?: Maybe<Array<Maybe<SiteStatistic>>>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The total number of records returned by this query. */
+  totalCount: Scalars['Int'];
+};
+
+/** An edge in a connection. */
+export type SiteStatisticEdge = {
+  __typename?: 'SiteStatisticEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node?: Maybe<SiteStatistic>;
 };
 
 /** Stores where video games are sold, e.g. Steam or the Epic Games Store */
@@ -1071,6 +1189,8 @@ export type StoreConnection = {
   nodes?: Maybe<Array<Maybe<Store>>>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
+  /** The total number of records returned by this query. */
+  totalCount: Scalars['Int'];
 };
 
 /** An edge in a connection. */
@@ -1208,6 +1328,8 @@ export type UserConnection = {
   nodes?: Maybe<Array<Maybe<User>>>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
+  /** The total number of records returned by this query. */
+  totalCount: Scalars['Int'];
 };
 
 /** An edge in a connection. */
