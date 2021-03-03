@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="box" v-if="handleable">
     <article class="media">
       <div class="media-left">
         <figure class="image is-64x64">
@@ -44,17 +44,52 @@ export default defineComponent({
     }
   },
   setup(props) {
+    // TODO: Add links here and make them work.
     const eventText = computed(() => {
-      return 'foo';
+      let text = '';
+
+      switch (props.event.eventCategory) {
+        case 'ADD_TO_LIBRARY':
+          text = `${props.event.user.username} added ${props.event.eventable.game.name} to their library.`;
+          break;
+        case 'FAVORITE_GAME':
+          text = `${props.event.user.username} favorited ${props.event.eventable.game.name}.`;
+          break;
+        case 'NEW_USER':
+          text = `${props.event.user.username} created their account.`;
+          break;
+        case 'FOLLOWING':
+          text = `${props.event.user.username} started following ${props.event.eventable.username}.`;
+          break;
+        case 'CHANGE_COMPLETION_STATUS':
+          text = 'TODO';
+          break;
+      }
+
+      return text;
     });
 
     const relativeTimeAgo = computed(() => {
       return format(props.event.createdAt);
     });
 
+    // Are we able to handle (aka "render valid text for") this event?
+    const handleable = computed(() => {
+      if (['ADD_TO_LIBRARY', 'FAVORITE_GAME', 'NEW_USER', 'FOLLOWING'].includes(props.event.eventCategory)) {
+        return true;
+      } else if (props.event.eventCategory === 'CHANGE_COMPLETION_STATUS') {
+        // TODO: Implement this when differences is added to the GraphQL API.
+        return false;
+      } else {
+        // This shouldn't happen unless a new event category is introduced.
+        return false;
+      }
+    });
+
     return {
       eventText,
-      relativeTimeAgo
+      relativeTimeAgo,
+      handleable
     };
   }
 });

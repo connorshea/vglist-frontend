@@ -18,9 +18,7 @@
     -->
 
     <template v-for="event in data.activity.nodes">
-      <!-- <template v-if="eventIsHandleable"> -->
-        <EventCard :event="event" :key="event.id"></EventCard>
-      <!-- </template> -->
+      <EventCard :event="event" :key="event.id"></EventCard>
     </template>
 
     <!-- <%= paginate @events %> -->
