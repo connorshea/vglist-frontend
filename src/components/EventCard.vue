@@ -15,7 +15,7 @@
 
           <p>
             <span class="has-text-muted" :title="event.createdAt">
-              <!-- <%= "#{distance_of_time_in_words(event.createdAt, Time.now)} ago" %> -->
+              {{ relativeTimeAgo }}
             </span>
             <!-- <% if policy(event).destroy? %>
               <%= link_to event_path(event.id),
@@ -33,6 +33,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from '@vue/composition-api';
+import { format } from 'timeago.js';
 
 export default defineComponent({
   name: 'EventCard',
@@ -47,8 +48,13 @@ export default defineComponent({
       return 'foo';
     });
 
+    const relativeTimeAgo = computed(() => {
+      return format(props.event.createdAt);
+    });
+
     return {
-      eventText
+      eventText,
+      relativeTimeAgo
     };
   }
 });
