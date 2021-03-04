@@ -5,8 +5,7 @@ query Platforms($cursor: String!) {
       name
     }
     pageInfo {
-      hasNextPage
-      endCursor
+      ...paginationFields
     }
   }
 }

@@ -8,9 +8,7 @@ query Series($id: ID!) {
         ...gameCardFields
       }
       pageInfo {
-        startCursor
-        hasNextPage
-        hasPreviousPage
+        ...paginationFields
       }
     }
   }

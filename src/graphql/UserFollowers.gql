@@ -5,8 +5,7 @@ query UserFollowers($userId: ID!, $cursor: String!) {
         ...userCardFields
       }
       pageInfo {
-        hasNextPage
-        endCursor
+        ...paginationFields
       }
     }
   }

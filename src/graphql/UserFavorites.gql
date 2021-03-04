@@ -5,9 +5,7 @@ query UserFavorites($userId: ID!, $cursor: String!) {
         ...gameCardFields
       }
       pageInfo {
-        hasPreviousPage
-        hasNextPage
-        endCursor
+        ...paginationFields
       }
     }
   }

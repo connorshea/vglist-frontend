@@ -8,9 +8,7 @@ query Platform($id: ID!) {
         ...gameCardFields
       }
       pageInfo {
-        startCursor
-        hasNextPage
-        hasPreviousPage
+        ...paginationFields
       }
     }
   }

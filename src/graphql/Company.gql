@@ -8,9 +8,7 @@ query Company($id: ID!) {
         ...gameCardFields
       }
       pageInfo {
-        startCursor
-        hasNextPage
-        hasPreviousPage
+        ...paginationFields
       }
     }
     publishedGames {
@@ -18,9 +16,7 @@ query Company($id: ID!) {
         ...gameCardFields
       }
       pageInfo {
-        startCursor
-        hasNextPage
-        hasPreviousPage
+        ...paginationFields
       }
     }
   }

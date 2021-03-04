@@ -5,8 +5,7 @@ query Companies($cursor: String!) {
       name
     }
     pageInfo {
-      hasNextPage
-      endCursor
+      ...paginationFields
     }
   }
 }

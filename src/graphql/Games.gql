@@ -4,8 +4,7 @@ query Games($cursor: String!) {
       ...gameCardFields
     }
     pageInfo {
-      hasNextPage
-      endCursor
+      ...paginationFields
     }
   }
 }

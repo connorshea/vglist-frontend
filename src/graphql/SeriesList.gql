@@ -5,8 +5,7 @@ query SeriesList($cursor: String!) {
       name
     }
     pageInfo {
-      hasNextPage
-      endCursor
+      ...paginationFields
     }
   }
 }

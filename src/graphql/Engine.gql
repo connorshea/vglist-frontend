@@ -8,9 +8,7 @@ query Engine($id: ID!) {
         ...gameCardFields
       }
       pageInfo {
-        startCursor
-        hasNextPage
-        hasPreviousPage
+        ...paginationFields
       }
     }
   }

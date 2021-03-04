@@ -5,8 +5,7 @@ query Stores($cursor: String!) {
       name
     }
     pageInfo {
-      hasNextPage
-      endCursor
+      ...paginationFields
     }
   }
 }

@@ -5,8 +5,7 @@ query Engines($cursor: String!) {
       name
     }
     pageInfo {
-      hasNextPage
-      endCursor
+      ...paginationFields
     }
   }
 }

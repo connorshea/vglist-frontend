@@ -4,10 +4,7 @@ query ActivityFeed($feedType: ActivityFeed) {
       ...eventCardFields
     }
     pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
+      ...paginationFields
     }
   }
 }

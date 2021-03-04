@@ -5,8 +5,7 @@ query UserFollowing($userId: ID!, $cursor: String!) {
         ...userCardFields
       }
       pageInfo {
-        hasNextPage
-        endCursor
+        ...paginationFields
       }
     }
   }

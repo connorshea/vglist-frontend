@@ -5,10 +5,7 @@ query UserActivity($userId: ID!, $cursor: String!) {
         ...eventCardFields
       }
       pageInfo {
-        hasPreviousPage
-        hasNextPage
-        startCursor
-        endCursor
+        ...paginationFields
       }
     }
   }

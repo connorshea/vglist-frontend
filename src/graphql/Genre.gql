@@ -8,9 +8,7 @@ query Genre($id: ID!) {
         ...gameCardFields
       }
       pageInfo {
-        startCursor
-        hasNextPage
-        hasPreviousPage
+        ...paginationFields
       }
     }
   }
