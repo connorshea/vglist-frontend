@@ -6,6 +6,7 @@ import Company from '@/views/Company.vue';
 import Companies from '@/views/Companies.vue';
 import Engine from '@/views/Engine.vue';
 import Engines from '@/views/Engines.vue';
+import FollowingActivity from '@/views/FollowingActivity.vue';
 import Games from '@/views/Games.vue';
 import Game from '@/views/Game.vue';
 import Genre from '@/views/Genre.vue';
@@ -44,6 +45,11 @@ const routes: Array<RouteConfig> = [
     path: '/activity',
     name: 'Activity',
     component: Activity
+  },
+  {
+    path: '/activity/following',
+    name: 'FollowingActivity',
+    component: FollowingActivity
   },
   {
     path: '/engines',

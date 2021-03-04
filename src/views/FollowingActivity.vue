@@ -1,6 +1,6 @@
 <template>  
   <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile" v-if="data">
-    <h1 class="title">Global Activity</h1>
+    <h1 class="title">Activity</h1>
 
     <template v-if="userSignedIn">
       <div class="tabs">
@@ -34,7 +34,7 @@ import { useQuery } from 'villus';
 import EventCard from '@/components/EventCard.vue';
 
 export default defineComponent({
-  name: 'Activity',
+  name: 'FollowingActivity',
   components: {
     EventCard
   },
@@ -42,7 +42,7 @@ export default defineComponent({
     const { data } = useQuery({
       query: ActivityFeedDocument,
       variables: {
-        feedType: ActivityFeed.Global
+        feedType: ActivityFeed.Following
       }
     });
 
