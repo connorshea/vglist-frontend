@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { ActivityFeed, ActivityFeedDocument } from '@/generated/graphql.ts';
+import { ActivityFeed, ActivityFeedDocument } from '@/generated/graphql';
 import { computed, defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import EventCard from '@/components/EventCard.vue';

@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import { UserDocument } from '@/generated/graphql.ts';
+import { UserDocument } from '@/generated/graphql';
 import { computed, defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 

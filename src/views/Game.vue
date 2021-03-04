@@ -90,7 +90,7 @@
 </template>
 
 <script lang="ts">
-import { GameDocument } from '@/generated/graphql.ts';
+import { GameDocument } from '@/generated/graphql';
 import { defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import GameInfobox from '@/components/GameInfobox.vue';

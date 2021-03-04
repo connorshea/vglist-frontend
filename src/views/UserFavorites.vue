@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { UserFavoritesDocument } from '@/generated/graphql.ts';
+import { UserFavoritesDocument } from '@/generated/graphql';
 import { defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';

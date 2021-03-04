@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { UsersDocument } from '@/generated/graphql.ts';
+import { UsersDocument } from '@/generated/graphql';
 import { defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import UserCard from '@/components/UserCard.vue';

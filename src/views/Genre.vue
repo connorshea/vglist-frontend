@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { GenreDocument } from '@/generated/graphql.ts';
+import { GenreDocument } from '@/generated/graphql';
 import { computed, defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';

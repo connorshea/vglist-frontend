@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { UserFollowingDocument } from '@/generated/graphql.ts';
+import { UserFollowingDocument } from '@/generated/graphql';
 import { defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import UserCard from '@/components/UserCard.vue';

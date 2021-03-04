@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { StoreDocument } from '@/generated/graphql.ts';
+import { StoreDocument } from '@/generated/graphql';
 import { defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 

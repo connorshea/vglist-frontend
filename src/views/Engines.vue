@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { EnginesDocument } from '@/generated/graphql.ts';
+import { EnginesDocument } from '@/generated/graphql';
 import { defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 
