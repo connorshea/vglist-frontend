@@ -1,0 +1,36 @@
+fragment eventCardFields on Event {
+  id
+  eventCategory
+  createdAt
+  user {
+    slug
+    username
+    avatarUrl(size: SMALL)
+  }
+  eventable {
+    __typename
+    ... on User {
+      slug
+      username
+    }
+    ... on GamePurchase {
+      game {
+        id
+        name
+      }
+    }
+    ... on Relationship {
+      followed {
+        username
+        slug
+      }
+    }
+    ... on FavoriteGame {
+      id
+      game {
+        id
+        name
+      }
+    }
+  }
+}

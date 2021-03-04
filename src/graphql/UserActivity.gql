@@ -1,0 +1,15 @@
+query UserActivity($userId: ID!, $cursor: String!) {
+  user(id: $userId) {
+    activity(after: $cursor) {
+      nodes {
+        ...eventCardFields
+      }
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
+      }
+    }
+  }
+}

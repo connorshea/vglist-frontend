@@ -1,40 +1,13 @@
 query ActivityFeed($feedType: ActivityFeed) {
   activity(feedType: $feedType) {
     nodes {
-      id
-      eventCategory
-      createdAt
-      user {
-        slug
-        username
-        avatarUrl(size: SMALL)
-      }
-      eventable {
-        __typename
-        ... on User {
-          slug
-          username
-        }
-        ... on GamePurchase {
-          game {
-            id
-            name
-          }
-        }
-        ... on Relationship {
-          followed {
-            username
-            slug
-          }
-        }
-        ... on FavoriteGame {
-          id
-          game {
-            id
-            name
-          }
-        }
-      }
+      ...eventCardFields
+    }
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
     }
   }
 }
