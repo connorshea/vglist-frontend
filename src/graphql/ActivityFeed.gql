@@ -1,5 +1,5 @@
-query ActivityFeed($feedType: ActivityFeed) {
-  activity(feedType: $feedType) {
+query ActivityFeed($feedType: ActivityFeed, $beforeCursor: String, $afterCursor: String) {
+  activity(feedType: $feedType, before: $beforeCursor, after: $afterCursor) {
     nodes {
       ...eventCardFields
     }
