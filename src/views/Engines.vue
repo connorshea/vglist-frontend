@@ -9,6 +9,8 @@
         </router-link>
       </li>
     </ul>
+
+    <!-- <%= paginate @engines %> -->
   </div>
 </template>
 
