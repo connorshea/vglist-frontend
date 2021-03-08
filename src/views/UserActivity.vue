@@ -2,7 +2,7 @@
   <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile" v-if="data">
     <template v-if="data.user.activity.nodes.length > 0">
       <template v-for="event in data.user.activity.nodes">
-        <EventCard :event="event" :key="event.id"></EventCard>
+        <EventCard :event="event" :key="event.id" @refresh="execute" />
       </template>
     </template>
     <template v-else>
@@ -34,15 +34,16 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const { data } = useQuery({
+    const { data, execute } = useQuery({
       query: UserActivityDocument,
       variables: {
         userId: props.user.id,
         cursor: ''
-      }
+      },
+      cachePolicy: 'network-only' // To allow the query to be re-fetched after deleting an event.
     });
 
-    return { data };
+    return { data, execute };
   }
 });
 </script>

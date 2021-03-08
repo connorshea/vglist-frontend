@@ -20,7 +20,7 @@
     </template>
 
     <template v-for="event in data.activity.nodes">
-      <EventCard :event="event" :key="event.id"></EventCard>
+      <EventCard :event="event" :key="event.id" @refresh="execute"/>
     </template>
 
     <!-- <%= paginate @events %> -->
@@ -39,11 +39,12 @@ export default defineComponent({
     EventCard
   },
   setup(_props, context) {
-    const { data } = useQuery({
+    const { data, execute } = useQuery({
       query: ActivityFeedDocument,
       variables: {
         feedType: ActivityFeed.Global
-      }
+      },
+      cachePolicy: 'network-only' // To allow the query to be re-fetched after deleting an event.
     });
 
     const userSignedIn = computed(() => {
@@ -52,6 +53,7 @@ export default defineComponent({
 
     return {
       data,
+      execute,
       userSignedIn
     };
   }

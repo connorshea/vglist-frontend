@@ -28,9 +28,10 @@
               {{ event.user.username }}
             </router-link>
             favorited
-            <router-link :to="{ name: 'Game', params: { id: event.eventable.game.id }}">
-              {{ event.eventable.game.name }}
-            </router-link>.
+            <router-link
+              v-text="event.eventable.game.name"
+              :to="{ name: 'Game', params: { id: event.eventable.game.id }}"
+            />.
           </p>
 
           <p v-else-if="event.eventCategory === 'NEW_USER'">
@@ -45,9 +46,10 @@
               {{ event.user.username }}
             </router-link>
             started following
-            <router-link :to="{ name: 'UserProfile', params: { slug: event.eventable.followed.slug }}">
-              {{ event.eventable.followed.username }}
-            </router-link>.
+            <router-link
+              v-text="event.eventable.followed.username"
+              :to="{ name: 'UserProfile', params: { slug: event.eventable.followed.slug }}"
+            />.
           </p>
           <!-- TODO: Add completion status support. -->
 
@@ -55,13 +57,12 @@
             <span class="has-text-muted" :title="event.createdAt">
               {{ relativeTimeAgo }}
             </span>
-            <!-- <% if policy(event).destroy? %>
-              <%= link_to event_path(event.id),
-                data: { confirm: "Are you sure you want to delete this event?" },
-                method: :delete, class: 'ml-5' do %>
-                <%= svg_icon('trash', css_class: 'has-fill-danger-hoverable', title: 'Delete', options: { style: 'vertical-align: text-top;' }) %>
-              <% end %>
-            <% end %> -->
+            <template v-if="eventDeletable">
+              <a @click="deleteEvent" class="ml-5">
+                Delete
+              <!-- <%= svg_icon('trash', css_class: 'has-fill-danger-hoverable', title: 'Delete', options: { style: 'vertical-align: text-top;' }) %> -->
+              </a>
+            </template>
           </p>
         </div>
       </div>
@@ -70,8 +71,10 @@
 </template>
 
 <script lang="ts">
+import { DeleteEventDocument } from '@/generated/graphql';
 import { computed, defineComponent } from '@vue/composition-api';
 import { format } from 'timeago.js';
+import { useMutation } from 'villus';
 
 export default defineComponent({
   name: 'EventCard',
@@ -81,7 +84,7 @@ export default defineComponent({
       type: Object
     }
   },
-  setup(props) {
+  setup(props, context) {
     const relativeTimeAgo = computed(() => {
       return format(props.event.createdAt);
     });
@@ -99,9 +102,26 @@ export default defineComponent({
       }
     });
 
+    const eventDeletable = computed(() => {
+      return props.event.user.username === context.root.$store.state.currentUser?.username;
+    });
+
+    const { execute } = useMutation(DeleteEventDocument);
+
+    const deleteEvent = () => {
+      if (confirm("Are you sure you want to delete this event?")) {
+        execute({ id: props.event.id }).then(() => {
+          // Refresh the events list after the event has been deleted.
+          context.emit('refresh');
+        });
+      }
+    }
+
     return {
       relativeTimeAgo,
-      handleable
+      handleable,
+      eventDeletable,
+      deleteEvent
     };
   }
 });
