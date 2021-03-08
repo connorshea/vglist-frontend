@@ -6,8 +6,13 @@
         <img v-else src="@/assets/images/no-cover.png"/>
       </div>
 
-      <div class="field buttons buttons-vertical">
-        <!-- favorite button -->
+      <div v-if="userSignedIn" class="field buttons buttons-vertical">
+        <a v-if="data.game.isFavorited" class="button is-fullwidth toggle-icon-on-hover" @click="unfavoriteGame">
+          <span class='ml-5'>Unfavorite</span>
+        </a>
+        <a v-else class="button is-fullwidth toggle-icon-on-hover" @click="favoriteGame">
+          <span class='ml-5'>Favorite</span>
+        </a>
         <!-- add game to library -->
         <!-- Actions dropdown -->
       </div>
@@ -90,9 +95,9 @@
 </template>
 
 <script lang="ts">
-import { GameDocument } from '@/generated/graphql';
-import { defineComponent } from '@vue/composition-api';
-import { useQuery } from 'villus';
+import { FavoriteGameDocument, GameDocument, UnfavoriteGameDocument } from '@/generated/graphql';
+import { computed, defineComponent } from '@vue/composition-api';
+import { useMutation, useQuery } from 'villus';
 import GameInfobox from '@/components/GameInfobox.vue';
 
 export default defineComponent({
@@ -106,15 +111,48 @@ export default defineComponent({
       type: String
     }
   },
-  setup(props) {
-    const { data } = useQuery({
+  setup(props, context) {
+    const { data, execute } = useQuery({
       query: GameDocument,
       variables: {
         id: props.id
-      }
+      },
+      cachePolicy: 'network-only'
     });
 
-    return { data };
+    const userSignedIn = computed(() => {
+      return context.root.$store.state.userSignedIn;
+    });
+
+    const { execute: executeFavoriteGame } = useMutation(FavoriteGameDocument);
+    const { execute: executeUnfavoriteGame } = useMutation(UnfavoriteGameDocument);
+
+    const favoriteGame = () => {
+      const gameId = data.value?.game?.id;
+      // TODO: Error handling here?
+      if (typeof gameId !== 'undefined') {
+        executeFavoriteGame({ id: gameId }).then(() => {
+          execute();
+        });
+      }
+    }
+
+    const unfavoriteGame = () => {
+      const gameId = data.value?.game?.id;
+      // TODO: Error handling here?
+      if (typeof gameId !== 'undefined') {
+        executeUnfavoriteGame({ id: gameId }).then(() => {
+          execute();
+        });
+      }
+    }
+
+    return {
+      data,
+      userSignedIn,
+      favoriteGame,
+      unfavoriteGame
+    };
   }
 });
 </script>

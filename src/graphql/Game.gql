@@ -65,5 +65,7 @@ query Game($id: ID!) {
     mobygamesId
     pcgamingwikiId
     giantbombId
+    isFavorited
+    isInLibrary
   }
 }

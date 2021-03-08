@@ -1,0 +1,8 @@
+mutation UnfavoriteGame($id: ID!) {
+  unfavoriteGame(gameId: $id) {
+    game {
+      id
+      name
+    }
+  }
+}

@@ -1,0 +1,8 @@
+mutation FavoriteGame($id: ID!) {
+  favoriteGame(gameId: $id) {
+    game {
+      id
+      name
+    }
+  }
+}
