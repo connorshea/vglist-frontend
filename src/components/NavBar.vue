@@ -252,7 +252,7 @@ export default defineComponent({
       return items;
     },
     oauthUrl: function(): string {
-      return `${process.env.VUE_APP_VGLIST_HOST_URL}/settings/oauth/authorize?client_id=${this.$store.state.clientId}&redirect_uri=${this.$store.state.redirectUri}&response_type=code`;
+      return `${process.env.VUE_APP_VGLIST_HOST_URL}/settings/oauth/authorize?client_id=${this.$store.state.clientId}&redirect_uri=${this.$store.state.redirectUri}&response_type=code&scope=read+write`;
     },
     /**
      * Whether to show the authenticate button.
