@@ -11,7 +11,45 @@
       </div>
       <div class="media-content">
         <div class="content">
-          <p>{{ eventText }}</p>
+
+          <p v-if="event.eventCategory === 'ADD_TO_LIBRARY'">
+            <router-link :to="{ name: 'UserProfile', params: { slug: event.user.slug }}">
+              {{ event.user.username }}
+            </router-link>
+            added
+            <router-link :to="{ name: 'Game', params: { id: event.eventable.game.id }}">
+              {{ event.eventable.game.name }}
+            </router-link>
+            to their library.
+          </p>
+
+          <p v-else-if="event.eventCategory === 'FAVORITE_GAME'">
+            <router-link :to="{ name: 'UserProfile', params: { slug: event.user.slug }}">
+              {{ event.user.username }}
+            </router-link>
+            favorited
+            <router-link :to="{ name: 'Game', params: { id: event.eventable.game.id }}">
+              {{ event.eventable.game.name }}
+            </router-link>.
+          </p>
+
+          <p v-else-if="event.eventCategory === 'NEW_USER'">
+            <router-link :to="{ name: 'UserProfile', params: { slug: event.user.slug }}">
+              {{ event.user.username }}
+            </router-link>
+            created their account.
+          </p>
+
+          <p v-else-if="event.eventCategory === 'FOLLOWING'">
+            <router-link :to="{ name: 'UserProfile', params: { slug: event.user.slug }}">
+              {{ event.user.username }}
+            </router-link>
+            started following
+            <router-link :to="{ name: 'UserProfile', params: { slug: event.eventable.followed.slug }}">
+              {{ event.eventable.followed.username }}
+            </router-link>.
+          </p>
+          <!-- TODO: Add completion status support. -->
 
           <p>
             <span class="has-text-muted" :title="event.createdAt">
@@ -44,31 +82,6 @@ export default defineComponent({
     }
   },
   setup(props) {
-    // TODO: Add links here and make them work.
-    const eventText = computed(() => {
-      let text = '';
-
-      switch (props.event.eventCategory) {
-        case 'ADD_TO_LIBRARY':
-          text = `${props.event.user.username} added ${props.event.eventable.game.name} to their library.`;
-          break;
-        case 'FAVORITE_GAME':
-          text = `${props.event.user.username} favorited ${props.event.eventable.game.name}.`;
-          break;
-        case 'NEW_USER':
-          text = `${props.event.user.username} created their account.`;
-          break;
-        case 'FOLLOWING':
-          text = `${props.event.user.username} started following ${props.event.eventable.username}.`;
-          break;
-        case 'CHANGE_COMPLETION_STATUS':
-          text = 'TODO';
-          break;
-      }
-
-      return text;
-    });
-
     const relativeTimeAgo = computed(() => {
       return format(props.event.createdAt);
     });
@@ -87,7 +100,6 @@ export default defineComponent({
     });
 
     return {
-      eventText,
       relativeTimeAgo,
       handleable
     };
