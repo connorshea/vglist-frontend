@@ -14,7 +14,7 @@
             placeholder="Search"
           />
           <span class="icon is-small is-left">
-            <!-- <SVGSearchIcon/> -->
+            <SvgIcon :name="'search'"/>
           </span>
         </p>
       </div>
@@ -72,6 +72,7 @@
 <script lang="ts">
 import * as _ from 'lodash';
 import { defineComponent } from '@vue/composition-api';
+import SvgIcon from '@/components/SvgIcon.vue';
 
 type SearchableType = 'Game' | 'Series' | 'Company' | 'Platform' | 'Engine' | 'Genre' | 'User';
 
@@ -95,6 +96,9 @@ interface SearchData {
 
 export default defineComponent({
   name: 'Search',
+  components: {
+    SvgIcon
+  },
   data: function() {
     return {
       searchUrl: '/search.json',
