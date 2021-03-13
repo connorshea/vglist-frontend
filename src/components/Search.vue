@@ -1,23 +1,21 @@
 <template>
   <div class="navbar-item has-dropdown field mt-10" v-bind:class="{ 'is-active': dropdownActive }">
-    <div class="control">
-      <div class="field mb-0">
-        <p class="control has-icons-left">
-          <input
-            v-model="query"
-            @input="onSearch"
-            @keyup.up.prevent="onUpArrow"
-            @keyup.down.prevent="onDownArrow"
-            @keyup.enter.prevent="onEnter"
-            class="input navbar-search-input"
-            type="search"
-            placeholder="Search"
-          />
-          <span class="icon is-small is-left">
-            <SvgIcon :name="'search'"/>
-          </span>
-        </p>
-      </div>
+    <div class="field mb-0">
+      <p class="control has-icons-left">
+        <input
+          v-model="query"
+          @input="onSearch"
+          @keyup.up.prevent="onUpArrow"
+          @keyup.down.prevent="onDownArrow"
+          @keyup.enter.prevent="onEnter"
+          class="input navbar-search-input"
+          type="search"
+          placeholder="Search"
+        />
+        <span class="icon is-small is-left">
+          <SvgIcon :name="'search'"/>
+        </span>
+      </p>
     </div>
 
     <div v-if="dropdownActive" class="navbar-search-dropdown navbar-dropdown">

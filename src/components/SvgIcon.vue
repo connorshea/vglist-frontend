@@ -17,20 +17,15 @@ export default defineComponent({
       type: String,
       required: true
     },
-    fill: {
-      type: String,
-      required: false,
-      default: '#000'
-    },
     height: {
       type: Number,
       required: false,
-      default: 20
+      default: 16
     },
     width: {
       type: Number,
       required: false,
-      default: 20
+      default: 16
     }
   },
   mounted() {
@@ -39,7 +34,6 @@ export default defineComponent({
       const svgElement = this.$el.firstElementChild;
       svgElement.setAttribute('width', `${this.width}px`);
       svgElement.setAttribute('height', `${this.height}px`);
-      svgElement.setAttribute('style', `fill: ${this.fill};`);
     }
   }
 });

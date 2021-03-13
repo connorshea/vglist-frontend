@@ -14,9 +14,7 @@
 
     <div class="navbar-menu is-shadowless" id="navMenu">
       <div class="navbar-start">
-        <div class="navbar-item has-dropdown field mt-10">
-          <Search/>
-        </div>
+        <Search/>
 
         <!-- Link to the global activity if the user isn't logged in. -->
         <router-link :to="userSignedIn ? '/activity/following' : '/activity'" class="navbar-item">Activity</router-link>
