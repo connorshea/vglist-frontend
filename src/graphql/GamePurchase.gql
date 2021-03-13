@@ -10,11 +10,13 @@ query GamePurchase($id: ID!) {
     platforms {
       nodes {
         id
+        name
       }
     }
     stores {
       nodes {
         id
+        name
       }
     }
   }
