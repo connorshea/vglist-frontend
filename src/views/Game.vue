@@ -17,7 +17,7 @@
           <SvgIcon :name="'heart-full'" :classes="['is-inline-flex']" :svg-classes="['icon-2']" :fill="'red'"/>
           <span class='ml-5'>Favorite</span>
         </a>
-        <!-- add game to library -->
+        <AddGameToLibrary :isInLibrary="data.game.isInLibrary" :gameId="data.game.id" />
         <!-- Actions dropdown -->
       </div>
     </div>
@@ -103,12 +103,14 @@ import { FavoriteGameDocument, GameDocument, UnfavoriteGameDocument } from '@/ge
 import { computed, defineComponent } from '@vue/composition-api';
 import { useMutation, useQuery } from 'villus';
 import GameInfobox from '@/components/GameInfobox.vue';
+import AddGameToLibrary from '@/components/AddGameToLibrary.vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 
 export default defineComponent({
   name: 'Game',
   components: {
     GameInfobox,
+    AddGameToLibrary,
     SvgIcon
   },
   props: {
