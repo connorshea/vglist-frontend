@@ -160,11 +160,13 @@ export default defineComponent({
     },
     startDate: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     completionDate: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     comments: {
       type: String,
@@ -174,23 +176,17 @@ export default defineComponent({
     platforms: {
       type: Array,
       required: false,
-      default: function() {
-        return [];
-      }
+      default: () => []
     },
     stores: {
       type: Array,
       required: false,
-      default: function() {
-        return [];
-      }
+      default: () => []
     },
     game: {
       type: Object,
       required: false,
-      default: function() {
-        return {};
-      }
+      default: () => { return {}; }
     },
     isActive: {
       type: Boolean,
@@ -202,7 +198,7 @@ export default defineComponent({
       validator: (val: string) => ['create', 'update', 'createWithGame'].includes(val)
     }
   },
-  setup(props: any, context: any) {
+  setup(props, context) {
     const gamePurchase = computed(() => {
       return {
         comments: props.comments,
@@ -212,7 +208,7 @@ export default defineComponent({
         completionStatus: props.completionStatus,
         startDate: props.startDate,
         completionDate: props.completionDate,
-        hoursPlayed: parseFloat(props.hoursPlayed),
+        hoursPlayed: parseFloat(props.hoursPlayed.toString()),
         replayCount: props.replayCount,
         platforms: props.platforms,
         stores: props.stores
@@ -286,6 +282,7 @@ export default defineComponent({
     const selectGame = () => gameSelected.value = true;
 
     // TODO: Figure out error handling
+    // Note that refs in @vue/composition-api don't handle arrays well, allegedly?
     const errors: string[] = [];
 
     const modalTitle = computed(() => {
