@@ -18,14 +18,15 @@
           </ul>
         </div>
         <div v-if="gameSelected">
-          <!-- <SingleSelect
+          <SingleSelect
             :label="formData.game.label"
             v-model="gamePurchase.game"
-            :search-path-identifier="'games'"
             :max-height="'150px'"
             :disabled="true"
             @input="selectGame"
-          ></SingleSelect> -->
+            :graphqlQuery="GameSearchDocument"
+            :searchPath="'gameSearch'"
+          ></SingleSelect>
 
           <StaticSingleSelect
             :label="formData.completionStatus.label"
@@ -96,13 +97,14 @@
         </div>
 
         <div v-else>
-          <!-- <SingleSelect
+          <SingleSelect
             :label="formData.game.label"
             v-model="gamePurchase.game"
-            :search-path-identifier="'games'"
             :max-height="'150px'"
             @input="selectGame"
-          ></SingleSelect> -->
+            :graphqlQuery="GameSearchDocument"
+            :searchPath="'gameSearch'"
+          ></SingleSelect>
         </div>
       </section>
       <footer class="modal-card-foot">
@@ -120,9 +122,10 @@ import { useMutation } from 'villus';
 import TextArea from '@/components/fields/TextArea.vue';
 import NumberField from '@/components/fields/NumberField.vue';
 import DateField from '@/components/fields/DateField.vue';
-// import SingleSelect from '@/components/fields/SingleSelect.vue';
+import SingleSelect from '@/components/fields/SingleSelect.vue';
 // import MultiSelect from '@/components/fields/MultiSelect.vue';
 import StaticSingleSelect from '@/components/fields/StaticSingleSelect.vue';
+import { GameSearchDocument } from '@/generated/graphql';
 
 export default defineComponent({
   name: 'GameModal',
@@ -130,7 +133,7 @@ export default defineComponent({
     TextArea,
     NumberField,
     DateField,
-    // SingleSelect,
+    SingleSelect,
     // MultiSelect,
     StaticSingleSelect
   },
@@ -257,20 +260,15 @@ export default defineComponent({
       }
     });
 
-    const formattedCompletionStatuses = computed(() => {
-      let completionStatuses = {
-        unplayed: 'Unplayed',
-        in_progress: 'In Progress',
-        paused: 'Paused',
-        dropped: 'Dropped',
-        completed: 'Completed',
-        fully_completed: '100% Completed',
-        not_applicable: 'N/A'
-      }
-      return Object.entries(completionStatuses).map(status => {
-        return { label: status[1], value: status[0] };
-      });
-    });
+    const formattedCompletionStatuses = [
+      { label: "Unplayed", value: "unplayed" },
+      { label: "In Progress", value: "in_progress" },
+      { label: "Paused", value: "paused" },
+      { label: "Dropped", value: "dropped" },
+      { label: "Completed", value: "completed" },
+      { label: "100% Completed", value: "fully_completed" },
+      { label: "N/A", value: "not_applicable" }
+    ];
 
     const gameSelected = ref(props.gameModalState !== 'create');
 
@@ -300,7 +298,8 @@ export default defineComponent({
       selectGame,
       onClose,
       onSave,
-      errors
+      errors,
+      GameSearchDocument
     };
   }
 });

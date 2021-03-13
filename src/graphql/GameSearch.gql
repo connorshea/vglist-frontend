@@ -1,0 +1,8 @@
+query GameSearch($query: String!) {
+  gameSearch(query: $query) {
+    nodes {
+     	id
+      name
+    }
+  }
+}
