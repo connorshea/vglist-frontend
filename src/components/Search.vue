@@ -12,7 +12,7 @@
           type="search"
           placeholder="Search"
         />
-        <SvgIcon :name="'search'" :classes="'icon is-small is-left'"/>
+        <SvgIcon :name="'search'" :classes="['icon', 'is-small', 'is-left']"/>
       </p>
     </div>
 

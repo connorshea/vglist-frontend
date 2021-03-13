@@ -58,9 +58,11 @@
               {{ relativeTimeAgo }}
             </span>
             <template v-if="eventDeletable">
-              <a @click="deleteEvent" class="ml-5">
-                Delete
-              <!-- <%= svg_icon('trash', css_class: 'has-fill-danger-hoverable', title: 'Delete', options: { style: 'vertical-align: text-top;' }) %> -->
+              <a @click="deleteEvent" class="ml-5" title="Delete">
+                <SvgIcon :name="'trash'"
+                         :svg-classes="['has-fill-danger-hoverable']"
+                         :css-style="'vertical-align: text-top;'"
+                         :size="20"/>
               </a>
             </template>
           </p>
@@ -75,9 +77,13 @@ import { DeleteEventDocument } from '@/generated/graphql';
 import { computed, defineComponent } from '@vue/composition-api';
 import { format } from 'timeago.js';
 import { useMutation } from 'villus';
+import SvgIcon from '@/components/SvgIcon.vue';
 
 export default defineComponent({
   name: 'EventCard',
+  components: {
+    SvgIcon
+  },
   props: {
     event: {
       required: true,

@@ -17,12 +17,7 @@ export default defineComponent({
       type: String,
       required: true
     },
-    height: {
-      type: Number,
-      required: false,
-      default: 16
-    },
-    width: {
+    size: {
       type: Number,
       required: false,
       default: 16
@@ -31,27 +26,34 @@ export default defineComponent({
       type: String,
       required: false
     },
-    classes: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    svgClasses: {
+    cssStyle: {
       type: String,
       required: false
+    },
+    classes: {
+      type: Array as () => Array<string>,
+      required: false,
+      default: () => []
+    },
+    svgClasses: {
+      type: Array as () => Array<string>,
+      required: false,
+      default: () => []
     }
   },
   mounted() {
     // https://medium.com/js-dojo/making-svg-icon-component-in-vue-cb7fac70e758
     if (this?.$el?.firstElementChild?.nodeName === 'svg') {
       const svgElement = this.$el.firstElementChild;
-      svgElement.setAttribute('width', `${this.width}px`);
-      svgElement.setAttribute('height', `${this.height}px`);
-      if (typeof this.svgClasses !== 'undefined') {
-        svgElement.classList.add(...this.svgClasses.split(' '));
-      }
+      svgElement.setAttribute('height', `${this.size}px`);
+      svgElement.setAttribute('width', `${this.size}px`);
+      svgElement.classList.add('svg-icon', ...this.svgClasses);
+
       if (typeof this.fill !== 'undefined') {
         svgElement.setAttribute('fill', this.fill);
+      }
+      if (typeof this.cssStyle !== 'undefined') {
+        svgElement.setAttribute('style', this.cssStyle);
       }
     }
   }
