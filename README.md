@@ -60,3 +60,9 @@ yarn lint
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## License
+
+vglist-frontend's source code is licensed under the terms of [The MIT License](LICENSE).
+
+Icons are courtesy of [Font Awesome](https://fontawesome.com), licensed as [CC-BY-SA 4.0](https://creativecommons.org/licenses/by/4.0/).
