@@ -1,0 +1,21 @@
+query GamePurchase($id: ID!) {
+  gamePurchase(id: $id) {
+    rating
+    startDate
+    completionDate
+    completionStatus
+    comments
+    hoursPlayed
+    replayCount
+    platforms {
+      nodes {
+        id
+      }
+    }
+    stores {
+      nodes {
+        id
+      }
+    }
+  }
+}

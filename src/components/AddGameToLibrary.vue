@@ -29,7 +29,7 @@
       v-if="isModalActive"
       :isActive="isModalActive"
       :gameModalState="gameModalState"
-      v-bind="mutableGamePurchase"
+      v-bind="gamePurchase"
       v-on:close="deactivateModal"
       v-on:closeAndRefresh="closeAndRefresh"
       v-on:create="onSubmit"
@@ -41,8 +41,8 @@
 import { computed, defineComponent, ref } from '@vue/composition-api';
 import GameModal from '@/components/GameModal.vue';
 import SvgIcon from '@/components/SvgIcon.vue';
-import { RemoveGameFromLibraryDocument } from '@/generated/graphql';
-import { useMutation } from 'villus';
+import { GamePurchaseDocument, RemoveGameFromLibraryDocument } from '@/generated/graphql';
+import { useMutation, useQuery } from 'villus';
 
 export default defineComponent({
   name: 'AddGameToLibrary',
@@ -61,19 +61,47 @@ export default defineComponent({
     }
   },
   setup(props, context) {
-    let mutableGamePurchase = ref({});
+    let gamePurchase = ref({});
     let isModalActive = ref(false);
 
     const gameModalState = computed(() => props.isInLibrary ? 'update' : 'createWithGame');
 
-    const activateModal = (game = {}) => {
+    const { data: gamePurchaseData, execute: executeGamePurchase } = useQuery({
+      query: GamePurchaseDocument,
+      variables: {
+        id: props.game.gamePurchaseId
+      },
+      fetchOnMount: false
+    });
+
+    const activateModal = (game = {}, loadGamePurchase = false) => {
       let html = document.querySelector('html');
       html?.classList.add('is-clipped');
 
-      if (Object.keys(mutableGamePurchase.value).length === 0) {
-        mutableGamePurchase.value = { game: game };
+      if (loadGamePurchase) {
+        executeGamePurchase().then(() => {
+          if (gamePurchaseData.value !== null) {
+            // Doing it this way because the spread operator won't work correctly for some reason.
+            let gamePurchaseValues = Object.assign({}, gamePurchaseData.value?.gamePurchase);
+            delete gamePurchaseValues['stores'];
+            delete gamePurchaseValues['platforms'];
+
+            gamePurchase.value = {
+              id: props.game.gamePurchaseId,
+              game: game,
+              platforms: gamePurchaseData.value?.gamePurchase?.platforms?.nodes,
+              stores: gamePurchaseData.value?.gamePurchase?.stores?.nodes,
+              ...gamePurchaseValues
+            };
+          } else {
+            gamePurchase.value = { game: game };
+          }
+          isModalActive.value = true;
+        });
+      } else {
+        gamePurchase.value = { game: game };
+        isModalActive.value = true;
       }
-      isModalActive.value = true;
     };
 
     const deactivateModal = () => {
@@ -85,10 +113,10 @@ export default defineComponent({
 
     const closeAndRefresh = () => deactivateModal();
     const addGameToLibrary = () => {
-      activateModal(props.game);
+      activateModal(props.game, false);
     };
     const editGameInLibrary = () => {
-      activateModal(props.game)
+      activateModal(props.game, true);
     };
 
     const { execute: executeRemoveGameFromLibrary } = useMutation(RemoveGameFromLibraryDocument);
@@ -103,7 +131,7 @@ export default defineComponent({
     };
 
     return {
-      mutableGamePurchase,
+      gamePurchase,
       isModalActive,
       gameModalState,
       activateModal,

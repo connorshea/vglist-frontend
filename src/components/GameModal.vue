@@ -141,8 +141,9 @@ export default defineComponent({
   },
   props: {
     id: {
-      type: Number,
-      required: false
+      type: String,
+      required: false,
+      default: null
     },
     rating: {
       type: [Number, String],
@@ -160,7 +161,7 @@ export default defineComponent({
       default: 0
     },
     completionStatus: {
-      type: Object,
+      type: String,
       required: false
     },
     startDate: {
@@ -204,12 +205,27 @@ export default defineComponent({
     }
   },
   setup(props, context) {
+    const formattedCompletionStatuses: Array<{ label: string, value: keyof typeof GamePurchaseCompletionStatus, enumValue: `${GamePurchaseCompletionStatus}` }> = [
+      { label: "Unplayed", value: "Unplayed", enumValue: 'UNPLAYED' },
+      { label: "In Progress", value: "InProgress", enumValue: 'IN_PROGRESS' },
+      { label: "Paused", value: "Paused", enumValue: 'PAUSED' },
+      { label: "Dropped", value: "Dropped", enumValue: 'DROPPED' },
+      { label: "Completed", value: "Completed", enumValue: 'COMPLETED' },
+      { label: "100% Completed", value: "FullyCompleted", enumValue: 'FULLY_COMPLETED' },
+      { label: "N/A", value: "NotApplicable", enumValue: 'NOT_APPLICABLE' }
+    ];
+
+    let startingCompletionStatus = null;
+    if (props.completionStatus) {
+      startingCompletionStatus = formattedCompletionStatuses.find((status) => status.enumValue === props.completionStatus);
+    }
+
     const gamePurchase = ref({
-      id: null as string | null,
+      id: props.id,
       comments: props.comments,
       rating: props.rating,
       game: props.game,
-      completionStatus: props.completionStatus as { label: string, value: keyof typeof GamePurchaseCompletionStatus },
+      completionStatus: startingCompletionStatus ?? null,
       startDate: props.startDate,
       completionDate: props.completionDate,
       hoursPlayed: parseFloat(props.hoursPlayed),
@@ -258,16 +274,6 @@ export default defineComponent({
       }
     };
 
-    const formattedCompletionStatuses: Array<{ label: string, value: keyof typeof GamePurchaseCompletionStatus }> = [
-      { label: "Unplayed", value: "Unplayed" },
-      { label: "In Progress", value: "InProgress" },
-      { label: "Paused", value: "Paused" },
-      { label: "Dropped", value: "Dropped" },
-      { label: "Completed", value: "Completed" },
-      { label: "100% Completed", value: "FullyCompleted" },
-      { label: "N/A", value: "NotApplicable" }
-    ];
-
     const gameSelected = ref(props.gameModalState !== 'create');
 
     const onClose = () => context.emit('close');
@@ -291,13 +297,17 @@ export default defineComponent({
         rating: Number(gamePurchase.value.rating),
         startDate: gamePurchase.value.startDate,
         completionDate: gamePurchase.value.completionDate,
-        completionStatus: GamePurchaseCompletionStatus[gamePurchase.value.completionStatus?.value] ?? null,
+        completionStatus: null as GamePurchaseCompletionStatus | null,
         comments: gamePurchase.value.comments,
         hoursPlayed: isNaN(gamePurchase.value.hoursPlayed) ? null : Number(gamePurchase.value.hoursPlayed),
         replayCount: Number(gamePurchase.value.replayCount),
         platforms: gamePurchase.value.platforms.map((p: { id: string, name: string }) => p.id),
         stores: gamePurchase.value.stores.map((s: { id: string, name: string }) => s.id)
       };
+
+      if (gamePurchase.value.completionStatus) {
+        gamePurchaseParams.completionStatus = GamePurchaseCompletionStatus[gamePurchase.value.completionStatus?.value];
+      }
 
       executeUpdateGameInLibrary(gamePurchaseParams).then(updatedGamePurchase => {
         context.emit('create', updatedGamePurchase.data.updateGameInLibrary?.gamePurchase);
@@ -311,7 +321,7 @@ export default defineComponent({
         rating: Number(gamePurchase.value.rating),
         startDate: gamePurchase.value.startDate,
         completionDate: gamePurchase.value.completionDate,
-        completionStatus: GamePurchaseCompletionStatus[gamePurchase.value.completionStatus?.value] ?? null,
+        completionStatus: null as GamePurchaseCompletionStatus | null,
         comments: gamePurchase.value.comments,
         hoursPlayed: isNaN(gamePurchase.value.hoursPlayed) ? null : Number(gamePurchase.value.hoursPlayed),
         replayCount: Number(gamePurchase.value.replayCount),
@@ -319,10 +329,13 @@ export default defineComponent({
         stores: gamePurchase.value.stores.map((s: { id: string, name: string }) => s.id)
       };
 
+      if (gamePurchase.value.completionStatus) {
+        gamePurchaseParams.completionStatus = GamePurchaseCompletionStatus[gamePurchase.value.completionStatus?.value];
+      }
+
       executeAddGameToLibrary(gamePurchaseParams).then(newlyAddedGamePurchase => {
         context.emit('create', newlyAddedGamePurchase.data.addGameToLibrary?.gamePurchase);
         context.emit('closeAndRefresh');
-        gamePurchase.value.id = newlyAddedGamePurchase.data.addGameToLibrary?.gamePurchase?.id ?? null;
       });
     }
 
