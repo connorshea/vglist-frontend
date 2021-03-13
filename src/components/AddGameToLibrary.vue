@@ -66,12 +66,12 @@ export default defineComponent({
 
     const gameModalState = computed(() => props.isInLibrary ? 'update' : 'createWithGame');
 
+    let queryVariables = ref({ id: props.game.gamePurchaseId });
     const { data: gamePurchaseData, execute: executeGamePurchase } = useQuery({
       query: GamePurchaseDocument,
-      variables: {
-        id: props.game.gamePurchaseId
-      },
-      fetchOnMount: false
+      variables: queryVariables,
+      fetchOnMount: false,
+      cachePolicy: 'network-only'
     });
 
     const activateModal = (game = {}, loadGamePurchase = false) => {
@@ -111,9 +111,12 @@ export default defineComponent({
       isModalActive.value = false;
     };
 
-    const closeAndRefresh = () => deactivateModal();
+    const closeAndRefresh = () => {
+      deactivateModal();
+      context.emit('refresh');
+    }
     const addGameToLibrary = () => {
-      activateModal(props.game, false);
+      activateModal(props.game);
     };
     const editGameInLibrary = () => {
       activateModal(props.game, true);
@@ -126,8 +129,13 @@ export default defineComponent({
       context.emit('refresh');
     };
 
-    const onSubmit = () => {
-      context.emit('refresh');
+    const onSubmit = (submittedGamePurchase: { id: string }) => {
+      queryVariables.value = { id: submittedGamePurchase.id };
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      executeGamePurchase().then(({ data: _data, error: _error }) => {
+        // TODO: Error handling.
+        context.emit('refresh');
+      });
     };
 
     return {

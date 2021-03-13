@@ -151,9 +151,9 @@ export default defineComponent({
       default: ''
     },
     hoursPlayed: {
-      type: String,
+      type: [Number, String],
       required: false,
-      default: ''
+      default: null
     },
     replayCount: {
       type: [Number, String],
@@ -228,7 +228,7 @@ export default defineComponent({
       completionStatus: startingCompletionStatus ?? null,
       startDate: props.startDate,
       completionDate: props.completionDate,
-      hoursPlayed: parseFloat(props.hoursPlayed),
+      hoursPlayed: parseFloat(props.hoursPlayed?.toString() ?? null),
       replayCount: props.replayCount,
       platforms: props.platforms as Array<{ id: string, name: string}>,
       stores: props.stores as Array<{ id: string, name: string}>
