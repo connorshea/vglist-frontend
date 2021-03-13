@@ -1,15 +1,16 @@
 <template>
-  <div :class="grandparentClass">
-    <label v-if="label" :for="inputId" class="label">{{ label }}</label>
-    <div :class="parentClass">
+  <div class="field">
+    <label v-if="label" class="label" :for="inputId">{{ label }}</label>
+    <div class="control">
       <v-select
+        multiple
         :options="options"
-        :disabled="disabled"
         @search="onSearch"
-        label="name"
         :inputId="inputId"
-        v-bind:value="value"
+        label="name"
         :placeholder="placeholder"
+        @change="onChange"
+        v-bind:value="value"
         v-on:input="onInput"
       ></v-select>
     </div>
@@ -24,49 +25,28 @@ import * as _ from 'lodash';
 import { useQuery } from 'villus';
 
 export default defineComponent({
-  name: 'SingleSelect',
+  name: 'MultiSelect',
   components: {
     vSelect
   },
   props: {
     label: {
       type: String,
-      required: false
+      required: true
     },
     value: {
-      type: Object,
+      type: Array,
+      required: true
+    },
+    placeholder: {
+      type: String,
       required: false
     },
     graphqlQuery: {
       type: Object,
       required: true
     },
-    disabled: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-    grandparentClass: {
-      type: String,
-      required: false,
-      default: 'field'
-    },
-    parentClass: {
-      type: String,
-      required: false,
-      default: 'control'
-    },
-    placeholder: {
-      type: String,
-      required: false
-    },
-    // Can be used to rename labels in the component dropdown or make other
-    // modifications to options.
-    customOptionFunc: {
-      type: Function,
-      required: false
-    },
-    // The name of the search query in the GraphQL response, e.g. 'gameSearch'.
+    // The name of the search query in the GraphQL response, e.g. 'platformSearch'.
     searchPath: {
       type: String,
       required: true
@@ -82,28 +62,29 @@ export default defineComponent({
     });
 
     const inputId = computed(() => _.snakeCase(props.label));
+
     const options = computed(() => {
       if (data.value) {
-        let nodes = data.value[props.searchPath].nodes;
-        // If there's a custom options function, map with it before returning the nodes.
-        return props.customOptionFunc ? nodes.map(props.customOptionFunc) : nodes;
+        return data.value[props.searchPath].nodes;
       } else {
         return [];
       }
     });
 
     const onInput = (event: unknown) => context.emit('input', event);
+    const onChange = (selectedItems: unknown[]) => context.emit('input', selectedItems);
+
     const onSearch = _.debounce((search: string) => {
       variables.value = { query: search };
     }, 300);
 
     return {
-      data,
       inputId,
       options,
       onInput,
+      onChange,
       onSearch
     };
-  }
+  },
 });
 </script>

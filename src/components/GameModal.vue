@@ -83,17 +83,19 @@
             v-model="gamePurchase.completionDate"
           ></DateField>
 
-          <!-- <MultiSelect
+          <MultiSelect
             :label="formData.platforms.label"
             v-model="gamePurchase.platforms"
-            :search-path-identifier="'platforms'"
-          ></MultiSelect> -->
+            :search-path="'platformSearch'"
+            :graphqlQuery="PlatformSearchDocument"
+          ></MultiSelect>
 
-          <!-- <MultiSelect
+          <MultiSelect
             :label="formData.stores.label"
             v-model="gamePurchase.stores"
-            :search-path-identifier="'stores'"
-          ></MultiSelect> -->
+            :search-path="'storeSearch'"
+            :graphqlQuery="StoreSearchDocument"
+          ></MultiSelect>
         </div>
 
         <div v-else>
@@ -123,9 +125,9 @@ import TextArea from '@/components/fields/TextArea.vue';
 import NumberField from '@/components/fields/NumberField.vue';
 import DateField from '@/components/fields/DateField.vue';
 import SingleSelect from '@/components/fields/SingleSelect.vue';
-// import MultiSelect from '@/components/fields/MultiSelect.vue';
+import MultiSelect from '@/components/fields/MultiSelect.vue';
 import StaticSingleSelect from '@/components/fields/StaticSingleSelect.vue';
-import { GameSearchDocument } from '@/generated/graphql';
+import { GameSearchDocument, PlatformSearchDocument, StoreSearchDocument } from '@/generated/graphql';
 
 export default defineComponent({
   name: 'GameModal',
@@ -134,7 +136,7 @@ export default defineComponent({
     NumberField,
     DateField,
     SingleSelect,
-    // MultiSelect,
+    MultiSelect,
     StaticSingleSelect
   },
   props: {
@@ -202,20 +204,18 @@ export default defineComponent({
     }
   },
   setup(props, context) {
-    const gamePurchase = computed(() => {
-      return {
-        comments: props.comments,
-        rating: props.rating,
-        game: props.game,
-        userId: context.root.$store.state.currentUser.id,
-        completionStatus: props.completionStatus,
-        startDate: props.startDate,
-        completionDate: props.completionDate,
-        hoursPlayed: parseFloat(props.hoursPlayed.toString()),
-        replayCount: props.replayCount,
-        platforms: props.platforms,
-        stores: props.stores
-      }
+    const gamePurchase = ref({
+      comments: props.comments,
+      rating: props.rating,
+      game: props.game,
+      userId: context.root.$store.state.currentUser.id,
+      completionStatus: props.completionStatus,
+      startDate: props.startDate,
+      completionDate: props.completionDate,
+      hoursPlayed: parseFloat(props.hoursPlayed.toString()),
+      replayCount: props.replayCount,
+      platforms: props.platforms,
+      stores: props.stores
     });
 
     const formData = computed(() => {
@@ -275,6 +275,7 @@ export default defineComponent({
     const onClose = () => context.emit('close');
     const onSave = () => {
       console.log('TODO: Submit with mutation');
+      console.log(gamePurchase);
     };
 
     const selectGame = () => gameSelected.value = true;
@@ -299,7 +300,9 @@ export default defineComponent({
       onClose,
       onSave,
       errors,
-      GameSearchDocument
+      GameSearchDocument,
+      PlatformSearchDocument,
+      StoreSearchDocument
     };
   }
 });
