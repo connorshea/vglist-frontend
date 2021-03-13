@@ -1,23 +1,23 @@
 <template>
   <div class="is-fullwidth">
     <button
-      v-if="isInLibrary"
+      v-show="isInLibrary"
       @click="editGameInLibrary()"
       class="button is-fullwidth is-primary mr-5 mr-0-mobile"
     >
-      <SvgIcon :name="'pencil'" :classes="['icon']"/>
+      <SvgIcon :name="'pencil'" :classes="['icon']" :fill="'white'" :size="15"/>
       <span>Edit game in library</span>
     </button>
     <button
-      v-if="isInLibrary"
+      v-show="isInLibrary"
       @click="removeGameFromLibrary()"
       class="button is-fullwidth is-danger mr-5 mr-0-mobile"
     >
-      <SvgIcon :name="'remove'" :classes="['icon']"/>
+      <SvgIcon :name="'remove'" :classes="['icon']" :fill="'white'" :size="15"/>
       <span>Remove from library</span>
     </button>
     <button
-      v-if="!isInLibrary"
+      v-show="!isInLibrary"
       @click="addGameToLibrary()"
       class="button is-fullwidth is-primary mr-5 mr-0-mobile"
     >
@@ -41,6 +41,8 @@
 import { computed, defineComponent, ref } from '@vue/composition-api';
 import GameModal from '@/components/GameModal.vue';
 import SvgIcon from '@/components/SvgIcon.vue';
+import { RemoveGameFromLibraryDocument } from '@/generated/graphql';
+import { useMutation } from 'villus';
 
 export default defineComponent({
   name: 'AddGameToLibrary',
@@ -58,7 +60,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  setup(props, context) {
     let mutableGamePurchase = ref({});
     let isModalActive = ref(false);
 
@@ -86,9 +88,14 @@ export default defineComponent({
       activateModal(props.game);
     };
     const editGameInLibrary = () => activateModal(props.game);
+
+    const { execute: executeRemoveGameFromLibrary } = useMutation(RemoveGameFromLibraryDocument);
+
     const removeGameFromLibrary = () => {
-      console.log('TODO mutation');
+      executeRemoveGameFromLibrary({ id: props.game.id });
+      context.emit('refresh');
     };
+
     const onSubmit = () => {
       console.log('TODO, reload page?');
     };

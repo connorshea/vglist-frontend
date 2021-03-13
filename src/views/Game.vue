@@ -17,7 +17,7 @@
           <SvgIcon :name="'heart-full'" :classes="['is-inline-flex']" :svg-classes="['icon-2']" :fill="'red'"/>
           <span class='ml-5'>Favorite</span>
         </a>
-        <AddGameToLibrary :isInLibrary="data.game.isInLibrary" :game="data.game" />
+        <AddGameToLibrary :isInLibrary="data.game.isInLibrary" :game="data.game" @refresh="refreshGame"/>
         <!-- Actions dropdown -->
       </div>
     </div>
@@ -155,11 +155,14 @@ export default defineComponent({
       }
     }
 
+    const refreshGame = () => execute();
+
     return {
       data,
       userSignedIn,
       favoriteGame,
-      unfavoriteGame
+      unfavoriteGame,
+      refreshGame
     };
   }
 });
