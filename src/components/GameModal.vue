@@ -281,7 +281,7 @@ export default defineComponent({
         completionDate: gamePurchase.value.completionDate,
         completionStatus: GamePurchaseCompletionStatus[gamePurchase.value.completionStatus?.value] ?? null,
         comments: gamePurchase.value.comments,
-        hoursPlayed: isNaN(gamePurchase.value.hoursPlayed) ? null : gamePurchase.value.hoursPlayed,
+        hoursPlayed: isNaN(gamePurchase.value.hoursPlayed) ? null : Number(gamePurchase.value.hoursPlayed),
         replayCount: Number(gamePurchase.value.replayCount),
         platforms: gamePurchase.value.platforms.map((p: any) => p.id),
         stores: gamePurchase.value.stores.map((s: any) => s.id)
