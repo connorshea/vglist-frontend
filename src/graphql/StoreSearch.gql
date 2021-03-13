@@ -1,0 +1,8 @@
+query StoreSearch($query: String!) {
+  storeSearch(query: $query) {
+    nodes {
+     	id
+      name
+    }
+  }
+}

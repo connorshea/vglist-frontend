@@ -1,0 +1,8 @@
+query PlatformSearch($query: String!) {
+  platformSearch(query: $query) {
+    nodes {
+     	id
+      name
+    }
+  }
+}
