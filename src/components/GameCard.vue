@@ -11,23 +11,43 @@
         <p class="subtitle is-6" v-if="developers !== null">{{ developers }}</p>
       </div>
     </router-link>
+
     <!-- Game card Dropdown -->
+    <div class="dropdown dropdown-dynamic game-card-dropdown is-right" :class="{ 'is-active': isActive }" v-if="userSignedIn">
+      <div class="dropdown-trigger">
+        <button class="button is-borderless is-shadowless" aria-haspopup="true" aria-controls="dropdown-menu" @click="toggleActive">
+          <SvgIcon :name="'chevron-down'" :classes="['icon']" :size="15" />
+        </button>
+      </div>
+      <div class="dropdown-menu" id="dropdown-menu" role="menu">
+        <div class="dropdown-content">
+          <a v-if="game.isFavorited" class="dropdown-item" @click="unfavoriteGame">Unfavorite</a>
+          <a v-else class="dropdown-item" @click="favoriteGame">Favorite</a>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Company, Platform } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { Company, FavoriteGameDocument, Platform, UnfavoriteGameDocument } from '@/generated/graphql';
+import { computed, defineComponent, ref } from '@vue/composition-api';
+import SvgIcon from '@/components/SvgIcon.vue';
+import { useMutation } from 'villus';
 
 export default defineComponent({
   name: 'GameCard',
+  components: {
+    SvgIcon
+  },
   props: {
     game: {
       required: true,
       type: Object
     }
   },
-  setup(props) {
+  setup(props, context) {
+    let isActive = ref<boolean>(false);
     const platforms = computed(() => {
       if (props.game.platforms.nodes.size === 0) { return null; }
       return props.game.platforms.nodes.map((p: Platform) => p.name).join(', ');
@@ -37,9 +57,34 @@ export default defineComponent({
       return props.game.developers.nodes.map((d: Company) => d.name).join(', ');
     });
 
+    const { execute: executeFavoriteGame } = useMutation(FavoriteGameDocument);
+    const { execute: executeUnfavoriteGame } = useMutation(UnfavoriteGameDocument);
+
+    // TODO: Figure out a way to refresh the game query response here or mutate
+    // it so that isFavorited isn't true anymore (maybe just have a second
+    // variable that the v-if checks that we set here locally?).
+    const favoriteGame = () => {
+      executeFavoriteGame({ id: props.game.id }).then(() => toggleActive());
+    };
+
+    const unfavoriteGame = () => {
+      executeUnfavoriteGame({ id: props.game.id }).then(() => toggleActive());
+    };
+
+    const toggleActive = () => isActive.value = !isActive.value;
+
+    const userSignedIn = computed(() => {
+      return context.root.$store.state.userSignedIn;
+    });
+
     return {
+      isActive,
       platforms,
-      developers
+      developers,
+      favoriteGame,
+      unfavoriteGame,
+      toggleActive,
+      userSignedIn
     };
   }
 });

@@ -12,4 +12,5 @@ fragment gameCardFields on Game {
       name
     }
   }
+  isFavorited
 }
