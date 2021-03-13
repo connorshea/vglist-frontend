@@ -8,13 +8,13 @@
 
       <div v-if="userSignedIn" class="field buttons buttons-vertical">
         <a v-show="data.game.isFavorited" class="button is-fullwidth toggle-icon-on-hover" @click="unfavoriteGame">
-          <SvgIcon :name="'heart-full'" :svg-classes="'svg-icon icon-1'" :fill="'red'"/>
-          <SvgIcon :name="'heart-broken'" :svg-classes="'svg-icon icon-2'" :fill="'red'"/>
+          <SvgIcon :name="'heart-full'" :classes="'is-inline-flex'" :svg-classes="'svg-icon icon-1'" :fill="'red'"/>
+          <SvgIcon :name="'heart-broken'" :classes="'is-inline-flex'" :svg-classes="'svg-icon icon-2'" :fill="'red'"/>
           <span class='ml-5'>Unfavorite</span>
         </a>
         <a v-show="!data.game.isFavorited" class="button is-fullwidth toggle-icon-on-hover" @click="favoriteGame">
-          <SvgIcon :name="'heart'" :svg-classes="'svg-icon icon-1'" :fill="'red'"/>
-          <SvgIcon :name="'heart-full'" :svg-classes="'svg-icon icon-2'" :fill="'red'"/>
+          <SvgIcon :name="'heart'" :classes="'is-inline-flex'" :svg-classes="'svg-icon icon-1'" :fill="'red'"/>
+          <SvgIcon :name="'heart-full'" :classes="'is-inline-flex'" :svg-classes="'svg-icon icon-2'" :fill="'red'"/>
           <span class='ml-5'>Favorite</span>
         </a>
         <!-- add game to library -->
