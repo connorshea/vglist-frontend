@@ -2,9 +2,9 @@
   <!-- This is a bit of a hack to load it with the HTML Loader.
        https://stackoverflow.com/questions/50834598/inline-svg-in-vuejs-component
   -->
-  <div class="inline-block svg-icon"
+  <span :class="classes"
        v-html="require(`!html-loader!@/assets/icons/${name}.svg`)"
-  ></div>
+  ></span>
 </template>
 
 <script lang="ts">
@@ -26,6 +26,11 @@ export default defineComponent({
       type: Number,
       required: false,
       default: 16
+    },
+    classes: {
+      type: String,
+      required: false,
+      default: ''
     }
   },
   mounted() {
