@@ -66,6 +66,7 @@ export default defineComponent({
       type: Function,
       required: false
     },
+    // The name of the search query in the GraphQL response, e.g. 'gameSearch'.
     searchPath: {
       type: String,
       required: true
@@ -81,9 +82,14 @@ export default defineComponent({
     });
 
     const inputId = computed(() => _.snakeCase(props.label));
-    // TODO: Make a ref?
     const options = computed(() => {
-      return data.value ? data.value[props.searchPath].nodes : [];
+      if (data.value) {
+        let nodes = data.value[props.searchPath].nodes;
+        // If there's a custom options function, map with it before returning the nodes.
+        return props.customOptionFunc ? nodes.map(props.customOptionFunc) : nodes;
+      } else {
+        return [];
+      }
     });
 
     const onInput = (event: unknown) => context.emit('input', event);
