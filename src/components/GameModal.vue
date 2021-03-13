@@ -211,9 +211,9 @@ export default defineComponent({
         userId: context.root.$store.state.currentUser.id,
         completionStatus: props.completionStatus,
         startDate: props.startDate,
-        completion_date: props.completionDate,
-        hours_played: parseFloat(props.hoursPlayed),
-        replay_count: props.replayCount,
+        completionDate: props.completionDate,
+        hoursPlayed: parseFloat(props.hoursPlayed),
+        replayCount: props.replayCount,
         platforms: props.platforms,
         stores: props.stores
       }
