@@ -120,7 +120,7 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from '@vue/composition-api';
 import { useMutation } from 'villus';
-import { AddGameToLibraryDocument, GamePurchaseCompletionStatus, GameSearchDocument, PlatformSearchDocument, StoreSearchDocument } from '@/generated/graphql';
+import { AddGameToLibraryDocument, GamePurchaseCompletionStatus, GameSearchDocument, PlatformSearchDocument, StoreSearchDocument, UpdateGameInLibraryDocument } from '@/generated/graphql';
 
 import TextArea from '@/components/fields/TextArea.vue';
 import NumberField from '@/components/fields/NumberField.vue';
@@ -205,6 +205,7 @@ export default defineComponent({
   },
   setup(props, context) {
     const gamePurchase = ref({
+      id: null as string | null,
       comments: props.comments,
       rating: props.rating,
       game: props.game,
@@ -272,8 +273,39 @@ export default defineComponent({
     const onClose = () => context.emit('close');
 
     const { execute: executeAddGameToLibrary } = useMutation(AddGameToLibraryDocument);
+    const { execute: executeUpdateGameInLibrary } = useMutation(UpdateGameInLibraryDocument);
 
     const onSave = () => {
+      if (props.gameModalState === 'update') {
+        updateGameInLibrary();
+      } else {
+        addGameToLibrary();
+      }
+    };
+
+    const updateGameInLibrary = () => {
+      if (gamePurchase.value.id === null) { return; }
+
+      let gamePurchaseParams = {
+        gamePurchaseId: gamePurchase.value.id,
+        rating: Number(gamePurchase.value.rating),
+        startDate: gamePurchase.value.startDate,
+        completionDate: gamePurchase.value.completionDate,
+        completionStatus: GamePurchaseCompletionStatus[gamePurchase.value.completionStatus?.value] ?? null,
+        comments: gamePurchase.value.comments,
+        hoursPlayed: isNaN(gamePurchase.value.hoursPlayed) ? null : Number(gamePurchase.value.hoursPlayed),
+        replayCount: Number(gamePurchase.value.replayCount),
+        platforms: gamePurchase.value.platforms.map((p: any) => p.id),
+        stores: gamePurchase.value.stores.map((s: any) => s.id)
+      };
+
+      executeUpdateGameInLibrary(gamePurchaseParams).then(updatedGamePurchase => {
+        context.emit('create', updatedGamePurchase.data.updateGameInLibrary?.gamePurchase);
+        context.emit('closeAndRefresh');
+      });
+    }
+
+    const addGameToLibrary = () => {
       let gamePurchaseParams = {
         gameId: gamePurchase.value.game.id,
         rating: Number(gamePurchase.value.rating),
@@ -287,11 +319,12 @@ export default defineComponent({
         stores: gamePurchase.value.stores.map((s: any) => s.id)
       };
 
-      executeAddGameToLibrary(gamePurchaseParams).then(gamePurchase => {
-        context.emit('create', gamePurchase.data.addGameToLibrary?.gamePurchase);
+      executeAddGameToLibrary(gamePurchaseParams).then(newlyAddedGamePurchase => {
+        context.emit('create', newlyAddedGamePurchase.data.addGameToLibrary?.gamePurchase);
         context.emit('closeAndRefresh');
+        gamePurchase.value.id = newlyAddedGamePurchase.data.addGameToLibrary?.gamePurchase?.id ?? null;
       });
-    };
+    }
 
     const selectGame = () => gameSelected.value = true;
 
