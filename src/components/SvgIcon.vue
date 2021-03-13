@@ -3,7 +3,7 @@
        https://stackoverflow.com/questions/50834598/inline-svg-in-vuejs-component
   -->
   <span :class="classes"
-       v-html="require(`!html-loader!@/assets/icons/${name}.svg`)"
+        v-html="require(`!html-loader!@/assets/icons/${name}.svg`)"
   ></span>
 </template>
 
@@ -27,10 +27,18 @@ export default defineComponent({
       required: false,
       default: 16
     },
+    fill: {
+      type: String,
+      required: false
+    },
     classes: {
       type: String,
       required: false,
       default: ''
+    },
+    svgClasses: {
+      type: String,
+      required: false
     }
   },
   mounted() {
@@ -39,6 +47,12 @@ export default defineComponent({
       const svgElement = this.$el.firstElementChild;
       svgElement.setAttribute('width', `${this.width}px`);
       svgElement.setAttribute('height', `${this.height}px`);
+      if (typeof this.svgClasses !== 'undefined') {
+        svgElement.classList.add(...this.svgClasses.split(' '));
+      }
+      if (typeof this.fill !== 'undefined') {
+        svgElement.setAttribute('fill', this.fill);
+      }
     }
   }
 });
