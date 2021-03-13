@@ -1,23 +1,19 @@
 <template>
   <div class="navbar-item has-dropdown field mt-10" v-bind:class="{ 'is-active': dropdownActive }">
-    <div class="control">
-      <div class="field mb-0">
-        <p class="control has-icons-left">
-          <input
-            v-model="query"
-            @input="onSearch"
-            @keyup.up.prevent="onUpArrow"
-            @keyup.down.prevent="onDownArrow"
-            @keyup.enter.prevent="onEnter"
-            class="input navbar-search-input"
-            type="search"
-            placeholder="Search"
-          />
-          <span class="icon is-small is-left">
-            <!-- <SVGSearchIcon/> -->
-          </span>
-        </p>
-      </div>
+    <div class="field mb-0">
+      <p class="control has-icons-left">
+        <input
+          v-model="query"
+          @input="onSearch"
+          @keyup.up.prevent="onUpArrow"
+          @keyup.down.prevent="onDownArrow"
+          @keyup.enter.prevent="onEnter"
+          class="input navbar-search-input"
+          type="search"
+          placeholder="Search"
+        />
+        <SvgIcon :name="'search'" :classes="['icon', 'is-small', 'is-left']"/>
+      </p>
     </div>
 
     <div v-if="dropdownActive" class="navbar-search-dropdown navbar-dropdown">
@@ -72,6 +68,7 @@
 <script lang="ts">
 import * as _ from 'lodash';
 import { defineComponent } from '@vue/composition-api';
+import SvgIcon from '@/components/SvgIcon.vue';
 
 type SearchableType = 'Game' | 'Series' | 'Company' | 'Platform' | 'Engine' | 'Genre' | 'User';
 
@@ -95,6 +92,9 @@ interface SearchData {
 
 export default defineComponent({
   name: 'Search',
+  components: {
+    SvgIcon
+  },
   data: function() {
     return {
       searchUrl: '/search.json',

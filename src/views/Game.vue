@@ -1,5 +1,5 @@
 <template>
-  <div class="columns" v-if="data.game">
+  <div class="columns" v-if="data">
     <div class="game-sidebar column is-3-desktop is-5-tablet is-12-mobile">
       <div class="hero-image game-cover mb-10">
         <img v-if="data.game.coverUrl !== null" :src="data.game.coverUrl" />
@@ -7,10 +7,14 @@
       </div>
 
       <div v-if="userSignedIn" class="field buttons buttons-vertical">
-        <a v-if="data.game.isFavorited" class="button is-fullwidth toggle-icon-on-hover" @click="unfavoriteGame">
+        <a v-show="data.game.isFavorited" class="button is-fullwidth toggle-icon-on-hover" @click="unfavoriteGame">
+          <SvgIcon :name="'heart-full'" :classes="['is-inline-flex']" :svg-classes="['icon-1']" :fill="'red'"/>
+          <SvgIcon :name="'heart-broken'" :classes="['is-inline-flex']" :svg-classes="['icon-2']" :fill="'red'"/>
           <span class='ml-5'>Unfavorite</span>
         </a>
-        <a v-else class="button is-fullwidth toggle-icon-on-hover" @click="favoriteGame">
+        <a v-show="!data.game.isFavorited" class="button is-fullwidth toggle-icon-on-hover" @click="favoriteGame">
+          <SvgIcon :name="'heart'" :classes="['is-inline-flex']" :svg-classes="['icon-1']" :fill="'red'"/>
+          <SvgIcon :name="'heart-full'" :classes="['is-inline-flex']" :svg-classes="['icon-2']" :fill="'red'"/>
           <span class='ml-5'>Favorite</span>
         </a>
         <!-- add game to library -->
@@ -99,11 +103,13 @@ import { FavoriteGameDocument, GameDocument, UnfavoriteGameDocument } from '@/ge
 import { computed, defineComponent } from '@vue/composition-api';
 import { useMutation, useQuery } from 'villus';
 import GameInfobox from '@/components/GameInfobox.vue';
+import SvgIcon from '@/components/SvgIcon.vue';
 
 export default defineComponent({
   name: 'Game',
   components: {
-    GameInfobox
+    GameInfobox,
+    SvgIcon
   },
   props: {
     id: {
