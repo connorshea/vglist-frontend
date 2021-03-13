@@ -20,6 +20,7 @@
     "villus": "^1.0.0-rc.12",
     "vue": "^2.6.12",
     "vue-router": "^3.5.0",
+    "vue-select": "^3.11.2",
     "vuex": "^3.6.0"
   },
   "devDependencies": {
@@ -32,6 +33,7 @@
     "@types/chai": "^4.2.11",
     "@types/lodash": "^4.14.168",
     "@types/mocha": "^5.2.4",
+    "@types/vue-select": "^3.11.1",
     "@typescript-eslint/eslint-plugin": "^4.15.0",
     "@typescript-eslint/parser": "^4.15.0",
     "@vue/cli-plugin-babel": "~4.5.0",
