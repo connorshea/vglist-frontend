@@ -17,7 +17,7 @@
           <SvgIcon :name="'heart-full'" :classes="['is-inline-flex']" :svg-classes="['icon-2']" :fill="'red'"/>
           <span class='ml-5'>Favorite</span>
         </a>
-        <AddGameToLibrary :isInLibrary="data.game.isInLibrary" :gameId="data.game.id" />
+        <AddGameToLibrary :isInLibrary="data.game.isInLibrary" :game="data.game" />
         <!-- Actions dropdown -->
       </div>
     </div>

@@ -25,32 +25,32 @@
       <span>Add to library</span>
     </button>
 
-    <!-- <game-modal
+    <GameModal
       v-if="isModalActive"
       :isActive="isModalActive"
       :gameModalState="gameModalState"
-      :userId="userId"
       v-bind="mutableGamePurchase"
       v-on:close="deactivateModal"
       v-on:closeAndRefresh="closeAndRefresh"
       v-on:create="onSubmit"
-    ></game-modal> -->
+    />
   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, ref } from '@vue/composition-api';
-// import GameModal from '@/components/GameModal.vue';
+import GameModal from '@/components/GameModal.vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 
 export default defineComponent({
   name: 'AddGameToLibrary',
   components: {
-    SvgIcon
+    SvgIcon,
+    GameModal
   },
   props: {
-    gameId: {
-      type: String,
+    game: {
+      type: Object,
       required: true
     },
     isInLibrary: {
@@ -83,9 +83,9 @@ export default defineComponent({
 
     const closeAndRefresh = () => deactivateModal();
     const addGameToLibrary = () => {
-      console.log('Activate modal, modal handles actually adding the game to user\'s library');
+      activateModal(props.game);
     };
-    const editGameInLibrary = () => activateModal();
+    const editGameInLibrary = () => activateModal(props.game);
     const removeGameFromLibrary = () => {
       console.log('TODO mutation');
     };

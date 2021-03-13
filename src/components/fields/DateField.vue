@@ -46,12 +46,12 @@ export default defineComponent({
   },
   setup(props) {
     const dateFieldName = computed(() => `${props.formClass}[${props.attribute}]`);
-    const dateFieldID = computed(() => `${props.formClass}_${props.attribute}`);
+    const dateFieldId = computed(() => `${props.formClass}_${props.attribute}`);
     const dataValue = ref(props.value);
 
     return {
       dateFieldName,
-      dateFieldID,
+      dateFieldId,
       dataValue
     }
   }

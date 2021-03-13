@@ -29,7 +29,7 @@ export default defineComponent({
   props: {
     label: {
       type: String,
-      required: false
+      required: true
     },
     placeholder: {
       type: String,

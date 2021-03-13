@@ -37,10 +37,10 @@ export default defineComponent({
     }
   },
   setup(props) {
+    const dataValue = ref(props.value);
+
     const textAreaName = computed(() => `${props.formClass}[${props.attribute}]`);
     const textAreaId = computed(() => `${props.formClass}_${props.attribute}`);
-
-    const dataValue = ref(props.value);
 
     return {
       textAreaName,
