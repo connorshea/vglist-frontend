@@ -21,7 +21,7 @@
       </div>
       <div class="dropdown-menu" id="dropdown-menu" role="menu">
         <div class="dropdown-content">
-          <a v-if="game.isFavorited" class="dropdown-item" @click="unfavoriteGame">Unfavorite</a>
+          <a v-if="game.isFavorited || localIsFavorited" class="dropdown-item" @click="unfavoriteGame">Unfavorite</a>
           <a v-else class="dropdown-item" @click="favoriteGame">Favorite</a>
         </div>
       </div>
@@ -47,7 +47,6 @@ export default defineComponent({
     }
   },
   setup(props, context) {
-    let isActive = ref<boolean>(false);
     const platforms = computed(() => {
       if (props.game.platforms.nodes.size === 0) { return null; }
       return props.game.platforms.nodes.map((p: Platform) => p.name).join(', ');
@@ -60,15 +59,25 @@ export default defineComponent({
     const { execute: executeFavoriteGame } = useMutation(FavoriteGameDocument);
     const { execute: executeUnfavoriteGame } = useMutation(UnfavoriteGameDocument);
 
-    // TODO: Figure out a way to refresh the game query response here or mutate
-    // it so that isFavorited isn't true anymore (maybe just have a second
-    // variable that the v-if checks that we set here locally?).
+    let isActive = ref<boolean>(false);
+
+    // Tracks whether the game has been favorited, will be toggled when the
+    // mutation is executed so we don't have to reload the game record.
+    let localIsFavorited = ref<boolean>(props.game.isFavorited);
+
     const favoriteGame = () => {
-      executeFavoriteGame({ id: props.game.id }).then(() => toggleActive());
+      executeFavoriteGame({ id: props.game.id }).then(() => {
+        // TODO: Add error handling for if the mutation fails.
+        toggleActive();
+        localIsFavorited.value = true;
+      });
     };
 
     const unfavoriteGame = () => {
-      executeUnfavoriteGame({ id: props.game.id }).then(() => toggleActive());
+      executeUnfavoriteGame({ id: props.game.id }).then(() => {
+        toggleActive();
+        localIsFavorited.value = false;
+      });
     };
 
     const toggleActive = () => isActive.value = !isActive.value;
@@ -84,7 +93,8 @@ export default defineComponent({
       favoriteGame,
       unfavoriteGame,
       toggleActive,
-      userSignedIn
+      userSignedIn,
+      localIsFavorited
     };
   }
 });
