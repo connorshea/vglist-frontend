@@ -214,8 +214,8 @@ export default defineComponent({
       completionDate: props.completionDate,
       hoursPlayed: parseFloat(props.hoursPlayed),
       replayCount: props.replayCount,
-      platforms: props.platforms,
-      stores: props.stores
+      platforms: props.platforms as Array<{ id: string, name: string}>,
+      stores: props.stores as Array<{ id: string, name: string}>
     });
 
     const formData = {
@@ -295,8 +295,8 @@ export default defineComponent({
         comments: gamePurchase.value.comments,
         hoursPlayed: isNaN(gamePurchase.value.hoursPlayed) ? null : Number(gamePurchase.value.hoursPlayed),
         replayCount: Number(gamePurchase.value.replayCount),
-        platforms: gamePurchase.value.platforms.map((p: any) => p.id),
-        stores: gamePurchase.value.stores.map((s: any) => s.id)
+        platforms: gamePurchase.value.platforms.map((p: { id: string, name: string }) => p.id),
+        stores: gamePurchase.value.stores.map((s: { id: string, name: string }) => s.id)
       };
 
       executeUpdateGameInLibrary(gamePurchaseParams).then(updatedGamePurchase => {
@@ -315,8 +315,8 @@ export default defineComponent({
         comments: gamePurchase.value.comments,
         hoursPlayed: isNaN(gamePurchase.value.hoursPlayed) ? null : Number(gamePurchase.value.hoursPlayed),
         replayCount: Number(gamePurchase.value.replayCount),
-        platforms: gamePurchase.value.platforms.map((p: any) => p.id),
-        stores: gamePurchase.value.stores.map((s: any) => s.id)
+        platforms: gamePurchase.value.platforms.map((p: { id: string, name: string }) => p.id),
+        stores: gamePurchase.value.stores.map((s: { id: string, name: string }) => s.id)
       };
 
       executeAddGameToLibrary(gamePurchaseParams).then(newlyAddedGamePurchase => {
