@@ -87,7 +87,9 @@ export default defineComponent({
     const addGameToLibrary = () => {
       activateModal(props.game);
     };
-    const editGameInLibrary = () => activateModal(props.game);
+    const editGameInLibrary = () => {
+      activateModal(props.game)
+    };
 
     const { execute: executeRemoveGameFromLibrary } = useMutation(RemoveGameFromLibraryDocument);
 
@@ -97,7 +99,7 @@ export default defineComponent({
     };
 
     const onSubmit = () => {
-      console.log('TODO, reload page?');
+      context.emit('refresh');
     };
 
     return {

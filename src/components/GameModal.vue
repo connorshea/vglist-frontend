@@ -120,6 +120,7 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from '@vue/composition-api';
 import { useMutation } from 'villus';
+import { AddGameToLibraryDocument, GamePurchaseCompletionStatus, GameSearchDocument, PlatformSearchDocument, StoreSearchDocument } from '@/generated/graphql';
 
 import TextArea from '@/components/fields/TextArea.vue';
 import NumberField from '@/components/fields/NumberField.vue';
@@ -127,7 +128,6 @@ import DateField from '@/components/fields/DateField.vue';
 import SingleSelect from '@/components/fields/SingleSelect.vue';
 import MultiSelect from '@/components/fields/MultiSelect.vue';
 import StaticSingleSelect from '@/components/fields/StaticSingleSelect.vue';
-import { GameSearchDocument, PlatformSearchDocument, StoreSearchDocument } from '@/generated/graphql';
 
 export default defineComponent({
   name: 'GameModal',
@@ -150,7 +150,7 @@ export default defineComponent({
       default: ''
     },
     hoursPlayed: {
-      type: [Number, String],
+      type: String,
       required: false,
       default: ''
     },
@@ -208,74 +208,89 @@ export default defineComponent({
       comments: props.comments,
       rating: props.rating,
       game: props.game,
-      userId: context.root.$store.state.currentUser.id,
-      completionStatus: props.completionStatus,
+      completionStatus: props.completionStatus as { label: string, value: keyof typeof GamePurchaseCompletionStatus },
       startDate: props.startDate,
       completionDate: props.completionDate,
-      hoursPlayed: parseFloat(props.hoursPlayed.toString()),
+      hoursPlayed: parseFloat(props.hoursPlayed),
       replayCount: props.replayCount,
       platforms: props.platforms,
       stores: props.stores
     });
 
-    const formData = computed(() => {
-      return {
-        class: 'game_purchase',
-        comments: {
-          label: 'Comments',
-          attribute: 'comments'
-        },
-        rating: {
-          label: 'Rating (out of 100)',
-          attribute: 'rating'
-        },
-        hoursPlayed: {
-          label: 'Hours Played',
-          attribute: 'hoursPlayed'
-        },
-        replayCount: {
-          label: 'Replay Count',
-          attribute: 'replayCount'
-        },
-        completionStatus: {
-          label: 'Completion Status'
-        },
-        startDate: {
-          label: 'Start Date',
-          attribute: 'startDate'
-        },
-        completionDate: {
-          label: 'Completion Date',
-          attribute: 'completionDate'
-        },
-        platforms: {
-          label: 'Platforms'
-        },
-        stores: {
-          label: 'Stores'
-        },
-        game: {
-          label: 'Game'
-        }
+    const formData = {
+      class: 'game_purchase',
+      comments: {
+        label: 'Comments',
+        attribute: 'comments'
+      },
+      rating: {
+        label: 'Rating (out of 100)',
+        attribute: 'rating'
+      },
+      hoursPlayed: {
+        label: 'Hours Played',
+        attribute: 'hoursPlayed'
+      },
+      replayCount: {
+        label: 'Replay Count',
+        attribute: 'replayCount'
+      },
+      completionStatus: {
+        label: 'Completion Status'
+      },
+      startDate: {
+        label: 'Start Date',
+        attribute: 'startDate'
+      },
+      completionDate: {
+        label: 'Completion Date',
+        attribute: 'completionDate'
+      },
+      platforms: {
+        label: 'Platforms'
+      },
+      stores: {
+        label: 'Stores'
+      },
+      game: {
+        label: 'Game'
       }
-    });
+    };
 
-    const formattedCompletionStatuses = [
-      { label: "Unplayed", value: "unplayed" },
-      { label: "In Progress", value: "in_progress" },
-      { label: "Paused", value: "paused" },
-      { label: "Dropped", value: "dropped" },
-      { label: "Completed", value: "completed" },
-      { label: "100% Completed", value: "fully_completed" },
-      { label: "N/A", value: "not_applicable" }
+    const formattedCompletionStatuses: Array<{ label: string, value: keyof typeof GamePurchaseCompletionStatus }> = [
+      { label: "Unplayed", value: "Unplayed" },
+      { label: "In Progress", value: "InProgress" },
+      { label: "Paused", value: "Paused" },
+      { label: "Dropped", value: "Dropped" },
+      { label: "Completed", value: "Completed" },
+      { label: "100% Completed", value: "FullyCompleted" },
+      { label: "N/A", value: "NotApplicable" }
     ];
 
     const gameSelected = ref(props.gameModalState !== 'create');
 
     const onClose = () => context.emit('close');
+
+    const { execute: executeAddGameToLibrary } = useMutation(AddGameToLibraryDocument);
+
     const onSave = () => {
-      console.log('TODO: Submit with mutation');
-      console.log(gamePurchase);
+      let gamePurchaseParams = {
+        gameId: gamePurchase.value.game.id,
+        rating: Number(gamePurchase.value.rating),
+        startDate: gamePurchase.value.startDate,
+        completionDate: gamePurchase.value.completionDate,
+        completionStatus: GamePurchaseCompletionStatus[gamePurchase.value.completionStatus?.value] ?? null,
+        comments: gamePurchase.value.comments,
+        hoursPlayed: isNaN(gamePurchase.value.hoursPlayed) ? null : gamePurchase.value.hoursPlayed,
+        replayCount: Number(gamePurchase.value.replayCount),
+        platforms: gamePurchase.value.platforms.map((p: any) => p.id),
+        stores: gamePurchase.value.stores.map((s: any) => s.id)
+      };
+
+      executeAddGameToLibrary(gamePurchaseParams).then(gamePurchase => {
+        context.emit('create', gamePurchase.data.addGameToLibrary?.gamePurchase);
+        context.emit('closeAndRefresh');
+      });
     };
 
     const selectGame = () => gameSelected.value = true;
@@ -284,11 +299,7 @@ export default defineComponent({
     // Note that refs in @vue/composition-api don't handle arrays well, allegedly?
     const errors: string[] = [];
 
-    const modalTitle = computed(() => {
-      return gamePurchase.value.game.name !== undefined
-        ? gamePurchase.value.game.name
-        : 'Add a game to your library';
-    });
+    const modalTitle = computed(() => gamePurchase.value.game.name ?? 'Add a game to your library');
 
     return {
       gamePurchase,
