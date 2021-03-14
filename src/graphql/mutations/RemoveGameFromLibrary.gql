@@ -1,0 +1,8 @@
+mutation RemoveGameFromLibrary($id: ID!) {
+  removeGameFromLibrary(gameId: $id) {
+    game {
+      id
+      name
+    }
+  }
+}

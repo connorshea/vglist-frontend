@@ -67,5 +67,6 @@ query Game($id: ID!) {
     giantbombId
     isFavorited
     isInLibrary
+    gamePurchaseId
   }
 }
