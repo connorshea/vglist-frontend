@@ -1,0 +1,47 @@
+query GlobalSearch($query: String!) {
+  globalSearch(query: $query) {
+    nodes {
+      __typename
+      ... on CompanySearchResult {
+        id
+        searchableId
+        content
+      }
+      ... on EngineSearchResult {
+        id
+        searchableId
+        content
+      }
+      ... on GameSearchResult {
+        id
+        searchableId
+        content
+        coverUrl
+        releaseDate
+        developerName
+      }
+      ... on GenreSearchResult {
+        id
+        searchableId
+        content
+      }
+      ... on PlatformSearchResult {
+        id
+        searchableId
+        content
+      }
+      ... on SeriesSearchResult {
+        id
+        searchableId
+        content
+      }
+      ... on UserSearchResult {
+        id
+        searchableId
+        content
+        slug
+        avatarUrl
+      }
+    }
+  }
+}
