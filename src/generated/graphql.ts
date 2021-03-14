@@ -1214,6 +1214,7 @@ export type RemoveGameFromLibraryPayload = {
   game?: Maybe<Game>;
 };
 
+/** Search results returned by global search. */
 export type SearchResultInterface = {
   /** The contents of the search result, typically the name or username of the corresponding record. */
   content: Scalars['String'];
@@ -1252,12 +1253,19 @@ export type SearchResultUnionEdge = {
 
 /** The types of records that can be returned as a `SearchResult`. */
 export enum SearchableEnum {
+  /** Self-explanatory. */
   Company = 'COMPANY',
+  /** Self-explanatory. */
   Engine = 'ENGINE',
+  /** Self-explanatory. */
   Game = 'GAME',
+  /** Self-explanatory. */
   Genre = 'GENRE',
+  /** Self-explanatory. */
   Platform = 'PLATFORM',
+  /** Self-explanatory. */
   Series = 'SERIES',
+  /** Self-explanatory. */
   User = 'USER'
 }
 
