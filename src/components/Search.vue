@@ -180,20 +180,20 @@ export default defineComponent({
     onMoreGames() {
       this.currentPage += 1;
       fetch(`${this.searchUrl}?query=${this.query}&page=${this.currentPage}&only_games=true`)
-          .then(response => {
-            return response.json();
-          })
-          .then(searchResults => {
-            this.searchResults['Game'] = _.get(this.searchResults, 'Game').concat(searchResults['Game']);
-            this.activeSearchResult = -1;
-            // If there are a multiple of 15 results and no new games are
-            // added, the component will still show a "More..." button. This
-            // sets 'moreAlreadyLoaded' to true to make sure the 'More...'
-            // button is hidden and handle this edge case.
-            if (searchResults['Game'].length === 0) {
-              this.moreAlreadyLoaded = true;
-            }
-          });
+        .then(response => {
+          return response.json();
+        })
+        .then(searchResults => {
+          this.searchResults['Game'] = _.get(this.searchResults, 'Game').concat(searchResults['Game']);
+          this.activeSearchResult = -1;
+          // If there are a multiple of 15 results and no new games are
+          // added, the component will still show a "More..." button. This
+          // sets 'moreAlreadyLoaded' to true to make sure the 'More...'
+          // button is hidden and handle this edge case.
+          if (searchResults['Game'].length === 0) {
+            this.moreAlreadyLoaded = true;
+          }
+        });
     }
   },
   computed: {

@@ -1,0 +1,20 @@
+name: Lint and test
+
+on: [push]
+
+jobs:
+  test-and-lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14.x'
+    - name: Install
+      run: yarn install --frozen-lockfile
+    - name: Lint
+      run: yarn run lint
+    - name: Test
+      run: yarn run test:unit
