@@ -18,5 +18,16 @@ module.exports = {
     'indent': ['warn', 2]
   },
   // Ignore the generated GraphQL file.
-  ignorePatterns: ["src/generated/graphql.ts"]
+  ignorePatterns: ["src/generated/graphql.ts"],
+  overrides: [
+    {
+      files: [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+      ],
+      env: {
+        jest: true
+      }
+    }
+  ]
 }
