@@ -1,0 +1,5 @@
+mutation DeletePlatform($id: ID!) {
+  deletePlatform(platformId: $id) {
+    deleted
+  }
+}

@@ -1,0 +1,5 @@
+mutation DeleteSeries($id: ID!) {
+  deleteSeries(seriesId: $id) {
+    deleted
+  }
+}

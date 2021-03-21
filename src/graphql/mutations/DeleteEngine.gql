@@ -1,0 +1,5 @@
+mutation DeleteEngine($id: ID!) {
+  deleteEngine(engineId: $id) {
+    deleted
+  }
+}

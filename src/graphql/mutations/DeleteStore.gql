@@ -1,0 +1,5 @@
+mutation DeleteStore($id: ID!) {
+  deleteStore(storeId: $id) {
+    deleted
+  }
+}
