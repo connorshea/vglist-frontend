@@ -150,7 +150,7 @@ export default defineComponent({
         {
           username: 'connor',
           slug: 'connor',
-          role: 'admin'
+          role: 'ADMIN'
         }
       );
     },
