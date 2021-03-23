@@ -21,6 +21,8 @@ import Game from '@/views/games/Game.vue';
 
 import Genre from '@/views/genres/Genre.vue';
 import Genres from '@/views/genres/Genres.vue';
+import CreateGenre from '@/views/genres/CreateGenre.vue';
+import EditGenre from '@/views/genres/EditGenre.vue';
 
 import Platform from '@/views/platforms/Platform.vue';
 import Platforms from '@/views/platforms/Platforms.vue';
@@ -129,6 +131,17 @@ const routes: Array<RouteConfig> = [
     path: '/genres/:id',
     name: 'Genre',
     component: Genre,
+    props: true
+  },
+  {
+    path: '/genres/new',
+    name: 'CreateGenre',
+    component: CreateGenre
+  },
+  {
+    path: '/genres/:id/edit',
+    name: 'EditGenre',
+    component: EditGenre,
     props: true
   },
   {

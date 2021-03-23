@@ -1,0 +1,7 @@
+mutation CreateGenre($name: String!, $wikidataId: ID) {
+  createGenre(name: $name, wikidataId: $wikidataId) {
+    genre {
+      id
+    }
+  }
+}

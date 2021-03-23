@@ -1,0 +1,7 @@
+mutation UpdateGenre($id: ID!, $name: String, $wikidataId: ID) {
+  updateGenre(genreId: $id, name: $name, wikidataId: $wikidataId) {
+    genre {
+      id
+    }
+  }
+}
