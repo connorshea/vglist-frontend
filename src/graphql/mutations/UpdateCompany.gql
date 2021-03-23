@@ -1,0 +1,7 @@
+mutation UpdateCompany($id: ID!, $name: String, $wikidataId: ID) {
+  updateCompany(companyId: $id, name: $name, wikidataId: $wikidataId) {
+    company {
+      id
+    }
+  }
+}

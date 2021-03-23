@@ -1,0 +1,7 @@
+mutation CreateCompany($name: String!, $wikidataId: ID) {
+  createCompany(name: $name, wikidataId: $wikidataId) {
+    company {
+      id
+    }
+  }
+}
