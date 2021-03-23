@@ -39,7 +39,7 @@ import { useMutation } from 'villus';
 import { UpdateCompanyDocument, CreateCompanyDocument } from '@/generated/graphql';
 
 export default defineComponent({
-  name: 'EditCompany',
+  name: 'CompanyForm',
   components: {
     TextField,
     NumberField
