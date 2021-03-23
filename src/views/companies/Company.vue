@@ -2,6 +2,17 @@
   <div class="company" v-if="data">
     <h1 class="title">{{ data.company.name }}</h1>
 
+    <div v-if="userSignedIn" class="field buttons">
+      <template v-if="userCanEdit">
+        <router-link :to="{ name: 'EditCompany', params: { id: data.company.id }}" class="button mr-0-mobile is-fullwidth-mobile">
+          Edit
+        </router-link>
+      </template>
+      <template v-if="userCanDelete">
+        <a @click="deleteCompany" class="button is-fullwidth-mobile is-danger">Delete</a>
+      </template>
+    </div>
+
     <a v-if="data.company.wikidataId !== null" :href="wikidataUrl">Wikidata</a>
 
     <template v-if="data.company.developedGames.nodes.length > 0">
@@ -39,9 +50,9 @@
 </template>
 
 <script lang="ts">
-import { CompanyDocument } from '@/generated/graphql';
+import { CompanyDocument, DeleteCompanyDocument } from '@/generated/graphql';
 import { computed, defineComponent } from '@vue/composition-api';
-import { useQuery } from 'villus';
+import { useMutation, useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
 
 export default defineComponent({
@@ -55,7 +66,7 @@ export default defineComponent({
       type: String
     }
   },
-  setup(props) {
+  setup(props, context) {
     const { data } = useQuery({
       query: CompanyDocument,
       variables: {
@@ -67,9 +78,34 @@ export default defineComponent({
       return `https://www.wikidata.org/wiki/Q${data.value?.company?.wikidataId}`;
     });
 
+    const { data: deleteCompanyData, execute: executeDeleteCompany, error: deleteCompanyErrors } = useMutation(DeleteCompanyDocument);
+    let deleteCompany = () => {
+      if (confirm("Are you sure you want to delete this company?")) {
+        executeDeleteCompany({ id: props.id }).then(() => {
+          if (deleteCompanyData.value?.deleteCompany?.deleted) {
+            context.root.$router.push({ name: 'Companies' });
+          } else {
+            // TODO: Error handling.
+            console.log(`Error: ${deleteCompanyErrors.value}`);
+          }
+        });
+      }
+    };
+
+    const userSignedIn = computed(() => {
+      return context.root.$store.state.userSignedIn;
+    });
+
+    const userCanEdit = userSignedIn;
+    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(context.root.$store.state.currentUser.role));
+
     return {
       data,
-      wikidataUrl
+      wikidataUrl,
+      deleteCompany,
+      userSignedIn,
+      userCanEdit,
+      userCanDelete
     };
   }
 });

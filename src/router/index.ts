@@ -1,22 +1,33 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
+
 import Home from '@/views/Home.vue';
+
 import Activity from '@/views/activity/Activity.vue';
+import FollowingActivity from '@/views/activity/FollowingActivity.vue';
+
 import Company from '@/views/companies/Company.vue';
 import Companies from '@/views/companies/Companies.vue';
+import EditCompany from '@/views/companies/EditCompany.vue';
+
 import Engine from '@/views/engines/Engine.vue';
 import Engines from '@/views/engines/Engines.vue';
-import FollowingActivity from '@/views/activity/FollowingActivity.vue';
+
 import Games from '@/views/games/Games.vue';
 import Game from '@/views/games/Game.vue';
+
 import Genre from '@/views/genres/Genre.vue';
 import Genres from '@/views/genres/Genres.vue';
+
 import Platform from '@/views/platforms/Platform.vue';
 import Platforms from '@/views/platforms/Platforms.vue';
+
 import Series from '@/views/series/Series.vue';
 import SeriesList from '@/views/series/SeriesList.vue';
+
 import Store from '@/views/stores/Store.vue';
 import Stores from '@/views/stores/Stores.vue';
+
 import Users from '@/views/users/Users.vue';
 import User from '@/views/users/User.vue';
 import UserProfile from '@/views/users/UserProfile.vue';
@@ -71,6 +82,12 @@ const routes: Array<RouteConfig> = [
     path: '/companies/:id',
     name: 'Company',
     component: Company,
+    props: true
+  },
+  {
+    path: '/companies/:id/edit',
+    name: 'EditCompany',
+    component: EditCompany,
     props: true
   },
   {
