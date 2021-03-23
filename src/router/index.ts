@@ -31,6 +31,8 @@ import EditPlatform from '@/views/platforms/EditPlatform.vue';
 
 import Series from '@/views/series/Series.vue';
 import SeriesList from '@/views/series/SeriesList.vue';
+import CreateSeries from '@/views/series/CreateSeries.vue';
+import EditSeries from '@/views/series/EditSeries.vue';
 
 import Store from '@/views/stores/Store.vue';
 import Stores from '@/views/stores/Stores.vue';
@@ -177,6 +179,17 @@ const routes: Array<RouteConfig> = [
     path: '/series/:id',
     name: 'Series',
     component: Series,
+    props: true
+  },
+  {
+    path: '/series/new',
+    name: 'CreateSeries',
+    component: CreateSeries
+  },
+  {
+    path: '/series/:id/edit',
+    name: 'EditSeries',
+    component: EditSeries,
     props: true
   },
   {

@@ -1,0 +1,7 @@
+mutation UpdateSeries($id: ID!, $name: String, $wikidataId: ID) {
+  updateSeries(seriesId: $id, name: $name, wikidataId: $wikidataId) {
+    series {
+      id
+    }
+  }
+}
