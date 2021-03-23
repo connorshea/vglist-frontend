@@ -1,0 +1,7 @@
+mutation CreatePlatform($name: String!, $wikidataId: ID) {
+  createPlatform(name: $name, wikidataId: $wikidataId) {
+    platform {
+      id
+    }
+  }
+}

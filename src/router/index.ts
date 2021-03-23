@@ -26,6 +26,8 @@ import EditGenre from '@/views/genres/EditGenre.vue';
 
 import Platform from '@/views/platforms/Platform.vue';
 import Platforms from '@/views/platforms/Platforms.vue';
+import CreatePlatform from '@/views/platforms/CreatePlatform.vue';
+import EditPlatform from '@/views/platforms/EditPlatform.vue';
 
 import Series from '@/views/series/Series.vue';
 import SeriesList from '@/views/series/SeriesList.vue';
@@ -153,6 +155,17 @@ const routes: Array<RouteConfig> = [
     path: '/platforms/:id',
     name: 'Platform',
     component: Platform,
+    props: true
+  },
+  {
+    path: '/platforms/new',
+    name: 'CreatePlatform',
+    component: CreatePlatform
+  },
+  {
+    path: '/platforms/:id/edit',
+    name: 'EditPlatform',
+    component: EditPlatform,
     props: true
   },
   {

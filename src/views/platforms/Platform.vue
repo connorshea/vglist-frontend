@@ -2,6 +2,17 @@
   <div class="platform" v-if="data">
     <h1 class="title">{{ data.platform.name }}</h1>
 
+    <div v-if="userSignedIn" class="field buttons">
+      <template v-if="userCanEdit">
+        <router-link :to="{ name: 'EditPlatform', params: { id: data.platform.id }}" class="button mr-0-mobile is-fullwidth-mobile">
+          Edit
+        </router-link>
+      </template>
+      <template v-if="userCanDelete">
+        <a @click="deletePlatform" class="button is-fullwidth-mobile is-danger">Delete</a>
+      </template>
+    </div>
+
     <a v-if="data.platform.wikidataId !== null" :href="wikidataUrl">Wikidata</a>
 
     <template v-if="data.platform.games.nodes.length > 0">
@@ -20,9 +31,9 @@
 </template>
 
 <script lang="ts">
-import { PlatformDocument } from '@/generated/graphql';
+import { DeletePlatformDocument, PlatformDocument } from '@/generated/graphql';
 import { computed, defineComponent } from '@vue/composition-api';
-import { useQuery } from 'villus';
+import { useMutation, useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
 
 export default defineComponent({
@@ -36,7 +47,7 @@ export default defineComponent({
       type: String
     }
   },
-  setup(props) {
+  setup(props, context) {
     const { data } = useQuery({
       query: PlatformDocument,
       variables: {
@@ -48,9 +59,34 @@ export default defineComponent({
       return `https://www.wikidata.org/wiki/Q${data.value?.platform?.wikidataId}`;
     });
 
+    const { data: deletePlatformData, execute: executeDeletePlatform, error: deletePlatformErrors } = useMutation(DeletePlatformDocument);
+    let deletePlatform = () => {
+      if (confirm("Are you sure you want to delete this platform?")) {
+        executeDeletePlatform({ id: props.id }).then(() => {
+          if (deletePlatformData.value?.deletePlatform?.deleted) {
+            context.root.$router.push({ name: 'Platforms' });
+          } else {
+            // TODO: Error handling.
+            console.log(`Error: ${deletePlatformErrors.value}`);
+          }
+        });
+      }
+    };
+
+    const userSignedIn = computed(() => {
+      return context.root.$store.state.userSignedIn;
+    });
+
+    const userCanEdit = userSignedIn;
+    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(context.root.$store.state.currentUser.role));
+
     return {
       data,
-      wikidataUrl
+      wikidataUrl,
+      deletePlatform,
+      userSignedIn,
+      userCanEdit,
+      userCanDelete
     };
   }
 });

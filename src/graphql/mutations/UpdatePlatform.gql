@@ -1,0 +1,7 @@
+mutation UpdatePlatform($id: ID!, $name: String, $wikidataId: ID) {
+  updatePlatform(platformId: $id, name: $name, wikidataId: $wikidataId) {
+    platform {
+      id
+    }
+  }
+}

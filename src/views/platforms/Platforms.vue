@@ -2,6 +2,10 @@
   <div class="platforms" v-if="data">
     <h1 class="title">Platforms</h1>
 
+    <p v-if="userSignedIn">
+      <router-link :to="{ name: 'CreatePlatform' }" class="button is-fullwidth-mobile mb-10">Create a new platform</router-link>
+    </p>
+
     <ul>
       <li v-for="platform in data.platforms.nodes" :key="platform.id">
         <router-link :to="{ name: 'Platform', params: { id: platform.id }}">
@@ -16,20 +20,25 @@
 
 <script lang="ts">
 import { PlatformsDocument } from '@/generated/graphql';
-import { defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 
 export default defineComponent({
   name: 'Platforms',
-  setup() {
+  setup(_props, context) {
     const { data } = useQuery({
       query: PlatformsDocument,
       variables: {
         cursor: ''
       }
     });
+    
+    const userSignedIn = computed(() => context.root.$store.state.userSignedIn);
 
-    return { data };
+    return {
+      data,
+      userSignedIn
+    };
   }
 });
 </script>
