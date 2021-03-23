@@ -22,7 +22,7 @@
     <button
       class="button is-primary mr-10 mr-0-mobile is-fullwidth-mobile"
       value="Submit"
-      @click.prevent="updateCompany"
+      @click.prevent="onSubmit"
     >Submit</button>
 
     <router-link :to="cancelRouterLink" class="button is-fullwidth-mobile mt-5-mobile">
@@ -57,7 +57,7 @@ export default defineComponent({
     },
     wikidataId: {
       required: false,
-      type: Number,
+      type: String,
       default: null
     },
     // Should be either 'create' or 'update'
@@ -79,10 +79,10 @@ export default defineComponent({
       }
     }
 
-    const company: Ref<{ id: string, name: string | null, wikidataId: number | string | null }> = ref({
-      id: props.id,
-      name: props.name,
-      wikidataId: props.wikidataId
+    const company: Ref<{ id: string | null, name: string | null, wikidataId: string | null }> = ref({
+      id: props.id ?? null, 
+      name: props.name ?? '',
+      wikidataId: props.wikidataId ?? ''
     });
 
     const title = computed(() => {
@@ -90,7 +90,7 @@ export default defineComponent({
     });
 
     const onSubmit = () => {
-      context.emit('submit');
+      return props.formState === 'create' ? createCompany() : updateCompany();
     };
 
     const cancelRouterLink = computed(() => {
@@ -101,8 +101,8 @@ export default defineComponent({
     let createCompany = () => {
       let { name, wikidataId } = company.value;
       executeCreateCompany({ name: name ?? '', wikidataId }).then(() => {
-        if (createCompanyData.value?.createCompany?.company?.id) {
-          context.root.$router.push({ name: 'Company', params: { id: props.id }});
+        if (createCompanyData.value.createCompany?.company?.id) {
+          context.root.$router.push({ name: 'Company', params: { id: createCompanyData.value.createCompany.company.id }});
         } else {
           // TODO: Error handling.
           console.log(`Error: ${createCompanyErrors.value}`);
@@ -112,8 +112,10 @@ export default defineComponent({
 
     const { data: updateCompanyData, execute: executeUpdateCompany, error: updateCompanyErrors } = useMutation(UpdateCompanyDocument);
     let updateCompany = () => {
-      executeUpdateCompany({ ...company.value }).then(() => {
-        if (updateCompanyData.value?.updateCompany?.company?.id) {
+      let { id: id, ...companyValues } = company.value;
+      if (id === null) { throw Error('Something went wrong and id is null.') }
+      executeUpdateCompany({ id: id, ...companyValues }).then(() => {
+        if (updateCompanyData.value.updateCompany?.company?.id) {
           context.root.$router.push({ name: 'Company', params: { id: props.id }});
         } else {
           // TODO: Error handling.

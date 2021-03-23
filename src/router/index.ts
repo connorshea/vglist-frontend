@@ -8,6 +8,7 @@ import FollowingActivity from '@/views/activity/FollowingActivity.vue';
 
 import Company from '@/views/companies/Company.vue';
 import Companies from '@/views/companies/Companies.vue';
+import CreateCompany from '@/views/companies/CreateCompany.vue';
 import EditCompany from '@/views/companies/EditCompany.vue';
 
 import Engine from '@/views/engines/Engine.vue';
@@ -83,6 +84,11 @@ const routes: Array<RouteConfig> = [
     name: 'Company',
     component: Company,
     props: true
+  },
+  {
+    path: '/companies/new',
+    name: 'CreateCompany',
+    component: CreateCompany
   },
   {
     path: '/companies/:id/edit',
