@@ -13,6 +13,8 @@ import EditCompany from '@/views/companies/EditCompany.vue';
 
 import Engine from '@/views/engines/Engine.vue';
 import Engines from '@/views/engines/Engines.vue';
+import CreateEngine from '@/views/engines/CreateEngine.vue';
+import EditEngine from '@/views/engines/EditEngine.vue';
 
 import Games from '@/views/games/Games.vue';
 import Game from '@/views/games/Game.vue';
@@ -72,6 +74,17 @@ const routes: Array<RouteConfig> = [
     path: '/engines/:id',
     name: 'Engine',
     component: Engine,
+    props: true
+  },
+  {
+    path: '/engines/new',
+    name: 'CreateEngine',
+    component: CreateEngine
+  },
+  {
+    path: '/engines/:id/edit',
+    name: 'EditEngine',
+    component: EditEngine,
     props: true
   },
   {

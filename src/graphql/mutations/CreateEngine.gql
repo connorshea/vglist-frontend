@@ -1,0 +1,7 @@
+mutation CreateEngine($name: String!, $wikidataId: ID) {
+  createEngine(name: $name, wikidataId: $wikidataId) {
+    engine {
+      id
+    }
+  }
+}

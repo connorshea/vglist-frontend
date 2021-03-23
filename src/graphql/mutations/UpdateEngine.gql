@@ -1,0 +1,7 @@
+mutation UpdateEngine($id: ID!, $name: String, $wikidataId: ID) {
+  updateEngine(engineId: $id, name: $name, wikidataId: $wikidataId) {
+    engine {
+      id
+    }
+  }
+}
