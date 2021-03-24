@@ -70,10 +70,10 @@ export default defineComponent({
 
     const setSortedBy = (sort: SortOptionsType) => {
       sortedBy.value = sort;
-      let { sortBy: _sortBy, ...currentQueryParams } = context.root.$route.query;
+      let { sort_by, ...currentQueryParams } = context.root.$route.query;
       let query = { ...currentQueryParams };
       if (sort !== null) {
-        query.sortBy = sort.toLowerCase();
+        query.sort_by = sort.toLowerCase();
       }
       context.root.$router.push({ name: 'Users', query: query })
       execute();

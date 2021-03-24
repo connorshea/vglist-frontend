@@ -220,7 +220,7 @@ const routes: Array<RouteConfig> = [
     path: '/users',
     name: 'Users',
     component: Users,
-    props: route => ({ sortBy: (route.query.sortBy as string)?.toLowerCase() })
+    props: route => ({ sortBy: (route.query.sort_by as string)?.toLowerCase() })
   },
   {
     path: '/users/:slug',
