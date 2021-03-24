@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { UsersDocument } from '@/generated/graphql';
+import { UsersDocument, UserSort } from '@/generated/graphql';
 import { defineComponent, Ref, ref } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import UserCard from '@/components/UserCard.vue';
@@ -58,7 +58,7 @@ export default defineComponent({
       variables: queryVariables
     });
 
-    type sortOptionsType = null | 'MOST_FOLLOWERS' | 'MOST_GAMES';
+    type sortOptionsType = null | UserSort;
 
     const setSortBy = (sort: sortOptionsType) => {
       sortBy.value = sort;
@@ -72,11 +72,11 @@ export default defineComponent({
       },
       {
         name: 'Most Followers',
-        value: 'MOST_FOLLOWERS'
+        value: UserSort.MostFollowers
       },
       {
         name: 'Most Games',
-        value: 'MOST_GAMES'
+        value: UserSort.MostGames
       }
     ];
 
