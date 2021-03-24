@@ -15,7 +15,9 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'indent': ['warn', 2]
+    'indent': ['warn', 2],
+    // Ignore rest siblings so we can use the rest syntax to ignore attributes of an object.
+    "@typescript-eslint/no-unused-vars": ['error', { 'ignoreRestSiblings': true }]
   },
   // Ignore the generated GraphQL file.
   ignorePatterns: ["src/generated/graphql.ts"],

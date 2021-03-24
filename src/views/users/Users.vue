@@ -6,7 +6,7 @@
       <div class="dropdown-trigger is-fullwidth-mobile" @click="toggleDropdown">
         <button class="button is-fullwidth" aria-haspopup="true" aria-controls="dropdown-menu">
           <span>
-            {{ sortBy === null ? "Sort" : `Sort by ${sortBy.toLowerCase().replace('_', ' ')}` }}
+            {{ sortedBy === null ? "Sort" : `Sort by ${sortedBy.toLowerCase().replace('_', ' ')}` }}
           </span>
           <SvgIcon :name="'chevron-down'" :size="15" :classes="['icon']"/>
         </button>
@@ -17,8 +17,8 @@
           <template v-for="sortOption in sortOptions">
             <a :key="sortOption.name"
                class="dropdown-item"
-               :class="{ 'has-text-weight-bold': sortBy === sortOption.value }"
-               @click="setSortBy(sortOption.value)"
+               :class="{ 'has-text-weight-bold': sortedBy === sortOption.value }"
+               @click="setSortedBy(sortOption.value)"
             >
               {{ sortOption.name }}
             </a>
@@ -50,22 +50,36 @@ export default defineComponent({
     UserCard,
     SvgIcon
   },
-  setup() {
-    const sortBy: Ref<sortOptionsType> = ref(null);
-    const queryVariables = ref({ cursor: '', sortBy: sortBy });
+  props: {
+    sortBy: {
+      type: String,
+      required: false,
+      default: null
+    }
+  },
+  setup(props, context) {
+    type SortOptionsType = UserSort | null;
+
+    let upcasedSortBy = props.sortBy?.toUpperCase() ?? null;
+    const sortedBy: Ref<SortOptionsType> = ref(upcasedSortBy as SortOptionsType);
+    const queryVariables = ref({ cursor: '', sortBy: sortedBy });
     const { execute, data } = useQuery({
       query: UsersDocument,
       variables: queryVariables
     });
 
-    type sortOptionsType = null | UserSort;
-
-    const setSortBy = (sort: sortOptionsType) => {
-      sortBy.value = sort;
+    const setSortedBy = (sort: SortOptionsType) => {
+      sortedBy.value = sort;
+      let { sortBy: _sortBy, ...currentQueryParams } = context.root.$route.query;
+      let query = { ...currentQueryParams };
+      if (sort !== null) {
+        query.sortBy = sort.toLowerCase();
+      }
+      context.root.$router.push({ name: 'Users', query: query })
       execute();
     };
 
-    const sortOptions: Array<{ name: string, value: sortOptionsType }> = [
+    const sortOptions: Array<{ name: string, value: SortOptionsType }> = [
       {
         name: 'Default',
         value: null
@@ -85,8 +99,8 @@ export default defineComponent({
 
     return {
       data,
-      sortBy,
-      setSortBy,
+      sortedBy,
+      setSortedBy,
       sortOptions,
       dropdownIsActive,
       toggleDropdown
