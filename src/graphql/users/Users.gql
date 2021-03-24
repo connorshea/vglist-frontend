@@ -1,5 +1,5 @@
-query Users($cursor: String!) {
-  users(after: $cursor) {
+query Users($cursor: String!, $sortBy: UserSort = null) {
+  users(after: $cursor, sortBy: $sortBy) {
     nodes {
       ...userCardFields
     }
