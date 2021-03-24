@@ -1,0 +1,7 @@
+mutation CreateStore($name: String!) {
+  createStore(name: $name) {
+    store {
+      id
+    }
+  }
+}

@@ -36,6 +36,8 @@ import EditSeries from '@/views/series/EditSeries.vue';
 
 import Store from '@/views/stores/Store.vue';
 import Stores from '@/views/stores/Stores.vue';
+import CreateStore from '@/views/stores/CreateStore.vue';
+import EditStore from '@/views/stores/EditStore.vue';
 
 import Users from '@/views/users/Users.vue';
 import User from '@/views/users/User.vue';
@@ -201,6 +203,17 @@ const routes: Array<RouteConfig> = [
     path: '/stores/:id',
     name: 'Store',
     component: Store,
+    props: true
+  },
+  {
+    path: '/stores/new',
+    name: 'CreateStore',
+    component: CreateStore
+  },
+  {
+    path: '/stores/:id/edit',
+    name: 'EditStore',
+    component: EditStore,
     props: true
   },
   {
