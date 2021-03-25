@@ -16,7 +16,7 @@
 import { GenreDocument } from '@/generated/graphql';
 import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
 import { useQuery } from 'villus';
-import GenreForm from '@/components/GenreForm.vue';
+import GenreForm from '@/components/forms/GenreForm.vue';
 
 export default defineComponent({
   name: 'EditGenre',

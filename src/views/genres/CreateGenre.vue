@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
-import GenreForm from '@/components/GenreForm.vue';
+import GenreForm from '@/components/forms/GenreForm.vue';
 
 export default defineComponent({
   name: 'CreateGenre',

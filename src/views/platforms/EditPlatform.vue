@@ -16,7 +16,7 @@
 import { PlatformDocument } from '@/generated/graphql';
 import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
 import { useQuery } from 'villus';
-import PlatformForm from '@/components/PlatformForm.vue';
+import PlatformForm from '@/components/forms/PlatformForm.vue';
 
 export default defineComponent({
   name: 'EditPlatform',

@@ -16,7 +16,7 @@
 import { EngineDocument } from '@/generated/graphql';
 import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
 import { useQuery } from 'villus';
-import EngineForm from '@/components/EngineForm.vue';
+import EngineForm from '@/components/forms/EngineForm.vue';
 
 export default defineComponent({
   name: 'EditEngine',

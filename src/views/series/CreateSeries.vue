@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
-import SeriesForm from '@/components/SeriesForm.vue';
+import SeriesForm from '@/components/forms/SeriesForm.vue';
 
 export default defineComponent({
   name: 'CreateSeries',

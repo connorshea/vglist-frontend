@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
-import StoreForm from '@/components/StoreForm.vue';
+import StoreForm from '@/components/forms/StoreForm.vue';
 
 export default defineComponent({
   name: 'CreateStore',

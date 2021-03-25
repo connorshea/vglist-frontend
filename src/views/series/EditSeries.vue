@@ -16,7 +16,7 @@
 import { SeriesDocument } from '@/generated/graphql';
 import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
 import { useQuery } from 'villus';
-import SeriesForm from '@/components/SeriesForm.vue';
+import SeriesForm from '@/components/forms/SeriesForm.vue';
 
 export default defineComponent({
   name: 'EditSeries',

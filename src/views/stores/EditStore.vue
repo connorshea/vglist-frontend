@@ -16,7 +16,7 @@
 import { StoreDocument } from '@/generated/graphql';
 import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
 import { useQuery } from 'villus';
-import StoreForm from '@/components/StoreForm.vue';
+import StoreForm from '@/components/forms/StoreForm.vue';
 
 export default defineComponent({
   name: 'EditStore',

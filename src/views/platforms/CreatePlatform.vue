@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
-import PlatformForm from '@/components/PlatformForm.vue';
+import PlatformForm from '@/components/forms/PlatformForm.vue';
 
 export default defineComponent({
   name: 'CreatePlatform',

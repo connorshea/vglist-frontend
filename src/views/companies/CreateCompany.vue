@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
-import CompanyForm from '@/components/CompanyForm.vue';
+import CompanyForm from '@/components/forms/CompanyForm.vue';
 
 export default defineComponent({
   name: 'CreateCompany',

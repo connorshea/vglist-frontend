@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
-import EngineForm from '@/components/EngineForm.vue';
+import EngineForm from '@/components/forms/EngineForm.vue';
 
 export default defineComponent({
   name: 'CreateEngine',
