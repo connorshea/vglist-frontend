@@ -118,7 +118,7 @@ export default defineComponent({
     // a ton of unnecessary requests).
     const { execute: executeSearch, data: searchData } = useQuery({
       query: GlobalSearchDocument,
-      variables: { query: '', page: 1 },
+      variables: { query: '', page: 1, perPage: 15 },
       fetchOnMount: false
     });
 
@@ -223,10 +223,12 @@ export default defineComponent({
       // This may cause weirdness, but because the dropdown becomes hidden when
       // the query value is empty, this doesn't currently seem to be an issue.
       if (query.value !== '') {
-        executeSearch({ variables: { query: query.value, page: currentPage.value }}).then(() => {
+        executeSearch({ variables: { query: query.value, page: currentPage.value, perPage: 15 }}).then(() => {
           let tempSearchData = _.cloneDeep(EMPTY_SEARCH_RESULTS);
 
-          if (searchData.value?.globalSearch.length == 0) { 
+          // If the number of records returned is under 15 (the page size),
+          // that suggests there aren't any further records for us to load.
+          if ((searchData.value?.globalSearch.length ?? 0) < 15) { 
             moreGamesExist.value = false;
           } else {
             // Set moreGamesExis to true if there are any games in the current
@@ -259,14 +261,14 @@ export default defineComponent({
 
     // Load more game records and append them to the game search results.
     const loadMoreGames = () => {
-      let queryVariables = { query: query.value, page: currentPage.value + 1 };
+      let queryVariables = { query: query.value, page: currentPage.value + 1, perPage: 15 };
       executeSearch({ variables: queryVariables }).then(() => {
         // Increase the current page value by 1 after loading more games.
         currentPage.value += 1;
 
-        // If there are no entries returned by the query, we can safely assume
-        // no more games exist for this query value.
-        if (searchData.value?.globalSearch.length === 0) { 
+        // If the number of records returned is under 15 (the page size),
+        // that suggests there aren't any further records for us to load.
+        if ((searchData.value?.globalSearch.length ?? 0) < 15) { 
           moreGamesExist.value = false;
         } else {
           // Set moreGamesExist to true if there are any games in the current

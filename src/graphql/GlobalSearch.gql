@@ -1,5 +1,5 @@
-query GlobalSearch($query: String!, $page: Int) {
-  globalSearch(query: $query, page: $page) {
+query GlobalSearch($query: String!, $page: Int, $perPage: Int) {
+  globalSearch(query: $query, page: $page, perPage: $perPage) {
     __typename
     ... on CompanySearchResult {
       id
