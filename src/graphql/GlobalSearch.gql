@@ -1,5 +1,5 @@
-query GlobalSearch($query: String!) {
-  globalSearch(query: $query) {
+query GlobalSearch($query: String!, $page: Int) {
+  globalSearch(query: $query, page: $page) {
     nodes {
       __typename
       ... on CompanySearchResult {
