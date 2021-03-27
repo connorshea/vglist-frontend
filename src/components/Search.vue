@@ -22,7 +22,7 @@
         <template v-if="searchResults[type].length > 0">
           <hr v-if="index > 0" class="navbar-divider">
           <p class="navbar-item navbar-dropdown-header">{{ plurals[type] }}</p>
-          <!-- Make this a router-link instead of a raw <a> -->
+          <!-- TODO: Make this a router-link instead of a raw <a> -->
           <a
             v-for="result in searchResults[type]"
             :key="result.id"
