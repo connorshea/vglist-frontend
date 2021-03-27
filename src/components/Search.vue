@@ -25,16 +25,18 @@
           <a
             v-for="result in searchResults[type]"
             :key="result.id"
-            :href="result.url"
+            :href="searchResultToUrl(result)"
             class="navbar-item"
             :class="{
               'is-active':
                 activeSearchResult !== -1 &&
-                flattenedSearchResults[activeSearchResult].searchable_id === result.searchable_id
+                flattenedSearchResults[activeSearchResult].searchableId === result.searchableId
             }">
             <div class="media">
               <figure class="media-left image is-48x48" v-if="type === 'Game' || type === 'User'">
-                <img :src="result.image_url" width='48px' height='48px' class="game-cover">
+                <!-- TODO: Add defaults for when the cover/avatar is null -->
+                <img v-if="type === 'Game'" :src="result.coverUrl" width='48px' height='48px' class="game-cover">
+                <img v-if="type === 'User'" :src="result.avatarUrl" width='48px' height='48px' class="game-cover">
               </figure>
               <div class="media-content">
                 <p v-if="type === 'Game'" class="has-text-weight-semibold">{{ result.content }}</p>
@@ -43,7 +45,7 @@
                   <!-- Outputs "2009 · Nintendo", "Nintendo", or "2009" depending on what data it has. -->
                   {{ [
                       result.releaseDate === null ? '' : result.releaseDate.slice(0, 4),
-                      result.developer === null ? '' : result.developer
+                      result.developerName === null ? '' : result.developerName
                     ].filter(x => x !== '').join(' · ') }}
                 </p>
               </div>
@@ -70,7 +72,7 @@
 import * as _ from 'lodash';
 import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
 import SvgIcon from '@/components/SvgIcon.vue';
-import { CompanySearchResult, EngineSearchResult, GameSearchResult, GenreSearchResult, GlobalSearchDocument, PlatformSearchResult, SeriesSearchResult, UserSearchResult } from '@/generated/graphql';
+import { CompanySearchResult, EngineSearchResult, GameSearchResult, GenreSearchResult, GlobalSearchDocument, PlatformSearchResult, SearchResultUnion, SeriesSearchResult, UserSearchResult } from '@/generated/graphql';
 import { useQuery } from 'villus';
 
 type SearchResultName = 'Game' | 'Series' | 'Company' | 'Platform' | 'Engine' | 'Genre' | 'User';
@@ -152,6 +154,7 @@ export default defineComponent({
         '.navbar-search-dropdown .navbar-item.is-active'
       );
       if (activeItem !== null) {
+        // TODO: Figure out how to make this work correctly.
         context.root.$router.push(activeItem.href);
       }
     };
@@ -190,10 +193,31 @@ export default defineComponent({
       console.log('TODO');
     };
 
+    // Convert the SearchResult to a usable URL.
+    const searchResultToUrl = (result: SearchResultUnion) => {
+      switch (result.__typename) {
+      case 'GameSearchResult':
+        return `/games/${result.searchableId}`;
+      case 'SeriesSearchResult':
+        return `/series/${result.searchableId}`;
+      case 'CompanySearchResult':
+        return `/companies/${result.searchableId}`;
+      case 'PlatformSearchResult':
+        return `/platforms/${result.searchableId}`;
+      case 'EngineSearchResult':
+        return `/engines/${result.searchableId}`;
+      case 'GenreSearchResult':
+        return `/genres/${result.searchableId}`;
+      case 'UserSearchResult':
+        return `/users/${result.slug}`;
+      }
+    };
+
     return {
       query,
       plurals,
       searchResults,
+      flattenedSearchResults,
       hasSearchResults,
       dropdownActive,
       activeSearchResult,
@@ -204,7 +228,8 @@ export default defineComponent({
       onEnter,
       scrollToActiveItem,
       onMoreGames,
-      debouncedOnSearch
+      debouncedOnSearch,
+      searchResultToUrl
     }
   }
 });
