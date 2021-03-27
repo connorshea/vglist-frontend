@@ -16,9 +16,9 @@ query GlobalSearch($query: String!) {
         id
         searchableId
         content
-        coverUrl
         releaseDate
         developerName
+        imageUrl: coverUrl
       }
       ... on GenreSearchResult {
         id
@@ -40,7 +40,7 @@ query GlobalSearch($query: String!) {
         searchableId
         content
         slug
-        avatarUrl
+        imageUrl: avatarUrl
       }
     }
   }
