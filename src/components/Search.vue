@@ -20,10 +20,11 @@
 
     <div v-if="dropdownActive" class="navbar-search-dropdown navbar-dropdown">
       <p class="navbar-item" v-if="!hasSearchResults">No results.</p>
-      <div v-for="(type, index) in Object.keys(searchResults)" :key="type">
-        <template v-if="searchResults[type].length > 0">
-          <!-- TODO: Fix the incorrect usage of hr in some cases because of how the index works here. -->
-          <hr v-if="index > 0" class="navbar-divider">
+      <template v-for="(type) in Object.keys(searchResults)">
+        <div class="navbar-search-dropdown-section-container" :key="type" v-if="searchResults[type].length > 0">
+          <!-- This will be hidden by CSS if it's the first one in the
+               dropdown, since it's the best solution I could come up with. -->
+          <hr class="navbar-divider">
           <p class="navbar-item navbar-dropdown-header">{{ plurals[type] }}</p>
           <template v-for="result in searchResults[type]">
             <router-link 
@@ -68,8 +69,8 @@
               </div>
             </div>
           </a>
-        </template>
-      </div>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -289,3 +290,11 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss" scoped>
+// A bit of a hack to hide the navbar divider on the first search result
+// section that gets displayed.
+.navbar-search-dropdown-section-container:first-of-type hr.navbar-divider {
+  display: none;
+}
+</style>
