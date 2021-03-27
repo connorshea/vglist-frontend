@@ -87,6 +87,16 @@ type SearchResults = {
   'User': UserSearchResult[]
 };
 
+const EMPTY_SEARCH_RESULTS: SearchResults = {
+  'Game': [],
+  'Series': [],
+  'Company': [],
+  'Platform': [],
+  'Engine': [],
+  'Genre': [],
+  'User': []
+};
+
 export default defineComponent({
   name: 'Search',
   components: {
@@ -112,21 +122,13 @@ export default defineComponent({
       'User': 'Users'
     };
 
-    const searchResults: Ref<SearchResults> = ref({
-      'Game': [],
-      'Series': [],
-      'Company': [],
-      'Platform': [],
-      'Engine': [],
-      'Genre': [],
-      'User': []
-    });
+    const searchResults: Ref<SearchResults> = ref(EMPTY_SEARCH_RESULTS);
 
     const hasSearchResults = computed(() => {
       return Object.values(searchResults.value).flat().length != 0;
     });
 
-    const dropdownActive = () => query.value.length > 1;
+    const dropdownActive = computed(() => query.value.length > 1);
 
     const activeSearchResult = ref(-1);
     const currentPage = ref(1);
@@ -176,11 +178,16 @@ export default defineComponent({
 
     const onSearch = () => {
       executeSearch().then(() => {
+        let tempSearchData = _.cloneDeep(EMPTY_SEARCH_RESULTS);
+
         searchData.value?.globalSearch.nodes?.forEach((node) => {
           if (node !== null) {
-            searchResults.value[node.__typename.replace('SearchResult', '') as SearchResultName].push(node as any);
+            tempSearchData[node.__typename.replace('SearchResult', '') as SearchResultName].push(node as any);
           }
         });
+
+        searchResults.value = tempSearchData;
+
         activeSearchResult.value = -1;
       });
     };
