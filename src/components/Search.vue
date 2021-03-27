@@ -186,6 +186,9 @@ export default defineComponent({
 
         searchData.value?.globalSearch.nodes?.forEach((node) => {
           if (node !== null) {
+            // TypeScript isn't smart enough for this code, and doesn't know
+            // this is safe to do.
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             tempSearchData[node.__typename.replace('SearchResult', '') as SearchResultName].push(node as any);
           }
         });
