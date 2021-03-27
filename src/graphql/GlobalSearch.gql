@@ -1,45 +1,51 @@
-query GlobalSearch($query: String!, $page: Int, $perPage: Int) {
-  globalSearch(query: $query, page: $page, perPage: $perPage) {
-    __typename
-    ... on CompanySearchResult {
-      id
-      searchableId
-      content
+query GlobalSearch($query: String!, $cursor: String) {
+  globalSearch(query: $query, after: $cursor) {
+    nodes {
+      __typename
+      ... on CompanySearchResult {
+        id
+        searchableId
+        content
+      }
+      ... on EngineSearchResult {
+        id
+        searchableId
+        content
+      }
+      ... on GameSearchResult {
+        id
+        searchableId
+        content
+        releaseDate
+        developerName
+        imageUrl: coverUrl
+      }
+      ... on GenreSearchResult {
+        id
+        searchableId
+        content
+      }
+      ... on PlatformSearchResult {
+        id
+        searchableId
+        content
+      }
+      ... on SeriesSearchResult {
+        id
+        searchableId
+        content
+      }
+      ... on UserSearchResult {
+        id
+        searchableId
+        content
+        slug
+        imageUrl: avatarUrl
+      }
     }
-    ... on EngineSearchResult {
-      id
-      searchableId
-      content
-    }
-    ... on GameSearchResult {
-      id
-      searchableId
-      content
-      releaseDate
-      developerName
-      imageUrl: coverUrl
-    }
-    ... on GenreSearchResult {
-      id
-      searchableId
-      content
-    }
-    ... on PlatformSearchResult {
-      id
-      searchableId
-      content
-    }
-    ... on SeriesSearchResult {
-      id
-      searchableId
-      content
-    }
-    ... on UserSearchResult {
-      id
-      searchableId
-      content
-      slug
-      imageUrl: avatarUrl
+    pageInfo {
+      hasNextPage
+      endCursor
     }
   }
 }

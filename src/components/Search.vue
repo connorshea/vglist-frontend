@@ -118,7 +118,7 @@ export default defineComponent({
     // a ton of unnecessary requests).
     const { execute: executeSearch, data: searchData } = useQuery({
       query: GlobalSearchDocument,
-      variables: { query: '', page: 1, perPage: 15 },
+      variables: { query: '', cursor: '' },
       fetchOnMount: false
     });
 
@@ -144,9 +144,6 @@ export default defineComponent({
     });
 
     const activeSearchResult = ref(-1);
-    // This endpoint uses page numbers instead of GraphQL cursors (which is
-    // cursed, but it's for performance reasons).
-    const currentPage = ref(1);
     // Whether the "More" button has already been used to load more games
     // this will only get set to true if more were loaded _and_ none of the
     // returned records were for Games.)
@@ -216,35 +213,30 @@ export default defineComponent({
       // Set searchFocused to true to allow the search input to become
       // re-focused when new input occurs.
       searchFocused.value = true;
-      // Reset currentPage to 1, in case the 'More' button has been pressed on
-      // a previous query.
-      currentPage.value = 1;
       // No need to re-run the query if the query value is empty.
       // This may cause weirdness, but because the dropdown becomes hidden when
       // the query value is empty, this doesn't currently seem to be an issue.
       if (query.value !== '') {
-        executeSearch({ variables: { query: query.value, page: currentPage.value, perPage: 15 }}).then(() => {
+        executeSearch({ variables: { query: query.value, cursor: '' }}).then(() => {
           let tempSearchData = _.cloneDeep(EMPTY_SEARCH_RESULTS);
 
-          // If the number of records returned is under 15 (the page size),
-          // that suggests there aren't any further records for us to load.
-          if ((searchData.value?.globalSearch.length ?? 0) < 15) { 
+          if (searchData.value?.globalSearch.pageInfo.hasNextPage === false) {
             moreGamesExist.value = false;
           } else {
-            // Set moreGamesExis to true if there are any games in the current
+            // Set moreGamesExist to true if there are any games in the current
             // page of results. Otherwise, we can assume that there are no more
             // games to find with this search query.
-            moreGamesExist.value = searchData.value?.globalSearch.some((searchResult) => {
-              return searchResult?.__typename === 'GameSearchResult';
+            moreGamesExist.value = searchData.value?.globalSearch.nodes?.some((node) => {
+              return node?.__typename === 'GameSearchResult';
             }) ?? false;
           }
 
-          searchData.value?.globalSearch.forEach((searchResult) => {
-            if (searchResult !== null) {
+          searchData.value?.globalSearch.nodes?.forEach((node) => {
+            if (node !== null) {
               // TypeScript isn't smart enough for this code, and doesn't know
               // this is safe to do.
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              tempSearchData[searchResult.__typename.replace('SearchResult', '') as SearchResultName].push(searchResult as any);
+              tempSearchData[node.__typename.replace('SearchResult', '') as SearchResultName].push(node as any);
             }
           });
 
@@ -261,30 +253,25 @@ export default defineComponent({
 
     // Load more game records and append them to the game search results.
     const loadMoreGames = () => {
-      let queryVariables = { query: query.value, page: currentPage.value + 1, perPage: 15 };
+      let queryVariables = { query: query.value, cursor: searchData.value?.globalSearch.pageInfo.endCursor };
       executeSearch({ variables: queryVariables }).then(() => {
-        // Increase the current page value by 1 after loading more games.
-        currentPage.value += 1;
-
-        // If the number of records returned is under 15 (the page size),
-        // that suggests there aren't any further records for us to load.
-        if ((searchData.value?.globalSearch.length ?? 0) < 15) { 
+        if (searchData.value?.globalSearch.pageInfo.hasNextPage === false) {
           moreGamesExist.value = false;
         } else {
           // Set moreGamesExist to true if there are any games in the current
           // page of results. Otherwise, we can assume that there are no more
           // games to find with this search query.
-          moreGamesExist.value = searchData.value?.globalSearch.some((searchResult) => {
-            return searchResult?.__typename === 'GameSearchResult';
+          moreGamesExist.value = searchData.value?.globalSearch.nodes?.some((node) => {
+            return node?.__typename === 'GameSearchResult';
           }) ?? false;
         }
 
-        searchData.value?.globalSearch?.forEach((searchResult) => {
-          if (searchResult?.__typename === 'GameSearchResult') {
+        searchData.value?.globalSearch.nodes?.forEach((node) => {
+          if (node?.__typename === 'GameSearchResult') {
             // TypeScript isn't smart enough for this code, and doesn't know
             // this is safe to do.
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            searchResults.value['Game'].push(searchResult as any);
+            searchResults.value['Game'].push(node as any);
           }
         });
 
