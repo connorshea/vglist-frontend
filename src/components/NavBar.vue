@@ -129,8 +129,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
-import { mapState } from 'vuex';
+import { computed, defineComponent } from '@vue/composition-api';
 import Search from '@/components/Search.vue';
 import { RawLocation } from 'vue-router';
 
@@ -142,10 +141,10 @@ export default defineComponent({
   components: {
     Search
   },
-  methods: {
-    signIn() {
+  setup(_props, context) {
+    const signIn = () => {
       // This is pretty much just a fake sign in for a user.
-      this.$store.commit(
+      context.root.$store.commit(
         'signIn',
         {
           username: 'connor',
@@ -153,31 +152,41 @@ export default defineComponent({
           role: 'ADMIN'
         }
       );
-    },
-    signOut() {
+    };
+
+    const signOut = () => {
       // This is pretty much just a fake sign out for a user.
-      this.$store.commit('signOut');
-    },
-    // Bit of a hack to allow a dynamic click action.
-    resolveClickAction(funcName: clickAction) {
-      this[funcName]();
-    }
-  },
-  computed: {
-    navBarItems: function() {
+      context.root.$store.commit('signOut');
+    };
+
+    const oauthUrl = computed(() => {
+      return `${process.env.VUE_APP_VGLIST_HOST_URL}/settings/oauth/authorize?client_id=${context.root.$store.state.clientId}&redirect_uri=${context.root.$store.state.redirectUri}&response_type=code&scope=read+write`;
+    });
+
+    /**
+     * Whether to show the authenticate button.
+     */
+    const showAuthenticate = computed(() => {
+      return context.root.$store.state.accessToken === null;
+    });
+
+    const userSignedIn = computed(() => context.root.$store.state.userSignedIn);
+    const currentUser = computed(() => context.root.$store.state.currentUser);
+
+    const navBarItems = computed(() => {
       let items: Array<{ id?: number; title: string | null; path: RawLocation | null; clickAction?: clickAction; router: boolean }> = [];
 
       // Include profile, admin, settings, and sign out if the user is logged in.
-      if (this.userSignedIn) {
+      if (userSignedIn.value === true) {
         items = items.concat({
           title: 'Profile',
           path: {
-            path: `/users/${this.currentUser.slug}`
+            path: `/users/${currentUser.value?.slug}`
           },
           router: true
         })
 
-        if (this.currentUser.role == 'admin') {
+        if (currentUser.value?.role == 'admin') {
           items = items.concat({
             title: 'Admin',
             path: '/admin',
@@ -245,27 +254,24 @@ export default defineComponent({
       )
 
       // Add `id` to all items in the items array so we can use it as the key.
-      items = items.map((item, i) => ({ id: i, ...item }));
+      return items.map((item, i) => ({ id: i, ...item }));
+    });
 
-      return items;
-    },
-    oauthUrl: function(): string {
-      return `${process.env.VUE_APP_VGLIST_HOST_URL}/settings/oauth/authorize?client_id=${this.$store.state.clientId}&redirect_uri=${this.$store.state.redirectUri}&response_type=code&scope=read+write`;
-    },
-    /**
-     * Whether to show the authenticate button.
-     */
-    showAuthenticate: function(): boolean {
-      return this.$store.state.accessToken === null;
-    },
-    ...mapState({
-      // These are `any` because TypeScript flips out if you tell it the actual
-      // types.
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      userSignedIn: (state: any) => state.userSignedIn,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      currentUser: (state: any) => state.currentUser
-    })
+    return {
+      signIn,
+      signOut,
+      oauthUrl,
+      showAuthenticate,
+      userSignedIn,
+      currentUser,
+      navBarItems
+    }
+  },
+  methods: {
+    // Bit of a hack to allow a dynamic click action.
+    resolveClickAction(funcName: clickAction) {
+      this[funcName]();
+    }
   }
 });
 </script>
