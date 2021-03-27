@@ -20,6 +20,14 @@ query Game($id: ID!) {
     series {
       id
       name
+      # We only use 3, but this provides a buffer in case it returns the game we're looking at right now.
+      games(first: 4) {
+        nodes {
+          id
+          name
+          coverUrl
+        }
+      }
     }
     developers {
       nodes {
