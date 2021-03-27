@@ -35,9 +35,14 @@
             }">
             <div class="media">
               <figure class="media-left image is-48x48" v-if="type === 'Game' || type === 'User'">
-                <!-- TODO: Add defaults for when the cover/avatar is null -->
-                <img v-if="type === 'Game'" :src="result.coverUrl" width='48px' height='48px' class="game-cover">
-                <img v-if="type === 'User'" :src="result.avatarUrl" width='48px' height='48px' class="game-cover">
+                <template v-if="type === 'Game'">
+                  <img v-if="result.coverUrl !== null" :src="result.coverUrl" width='48px' height='48px' class="game-cover">
+                  <img v-else src="@/assets/images/no-cover.png" width='48px' height='48px' class="game-cover">
+                </template>
+                <template v-else-if="type === 'User'">
+                  <img v-if="result.avatarUrl !== null" :src="result.avatarUrl" width='48px' height='48px' class="game-cover">
+                  <img v-else src="@/assets/images/default-avatar.png" width='48px' height='48px' class="game-cover">
+                </template>
               </figure>
               <div class="media-content">
                 <p v-if="type === 'Game'" class="has-text-weight-semibold">{{ result.content }}</p>
