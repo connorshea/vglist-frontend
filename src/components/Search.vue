@@ -8,6 +8,8 @@
           @keyup.up.prevent="onUpArrow"
           @keyup.down.prevent="onDownArrow"
           @keyup.enter.prevent="onEnter"
+          @keyup.escape.prevent="onEscape"
+          @focus="onFocus"
           class="input navbar-search-input"
           type="search"
           placeholder="Search"
@@ -108,11 +110,14 @@ export default defineComponent({
   },
   setup(_props, context) {
     const query = ref('');
-    const queryVariables = ref({ query: query });
-    
+
+    // We run the search query manually to allow for debouncing, so we don't
+    // use the query ref here. If we use a ref for the variables, it causes
+    // the query to be executed on every input into the search field (meaning
+    // a ton of unnecessary requests).
     const { execute: executeSearch, data: searchData } = useQuery({
       query: GlobalSearchDocument,
-      variables: queryVariables.value,
+      variables: { query: '' },
       fetchOnMount: false
     });
 
@@ -132,7 +137,10 @@ export default defineComponent({
       return Object.values(searchResults.value).flat().length != 0;
     });
 
-    const dropdownActive = computed(() => query.value.length > 1);
+    const searchFocused = ref(false);
+    const dropdownActive = computed(() => {
+      return query.value.length > 1 && searchFocused.value;
+    });
 
     const activeSearchResult = ref(-1);
     const currentPage = ref(1);
@@ -170,6 +178,14 @@ export default defineComponent({
       }
     };
 
+    const onEscape = () => {
+      searchFocused.value = false;
+    };
+
+    const onFocus = () => {
+      searchFocused.value = true;
+    };
+
     // For use when a page is navigated, and in some other cases.
     const resetSearchResults = () => {
       searchResults.value = _.cloneDeep(EMPTY_SEARCH_RESULTS);
@@ -195,26 +211,34 @@ export default defineComponent({
     };
 
     const onSearch = () => {
-      executeSearch().then(() => {
-        let tempSearchData = _.cloneDeep(EMPTY_SEARCH_RESULTS);
+      // Set searchFocused to true to allow the search input to become
+      // re-focused when new input occurs.
+      searchFocused.value = true;
+      // No need to re-run the query if the query value is empty.
+      // This may cause weirdness, but because the dropdown becomes hidden when
+      // the query value is empty, this doesn't currently seem to be an issue.
+      if (query.value !== '') {
+        executeSearch({ variables: { query: query.value }}).then(() => {
+          let tempSearchData = _.cloneDeep(EMPTY_SEARCH_RESULTS);
 
-        searchData.value?.globalSearch.nodes?.forEach((node) => {
-          if (node !== null) {
-            // TypeScript isn't smart enough for this code, and doesn't know
-            // this is safe to do.
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            tempSearchData[node.__typename.replace('SearchResult', '') as SearchResultName].push(node as any);
-          }
+          searchData.value?.globalSearch.nodes?.forEach((node) => {
+            if (node !== null) {
+              // TypeScript isn't smart enough for this code, and doesn't know
+              // this is safe to do.
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              tempSearchData[node.__typename.replace('SearchResult', '') as SearchResultName].push(node as any);
+            }
+          });
+
+          searchResults.value = tempSearchData;
+
+          activeSearchResult.value = -1;
         });
-
-        searchResults.value = tempSearchData;
-
-        activeSearchResult.value = -1;
-      });
+      }
     };
 
-    // TODO: This doesn't work, maybe need to debounce the query ref so the
-    // GraphQL request doesn't happen immediately when it changes?
+    // Debounce the search request's execution when the search input's value
+    // changes to prevent a bunch of unnecessary requests.
     const debouncedOnSearch = _.debounce(onSearch, 400);
 
     const onMoreGames = () => {
@@ -254,6 +278,8 @@ export default defineComponent({
       onUpArrow,
       onDownArrow,
       onEnter,
+      onEscape,
+      onFocus,
       resetSearchResults,
       scrollToActiveItem,
       onMoreGames,
