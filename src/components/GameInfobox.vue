@@ -124,7 +124,7 @@ export default defineComponent({
   },
   setup(props) {
     const formattedReleaseDate = computed(() => {
-      let options = { year: 'numeric', month: 'long', day: 'numeric' };
+      let options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
       return new Intl.DateTimeFormat('en', options).format(Date.parse(props.game.releaseDate));
     });
 
