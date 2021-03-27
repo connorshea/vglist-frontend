@@ -226,23 +226,23 @@ export default defineComponent({
         executeSearch({ variables: { query: query.value, page: currentPage.value }}).then(() => {
           let tempSearchData = _.cloneDeep(EMPTY_SEARCH_RESULTS);
 
-          if (searchData.value?.globalSearch.nodes?.length == 0) { 
+          if (searchData.value?.globalSearch.length == 0) { 
             moreGamesExist.value = false;
           } else {
             // Set moreGamesExis to true if there are any games in the current
             // page of results. Otherwise, we can assume that there are no more
             // games to find with this search query.
-            moreGamesExist.value = searchData.value?.globalSearch.nodes?.some((node) => {
-              return node?.__typename === 'GameSearchResult';
+            moreGamesExist.value = searchData.value?.globalSearch.some((searchResult) => {
+              return searchResult?.__typename === 'GameSearchResult';
             }) ?? false;
           }
 
-          searchData.value?.globalSearch.nodes?.forEach((node) => {
-            if (node !== null) {
+          searchData.value?.globalSearch.forEach((searchResult) => {
+            if (searchResult !== null) {
               // TypeScript isn't smart enough for this code, and doesn't know
               // this is safe to do.
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              tempSearchData[node.__typename.replace('SearchResult', '') as SearchResultName].push(node as any);
+              tempSearchData[searchResult.__typename.replace('SearchResult', '') as SearchResultName].push(searchResult as any);
             }
           });
 
@@ -266,23 +266,23 @@ export default defineComponent({
 
         // If there are no entries returned by the query, we can safely assume
         // no more games exist for this query value.
-        if (searchData.value?.globalSearch.nodes?.length === 0) { 
+        if (searchData.value?.globalSearch.length === 0) { 
           moreGamesExist.value = false;
         } else {
           // Set moreGamesExist to true if there are any games in the current
           // page of results. Otherwise, we can assume that there are no more
           // games to find with this search query.
-          moreGamesExist.value = searchData.value?.globalSearch.nodes?.some((node) => {
-            return node?.__typename === 'GameSearchResult';
+          moreGamesExist.value = searchData.value?.globalSearch.some((searchResult) => {
+            return searchResult?.__typename === 'GameSearchResult';
           }) ?? false;
         }
 
-        searchData.value?.globalSearch.nodes?.forEach((node) => {
-          if (node?.__typename === 'GameSearchResult') {
+        searchData.value?.globalSearch?.forEach((searchResult) => {
+          if (searchResult?.__typename === 'GameSearchResult') {
             // TypeScript isn't smart enough for this code, and doesn't know
             // this is safe to do.
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            searchResults.value['Game'].push(node as any);
+            searchResults.value['Game'].push(searchResult as any);
           }
         });
 

@@ -1,47 +1,45 @@
 query GlobalSearch($query: String!, $page: Int) {
   globalSearch(query: $query, page: $page) {
-    nodes {
-      __typename
-      ... on CompanySearchResult {
-        id
-        searchableId
-        content
-      }
-      ... on EngineSearchResult {
-        id
-        searchableId
-        content
-      }
-      ... on GameSearchResult {
-        id
-        searchableId
-        content
-        releaseDate
-        developerName
-        imageUrl: coverUrl
-      }
-      ... on GenreSearchResult {
-        id
-        searchableId
-        content
-      }
-      ... on PlatformSearchResult {
-        id
-        searchableId
-        content
-      }
-      ... on SeriesSearchResult {
-        id
-        searchableId
-        content
-      }
-      ... on UserSearchResult {
-        id
-        searchableId
-        content
-        slug
-        imageUrl: avatarUrl
-      }
+    __typename
+    ... on CompanySearchResult {
+      id
+      searchableId
+      content
+    }
+    ... on EngineSearchResult {
+      id
+      searchableId
+      content
+    }
+    ... on GameSearchResult {
+      id
+      searchableId
+      content
+      releaseDate
+      developerName
+      imageUrl: coverUrl
+    }
+    ... on GenreSearchResult {
+      id
+      searchableId
+      content
+    }
+    ... on PlatformSearchResult {
+      id
+      searchableId
+      content
+    }
+    ... on SeriesSearchResult {
+      id
+      searchableId
+      content
+    }
+    ... on UserSearchResult {
+      id
+      searchableId
+      content
+      slug
+      imageUrl: avatarUrl
     }
   }
 }
