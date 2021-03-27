@@ -22,6 +22,7 @@
         <template v-if="searchResults[type].length > 0">
           <hr v-if="index > 0" class="navbar-divider">
           <p class="navbar-item navbar-dropdown-header">{{ plurals[type] }}</p>
+          <!-- Make this a router-link instead of a raw <a> -->
           <a
             v-for="result in searchResults[type]"
             :key="result.id"
@@ -51,18 +52,18 @@
               </div>
             </div>
           </a>
-        </template>
-        <!-- If there are a multiple of 15 games, we can potentially load another page of them. -->
-        <a class="navbar-item"
-           v-if="type === 'Game' && searchResults[type].length % 15 === 0 && !moreAlreadyLoaded"
-           @click="onMoreGames"
-        >
-          <div class="media">
-            <div class="media-content">
-              <p>More...</p>
+          <!-- If there are a multiple of 15 games, we can potentially load another page of them. -->
+          <a class="navbar-item"
+            v-if="type === 'Game' && !moreAlreadyLoaded"
+            @click="onMoreGames"
+          >
+            <div class="media">
+              <div class="media-content">
+                <p>More...</p>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </template>
       </div>
     </div>
   </div>
@@ -132,6 +133,9 @@ export default defineComponent({
 
     const activeSearchResult = ref(-1);
     const currentPage = ref(1);
+    // Whether the "More" button has already been used to load more games
+    // this will only get set to true if more were loaded _and_ none of the
+    // returned records were for Games.)
     const moreAlreadyLoaded = ref(false);
 
     const onUpArrow = () => {
