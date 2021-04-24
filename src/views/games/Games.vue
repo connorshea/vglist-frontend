@@ -4,36 +4,19 @@
 
     <div class="columns">
       <div class="games-search-sidebar column is-3">
-        <!-- <div class="dropdown is-fullwidth mr-0-mobile">
-          <div class="dropdown-trigger is-fullwidth-mobile">
-            <button class="button is-fullwidth" aria-haspopup="true" aria-controls="dropdown-menu">
-              <span>
-                <%= params[:order_by].nil? ? "Sort" : "Sort by #{params[:order_by].titleize.downcase}" %>
-              </span>
-              <span class="icon">
-                <%= svg_icon('chevron-down', height: 15, aria: false) %>
-              </span>
-            </button>
-          </div>
-
-          <div class="dropdown-menu is-fullwidth" id="sort-dropdown-menu" role="menu">
-            <div class="dropdown-content">
-              <%= sort_dropdown_link(nil, 'Default') %>
-              <%= sort_dropdown_link(:newest, 'Newest') %>
-              <%= sort_dropdown_link(:oldest, 'Oldest') %>
-              <%= sort_dropdown_link(:recently_updated, 'Recently updated') %>
-              <%= sort_dropdown_link(:least_recently_updated, 'Least recently updated') %>
-              <%= sort_dropdown_link(:most_favorites, 'Most favorites') %>
-              <%= sort_dropdown_link(:most_owners, 'Most owners') %>
-              <%= sort_dropdown_link(:recently_released, 'Recently released') %>
-              <%= sort_dropdown_link(:highest_avg_rating, 'Highest average rating') %>
-            </div>
-          </div>
-        </div>
+        <sort-dropdown
+          :sortOptions="sortOptions"
+          :initialSortOption="sortBy"
+          @activeSortChanged="updateSortValue"
+        ></sort-dropdown>
 
         <div class="is-fullwidth-mobile">
-          <div class="games-filters" data-vue-component="games-filters"></div>
-        </div> -->
+          <games-filters
+            @activeFiltersChanged="updateFilters"
+            :platform="platformId"
+            :year="byYear"
+          />
+        </div>
       </div>
 
       <div class="is-9 column">
@@ -56,25 +39,109 @@
 </template>
 
 <script lang="ts">
-import { GamesDocument } from '@/generated/graphql';
-import { defineComponent } from '@vue/composition-api';
+import { GamesDocument, GameSort, Platform } from '@/generated/graphql';
+import { defineComponent, ref, Ref } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
+import GamesFilters from '@/components/GamesFilters.vue';
+import SortDropdown from '@/components/SortDropdown.vue';
 
 export default defineComponent({
   name: 'Games',
   components: {
-    GameCard
+    GameCard,
+    GamesFilters,
+    SortDropdown
   },
-  setup() {
-    const { data } = useQuery({
-      query: GamesDocument,
-      variables: {
-        cursor: ''
-      }
+  props: {
+    sortBy: {
+      type: String,
+      required: false,
+      default: null
+    },
+    platformId: {
+      type: String,
+      required: false,
+      default: null
+    },
+    byYear: {
+      type: Number,
+      required: false,
+      default: null
+    }
+  },
+  setup(props, context) {
+    type SortOptionsType = GameSort | null;
+
+    const queryVariables: Ref<{ cursor: string, sortBy: SortOptionsType, byYear: number | null, platformId: string | null}> = ref({
+      cursor: '',
+      sortBy: props.sortBy?.toUpperCase() as SortOptionsType,
+      byYear: props.byYear,
+      platformId: props.platformId
     });
 
-    return { data };
+    const { data } = useQuery({
+      query: GamesDocument,
+      variables: queryVariables.value
+    });
+
+    const updateSortValue = (sort: SortOptionsType) => {
+      let { sort_by, ...currentQueryParams } = context.root.$route.query;
+      let query = { ...currentQueryParams };
+      if (sort !== null) {
+        query.sort_by = sort.toLowerCase();
+      }
+      queryVariables.value.sortBy = sort?.toUpperCase() as SortOptionsType;
+      context.root.$router.push({ name: 'Games', query: query });
+    };
+
+    const updateFilters = (filterData: { platform: Platform | null, year: number | null}) => {
+      queryVariables.value.byYear = filterData.year;
+      queryVariables.value.platformId = filterData.platform?.id ?? null;
+    };
+
+    const sortOptions: Array<{ name: string, value: SortOptionsType }> = [
+      {
+        name: 'Default',
+        value: null
+      },
+      {
+        name: 'Newest',
+        value: GameSort.Newest
+      },
+      {
+        name: 'Oldest',
+        value: GameSort.Oldest
+      },
+      {
+        name: 'Recently updated',
+        value: GameSort.RecentlyUpdated
+      },
+      {
+        name: 'Most favorites',
+        value: GameSort.MostFavorites
+      },
+      {
+        name: 'Most owners',
+        value: GameSort.MostOwners
+      },
+      {
+        name: 'Recently released',
+        value: GameSort.RecentlyReleased
+      },
+      {
+        name: 'Highest average rating',
+        value: GameSort.HighestAvgRating
+      }
+    ];
+
+    return {
+      data,
+      sortOptions,
+      updateSortValue,
+      updateFilters,
+      queryVariables
+    };
   }
 });
 </script>

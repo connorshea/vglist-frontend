@@ -1,5 +1,5 @@
-query Games($cursor: String!) {
-  games(after: $cursor) {
+query Games($cursor: String!, $sortBy: GameSort, $platformId: ID, $byYear: Int) {
+  games(after: $cursor, sortBy: $sortBy, onPlatform: $platformId, byYear: $byYear) {
     nodes {
       ...gameCardFields
     }

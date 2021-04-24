@@ -2,30 +2,11 @@
   <div class="users" v-if="data">
     <h1 class="title">Users</h1>
 
-    <div class="dropdown is-fullwidth mr-0-mobile" :class="{ 'is-active': dropdownIsActive }">
-      <div class="dropdown-trigger is-fullwidth-mobile" @click="toggleDropdown">
-        <button class="button is-fullwidth" aria-haspopup="true" aria-controls="dropdown-menu">
-          <span>
-            {{ sortedBy === null ? "Sort" : `Sort by ${sortedBy.toLowerCase().replace('_', ' ')}` }}
-          </span>
-          <SvgIcon :name="'chevron-down'" :size="15" :classes="['icon']"/>
-        </button>
-      </div>
-
-      <div class="dropdown-menu is-fullwidth" id="sort-dropdown-menu" role="menu">
-        <div class="dropdown-content">
-          <template v-for="sortOption in sortOptions">
-            <a :key="sortOption.name"
-               class="dropdown-item"
-               :class="{ 'has-text-weight-bold': sortedBy === sortOption.value }"
-               @click="setSortedBy(sortOption.value)"
-            >
-              {{ sortOption.name }}
-            </a>
-          </template>
-        </div>
-      </div>
-    </div>
+    <sort-dropdown
+      :sortOptions="sortOptions"
+      :initialSortOption="sortBy"
+      @activeSortChanged="refetchQuery"
+    ></sort-dropdown>
 
     <div class="user-card-list mt-20">
       <template v-for="user in data.users.nodes">
@@ -42,13 +23,13 @@ import { UsersDocument, UserSort } from '@/generated/graphql';
 import { defineComponent, Ref, ref } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import UserCard from '@/components/UserCard.vue';
-import SvgIcon from '@/components/SvgIcon.vue';
+import SortDropdown from '@/components/SortDropdown.vue';
 
 export default defineComponent({
   name: 'Users',
   components: {
     UserCard,
-    SvgIcon
+    SortDropdown
   },
   props: {
     sortBy: {
@@ -61,21 +42,21 @@ export default defineComponent({
     type SortOptionsType = UserSort | null;
 
     let upcasedSortBy = props.sortBy?.toUpperCase() ?? null;
-    const sortedBy: Ref<SortOptionsType> = ref(upcasedSortBy as SortOptionsType);
-    const queryVariables = ref({ cursor: '', sortBy: sortedBy });
+    const activeSortOption: Ref<SortOptionsType> = ref(upcasedSortBy as SortOptionsType);
+    const queryVariables = ref({ cursor: '', sortBy: activeSortOption });
     const { execute, data } = useQuery({
       query: UsersDocument,
       variables: queryVariables
     });
 
-    const setSortedBy = (sort: SortOptionsType) => {
-      sortedBy.value = sort;
+    const refetchQuery = (sort: SortOptionsType) => {
+      activeSortOption.value = sort;
       let { sort_by, ...currentQueryParams } = context.root.$route.query;
       let query = { ...currentQueryParams };
       if (sort !== null) {
         query.sort_by = sort.toLowerCase();
       }
-      context.root.$router.push({ name: 'Users', query: query })
+      context.root.$router.push({ name: 'Users', query: query });
       execute();
     };
 
@@ -85,25 +66,20 @@ export default defineComponent({
         value: null
       },
       {
-        name: 'Most Followers',
+        name: 'Most followers',
         value: UserSort.MostFollowers
       },
       {
-        name: 'Most Games',
+        name: 'Most games',
         value: UserSort.MostGames
       }
     ];
 
-    const dropdownIsActive = ref(false);
-    const toggleDropdown = () => dropdownIsActive.value = !dropdownIsActive.value;
-
     return {
       data,
-      sortedBy,
-      setSortedBy,
-      sortOptions,
-      dropdownIsActive,
-      toggleDropdown
+      activeSortOption,
+      refetchQuery,
+      sortOptions
     };
   }
 });

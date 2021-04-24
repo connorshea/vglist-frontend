@@ -120,7 +120,12 @@ const routes: Array<RouteConfig> = [
   {
     path: '/games',
     name: 'Games',
-    component: Games
+    component: Games,
+    props: route => ({
+      sortBy: (route.query.sort_by as string)?.toLowerCase(),
+      platformId: (route.query.platform_id as string) ?? null,
+      byYear: parseInt(route.query.by_year as string) ?? null
+    })
   },
   {
     path: '/games/:id',
