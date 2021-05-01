@@ -1,0 +1,7 @@
+mutation AddGameToWikidataBlocklist($name: String!, $wikidataId: Int!) {
+  addToWikidataBlocklist(name: $name, wikidataId: $wikidataId) {
+    wikidataBlocklistEntry {
+      id
+    }
+  }
+}

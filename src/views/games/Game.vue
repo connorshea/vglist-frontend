@@ -119,7 +119,7 @@
 </template>
 
 <script lang="ts">
-import { DeleteGameDocument, FavoriteGameDocument, GameDocument, RemoveGameCoverDocument, UnfavoriteGameDocument } from '@/generated/graphql';
+import { AddGameToWikidataBlocklistDocument, DeleteGameDocument, FavoriteGameDocument, GameDocument, RemoveGameCoverDocument, UnfavoriteGameDocument } from '@/generated/graphql';
 import { computed, defineComponent, ref } from '@vue/composition-api';
 import { useMutation, useQuery } from 'villus';
 import GameInfobox from '@/components/GameInfobox.vue';
@@ -154,8 +154,9 @@ export default defineComponent({
 
     const { execute: executeFavoriteGame } = useMutation(FavoriteGameDocument);
     const { execute: executeUnfavoriteGame } = useMutation(UnfavoriteGameDocument);
-    const { execute: executeDeleteGame } = useMutation(DeleteGameDocument);
     const { execute: executeRemoveGameCover } = useMutation(RemoveGameCoverDocument);
+    const { execute: executeAddGameToWikidataBlocklist } = useMutation(AddGameToWikidataBlocklistDocument);
+    const { execute: executeDeleteGame } = useMutation(DeleteGameDocument);
 
     const favoriteGame = () => {
       const gameId = data.value?.game?.id;
@@ -199,7 +200,17 @@ export default defineComponent({
     };
 
     const addGameToWikidataBlocklist = () => {
-      console.log('TODO');
+      if (confirm("Are you sure you want to add this game to the blocklist?")) {
+        const gameName = data.value?.game?.name;
+        const wikidataId = data.value?.game?.wikidataId as number;
+
+        if (typeof gameName !== 'undefined' && typeof wikidataId !== 'undefined') {
+          executeAddGameToWikidataBlocklist({ name: gameName, wikidataId: wikidataId }).then(() => {
+            // Reload game data.
+            execute();
+          })
+        }
+      }
     };
 
     const mergeGame = () => {
