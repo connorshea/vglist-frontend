@@ -18,7 +18,27 @@
           <span class='ml-5'>Favorite</span>
         </a>
         <AddGameToLibrary :isInLibrary="data.game.isInLibrary" :game="data.game" @refresh="refreshGame"/>
+
         <!-- Actions dropdown -->
+        <div id="actions-dropdown" class="dropdown is-fullwidth mr-0-mobile" :class="{ 'is-active': actionsDropdownIsActive }">
+          <div class="dropdown-trigger is-fullwidth" @click="toggleActionsDropdown">
+            <button class="button is-fullwidth" aria-haspopup="true" aria-controls="dropdown-menu">
+              <span>Actions</span>
+              <SvgIcon :name="'chevron-down'" :size="15" :classes="['icon']"/>
+            </button>
+          </div>
+
+          <div class="dropdown-menu is-fullwidth" id="actions-dropdown-menu" role="menu">
+            <div class="dropdown-content">
+              <!-- TODO: Make this a link to the game edit page. -->
+              <a class="dropdown-item">Edit</a>
+              <a v-if="userIsModeratorOrAdmin" class="dropdown-item has-text-danger" @click="removeCover">Remove cover</a>
+              <a v-if="userIsModeratorOrAdmin" class="dropdown-item has-text-danger" @click="addGameToWikidataBlocklist">Add to Wikidata Blocklist</a>
+              <a v-if="userIsModeratorOrAdmin" class="dropdown-item has-text-danger" @click="mergeGame">Merge</a>
+              <a v-if="userIsModeratorOrAdmin" class="dropdown-item has-text-danger" @click="deleteGame">Delete</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -100,7 +120,7 @@
 
 <script lang="ts">
 import { FavoriteGameDocument, GameDocument, UnfavoriteGameDocument } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent, ref } from '@vue/composition-api';
 import { useMutation, useQuery } from 'villus';
 import GameInfobox from '@/components/GameInfobox.vue';
 import AddGameToLibrary from '@/components/AddGameToLibrary.vue';
@@ -157,12 +177,40 @@ export default defineComponent({
 
     const refreshGame = () => execute();
 
+    const actionsDropdownIsActive = ref(false);
+    const toggleActionsDropdown = () => actionsDropdownIsActive.value = !actionsDropdownIsActive.value;
+
+    const userIsModeratorOrAdmin = computed(() => ['ADMIN', 'MODERATOR'].includes(context.root.$store.state.currentUser.role));
+
+    const removeCover = () => {
+      console.log('TODO');
+    };
+
+    const addGameToWikidataBlocklist = () => {
+      console.log('TODO');
+    };
+
+    const mergeGame = () => {
+      console.log('TODO');
+    };
+
+    const deleteGame = () => {
+      console.log('TODO');
+    };
+
     return {
       data,
       userSignedIn,
       favoriteGame,
       unfavoriteGame,
-      refreshGame
+      refreshGame,
+      actionsDropdownIsActive,
+      toggleActionsDropdown,
+      userIsModeratorOrAdmin,
+      removeCover,
+      addGameToWikidataBlocklist,
+      mergeGame,
+      deleteGame
     };
   }
 });
