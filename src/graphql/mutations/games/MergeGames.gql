@@ -1,0 +1,8 @@
+mutation MergeGames($gameToKeepId: ID!, $gameToMergeId: ID!) {
+  mergeGames(gameToKeepId: $gameToKeepId, gameToMergeId: $gameToMergeId) {
+    game {
+      id
+      name
+    }
+  }
+}
