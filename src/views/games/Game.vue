@@ -32,8 +32,8 @@
             <div class="dropdown-content">
               <!-- TODO: Make this a link to the game edit page. -->
               <a class="dropdown-item">Edit</a>
-              <a v-if="userIsModeratorOrAdmin" class="dropdown-item has-text-danger" @click="removeCover">Remove cover</a>
-              <a v-if="userIsModeratorOrAdmin" class="dropdown-item has-text-danger" @click="addGameToWikidataBlocklist">Add to Wikidata Blocklist</a>
+              <a v-if="userIsModeratorOrAdmin && canRemoveCover" class="dropdown-item has-text-danger" @click="removeCover">Remove cover</a>
+              <a v-if="userIsModeratorOrAdmin && canAddToWikidataBlocklist" class="dropdown-item has-text-danger" @click="addGameToWikidataBlocklist">Add to Wikidata Blocklist</a>
               <a v-if="userIsModeratorOrAdmin" class="dropdown-item has-text-danger" @click="mergeGame">Merge</a>
               <a v-if="userIsModeratorOrAdmin" class="dropdown-item has-text-danger" @click="deleteGame">Delete</a>
             </div>
@@ -119,7 +119,7 @@
 </template>
 
 <script lang="ts">
-import { FavoriteGameDocument, GameDocument, UnfavoriteGameDocument } from '@/generated/graphql';
+import { DeleteGameDocument, FavoriteGameDocument, GameDocument, RemoveGameCoverDocument, UnfavoriteGameDocument } from '@/generated/graphql';
 import { computed, defineComponent, ref } from '@vue/composition-api';
 import { useMutation, useQuery } from 'villus';
 import GameInfobox from '@/components/GameInfobox.vue';
@@ -154,6 +154,8 @@ export default defineComponent({
 
     const { execute: executeFavoriteGame } = useMutation(FavoriteGameDocument);
     const { execute: executeUnfavoriteGame } = useMutation(UnfavoriteGameDocument);
+    const { execute: executeDeleteGame } = useMutation(DeleteGameDocument);
+    const { execute: executeRemoveGameCover } = useMutation(RemoveGameCoverDocument);
 
     const favoriteGame = () => {
       const gameId = data.value?.game?.id;
@@ -181,9 +183,19 @@ export default defineComponent({
     const toggleActionsDropdown = () => actionsDropdownIsActive.value = !actionsDropdownIsActive.value;
 
     const userIsModeratorOrAdmin = computed(() => ['ADMIN', 'MODERATOR'].includes(context.root.$store.state.currentUser.role));
+    const canAddToWikidataBlocklist = computed(() => data.value?.game?.wikidataId !== null);
+    const canRemoveCover = computed(() => data.value?.game?.coverUrl !== null);
 
     const removeCover = () => {
-      console.log('TODO');
+      if (confirm("Are you sure you want to remove this game's cover?")) {
+        const gameId = data.value?.game?.id;
+        if (typeof gameId !== 'undefined') {
+          executeRemoveGameCover({ id: gameId }).then(() => {
+            // Reload game data.
+            execute();
+          });
+        }
+      }
     };
 
     const addGameToWikidataBlocklist = () => {
@@ -195,7 +207,15 @@ export default defineComponent({
     };
 
     const deleteGame = () => {
-      console.log('TODO');
+      if (confirm("Are you sure you want to delete this game?")) {
+        const gameId = data.value?.game?.id;
+        if (typeof gameId !== 'undefined') {
+          executeDeleteGame({ id: gameId }).then(() => {
+            // Redirect to Games list page.
+            context.root.$router.push({ name: 'Games' });
+          });
+        }
+      }
     };
 
     return {
@@ -207,6 +227,8 @@ export default defineComponent({
       actionsDropdownIsActive,
       toggleActionsDropdown,
       userIsModeratorOrAdmin,
+      canAddToWikidataBlocklist,
+      canRemoveCover,
       removeCover,
       addGameToWikidataBlocklist,
       mergeGame,

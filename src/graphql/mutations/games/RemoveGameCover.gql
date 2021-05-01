@@ -1,0 +1,7 @@
+mutation RemoveGameCover($id: ID!) {
+  removeGameCover(gameId: $id) {
+    game {
+      name
+    }
+  }
+}
