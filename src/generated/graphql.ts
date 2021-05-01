@@ -760,71 +760,71 @@ export type Mutation = {
   __typename?: 'Mutation';
   /** Add a game to the current user's library. */
   addGameToLibrary?: Maybe<AddGameToLibraryPayload>;
-  /** Add game to Steam blocklist. **Only available to admins.** */
+  /** Add game to Steam blocklist. **Only available to admins using a first-party OAuth Application.** */
   addToSteamBlocklist?: Maybe<AddToSteamBlocklistPayload>;
-  /** Add game to Wikidata blocklist. **Only available to admins.** */
+  /** Add game to Wikidata blocklist. **Only available to admins using a first-party OAuth Application.** */
   addToWikidataBlocklist?: Maybe<AddToWikidataBlocklistPayload>;
-  /** Ban a user. **Only available to moderators and admins.** */
+  /** Ban a user. **Only available to moderators and admins using a first-party OAuth Application.** */
   banUser?: Maybe<BanUserPayload>;
-  /** Create a new game company. **Not available in production for now.** */
+  /** Create a new game company. **Only available when using a first-party OAuth Application.** */
   createCompany?: Maybe<CreateCompanyPayload>;
-  /** Create a new game engine. **Not available in production for now.** */
+  /** Create a new game engine. **Only available when using a first-party OAuth Application.** */
   createEngine?: Maybe<CreateEnginePayload>;
-  /** Create a new game genre. **Only available to moderators and admins.** **Not available in production for now.** */
+  /** Create a new game genre. **Only available to moderators and admins using a first-party OAuth Application.** */
   createGenre?: Maybe<CreateGenrePayload>;
-  /** Create a new game platform. **Only available to moderators and admins.** **Not available in production for now.** */
+  /** Create a new game platform. **Only available to moderators and admins using a first-party OAuth Application.** */
   createPlatform?: Maybe<CreatePlatformPayload>;
-  /** Create a new game series. **Not available in production for now.** */
+  /** Create a new game series. **Only available when using a first-party OAuth Application.** */
   createSeries?: Maybe<CreateSeriesPayload>;
-  /** Create a new game store. **Not available in production for now.** */
+  /** Create a new game store. **Only available when using a first-party OAuth Application.** */
   createStore?: Maybe<CreateStorePayload>;
-  /** Delete a game company. **Only available to moderators and admins.** **Not available in production for now.** */
+  /** Delete a game company. **Only available to moderators and admins using a first-party OAuth Application.** */
   deleteCompany?: Maybe<DeleteCompanyPayload>;
-  /** Delete a game engine. **Only available to moderators and admins.** **Not available in production for now.** */
+  /** Delete a game engine. **Only available to moderators and admins using a first-party OAuth Application.** */
   deleteEngine?: Maybe<DeleteEnginePayload>;
   /** Delete an event from the Activity Feed. You must be the owner of the event to delete it. */
   deleteEvent?: Maybe<DeleteEventPayload>;
-  /** Delete a game. **Only available to moderators and admins.** **Not available in production for now.** */
+  /** Delete a game. **Only available to moderators and admins using a first-party OAuth Application.** */
   deleteGame?: Maybe<DeleteGamePayload>;
-  /** Delete a game genre. **Only available to moderators and admins.** **Not available in production for now.** */
+  /** Delete a game genre. **Only available to moderators and admins using a first-party OAuth Application.** */
   deleteGenre?: Maybe<DeleteGenrePayload>;
-  /** Delete a game platform. **Only available to moderators and admins.** **Not available in production for now.** */
+  /** Delete a game platform. **Only available to moderators and admins using a first-party OAuth Application.** */
   deletePlatform?: Maybe<DeletePlatformPayload>;
-  /** Delete a game series. **Only available to moderators and admins.** **Not available in production for now.** */
+  /** Delete a game series. **Only available to moderators and admins using a first-party OAuth Application.** */
   deleteSeries?: Maybe<DeleteSeriesPayload>;
-  /** Delete a game store. **Only available to moderators and admins.** **Not available in production for now.** */
+  /** Delete a game store. **Only available to moderators and admins using a first-party OAuth Application.** */
   deleteStore?: Maybe<DeleteStorePayload>;
   /** Add a game to the current user's favorites. */
   favoriteGame?: Maybe<FavoriteGamePayload>;
   /** Follow a user. */
   followUser?: Maybe<FollowUserPayload>;
-  /** Remove game from Steam blocklist. **Only available to admins.** */
+  /** Remove game from Steam blocklist. **Only available to admins using a first-party OAuth Application.** */
   removeFromSteamBlocklist?: Maybe<RemoveFromSteamBlocklistPayload>;
-  /** Remove game from Wikidata blocklist. **Only available to admins.** */
+  /** Remove game from Wikidata blocklist. **Only available to admins using a first-party OAuth Application.** */
   removeFromWikidataBlocklist?: Maybe<RemoveFromWikidataBlocklistPayload>;
   /** Remove the cover from a game. **Only available to moderators and admins.** */
   removeGameCover?: Maybe<RemoveGameCoverPayload>;
   /** Remove a game from the current user's library. */
   removeGameFromLibrary?: Maybe<RemoveGameFromLibraryPayload>;
-  /** Unban a user. **Only available to moderators and admins.** */
+  /** Unban a user. **Only available to moderators and admins using a first-party OAuth Application.** */
   unbanUser?: Maybe<UnbanUserPayload>;
   /** Remove a game from the current user's favorites. */
   unfavoriteGame?: Maybe<UnfavoriteGamePayload>;
   /** Unfollow a user. */
   unfollowUser?: Maybe<UnfollowUserPayload>;
-  /** Update an existing game company. **Not available in production for now.** */
+  /** Update an existing game company. **Only available when using a first-party OAuth Application.** */
   updateCompany?: Maybe<UpdateCompanyPayload>;
-  /** Update an existing game engine. **Not available in production for now.** */
+  /** Update an existing game engine. **Only available when using a first-party OAuth Application.** */
   updateEngine?: Maybe<UpdateEnginePayload>;
   /** Update a game in the current user's library. */
   updateGameInLibrary?: Maybe<UpdateGameInLibraryPayload>;
-  /** Update an existing game genre. **Only available to moderators and admins.** **Not available in production for now.** */
+  /** Update an existing game genre. **Only available to moderators and admins using a first-party OAuth Application.** */
   updateGenre?: Maybe<UpdateGenrePayload>;
-  /** Update an existing game platform. **Only available to moderators and admins.** **Not available in production for now.** */
+  /** Update an existing game platform. **Only available to moderators and admins using a first-party OAuth Application.** */
   updatePlatform?: Maybe<UpdatePlatformPayload>;
-  /** Update an existing game series. **Not available in production for now.** */
+  /** Update an existing game series. **Only available when using a first-party OAuth Application.** */
   updateSeries?: Maybe<UpdateSeriesPayload>;
-  /** Update an existing game store. **Only available to moderators and admins.** **Not available in production for now.** */
+  /** Update an existing game store. **Only available to moderators and admins using a first-party OAuth Application.** */
   updateStore?: Maybe<UpdateStorePayload>;
 };
 
