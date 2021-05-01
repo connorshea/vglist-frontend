@@ -34,7 +34,7 @@
               <a class="dropdown-item">Edit</a>
               <a v-if="userIsModeratorOrAdmin && canRemoveCover" class="dropdown-item has-text-danger" @click="removeCover">Remove cover</a>
               <a v-if="userIsModeratorOrAdmin && canAddToWikidataBlocklist" class="dropdown-item has-text-danger" @click="addGameToWikidataBlocklist">Add to Wikidata Blocklist</a>
-              <a v-if="userIsModeratorOrAdmin" class="dropdown-item has-text-danger" @click="mergeGame">Merge</a>
+              <a v-if="userIsAdmin" class="dropdown-item has-text-danger" @click="mergeGame">Merge</a>
               <a v-if="userIsModeratorOrAdmin" class="dropdown-item has-text-danger" @click="deleteGame">Delete</a>
             </div>
           </div>
@@ -183,7 +183,9 @@ export default defineComponent({
     const actionsDropdownIsActive = ref(false);
     const toggleActionsDropdown = () => actionsDropdownIsActive.value = !actionsDropdownIsActive.value;
 
+    const userIsAdmin = computed(() => context.root.$store.state.currentUser.role === 'ADMIN');
     const userIsModeratorOrAdmin = computed(() => ['ADMIN', 'MODERATOR'].includes(context.root.$store.state.currentUser.role));
+
     const canAddToWikidataBlocklist = computed(() => data.value?.game?.wikidataId !== null);
     const canRemoveCover = computed(() => data.value?.game?.coverUrl !== null);
 
@@ -237,6 +239,7 @@ export default defineComponent({
       refreshGame,
       actionsDropdownIsActive,
       toggleActionsDropdown,
+      userIsAdmin,
       userIsModeratorOrAdmin,
       canAddToWikidataBlocklist,
       canRemoveCover,
