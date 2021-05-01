@@ -30,7 +30,7 @@ import { defineComponent, ref } from '@vue/composition-api';
 import SvgIcon from '@/components/SvgIcon.vue';
 
 export default defineComponent({
-  name: 'EventCard',
+  name: 'SortDropdown',
   components: {
     SvgIcon
   },
