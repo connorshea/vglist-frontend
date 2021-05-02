@@ -3,6 +3,11 @@ import VueRouter, { RouteConfig } from 'vue-router';
 
 import Home from '@/views/Home.vue';
 
+import Admin from '@/views/admin/Admin.vue';
+import AdminDashboard from '@/views/admin/AdminDashboard.vue';
+import WikidataBlocklist from '@/views/admin/WikidataBlocklist.vue';
+import SteamBlocklist from '@/views/admin/SteamBlocklist.vue';
+
 import Activity from '@/views/activity/Activity.vue';
 import FollowingActivity from '@/views/activity/FollowingActivity.vue';
 
@@ -62,6 +67,27 @@ const routes: Array<RouteConfig> = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue')
+  },
+  {
+    path: '/admin',
+    component: Admin,
+    children: [
+      {
+        path: '',
+        name: 'AdminDashboard',
+        component: AdminDashboard
+      },
+      {
+        path: 'wikidata_blocklist',
+        name: 'WikidataBlocklist',
+        component: WikidataBlocklist
+      },
+      {
+        path: 'steam_blocklist',
+        name: 'SteamBlocklist',
+        component: SteamBlocklist
+      }
+    ]
   },
   {
     path: '/activity',
