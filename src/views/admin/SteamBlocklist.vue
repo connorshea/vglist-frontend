@@ -25,7 +25,7 @@
                 </router-link>
               </td>
               <td>
-                <a class="has-text-danger" @click="removeSteamBlocklistEntry(blocklistEntry.steamAppId)">
+                <a class="has-text-danger" @click="removeSteamBlocklistEntry(blocklistEntry.id)">
                   Remove
                 </a>
               </td>
@@ -40,27 +40,28 @@
 </template>
 
 <script lang="ts">
-import { SteamBlocklistDocument } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
-import { useQuery } from 'villus';
+import { SteamBlocklistDocument, RemoveFromSteamBlocklistDocument } from '@/generated/graphql';
+import { defineComponent } from '@vue/composition-api';
+import { useMutation, useQuery } from 'villus';
 
 export default defineComponent({
   name: 'SteamBlocklist',
-  setup(_props, context) {
-    const userSignedIn = computed(() => {
-      return context.root.$store.state.userSignedIn;
-    });
-
-    const { data } = useQuery({
+  setup() {
+    const { data, execute } = useQuery({
       query: SteamBlocklistDocument,
       variables: {
         cursor: ''
       }
     });
 
-    const removeSteamBlocklistEntry = (steamAppId: number) => {
-      // TODO
-      console.log(steamAppId);
+    const { data: removeBlocklistEntryData, execute: executeRemoveBlocklistEntry } = useMutation(RemoveFromSteamBlocklistDocument);
+
+    const removeSteamBlocklistEntry = (blocklistEntryId: string) => {
+      executeRemoveBlocklistEntry({ blocklistEntryId: blocklistEntryId }).then(() => {
+        if (removeBlocklistEntryData.value?.removeFromSteamBlocklist?.deleted) {
+          execute({ cachePolicy: 'network-only' });
+        }
+      });
     };
 
     const steamUrl = (steamAppId: number) => {
@@ -69,7 +70,6 @@ export default defineComponent({
 
     return {
       data,
-      userSignedIn,
       removeSteamBlocklistEntry,
       steamUrl
     };

@@ -1,0 +1,5 @@
+mutation RemoveFromWikidataBlocklist($blocklistEntryId: ID!) {
+  removeFromWikidataBlocklist(wikidataBlocklistEntryId: $blocklistEntryId) {
+    deleted
+  }
+}

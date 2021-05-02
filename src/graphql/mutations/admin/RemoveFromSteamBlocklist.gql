@@ -1,0 +1,5 @@
+mutation RemoveFromSteamBlocklist($blocklistEntryId: ID!) {
+  removeFromSteamBlocklist(steamBlocklistEntryId: $blocklistEntryId) {
+    deleted
+  }
+}

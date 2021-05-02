@@ -25,7 +25,7 @@
                 </router-link>
               </td>
               <td>
-                <a class="has-text-danger" @click="removeWikidataBlocklistEntry(blocklistEntry.wikidataId)">
+                <a class="has-text-danger" @click="removeWikidataBlocklistEntry(blocklistEntry.id)">
                   Remove
                 </a>
               </td>
@@ -40,23 +40,28 @@
 </template>
 
 <script lang="ts">
-import { WikidataBlocklistDocument } from '@/generated/graphql';
+import { RemoveFromWikidataBlocklistDocument, WikidataBlocklistDocument } from '@/generated/graphql';
 import { defineComponent } from '@vue/composition-api';
-import { useQuery } from 'villus';
+import { useMutation, useQuery } from 'villus';
 
 export default defineComponent({
   name: 'WikidataBlocklist',
   setup() {
-    const { data } = useQuery({
+    const { data, execute } = useQuery({
       query: WikidataBlocklistDocument,
       variables: {
         cursor: ''
       }
     });
 
-    const removeWikidataBlocklistEntry = (wikidataId: number) => {
-      // TODO
-      console.log(wikidataId);
+    const { data: removeBlocklistEntryData, execute: executeRemoveBlocklistEntry } = useMutation(RemoveFromWikidataBlocklistDocument);
+
+    const removeWikidataBlocklistEntry = (blocklistEntryId: string) => {
+      executeRemoveBlocklistEntry({ blocklistEntryId: blocklistEntryId }).then(() => {
+        if (removeBlocklistEntryData.value?.removeFromWikidataBlocklist?.deleted) {
+          execute({ cachePolicy: 'network-only' });
+        }
+      });
     };
 
     const wikidataUrl = (wikidataId: number) => {
