@@ -1,0 +1,16 @@
+query SteamBlocklist($cursor: String) {
+  steamBlocklist(after: $cursor) {
+    nodes {
+      id
+      name
+      steamAppId
+      user {
+        username
+      }
+      createdAt
+    }
+    pageInfo {
+      ...paginationFields
+    }
+  }
+}

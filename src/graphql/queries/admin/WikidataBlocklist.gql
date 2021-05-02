@@ -1,0 +1,16 @@
+query WikidataBlocklist($cursor: String) {
+  wikidataBlocklist(after: $cursor) {
+    nodes {
+      id
+      name
+      wikidataId
+      user {
+        username
+      }
+      createdAt
+    }
+    pageInfo {
+      ...paginationFields
+    }
+  }
+}
