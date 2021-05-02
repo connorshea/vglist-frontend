@@ -186,7 +186,7 @@ export default defineComponent({
           router: true
         })
 
-        if (currentUser.value?.role == 'admin') {
+        if (currentUser.value?.role === 'ADMIN') {
           items = items.concat({
             title: 'Admin',
             path: '/admin',
