@@ -1,0 +1,32 @@
+query LiveStatistics {
+  liveStatistics {
+    users
+    games
+    platforms
+    series
+    engines
+    companies
+    genres
+    stores
+    events
+    gamePurchases
+    relationships
+    gamesWithCovers
+    gamesWithReleaseDates
+    bannedUsers
+    mobygamesIds
+    pcgamingwikiIds
+    wikidataIds
+    giantbombIds
+    steamAppIds
+    epicGamesStoreIds
+    gogIds
+    igdbIds
+    companyVersions
+    gameVersions
+    genreVersions
+    engineVersions
+    platformVersions
+    seriesVersions
+  }
+}
