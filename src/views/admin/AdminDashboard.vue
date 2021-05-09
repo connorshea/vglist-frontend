@@ -69,7 +69,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="statistic in data.siteStatistics.nodes.slice().reverse()" :key="statistic.id">
+          <tr v-for="statistic in data.siteStatistics.nodes.slice()" :key="statistic.id">
             <td>{{ formatTimestamp(statistic.timestamp) }}</td>
             <td>{{ statistic.users }}</td>
             <td>{{ statistic.games }}</td>
@@ -107,7 +107,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="statistic in data.siteStatistics.nodes.slice().reverse()" :key="statistic.id">
+          <tr v-for="statistic in data.siteStatistics.nodes.slice()" :key="statistic.id">
             <td>{{ formatTimestamp(statistic.timestamp) }}</td>
             <td>{{ statistic.mobygamesIds }}</td>
             <td>{{ statistic.pcgamingwikiIds }}</td>
@@ -137,7 +137,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="statistic in data.siteStatistics.nodes.slice().reverse()" :key="statistic.id">
+          <tr v-for="statistic in data.siteStatistics.nodes.slice()" :key="statistic.id">
             <td>{{ formatTimestamp(statistic.timestamp) }}</td>
             <td>{{ statistic.companyVersions }}</td>
             <td>{{ statistic.gameVersions }}</td>

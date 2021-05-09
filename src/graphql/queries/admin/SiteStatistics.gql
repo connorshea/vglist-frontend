@@ -1,5 +1,5 @@
 query SiteStatistics($cursor: String) {
-  siteStatistics(after: $cursor) {
+  siteStatistics(after: $cursor, sortDirection: DESC) {
     nodes {
       id
       timestamp
