@@ -1234,6 +1234,8 @@ export type Query = {
    * reason to send a request for every letter a user types.
    */
   globalSearch: SearchResultUnionConnection;
+  /** Current statistics for all records on the site, for use on the admin dashboard. **Only available to admins.** */
+  liveStatistics: SiteStatistic;
   /** Find a platform by ID. */
   platform?: Maybe<Platform>;
   /** Find a platform by searching based on its name. */
@@ -1740,8 +1742,8 @@ export type SiteStatistic = {
   giantbombIds: Scalars['Int'];
   /** The number of GOG.com IDs at this point in time. */
   gogIds: Scalars['Int'];
-  /** ID of the statistic record. */
-  id: Scalars['ID'];
+  /** ID of the statistic record. Shouldn't ever be `null` except in the LiveStatistics query. */
+  id?: Maybe<Scalars['ID']>;
   /** The number of IGDB IDs at this point in time. */
   igdbIds?: Maybe<Scalars['Int']>;
   /** The number of MobyGames IDs at this point in time. */
@@ -1762,8 +1764,11 @@ export type SiteStatistic = {
   steamAppIds: Scalars['Int'];
   /** The number of Stores at this point in time. */
   stores: Scalars['Int'];
-  /** The point in time at which these statistics were logged, always UTC. */
-  timestamp: Scalars['ISO8601DateTime'];
+  /**
+   * The point in time at which these statistics were logged, always UTC. Shouldn't
+   * ever be `null` except in the LiveStatistics query.
+   */
+  timestamp?: Maybe<Scalars['ISO8601DateTime']>;
   /** The number of Users at this point in time. */
   users: Scalars['Int'];
   /** The number of Wikidata IDs at this point in time. */
