@@ -6,7 +6,7 @@
       <nav class="level" v-if="recordCountRows !== null">
         <div class="level-item has-text-centered" v-for="(count, key) in recordCountRows[0]" :key="key">
           <div>
-            <p class="heading">{{ key }}</p>
+            <p class="heading">{{ startCase(key) }}</p>
             <p class="title">{{ count }}</p>
           </div>
         </div>
@@ -15,7 +15,7 @@
       <nav class="level" v-if="recordCountRows !== null">
         <div class="level-item has-text-centered" v-for="(count, key) in recordCountRows[1]" :key="key">
           <div>
-            <p class="heading">{{ key }}</p>
+            <p class="heading">{{ startCase(key) }}</p>
             <p class="title">{{ count }}</p>
           </div>
         </div>
@@ -27,7 +27,7 @@
       <nav class="level" v-if="externalIdCounts !== null">
         <div class="level-item has-text-centered" v-for="(count, key) in externalIdCounts" :key="key">
           <div>
-            <p class="heading">{{ key }}</p>
+            <p class="heading">{{ startCase(key) }}</p>
             <p class="title">{{ count }}</p>
           </div>
         </div>
@@ -39,7 +39,7 @@
       <nav class="level" v-if="versionCounts !== null">
         <div class="level-item has-text-centered" v-for="(count, key) in versionCounts" :key="key">
           <div>
-            <p class="heading">{{ key }}</p>
+            <p class="heading">{{ startCase(key) }}</p>
             <p class="title">{{ count }}</p>
           </div>
         </div>
@@ -158,6 +158,7 @@
 import { useQuery } from 'villus';
 import { computed, defineComponent } from '@vue/composition-api';
 import { LiveStatisticsDocument, SiteStatisticsDocument } from '@/generated/graphql';
+import _ from 'lodash';
 
 export default defineComponent({
   name: 'AdminDashboard',
@@ -188,14 +189,15 @@ export default defineComponent({
     // Will return a pair of arrays of record counts, one for each row of
     // statistics to display.
     const recordCountRows = computed(() => {
+      // Exit early if the query hasn't returned the data yet.
+      if (liveStatisticsData.value === null) {
+        return null;
+      }
+
       let recordKeys = ['users', 'games', 'platforms', 'series', 'engines', 'companies', 'genres', 'stores', 'events', 'gamePurchases', 'relationships', 'gamesWithCovers', 'gamesWithReleaseDates', 'bannedUsers'];
 
       // Get half of the record keys array's length so we can split it in half.
       let half = Math.ceil(recordKeys.length / 2);
-
-      if (liveStatisticsData.value === null) {
-        return null;
-      }
 
       let recordPairs = Object.entries(liveStatisticsData.value.liveStatistics).filter(([key]) => recordKeys.includes(key));
 
@@ -207,11 +209,12 @@ export default defineComponent({
     });
 
     const externalIdCounts = computed(() => {
-      let externalIdKeys = ['mobygamesIds', 'pcgamingwikiIds', 'wikidataIds', 'giantbombIds', 'steamAppIds', 'epicGamesStoreIds', 'gogIds', 'igdbIds'];
-
+      // Exit early if the query hasn't returned the data yet.
       if (liveStatisticsData.value === null) {
         return null;
       }
+
+      let externalIdKeys = ['mobygamesIds', 'pcgamingwikiIds', 'wikidataIds', 'giantbombIds', 'steamAppIds', 'epicGamesStoreIds', 'gogIds', 'igdbIds'];
 
       return Object.fromEntries(
         Object.entries(liveStatisticsData.value.liveStatistics).filter(([key]) => externalIdKeys.includes(key))
@@ -219,23 +222,29 @@ export default defineComponent({
     });
 
     const versionCounts = computed(() => {
-      let versionKeys = ['companyVersions', 'gameVersions', 'genreVersions', 'engineVersions', 'platformVersions', 'seriesVersions'];
-
+      // Exit early if the query hasn't returned the data yet.
       if (liveStatisticsData.value === null) {
         return null;
       }
+
+      let versionKeys = ['companyVersions', 'gameVersions', 'genreVersions', 'engineVersions', 'platformVersions', 'seriesVersions'];
 
       return Object.fromEntries(
         Object.entries(liveStatisticsData.value.liveStatistics).filter(([key]) => versionKeys.includes(key))
       );
     });
 
+    // Alias this specific function so we don't have to pass all of lodash into
+    // the Vue component.
+    const startCase = _.startCase;
+
     return {
       data,
       formatTimestamp,
       recordCountRows,
       externalIdCounts,
-      versionCounts
+      versionCounts,
+      startCase
     };
   }
 });
