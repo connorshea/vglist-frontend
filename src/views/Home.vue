@@ -85,7 +85,7 @@ export default defineComponent({
     const { data: gamesData } = useQuery({
       query: GamesDocument,
       variables: {
-        cursor: ''
+        after: ''
       }
     });
 

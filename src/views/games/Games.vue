@@ -6,13 +6,12 @@
       <div class="games-search-sidebar column is-3">
         <sort-dropdown
           :sortOptions="sortOptions"
-          :initialSortOption="sortBy"
+          :initialSortOption="upcasedSortBy"
           @activeSortChanged="updateSortValue"
         ></sort-dropdown>
 
         <div class="is-fullwidth-mobile">
           <games-filters
-            @activeFiltersChanged="updateFilters"
             :platform="platformId"
             :year="byYear"
           />
@@ -32,26 +31,35 @@
           </div>
         </div>
 
-        <!-- <%= paginate @games %> -->
+        <pagination
+          :page-name="'Games'"
+          :start-cursor="pageInfo.startCursor"
+          :end-cursor="pageInfo.endCursor"
+          :has-next-page="pageInfo.hasNextPage"
+          :has-previous-page="pageInfo.hasPreviousPage"
+          @cursorChanged="execute"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { GamesDocument, GameSort, Platform } from '@/generated/graphql';
-import { defineComponent, ref, Ref } from '@vue/composition-api';
+import { GamesDocument, GameSort } from '@/generated/graphql';
+import { computed, ComputedRef, defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
 import GamesFilters from '@/components/GamesFilters.vue';
 import SortDropdown from '@/components/SortDropdown.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default defineComponent({
   name: 'Games',
   components: {
     GameCard,
     GamesFilters,
-    SortDropdown
+    SortDropdown,
+    Pagination
   },
   props: {
     sortBy: {
@@ -68,36 +76,63 @@ export default defineComponent({
       type: Number,
       required: false,
       default: null
+    },
+    before: {
+      type: String,
+      required: false,
+      default: null
+    },
+    after: {
+      type: String,
+      required: false,
+      default: null
     }
   },
   setup(props, context) {
     type SortOptionsType = GameSort | null;
 
-    const queryVariables: Ref<{ cursor: string, sortBy: SortOptionsType, byYear: number | null, platformId: string | null}> = ref({
-      cursor: '',
-      sortBy: props.sortBy?.toUpperCase() as SortOptionsType,
-      byYear: props.byYear,
-      platformId: props.platformId
+    // Upcase it so we can pass the capitalized version to the sort dropdown, to
+    // ensure the default value works correctly.
+    const upcasedSortBy = computed(() => props.sortBy?.toUpperCase());
+
+    const queryVariables: ComputedRef<{ before: string | null, after: string | null, sortBy: SortOptionsType, byYear: number | null, platformId: string | null}> = computed(() => {
+      return {
+        before: props.before,
+        // Request the last 30 explicitly if we're using the 'before' argument,
+        // otherwise do nothing. This makes navigating to a previous page work
+        // correctly.
+        last: props.before === null ? null : 30,
+        after: props.after,
+        sortBy: upcasedSortBy.value as SortOptionsType,
+        byYear: props.byYear,
+        platformId: props.platformId
+      };
     });
 
-    const { data } = useQuery({
+    const { data, execute } = useQuery({
       query: GamesDocument,
-      variables: queryVariables.value
+      variables: queryVariables,
+      cachePolicy: 'network-only'
+    });
+
+    const pageInfo = computed(() => {
+      return {
+        startCursor: data.value?.games?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.games?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.games?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.games?.pageInfo.hasNextPage ?? false
+      };
     });
 
     const updateSortValue = (sort: SortOptionsType) => {
-      let { sort_by, ...currentQueryParams } = context.root.$route.query;
+      // Override the before and after values since we have to restart the
+      // cursor when changing the sort.
+      let { sort_by, before, after, ...currentQueryParams } = context.root.$route.query;
       let query = { ...currentQueryParams };
       if (sort !== null) {
         query.sort_by = sort.toLowerCase();
       }
-      queryVariables.value.sortBy = sort?.toUpperCase() as SortOptionsType;
       context.root.$router.push({ name: 'Games', query: query });
-    };
-
-    const updateFilters = (filterData: { platform: Platform | null, year: number | null}) => {
-      queryVariables.value.byYear = filterData.year;
-      queryVariables.value.platformId = filterData.platform?.id ?? null;
     };
 
     const sortOptions: Array<{ name: string, value: SortOptionsType }> = [
@@ -139,8 +174,10 @@ export default defineComponent({
       data,
       sortOptions,
       updateSortValue,
-      updateFilters,
-      queryVariables
+      queryVariables,
+      pageInfo,
+      upcasedSortBy,
+      execute
     };
   }
 });

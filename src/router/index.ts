@@ -148,9 +148,11 @@ const routes: Array<RouteConfig> = [
     name: 'Games',
     component: Games,
     props: route => ({
-      sortBy: (route.query.sort_by as string)?.toLowerCase(),
+      sortBy: (route.query.sort_by as string),
       platformId: (route.query.platform_id as string) ?? null,
-      byYear: parseInt(route.query.by_year as string) ?? null
+      byYear: parseInt(route.query.by_year as string) ?? null,
+      before: route.query.before,
+      after: route.query.after,
     })
   },
   {
