@@ -22,7 +22,14 @@
         </div>
       </div>
 
-      <!-- <%= paginate @games %> -->
+      <pagination
+        :page-name="'Engine'"
+        :start-cursor="pageInfo.startCursor"
+        :end-cursor="pageInfo.endCursor"
+        :has-next-page="pageInfo.hasNextPage"
+        :has-previous-page="pageInfo.hasPreviousPage"
+        @cursorChanged="execute"
+      />
     </template>
     <template v-else>
       <p class='has-text-centered mt-50 has-text-muted'>This engine doesn't have any games yet.</p>
@@ -35,11 +42,13 @@ import { DeleteEngineDocument, EngineDocument } from '@/generated/graphql';
 import { computed, defineComponent } from '@vue/composition-api';
 import { useMutation, useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default defineComponent({
   name: 'Engine',
   components: {
-    GameCard
+    GameCard,
+    Pagination
   },
   props: {
     id: {
@@ -70,9 +79,18 @@ export default defineComponent({
       };
     });
 
-    const { data } = useQuery({
+    const { data, execute } = useQuery({
       query: EngineDocument,
       variables: queryVariables
+    });
+
+    const pageInfo = computed(() => {
+      return {
+        startCursor: data.value?.engine?.games?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.engine?.games?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.engine?.games?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.engine?.games?.pageInfo.hasNextPage ?? false
+      };
     });
 
     const wikidataUrl = computed(() => {
@@ -102,11 +120,13 @@ export default defineComponent({
 
     return {
       data,
+      execute,
       wikidataUrl,
       deleteEngine,
       userSignedIn,
       userCanDelete,
-      userCanEdit
+      userCanEdit,
+      pageInfo
     };
   }
 });
