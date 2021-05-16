@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'Pagination',
@@ -29,11 +29,13 @@ export default defineComponent({
     },
     startCursor: {
       type: String,
-      required: true
+      required: false,
+      default: null
     },
     endCursor: {
       type: String,
-      required: true
+      required: false,
+      default: null
     },
     hasNextPage: {
       type: Boolean,
@@ -45,18 +47,28 @@ export default defineComponent({
     }
   },
   setup(props, context) {
-    const previousPageRoute = { name: props.pageName, query: { before: props.startCursor }};
-    const nextPageRoute = { name: props.pageName, query: { after: props.endCursor }};
+    const previousPageRoute = computed(() => {
+      return { name: props.pageName, query: { before: props.startCursor } };
+    });
+    const nextPageRoute = computed(() => {
+      return { name: props.pageName, query: { after: props.endCursor } };
+    });
 
     const nextPage = (cursor: string) => {
-      context.root.$router.push(nextPageRoute).then(() => {
-        context.emit('cursorChanged', cursor);
-      });
+      if (props.hasNextPage) {
+        context.root.$router.push(nextPageRoute.value).then(() => {
+          window.scrollTo(0, 0);
+          context.emit('cursorChanged', cursor);
+        });
+      }
     };
     const previousPage = (cursor: string) => {
-      context.root.$router.push(previousPageRoute).then(() => {
-        context.emit('cursorChanged', cursor);
-      });
+      if (props.hasPreviousPage) {
+        context.root.$router.push(previousPageRoute.value).then(() => {
+          window.scrollTo(0, 0);
+          context.emit('cursorChanged', cursor);
+        });
+      }
     };
 
     return {

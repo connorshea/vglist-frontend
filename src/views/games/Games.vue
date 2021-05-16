@@ -6,13 +6,12 @@
       <div class="games-search-sidebar column is-3">
         <sort-dropdown
           :sortOptions="sortOptions"
-          :initialSortOption="sortBy"
+          :initialSortOption="upcasedSortBy"
           @activeSortChanged="updateSortValue"
         ></sort-dropdown>
 
         <div class="is-fullwidth-mobile">
           <games-filters
-            @activeFiltersChanged="updateFilters"
             :platform="platformId"
             :year="byYear"
           />
@@ -34,11 +33,11 @@
 
         <pagination
           :page-name="'Games'"
-          :start-cursor="data.games.pageInfo.startCursor"
-          :end-cursor="data.games.pageInfo.endCursor"
-          :has-next-page="data.games.pageInfo.hasNextPage"
-          :has-previous-page="data.games.pageInfo.hasPreviousPage"
-          @cursorChanged="updateCursorAndExecute"
+          :start-cursor="pageInfo.startCursor"
+          :end-cursor="pageInfo.endCursor"
+          :has-next-page="pageInfo.hasNextPage"
+          :has-previous-page="pageInfo.hasPreviousPage"
+          @cursorChanged="execute"
         />
       </div>
     </div>
@@ -46,8 +45,8 @@
 </template>
 
 <script lang="ts">
-import { GamesDocument, GameSort, Platform } from '@/generated/graphql';
-import { defineComponent, ref, Ref } from '@vue/composition-api';
+import { GamesDocument, GameSort } from '@/generated/graphql';
+import { computed, ComputedRef, defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
 import GamesFilters from '@/components/GamesFilters.vue';
@@ -92,12 +91,18 @@ export default defineComponent({
   setup(props, context) {
     type SortOptionsType = GameSort | null;
 
-    const queryVariables: Ref<{ before: string | null, after: string | null, sortBy: SortOptionsType, byYear: number | null, platformId: string | null}> = ref({
-      before: props.before,
-      after: props.after,
-      sortBy: props.sortBy?.toUpperCase() as SortOptionsType,
-      byYear: props.byYear,
-      platformId: props.platformId
+    // Upcase it so we can pass the capitalized version to the sort dropdown, to
+    // ensure the default value works correctly.
+    const upcasedSortBy = computed(() => props.sortBy?.toUpperCase());
+
+    const queryVariables: ComputedRef<{ before: string | null, after: string | null, sortBy: SortOptionsType, byYear: number | null, platformId: string | null}> = computed(() => {
+      return {
+        before: props.before,
+        after: props.after,
+        sortBy: upcasedSortBy.value as SortOptionsType,
+        byYear: props.byYear,
+        platformId: props.platformId
+      };
     });
 
     const { data, execute } = useQuery({
@@ -106,19 +111,24 @@ export default defineComponent({
       cachePolicy: 'network-only'
     });
 
+    const pageInfo = computed(() => {
+      return {
+        startCursor: data.value?.games?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.games?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.games?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.games?.pageInfo.hasNextPage ?? false
+      };
+    });
+
     const updateSortValue = (sort: SortOptionsType) => {
+      // Override the before and after values since we have to restart the
+      // cursor when changing the sort.
       let { sort_by, before, after, ...currentQueryParams } = context.root.$route.query;
       let query = { ...currentQueryParams };
       if (sort !== null) {
         query.sort_by = sort.toLowerCase();
       }
-      queryVariables.value.sortBy = sort?.toUpperCase() as SortOptionsType;
       context.root.$router.push({ name: 'Games', query: query });
-    };
-
-    const updateFilters = (filterData: { platform: Platform | null, year: number | null}) => {
-      queryVariables.value.byYear = filterData.year;
-      queryVariables.value.platformId = filterData.platform?.id ?? null;
     };
 
     const sortOptions: Array<{ name: string, value: SortOptionsType }> = [
@@ -156,20 +166,14 @@ export default defineComponent({
       }
     ];
 
-    const updateCursorAndExecute = () => {
-      queryVariables.value.after = props.after;
-      queryVariables.value.before = props.before;
-
-      execute();
-    };
-
     return {
       data,
       sortOptions,
       updateSortValue,
-      updateFilters,
       queryVariables,
-      updateCursorAndExecute
+      pageInfo,
+      upcasedSortBy,
+      execute
     };
   }
 });

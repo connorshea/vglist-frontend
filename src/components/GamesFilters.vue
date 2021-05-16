@@ -59,7 +59,6 @@ export default defineComponent({
       }
       filterData.value.platform = platform;
       context.root.$router.push({ name: 'Games', query: query });
-      context.emit('activeFiltersChanged', filterData.value);
     };
 
     const onYearInput = (year: string | null) => {
@@ -70,7 +69,6 @@ export default defineComponent({
       }
       filterData.value.year = year === null ? null : parseInt(year);
       context.root.$router.push({ name: 'Games', query: query });
-      context.emit('activeFiltersChanged', filterData.value);
     };
 
     const yearOptions = computed(() => {
