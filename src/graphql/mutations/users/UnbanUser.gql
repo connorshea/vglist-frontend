@@ -1,0 +1,9 @@
+mutation UnbanUser($userId: ID!) {
+  unbanUser(userId: $userId) {
+    user {
+      id
+      username
+      banned
+    }
+  }
+}

@@ -1,0 +1,9 @@
+mutation RemoveUserAvatar($userId: ID!) {
+  removeUserAvatar(userId: $userId) {
+    user {
+      id
+      username
+      avatarUrl(size: SMALL)
+    }
+  }
+}
