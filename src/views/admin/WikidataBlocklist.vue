@@ -58,12 +58,21 @@ export default defineComponent({
       default: null
     }
   },
-  setup() {
+  setup(props) {
+    const queryVariables = computed(() => {
+      return {
+        before: props.before,
+        // Request the last 30 explicitly if we're using the 'before' argument,
+        // otherwise do nothing. This makes navigating to a previous page work
+        // correctly.
+        last: props.before === null ? null : 30,
+        after: props.after
+      };
+    });
+
     const { data, execute } = useQuery({
       query: WikidataBlocklistDocument,
-      variables: {
-        after: ''
-      }
+      variables: queryVariables
     });
 
     const pageInfo = computed(() => {

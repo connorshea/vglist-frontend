@@ -51,11 +51,21 @@ export default defineComponent({
     }
   },
   setup(props, context) {
+    const queryVariables = computed(() => {
+      return {
+        feedType: ActivityFeed.Following,
+        before: props.before,
+        // Request the last 30 explicitly if we're using the 'before' argument,
+        // otherwise do nothing. This makes navigating to a previous page work
+        // correctly.
+        last: props.before === null ? null : 30,
+        after: props.after
+      };
+    });
+
     const { data, execute } = useQuery({
       query: ActivityFeedDocument,
-      variables: {
-        feedType: ActivityFeed.Following
-      },
+      variables: queryVariables,
       cachePolicy: 'network-only' // To allow the query to be re-fetched after deleting an event.
     });
 
