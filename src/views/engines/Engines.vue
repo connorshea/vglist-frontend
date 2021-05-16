@@ -45,11 +45,21 @@ export default defineComponent({
       }
     });
 
+    const pageInfo = computed(() => {
+      return {
+        startCursor: data.value?.engines?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.engines?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.engines?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.engines?.pageInfo.hasNextPage ?? false
+      };
+    });
+
     const userSignedIn = computed(() => context.root.$store.state.userSignedIn);
 
     return {
       data,
-      userSignedIn
+      userSignedIn,
+      pageInfo
     };
   }
 });

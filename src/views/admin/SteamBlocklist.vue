@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import { SteamBlocklistDocument, RemoveFromSteamBlocklistDocument } from '@/generated/graphql';
-import { defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from '@vue/composition-api';
 import { useMutation, useQuery } from 'villus';
 
 export default defineComponent({
@@ -66,6 +66,15 @@ export default defineComponent({
       }
     });
 
+    const pageInfo = computed(() => {
+      return {
+        startCursor: data.value?.steamBlocklist?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.steamBlocklist?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.steamBlocklist?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.steamBlocklist?.pageInfo.hasNextPage ?? false
+      };
+    });
+
     const { data: removeBlocklistEntryData, execute: executeRemoveBlocklistEntry } = useMutation(RemoveFromSteamBlocklistDocument);
 
     const removeSteamBlocklistEntry = (blocklistEntryId: string) => {
@@ -83,7 +92,8 @@ export default defineComponent({
     return {
       data,
       removeSteamBlocklistEntry,
-      steamUrl
+      steamUrl,
+      pageInfo
     };
   }
 });

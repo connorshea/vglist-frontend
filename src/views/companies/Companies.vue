@@ -45,11 +45,21 @@ export default defineComponent({
       }
     });
 
+    const pageInfo = computed(() => {
+      return {
+        startCursor: data.value?.companies?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.companies?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.companies?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.companies?.pageInfo.hasNextPage ?? false
+      };
+    });
+
     const userSignedIn = computed(() => context.root.$store.state.userSignedIn);
 
     return {
       data,
-      userSignedIn
+      userSignedIn,
+      pageInfo
     };
   }
 });

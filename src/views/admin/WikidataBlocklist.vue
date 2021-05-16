@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import { RemoveFromWikidataBlocklistDocument, WikidataBlocklistDocument } from '@/generated/graphql';
-import { defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from '@vue/composition-api';
 import { useMutation, useQuery } from 'villus';
 
 export default defineComponent({
@@ -66,6 +66,15 @@ export default defineComponent({
       }
     });
 
+    const pageInfo = computed(() => {
+      return {
+        startCursor: data.value?.wikidataBlocklist?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.wikidataBlocklist?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.wikidataBlocklist?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.wikidataBlocklist?.pageInfo.hasNextPage ?? false
+      };
+    });
+
     const { data: removeBlocklistEntryData, execute: executeRemoveBlocklistEntry } = useMutation(RemoveFromWikidataBlocklistDocument);
 
     const removeWikidataBlocklistEntry = (blocklistEntryId: string) => {
@@ -83,7 +92,8 @@ export default defineComponent({
     return {
       data,
       removeWikidataBlocklistEntry,
-      wikidataUrl
+      wikidataUrl,
+      pageInfo
     };
   }
 });

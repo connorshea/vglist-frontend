@@ -59,6 +59,15 @@ export default defineComponent({
       cachePolicy: 'network-only' // To allow the query to be re-fetched after deleting an event.
     });
 
+    const pageInfo = computed(() => {
+      return {
+        startCursor: data.value?.activity?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.activity?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.activity?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.activity?.pageInfo.hasNextPage ?? false
+      };
+    });
+
     const userSignedIn = computed(() => {
       return context.root.$store.state.userSignedIn;
     });
@@ -66,7 +75,8 @@ export default defineComponent({
     return {
       data,
       execute,
-      userSignedIn
+      userSignedIn,
+      pageInfo
     };
   }
 });
