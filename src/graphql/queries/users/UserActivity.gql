@@ -1,6 +1,6 @@
-query UserActivity($userId: ID!, $cursor: String!) {
+query UserActivity($userId: ID!, $before: String, $last: Int, $after: String) {
   user(id: $userId) {
-    activity(after: $cursor) {
+    activity(before: $before, last: $last, after: $after) {
       nodes {
         ...eventCardFields
       }

@@ -332,22 +332,38 @@ const routes: Array<RouteConfig> = [
       {
         path: 'activity',
         name: 'UserActivity',
-        component: UserActivity
+        component: UserActivity,
+        props: route => ({
+          before: route.query.before,
+          after: route.query.after
+        })
       },
       {
         path: 'favorites',
         name: 'UserFavorites',
-        component: UserFavorites
+        component: UserFavorites,
+        props: route => ({
+          before: route.query.before,
+          after: route.query.after
+        })
       },
       {
         path: 'followers',
         name: 'UserFollowers',
-        component: UserFollowers
+        component: UserFollowers,
+        props: route => ({
+          before: route.query.before,
+          after: route.query.after
+        })
       },
       {
         path: 'following',
         name: 'UserFollowing',
-        component: UserFollowing
+        component: UserFollowing,
+        props: route => ({
+          before: route.query.before,
+          after: route.query.after
+        })
       }
     ]
   }

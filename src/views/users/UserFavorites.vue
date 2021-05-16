@@ -6,7 +6,14 @@
           <GameCard :game="game"/>
         </div>
 
-        <!-- <%= paginate @favorited_games %> -->
+        <pagination
+          :page-name="'UserFavorites'"
+          :start-cursor="pageInfo.startCursor"
+          :end-cursor="pageInfo.endCursor"
+          :has-next-page="pageInfo.hasNextPage"
+          :has-previous-page="pageInfo.hasPreviousPage"
+          @cursorChanged="execute"
+        />
       </div>
     </template>
     <template v-else>
@@ -19,31 +26,65 @@
 
 <script lang="ts">
 import { UserFavoritesDocument } from '@/generated/graphql';
-import { defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default defineComponent({
   name: 'UserFavorites',
   components: {
-    GameCard
+    GameCard,
+    Pagination
   },
   props: {
     user: {
       required: true,
       type: Object
+    },
+    after: {
+      type: String,
+      required: false,
+      default: null
+    },
+    before: {
+      type: String,
+      required: false,
+      default: null
     }
   },
   setup(props) {
-    const { data } = useQuery({
-      query: UserFavoritesDocument,
-      variables: {
+    const queryVariables = computed(() => {
+      return {
         userId: props.user.id,
-        cursor: ''
-      }
+        before: props.before,
+        // Request the last 30 explicitly if we're using the 'before' argument,
+        // otherwise do nothing. This makes navigating to a previous page work
+        // correctly.
+        last: props.before === null ? null : 30,
+        after: props.after
+      };
     });
 
-    return { data };
+    const { data, execute } = useQuery({
+      query: UserFavoritesDocument,
+      variables: queryVariables
+    });
+
+    const pageInfo = computed(() => {
+      return {
+        startCursor: data.value?.user?.favoritedGames?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.user?.favoritedGames?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.user?.favoritedGames?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.user?.favoritedGames?.pageInfo.hasNextPage ?? false
+      };
+    });
+
+    return {
+      data,
+      execute,
+      pageInfo
+    };
   }
 });
 </script>

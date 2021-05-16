@@ -1,6 +1,6 @@
-query UserFavorites($userId: ID!, $cursor: String!) {
+query UserFavorites($userId: ID!, $before: String, $last: Int, $after: String) {
   user(id: $userId) {
-    favoritedGames(after: $cursor) {
+    favoritedGames(before: $before, last: $last, after: $after) {
       nodes {
         ...gameCardFields
       }

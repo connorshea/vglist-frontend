@@ -7,7 +7,14 @@
         </template>
       </div>
       <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile">
-        <!-- <%= paginate @following %> -->
+        <pagination
+          :page-name="'UserFollowing'"
+          :start-cursor="pageInfo.startCursor"
+          :end-cursor="pageInfo.endCursor"
+          :has-next-page="pageInfo.hasNextPage"
+          :has-previous-page="pageInfo.hasPreviousPage"
+          @cursorChanged="execute"
+        />
       </div>
     </template>
     <template v-else>
@@ -20,31 +27,65 @@
 
 <script lang="ts">
 import { UserFollowingDocument } from '@/generated/graphql';
-import { defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import UserCard from '@/components/UserCard.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default defineComponent({
   name: 'UserFollowing',
   components: {
-    UserCard
+    UserCard,
+    Pagination
   },
   props: {
     user: {
       required: true,
       type: Object
+    },
+    after: {
+      type: String,
+      required: false,
+      default: null
+    },
+    before: {
+      type: String,
+      required: false,
+      default: null
     }
   },
   setup(props) {
-    const { data } = useQuery({
-      query: UserFollowingDocument,
-      variables: {
+    const queryVariables = computed(() => {
+      return {
         userId: props.user.id,
-        cursor: ''
-      }
+        before: props.before,
+        // Request the last 30 explicitly if we're using the 'before' argument,
+        // otherwise do nothing. This makes navigating to a previous page work
+        // correctly.
+        last: props.before === null ? null : 30,
+        after: props.after
+      };
     });
 
-    return { data };
+    const { data, execute } = useQuery({
+      query: UserFollowingDocument,
+      variables: queryVariables
+    });
+
+    const pageInfo = computed(() => {
+      return {
+        startCursor: data.value?.user?.following?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.user?.following?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.user?.following?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.user?.following?.pageInfo.hasNextPage ?? false
+      };
+    });
+
+    return {
+      data,
+      execute,
+      pageInfo
+    };
   }
 });
 </script>
