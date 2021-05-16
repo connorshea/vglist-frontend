@@ -48,10 +48,14 @@ export default defineComponent({
   },
   setup(props, context) {
     const previousPageRoute = computed(() => {
-      return { name: props.pageName, query: { before: props.startCursor } };
+      // Get the current query params, other than before/after. This avoids
+      // wiping out any other query parameters that are already present.
+      let { before, after, ...currentQueryParams } = context.root.$route.query;
+      return { name: props.pageName, query: { before: props.startCursor, ...currentQueryParams } };
     });
     const nextPageRoute = computed(() => {
-      return { name: props.pageName, query: { after: props.endCursor } };
+      let { before, after, ...currentQueryParams } = context.root.$route.query;
+      return { name: props.pageName, query: { after: props.endCursor, ...currentQueryParams } };
     });
 
     const nextPage = (cursor: string) => {
