@@ -1,9 +1,9 @@
-query Genre($id: ID!) {
+query Genre($id: ID!, $before: String, $last: Int, $after: String) {
   genre(id: $id) {
     id
     name
     wikidataId
-    games {
+    games(before: $before, last: $last, after: $after) {
       nodes {
         ...gameCardFields
       }

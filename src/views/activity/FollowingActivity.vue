@@ -23,7 +23,14 @@
       <EventCard :event="event" :key="event.id" @refresh="execute"/>
     </template>
 
-    <!-- <%= paginate @events %> -->
+    <pagination
+      :page-name="'FollowingActivity'"
+      :start-cursor="pageInfo.startCursor"
+      :end-cursor="pageInfo.endCursor"
+      :has-next-page="pageInfo.hasNextPage"
+      :has-previous-page="pageInfo.hasPreviousPage"
+      @cursorChanged="execute"
+    />
   </div>
 </template>
 
@@ -32,19 +39,52 @@ import { ActivityFeed, ActivityFeedDocument } from '@/generated/graphql';
 import { computed, defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import EventCard from '@/components/EventCard.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default defineComponent({
   name: 'FollowingActivity',
   components: {
-    EventCard
+    EventCard,
+    Pagination
   },
-  setup(_props, context) {
+  props: {
+    after: {
+      type: String,
+      required: false,
+      default: null
+    },
+    before: {
+      type: String,
+      required: false,
+      default: null
+    }
+  },
+  setup(props, context) {
+    const queryVariables = computed(() => {
+      return {
+        feedType: ActivityFeed.Following,
+        before: props.before,
+        // Request the last 30 explicitly if we're using the 'before' argument,
+        // otherwise do nothing. This makes navigating to a previous page work
+        // correctly.
+        last: props.before === null ? null : 30,
+        after: props.after
+      };
+    });
+
     const { data, execute } = useQuery({
       query: ActivityFeedDocument,
-      variables: {
-        feedType: ActivityFeed.Following
-      },
+      variables: queryVariables,
       cachePolicy: 'network-only' // To allow the query to be re-fetched after deleting an event.
+    });
+
+    const pageInfo = computed(() => {
+      return {
+        startCursor: data.value?.activity?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.activity?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.activity?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.activity?.pageInfo.hasNextPage ?? false
+      };
     });
 
     const userSignedIn = computed(() => {
@@ -54,7 +94,8 @@ export default defineComponent({
     return {
       data,
       execute,
-      userSignedIn
+      userSignedIn,
+      pageInfo
     };
   }
 });

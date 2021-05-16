@@ -14,7 +14,14 @@
       </li>
     </ul>
 
-    <!-- <%= paginate @companies %> -->
+    <pagination
+      :page-name="'Companies'"
+      :start-cursor="pageInfo.startCursor"
+      :end-cursor="pageInfo.endCursor"
+      :has-next-page="pageInfo.hasNextPage"
+      :has-previous-page="pageInfo.hasPreviousPage"
+      @cursorChanged="execute"
+    />
   </div>
 </template>
 
@@ -22,22 +29,58 @@
 import { CompaniesDocument } from '@/generated/graphql';
 import { computed, defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
+import Pagination from '@/components/Pagination.vue';
 
 export default defineComponent({
   name: 'Companies',
-  setup(_props, context) {
-    const { data } = useQuery({
+  components: {
+    Pagination
+  },
+  props: {
+    after: {
+      type: String,
+      required: false,
+      default: null
+    },
+    before: {
+      type: String,
+      required: false,
+      default: null
+    }
+  },
+  setup(props, context) {
+    const queryVariables = computed(() => {
+      return {
+        before: props.before,
+        // Request the last 30 explicitly if we're using the 'before' argument,
+        // otherwise do nothing. This makes navigating to a previous page work
+        // correctly.
+        last: props.before === null ? null : 30,
+        after: props.after
+      };
+    });
+
+    const { data, execute } = useQuery({
       query: CompaniesDocument,
-      variables: {
-        after: ''
-      }
+      variables: queryVariables
+    });
+
+    const pageInfo = computed(() => {
+      return {
+        startCursor: data.value?.companies?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.companies?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.companies?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.companies?.pageInfo.hasNextPage ?? false
+      };
     });
 
     const userSignedIn = computed(() => context.root.$store.state.userSignedIn);
 
     return {
       data,
-      userSignedIn
+      execute,
+      userSignedIn,
+      pageInfo
     };
   }
 });

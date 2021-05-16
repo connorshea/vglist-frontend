@@ -150,7 +150,14 @@
       </table>
     </div>
 
-    <!-- <%= paginate @statistics %> -->
+    <pagination
+      :page-name="'AdminDashboard'"
+      :start-cursor="pageInfo.startCursor"
+      :end-cursor="pageInfo.endCursor"
+      :has-next-page="pageInfo.hasNextPage"
+      :has-previous-page="pageInfo.hasPreviousPage"
+      @cursorChanged="execute"
+    />
   </div>
 </template>
 
@@ -158,16 +165,50 @@
 import { useQuery } from 'villus';
 import { computed, defineComponent } from '@vue/composition-api';
 import { LiveStatisticsDocument, SiteStatisticsDocument } from '@/generated/graphql';
-import _ from 'lodash';
+import Pagination from '@/components/Pagination.vue';
+import { startCase } from 'lodash';
 
 export default defineComponent({
   name: 'AdminDashboard',
-  setup() {
-    const { data } = useQuery({
+  components: {
+    Pagination
+  },
+  props: {
+    after: {
+      type: String,
+      required: false,
+      default: null
+    },
+    before: {
+      type: String,
+      required: false,
+      default: null
+    }
+  },
+  setup(props) {
+    const queryVariables = computed(() => {
+      return {
+        before: props.before,
+        // Request the last 30 explicitly if we're using the 'before' argument,
+        // otherwise do nothing. This makes navigating to a previous page work
+        // correctly.
+        last: props.before === null ? null : 30,
+        after: props.after
+      };
+    });
+
+    const { data, execute } = useQuery({
       query: SiteStatisticsDocument,
-      variables: {
-        cursor: ''
-      }
+      variables: queryVariables
+    });
+
+    const pageInfo = computed(() => {
+      return {
+        startCursor: data.value?.siteStatistics?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.siteStatistics?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.siteStatistics?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.siteStatistics?.pageInfo.hasNextPage ?? false
+      };
     });
 
     const formatTimestamp = (timestamp: string) => {
@@ -234,12 +275,10 @@ export default defineComponent({
       );
     });
 
-    // Alias this specific function so we don't have to pass all of lodash into
-    // the Vue component.
-    const startCase = _.startCase;
-
     return {
       data,
+      execute,
+      pageInfo,
       formatTimestamp,
       recordCountRows,
       externalIdCounts,

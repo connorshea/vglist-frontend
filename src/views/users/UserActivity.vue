@@ -12,38 +12,79 @@
       <p class="has-text-centered has-text-muted">No activity for this user yet.</p>
     </template>
 
-    <!-- <%= paginate @events %> -->
+    <pagination
+      :page-name="'UserActivity'"
+      :start-cursor="pageInfo.startCursor"
+      :end-cursor="pageInfo.endCursor"
+      :has-next-page="pageInfo.hasNextPage"
+      :has-previous-page="pageInfo.hasPreviousPage"
+      @cursorChanged="execute"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import { UserActivityDocument } from '@/generated/graphql';
-import { defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import EventCard from '@/components/EventCard.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default defineComponent({
   name: 'UserActivity',
   components: {
-    EventCard
+    EventCard,
+    Pagination
   },
   props: {
     user: {
       required: true,
       type: Object
+    },
+    after: {
+      type: String,
+      required: false,
+      default: null
+    },
+    before: {
+      type: String,
+      required: false,
+      default: null
     }
   },
   setup(props) {
+    const queryVariables = computed(() => {
+      return {
+        userId: props.user.id,
+        before: props.before,
+        // Request the last 30 explicitly if we're using the 'before' argument,
+        // otherwise do nothing. This makes navigating to a previous page work
+        // correctly.
+        last: props.before === null ? null : 30,
+        after: props.after
+      };
+    });
+
     const { data, execute } = useQuery({
       query: UserActivityDocument,
-      variables: {
-        userId: props.user.id,
-        cursor: ''
-      },
+      variables: queryVariables,
       cachePolicy: 'network-only' // To allow the query to be re-fetched after deleting an event.
     });
 
-    return { data, execute };
+    const pageInfo = computed(() => {
+      return {
+        startCursor: data.value?.user?.activity?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.user?.activity?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.user?.activity?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.user?.activity?.pageInfo.hasNextPage ?? false
+      };
+    });
+
+    return {
+      data,
+      execute,
+      pageInfo
+    };
   }
 });
 </script>

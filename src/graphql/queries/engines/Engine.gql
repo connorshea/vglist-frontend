@@ -1,9 +1,9 @@
-query Engine($id: ID!) {
+query Engine($id: ID!, $before: String, $last: Int, $after: String) {
   engine(id: $id) {
     id
     name
     wikidataId
-    games {
+    games(before: $before, last: $last, after: $after) {
       nodes {
         ...gameCardFields
       }

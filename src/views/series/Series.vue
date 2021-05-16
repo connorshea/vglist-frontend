@@ -22,7 +22,14 @@
         </div>
       </div>
 
-      <!-- <%= paginate @games %> -->
+      <pagination
+        :page-name="'Series'"
+        :start-cursor="pageInfo.startCursor"
+        :end-cursor="pageInfo.endCursor"
+        :has-next-page="pageInfo.hasNextPage"
+        :has-previous-page="pageInfo.hasPreviousPage"
+        @cursorChanged="execute"
+      />
     </template>
     <template v-else>
       <p class='has-text-centered mt-50 has-text-muted'>This series doesn't have any games yet.</p>
@@ -35,24 +42,55 @@ import { DeleteSeriesDocument, SeriesDocument } from '@/generated/graphql';
 import { computed, defineComponent } from '@vue/composition-api';
 import { useMutation, useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default defineComponent({
   name: 'Series',
   components: {
-    GameCard
+    GameCard,
+    Pagination
   },
   props: {
     id: {
       required: true,
       type: String
+    },
+    after: {
+      type: String,
+      required: false,
+      default: null
+    },
+    before: {
+      type: String,
+      required: false,
+      default: null
     }
   },
   setup(props, context) {
-    const { data } = useQuery({
+    const queryVariables = computed(() => {
+      return {
+        id: props.id,
+        before: props.before,
+        // Request the last 30 explicitly if we're using the 'before' argument,
+        // otherwise do nothing. This makes navigating to a previous page work
+        // correctly.
+        last: props.before === null ? null : 30,
+        after: props.after
+      };
+    });
+
+    const { data, execute } = useQuery({
       query: SeriesDocument,
-      variables: {
-        id: props.id
-      }
+      variables: queryVariables
+    });
+
+    const pageInfo = computed(() => {
+      return {
+        startCursor: data.value?.series?.games?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.series?.games?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.series?.games?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.series?.games?.pageInfo.hasNextPage ?? false
+      };
     });
 
     const wikidataUrl = computed(() => {
@@ -82,11 +120,13 @@ export default defineComponent({
 
     return {
       data,
+      execute,
       wikidataUrl,
       deleteSeries,
       userSignedIn,
       userCanEdit,
-      userCanDelete
+      userCanDelete,
+      pageInfo
     };
   }
 });

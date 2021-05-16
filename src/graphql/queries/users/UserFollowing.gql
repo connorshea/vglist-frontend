@@ -1,6 +1,6 @@
-query UserFollowing($userId: ID!, $cursor: String!) {
+query UserFollowing($userId: ID!, $before: String, $last: Int, $after: String) {
   user(id: $userId) {
-    following(after: $cursor) {
+    following(before: $before, last: $last, after: $after) {
       nodes {
         ...userCardFields
       }

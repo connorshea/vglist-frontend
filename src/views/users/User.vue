@@ -62,11 +62,13 @@ export default defineComponent({
     }
   },
   setup(props, context) {
+    const queryVariables = computed(() => {
+      return { slug: props.slug };
+    });
+
     const { data } = useQuery({
       query: UserDocument,
-      variables: {
-        slug: props.slug
-      }
+      variables: queryVariables
     });
 
     const isCurrentUser = computed(() => {
