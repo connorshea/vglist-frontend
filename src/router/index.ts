@@ -162,7 +162,13 @@ const routes: Array<RouteConfig> = [
     path: '/companies/:id',
     name: 'Company',
     component: Company,
-    props: true
+    props: route => ({
+      id: route.params.id,
+      developedBefore: route.query.developedBefore,
+      developedAfter: route.query.developedAfter,
+      publishedBefore: route.query.publishedBefore,
+      publishedAfter: route.query.publishedAfter
+    })
   },
   {
     path: '/companies/new',

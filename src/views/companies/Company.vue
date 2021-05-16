@@ -24,7 +24,15 @@
         </div>
       </div>
 
-      <!-- <%= paginate @developed_games, param_name: :developer_page %> -->
+      <pagination
+        :page-name="'Company'"
+        :prefix="'developed'"
+        :start-cursor="developedPageInfo.startCursor"
+        :end-cursor="developedPageInfo.endCursor"
+        :has-next-page="developedPageInfo.hasNextPage"
+        :has-previous-page="developedPageInfo.hasPreviousPage"
+        @cursorChanged="execute"
+      />
     </template>
     <template v-else>
       <h2 class="subtitle is-4 mt-40">Developed</h2>
@@ -40,7 +48,15 @@
         </div>
       </div>
 
-      <!-- <%= paginate @published_games, param_name: :publisher_page %> -->
+      <pagination
+        :page-name="'Company'"
+        :prefix="'published'"
+        :start-cursor="publishedPageInfo.startCursor"
+        :end-cursor="publishedPageInfo.endCursor"
+        :has-next-page="publishedPageInfo.hasNextPage"
+        :has-previous-page="publishedPageInfo.hasPreviousPage"
+        @cursorChanged="execute"
+      />
     </template>
     <template v-else>
       <h2 class="subtitle is-4 mt-40">Published</h2>
@@ -54,28 +70,77 @@ import { CompanyDocument, DeleteCompanyDocument } from '@/generated/graphql';
 import { computed, defineComponent } from '@vue/composition-api';
 import { useMutation, useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default defineComponent({
   name: 'Company',
   components: {
-    GameCard
+    GameCard,
+    Pagination
   },
   props: {
     id: {
       required: true,
       type: String
+    },
+    developedAfter: {
+      type: String,
+      required: false,
+      default: null
+    },
+    developedBefore: {
+      type: String,
+      required: false,
+      default: null
+    },
+    publishedAfter: {
+      type: String,
+      required: false,
+      default: null
+    },
+    publishedBefore: {
+      type: String,
+      required: false,
+      default: null
     }
   },
   setup(props, context) {
     const queryVariables = computed(() => {
       return {
-        id: props.id
+        id: props.id,
+        developedBefore: props.developedBefore,
+        // Request the last 30 explicitly if we're using the 'before' argument,
+        // otherwise do nothing. This makes navigating to a previous page work
+        // correctly.
+        developedLast: props.developedBefore === null ? null : 30,
+        developedAfter: props.developedAfter,
+        publishedBefore: props.publishedBefore,
+        publishedLast: props.publishedBefore === null ? null : 30,
+        publishedAfter: props.publishedAfter
       };
     });
 
-    const { data } = useQuery({
+    const { data, execute } = useQuery({
       query: CompanyDocument,
       variables: queryVariables
+    });
+
+    const publishedPageInfo = computed(() => {
+      return {
+        startCursor: data.value?.company?.publishedGames?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.company?.publishedGames?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.company?.publishedGames?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.company?.publishedGames?.pageInfo.hasNextPage ?? false
+      };
+    });
+
+    const developedPageInfo = computed(() => {
+      return {
+        startCursor: data.value?.company?.developedGames?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.company?.developedGames?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.company?.developedGames?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.company?.developedGames?.pageInfo.hasNextPage ?? false
+      };
     });
 
     const wikidataUrl = computed(() => {
@@ -105,11 +170,14 @@ export default defineComponent({
 
     return {
       data,
+      execute,
       wikidataUrl,
       deleteCompany,
       userSignedIn,
       userCanEdit,
-      userCanDelete
+      userCanDelete,
+      developedPageInfo,
+      publishedPageInfo
     };
   }
 });

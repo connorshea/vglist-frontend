@@ -61,18 +61,29 @@ export default defineComponent({
     hasPreviousPage: {
       type: Boolean,
       required: true
+    },
+    // The optional prefix prop is for when there's more than one pagination
+    // component on the same page (just the Company page right now).
+    prefix: {
+      type: String,
+      required: false,
+      default: null
     }
   },
   setup(props, context) {
+    // If there's a prefix, we need to change the parameters a bit. Otherwise, just use 'before' and 'after'.
+    const beforeWithPrefix = props.prefix === null ? 'before' : `${props.prefix}Before`;
+    const afterWithPrefix = props.prefix === null ? 'after' : `${props.prefix}After`;
+
     const previousPageRoute = computed(() => {
       // Get the current query params, other than before/after. This avoids
       // wiping out any other query parameters that are already present.
-      let { before, after, ...currentQueryParams } = context.root.$route.query;
-      return { name: props.pageName, query: { before: props.startCursor, ...currentQueryParams } };
+      let { [beforeWithPrefix]: before, [afterWithPrefix]: after, ...currentQueryParams } = context.root.$route.query;
+      return { name: props.pageName, query: { [beforeWithPrefix]: props.startCursor, ...currentQueryParams } };
     });
     const nextPageRoute = computed(() => {
-      let { before, after, ...currentQueryParams } = context.root.$route.query;
-      return { name: props.pageName, query: { after: props.endCursor, ...currentQueryParams } };
+      let { [beforeWithPrefix]: before, [afterWithPrefix]: after, ...currentQueryParams } = context.root.$route.query;
+      return { name: props.pageName, query: { [afterWithPrefix]: props.endCursor, ...currentQueryParams } };
     });
 
     const nextPage = (cursor: string) => {
