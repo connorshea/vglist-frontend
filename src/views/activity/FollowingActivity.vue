@@ -38,7 +38,19 @@ export default defineComponent({
   components: {
     EventCard
   },
-  setup(_props, context) {
+  props: {
+    after: {
+      type: String,
+      required: false,
+      default: null
+    },
+    before: {
+      type: String,
+      required: false,
+      default: null
+    }
+  },
+  setup(props, context) {
     const { data, execute } = useQuery({
       query: ActivityFeedDocument,
       variables: {

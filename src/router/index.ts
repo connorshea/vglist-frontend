@@ -80,29 +80,49 @@ const routes: Array<RouteConfig> = [
       {
         path: 'wikidata_blocklist',
         name: 'WikidataBlocklist',
-        component: WikidataBlocklist
+        component: WikidataBlocklist,
+        props: route => ({
+          before: route.query.before,
+          after: route.query.after
+        })
       },
       {
         path: 'steam_blocklist',
         name: 'SteamBlocklist',
-        component: SteamBlocklist
+        component: SteamBlocklist,
+        props: route => ({
+          before: route.query.before,
+          after: route.query.after
+        })
       }
     ]
   },
   {
     path: '/activity',
     name: 'Activity',
-    component: Activity
+    component: Activity,
+    props: route => ({
+      before: route.query.before,
+      after: route.query.after
+    })
   },
   {
     path: '/activity/following',
     name: 'FollowingActivity',
-    component: FollowingActivity
+    component: FollowingActivity,
+    props: route => ({
+      before: route.query.before,
+      after: route.query.after
+    })
   },
   {
     path: '/engines',
     name: 'Engines',
-    component: Engines
+    component: Engines,
+    props: route => ({
+      before: route.query.before,
+      after: route.query.after
+    })
   },
   {
     path: '/engines/:id',
@@ -124,7 +144,11 @@ const routes: Array<RouteConfig> = [
   {
     path: '/companies',
     name: 'Companies',
-    component: Companies
+    component: Companies,
+    props: route => ({
+      before: route.query.before,
+      after: route.query.after
+    })
   },
   {
     path: '/companies/:id',
@@ -164,7 +188,11 @@ const routes: Array<RouteConfig> = [
   {
     path: '/genres',
     name: 'Genres',
-    component: Genres
+    component: Genres,
+    props: route => ({
+      before: route.query.before,
+      after: route.query.after
+    })
   },
   {
     path: '/genres/:id',
@@ -186,7 +214,11 @@ const routes: Array<RouteConfig> = [
   {
     path: '/platforms',
     name: 'Platforms',
-    component: Platforms
+    component: Platforms,
+    props: route => ({
+      before: route.query.before,
+      after: route.query.after
+    })
   },
   {
     path: '/platforms/:id',
@@ -208,7 +240,11 @@ const routes: Array<RouteConfig> = [
   {
     path: '/series',
     name: 'SeriesList',
-    component: SeriesList
+    component: SeriesList,
+    props: route => ({
+      before: route.query.before,
+      after: route.query.after
+    })
   },
   {
     path: '/series/:id',
@@ -230,7 +266,11 @@ const routes: Array<RouteConfig> = [
   {
     path: '/stores',
     name: 'Stores',
-    component: Stores
+    component: Stores,
+    props: route => ({
+      before: route.query.before,
+      after: route.query.after
+    })
   },
   {
     path: '/stores/:id',
@@ -256,7 +296,7 @@ const routes: Array<RouteConfig> = [
     props: route => ({
       sortBy: route.query.sort_by as string,
       before: route.query.before,
-      after: route.query.after,
+      after: route.query.after
     })
   },
   {

@@ -25,7 +25,19 @@ import { useQuery } from 'villus';
 
 export default defineComponent({
   name: 'SeriesList',
-  setup(_props, context) {
+  props: {
+    after: {
+      type: String,
+      required: false,
+      default: null
+    },
+    before: {
+      type: String,
+      required: false,
+      default: null
+    }
+  },
+  setup(props, context) {
     const { data } = useQuery({
       query: SeriesListDocument,
       variables: {

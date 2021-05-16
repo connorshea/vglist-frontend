@@ -46,6 +46,18 @@ import { useMutation, useQuery } from 'villus';
 
 export default defineComponent({
   name: 'WikidataBlocklist',
+  props: {
+    after: {
+      type: String,
+      required: false,
+      default: null
+    },
+    before: {
+      type: String,
+      required: false,
+      default: null
+    }
+  },
   setup() {
     const { data, execute } = useQuery({
       query: WikidataBlocklistDocument,
