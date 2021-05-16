@@ -32,7 +32,14 @@
           </div>
         </div>
 
-        <!-- <%= paginate @games %> -->
+        <pagination
+          :page-name="'Games'"
+          :start-cursor="data.games.pageInfo.startCursor"
+          :end-cursor="data.games.pageInfo.endCursor"
+          :has-next-page="data.games.pageInfo.hasNextPage"
+          :has-previous-page="data.games.pageInfo.hasPreviousPage"
+          @cursorChanged="updateCursorAndExecute"
+        />
       </div>
     </div>
   </div>
@@ -45,13 +52,15 @@ import { useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
 import GamesFilters from '@/components/GamesFilters.vue';
 import SortDropdown from '@/components/SortDropdown.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default defineComponent({
   name: 'Games',
   components: {
     GameCard,
     GamesFilters,
-    SortDropdown
+    SortDropdown,
+    Pagination
   },
   props: {
     sortBy: {
@@ -68,25 +77,37 @@ export default defineComponent({
       type: Number,
       required: false,
       default: null
+    },
+    before: {
+      type: String,
+      required: false,
+      default: null
+    },
+    after: {
+      type: String,
+      required: false,
+      default: null
     }
   },
   setup(props, context) {
     type SortOptionsType = GameSort | null;
 
-    const queryVariables: Ref<{ cursor: string, sortBy: SortOptionsType, byYear: number | null, platformId: string | null}> = ref({
-      cursor: '',
+    const queryVariables: Ref<{ before: string | null, after: string | null, sortBy: SortOptionsType, byYear: number | null, platformId: string | null}> = ref({
+      before: props.before,
+      after: props.after,
       sortBy: props.sortBy?.toUpperCase() as SortOptionsType,
       byYear: props.byYear,
       platformId: props.platformId
     });
 
-    const { data } = useQuery({
+    const { data, execute } = useQuery({
       query: GamesDocument,
-      variables: queryVariables.value
+      variables: queryVariables,
+      cachePolicy: 'network-only'
     });
 
     const updateSortValue = (sort: SortOptionsType) => {
-      let { sort_by, ...currentQueryParams } = context.root.$route.query;
+      let { sort_by, before, after, ...currentQueryParams } = context.root.$route.query;
       let query = { ...currentQueryParams };
       if (sort !== null) {
         query.sort_by = sort.toLowerCase();
@@ -135,12 +156,20 @@ export default defineComponent({
       }
     ];
 
+    const updateCursorAndExecute = () => {
+      queryVariables.value.after = props.after;
+      queryVariables.value.before = props.before;
+
+      execute();
+    };
+
     return {
       data,
       sortOptions,
       updateSortValue,
       updateFilters,
-      queryVariables
+      queryVariables,
+      updateCursorAndExecute
     };
   }
 });
