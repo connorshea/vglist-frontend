@@ -14,7 +14,14 @@
       </li>
     </ul>
 
-    <!-- <%= paginate @platforms %> -->
+    <pagination
+      :page-name="'Platforms'"
+      :start-cursor="pageInfo.startCursor"
+      :end-cursor="pageInfo.endCursor"
+      :has-next-page="pageInfo.hasNextPage"
+      :has-previous-page="pageInfo.hasPreviousPage"
+      @cursorChanged="execute"
+    />
   </div>
 </template>
 
@@ -22,9 +29,13 @@
 import { PlatformsDocument } from '@/generated/graphql';
 import { computed, defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
+import Pagination from '@/components/Pagination.vue';
 
 export default defineComponent({
   name: 'Platforms',
+  components: {
+    Pagination
+  },
   props: {
     after: {
       type: String,
@@ -49,7 +60,7 @@ export default defineComponent({
       };
     });
 
-    const { data } = useQuery({
+    const { data, execute } = useQuery({
       query: PlatformsDocument,
       variables: queryVariables
     });
@@ -66,6 +77,7 @@ export default defineComponent({
 
     return {
       data,
+      execute,
       userSignedIn,
       pageInfo
     };

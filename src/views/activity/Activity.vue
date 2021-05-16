@@ -23,7 +23,14 @@
       <EventCard :event="event" :key="event.id" @refresh="execute"/>
     </template>
 
-    <!-- <%= paginate @events %> -->
+    <pagination
+      :page-name="'Activity'"
+      :start-cursor="pageInfo.startCursor"
+      :end-cursor="pageInfo.endCursor"
+      :has-next-page="pageInfo.hasNextPage"
+      :has-previous-page="pageInfo.hasPreviousPage"
+      @cursorChanged="execute"
+    />
   </div>
 </template>
 
@@ -32,11 +39,13 @@ import { ActivityFeed, ActivityFeedDocument } from '@/generated/graphql';
 import { computed, defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import EventCard from '@/components/EventCard.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default defineComponent({
   name: 'Activity',
   components: {
-    EventCard
+    EventCard,
+    Pagination
   },
   props: {
     after: {

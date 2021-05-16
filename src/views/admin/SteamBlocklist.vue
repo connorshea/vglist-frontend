@@ -35,7 +35,14 @@
       </table>
     </div>
 
-    <!-- <%= paginate @blocklist %> -->
+    <pagination
+      :page-name="'SteamBlocklist'"
+      :start-cursor="pageInfo.startCursor"
+      :end-cursor="pageInfo.endCursor"
+      :has-next-page="pageInfo.hasNextPage"
+      :has-previous-page="pageInfo.hasPreviousPage"
+      @cursorChanged="execute"
+    />
   </div>
 </template>
 
@@ -43,9 +50,13 @@
 import { SteamBlocklistDocument, RemoveFromSteamBlocklistDocument } from '@/generated/graphql';
 import { computed, defineComponent } from '@vue/composition-api';
 import { useMutation, useQuery } from 'villus';
+import Pagination from '@/components/Pagination.vue';
 
 export default defineComponent({
   name: 'SteamBlocklist',
+  components: {
+    Pagination
+  },
   props: {
     after: {
       type: String,
@@ -100,6 +111,7 @@ export default defineComponent({
 
     return {
       data,
+      execute,
       removeSteamBlocklistEntry,
       steamUrl,
       pageInfo
