@@ -75,7 +75,11 @@ const routes: Array<RouteConfig> = [
       {
         path: '',
         name: 'AdminDashboard',
-        component: AdminDashboard
+        component: AdminDashboard,
+        props: route => ({
+          before: route.query.before,
+          after: route.query.after
+        })
       },
       {
         path: 'wikidata_blocklist',
