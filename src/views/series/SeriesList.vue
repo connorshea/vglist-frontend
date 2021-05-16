@@ -29,7 +29,7 @@ export default defineComponent({
     const { data } = useQuery({
       query: SeriesListDocument,
       variables: {
-        cursor: ''
+        after: ''
       }
     });
 

@@ -1,5 +1,5 @@
-query SeriesList($cursor: String!) {
-  seriesList(after: $cursor) {
+query SeriesList($before: String, $last: Int, $after: String) {
+  seriesList(before: $before, last: $last, after: $after) {
     nodes {
       id
       name

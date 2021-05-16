@@ -1,5 +1,5 @@
-query Genres($cursor: String!) {
-  genres(after: $cursor) {
+query Genres($before: String, $last: Int, $after: String) {
+  genres(before: $before, last: $last, after: $after) {
     nodes {
       id
       name

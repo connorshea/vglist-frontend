@@ -1,5 +1,5 @@
-query WikidataBlocklist($cursor: String) {
-  wikidataBlocklist(after: $cursor) {
+query WikidataBlocklist($before: String, $last: Int, $after: String) {
+  wikidataBlocklist(before: $before, last: $last, after: $after) {
     nodes {
       id
       name

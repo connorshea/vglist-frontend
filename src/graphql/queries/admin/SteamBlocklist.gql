@@ -1,5 +1,5 @@
-query SteamBlocklist($cursor: String) {
-  steamBlocklist(after: $cursor) {
+query SteamBlocklist($before: String, $last: Int, $after: String) {
+  steamBlocklist(before: $before, last: $last, after: $after) {
     nodes {
       id
       name

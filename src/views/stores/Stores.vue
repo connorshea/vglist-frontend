@@ -29,7 +29,7 @@ export default defineComponent({
     const { data } = useQuery({
       query: StoresDocument,
       variables: {
-        cursor: ''
+        after: ''
       }
     });
 

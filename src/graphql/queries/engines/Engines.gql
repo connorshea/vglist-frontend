@@ -1,5 +1,5 @@
-query Engines($cursor: String!) {
-  engines(after: $cursor) {
+query Engines($before: String, $last: Int, $after: String) {
+  engines(before: $before, last: $last, after: $after) {
     nodes {
       id
       name

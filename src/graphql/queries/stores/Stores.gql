@@ -1,5 +1,5 @@
-query Stores($cursor: String!) {
-  stores(after: $cursor) {
+query Stores($before: String, $last: Int, $after: String) {
+  stores(before: $before, last: $last, after: $after) {
     nodes {
       id
       name

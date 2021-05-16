@@ -1,5 +1,5 @@
-query Platforms($cursor: String!) {
-  platforms(after: $cursor) {
+query Platforms($before: String, $last: Int, $after: String) {
+  platforms(before: $before, last: $last, after: $after) {
     nodes {
       id
       name

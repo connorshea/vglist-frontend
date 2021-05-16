@@ -1,5 +1,5 @@
-query Companies($cursor: String!) {
-  companies(after: $cursor) {
+query Companies($before: String, $last: Int, $after: String) {
+  companies(before: $before, last: $last, after: $after) {
     nodes {
       id
       name

@@ -50,7 +50,7 @@ export default defineComponent({
     const { data, execute } = useQuery({
       query: SteamBlocklistDocument,
       variables: {
-        cursor: ''
+        after: ''
       }
     });
 
