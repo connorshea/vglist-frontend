@@ -111,8 +111,7 @@ export default defineComponent({
 
     const { data, execute } = useQuery({
       query: GamesDocument,
-      variables: queryVariables,
-      cachePolicy: 'network-only'
+      variables: queryVariables
     });
 
     const pageInfo = computed(() => {

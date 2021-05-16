@@ -152,7 +152,7 @@ const routes: Array<RouteConfig> = [
       platformId: (route.query.platform_id as string) ?? null,
       byYear: parseInt(route.query.by_year as string) ?? null,
       before: route.query.before,
-      after: route.query.after,
+      after: route.query.after
     })
   },
   {
@@ -253,7 +253,11 @@ const routes: Array<RouteConfig> = [
     path: '/users',
     name: 'Users',
     component: Users,
-    props: route => ({ sortBy: (route.query.sort_by as string)?.toLowerCase() })
+    props: route => ({
+      sortBy: route.query.sort_by as string,
+      before: route.query.before,
+      after: route.query.after,
+    })
   },
   {
     path: '/users/:slug',

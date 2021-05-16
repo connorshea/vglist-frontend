@@ -4,8 +4,8 @@
 
     <sort-dropdown
       :sortOptions="sortOptions"
-      :initialSortOption="sortBy"
-      @activeSortChanged="refetchQuery"
+      :initialSortOption="upcasedSortBy"
+      @activeSortChanged="updateSortValue"
     ></sort-dropdown>
 
     <div class="user-card-list mt-20">
@@ -14,50 +14,91 @@
       </template>
     </div>
 
-    <!-- <%= paginate @users %> -->
+    <pagination
+      :page-name="'Users'"
+      :start-cursor="pageInfo.startCursor"
+      :end-cursor="pageInfo.endCursor"
+      :has-next-page="pageInfo.hasNextPage"
+      :has-previous-page="pageInfo.hasPreviousPage"
+      @cursorChanged="execute"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import { UsersDocument, UserSort } from '@/generated/graphql';
-import { defineComponent, Ref, ref } from '@vue/composition-api';
+import { computed, defineComponent } from '@vue/composition-api';
 import { useQuery } from 'villus';
 import UserCard from '@/components/UserCard.vue';
 import SortDropdown from '@/components/SortDropdown.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default defineComponent({
   name: 'Users',
   components: {
     UserCard,
-    SortDropdown
+    SortDropdown,
+    Pagination
   },
   props: {
     sortBy: {
       type: String,
       required: false,
       default: null
+    },
+    before: {
+      type: String,
+      requrired: false,
+      default: null
+    },
+    after: {
+      type: String,
+      requrired: false,
+      default: null
     }
   },
   setup(props, context) {
     type SortOptionsType = UserSort | null;
 
-    let upcasedSortBy = props.sortBy?.toUpperCase() ?? null;
-    const activeSortOption: Ref<SortOptionsType> = ref(upcasedSortBy as SortOptionsType);
-    const queryVariables = ref({ cursor: '', sortBy: activeSortOption });
+    // Upcase it so we can pass the capitalized version to the sort dropdown, to
+    // ensure the default value works correctly.
+    const upcasedSortBy = computed(() => props.sortBy?.toUpperCase());
+
+    const queryVariables = computed(() => {
+      return {
+        before: props.before,
+        // Request the last 30 explicitly if we're using the 'before' argument,
+        // otherwise do nothing. This makes navigating to a previous page work
+        // correctly.
+        last: props.before === null ? null : 30,
+        after: props.after,
+        sortBy: upcasedSortBy.value as SortOptionsType,
+      };
+    });
+
     const { execute, data } = useQuery({
       query: UsersDocument,
       variables: queryVariables
     });
 
-    const refetchQuery = (sort: SortOptionsType) => {
-      activeSortOption.value = sort;
-      let { sort_by, ...currentQueryParams } = context.root.$route.query;
+    const pageInfo = computed(() => {
+      return {
+        startCursor: data.value?.users?.pageInfo.startCursor ?? null,
+        endCursor: data.value?.users?.pageInfo.endCursor ?? null,
+        hasPreviousPage: data.value?.users?.pageInfo.hasPreviousPage ?? false,
+        hasNextPage: data.value?.users?.pageInfo.hasNextPage ?? false
+      };
+    });
+
+    const updateSortValue = (sort: SortOptionsType) => {
+      // Override the before and after values since we have to restart the
+      // cursor when changing the sort.
+      let { sort_by, before, after, ...currentQueryParams } = context.root.$route.query;
       let query = { ...currentQueryParams };
       if (sort !== null) {
         query.sort_by = sort.toLowerCase();
       }
       context.root.$router.push({ name: 'Users', query: query });
-      execute();
     };
 
     const sortOptions: Array<{ name: string, value: SortOptionsType }> = [
@@ -77,9 +118,11 @@ export default defineComponent({
 
     return {
       data,
-      activeSortOption,
-      refetchQuery,
-      sortOptions
+      execute,
+      updateSortValue,
+      upcasedSortBy,
+      sortOptions,
+      pageInfo
     };
   }
 });
