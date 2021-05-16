@@ -98,6 +98,10 @@ export default defineComponent({
     const queryVariables: ComputedRef<{ before: string | null, after: string | null, sortBy: SortOptionsType, byYear: number | null, platformId: string | null}> = computed(() => {
       return {
         before: props.before,
+        // Request the last 30 explicitly if we're using the 'before' argument,
+        // otherwise do nothing. This makes navigating to a previous page work
+        // correctly.
+        last: props.before === null ? null : 30,
         after: props.after,
         sortBy: upcasedSortBy.value as SortOptionsType,
         byYear: props.byYear,
