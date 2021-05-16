@@ -1,9 +1,17 @@
-query Company($id: ID!) {
+query Company(
+  $id: ID!,
+  $developedBefore: String,
+  $developedLast: Int,
+  $developedAfter: String,
+  $publishedBefore: String,
+  $publishedLast: Int,
+  $publishedAfter: String
+) {
   company(id: $id) {
     id
     name
     wikidataId
-    developedGames {
+    developedGames(before: $developedBefore, last: $developedLast, after: $developedAfter) {
       nodes {
         ...gameCardFields
       }
@@ -11,7 +19,7 @@ query Company($id: ID!) {
         ...paginationFields
       }
     }
-    publishedGames {
+    publishedGames(before: $publishedBefore, last: $publishedLast, after: $publishedAfter) {
       nodes {
         ...gameCardFields
       }

@@ -1,9 +1,9 @@
-query Platform($id: ID!) {
+query Platform($id: ID!, $before: String, $last: Int, $after: String) {
   platform(id: $id) {
     id
     name
     wikidataId
-    games {
+    games(before: $before, last: $last, after: $after) {
       nodes {
         ...gameCardFields
       }

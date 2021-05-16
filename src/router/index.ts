@@ -128,7 +128,11 @@ const routes: Array<RouteConfig> = [
     path: '/engines/:id',
     name: 'Engine',
     component: Engine,
-    props: true
+    props: route => ({
+      id: route.params.id,
+      before: route.query.before,
+      after: route.query.after
+    })
   },
   {
     path: '/engines/new',
@@ -198,7 +202,11 @@ const routes: Array<RouteConfig> = [
     path: '/genres/:id',
     name: 'Genre',
     component: Genre,
-    props: true
+    props: route => ({
+      id: route.params.id,
+      before: route.query.before,
+      after: route.query.after
+    })
   },
   {
     path: '/genres/new',
@@ -224,7 +232,11 @@ const routes: Array<RouteConfig> = [
     path: '/platforms/:id',
     name: 'Platform',
     component: Platform,
-    props: true
+    props: route => ({
+      id: route.params.id,
+      before: route.query.before,
+      after: route.query.after
+    })
   },
   {
     path: '/platforms/new',
@@ -250,7 +262,11 @@ const routes: Array<RouteConfig> = [
     path: '/series/:id',
     name: 'Series',
     component: Series,
-    props: true
+    props: route => ({
+      id: route.params.id,
+      before: route.query.before,
+      after: route.query.after
+    })
   },
   {
     path: '/series/new',

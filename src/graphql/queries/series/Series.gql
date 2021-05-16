@@ -1,9 +1,9 @@
-query Series($id: ID!) {
+query Series($id: ID!, $before: String, $last: Int, $after: String) {
   series(id: $id) {
     id
     name
     wikidataId
-    games {
+    games(before: $before, last: $last, after: $after) {
       nodes {
         ...gameCardFields
       }

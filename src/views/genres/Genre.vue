@@ -45,14 +45,34 @@ export default defineComponent({
     id: {
       required: true,
       type: String
+    },
+    after: {
+      type: String,
+      required: false,
+      default: null
+    },
+    before: {
+      type: String,
+      required: false,
+      default: null
     }
   },
   setup(props, context) {
+    const queryVariables = computed(() => {
+      return {
+        id: props.id,
+        before: props.before,
+        // Request the last 30 explicitly if we're using the 'before' argument,
+        // otherwise do nothing. This makes navigating to a previous page work
+        // correctly.
+        last: props.before === null ? null : 30,
+        after: props.after
+      };
+    });
+
     const { data } = useQuery({
       query: GenreDocument,
-      variables: {
-        id: props.id
-      }
+      variables: queryVariables
     });
 
     const wikidataUrl = computed(() => {

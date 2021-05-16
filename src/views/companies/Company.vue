@@ -67,11 +67,15 @@ export default defineComponent({
     }
   },
   setup(props, context) {
+    const queryVariables = computed(() => {
+      return {
+        id: props.id
+      };
+    });
+
     const { data } = useQuery({
       query: CompanyDocument,
-      variables: {
-        id: props.id
-      }
+      variables: queryVariables
     });
 
     const wikidataUrl = computed(() => {
