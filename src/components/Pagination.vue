@@ -1,18 +1,34 @@
 <template>
   <div>
     <nav class="pagination is-centered mt-15" role="navigation" aria-label="pagination">
-      <a
-        rel="prev"
-        class="pagination-previous"
-        :disabled="!hasPreviousPage"
-        @click="previousPage(startCursor)"
-      >Previous</a>
-      <a
-        rel="next"
-        class="pagination-next"
-        :disabled="!hasNextPage"
-        @click="nextPage(endCursor)"
-      >Next</a>
+      <!-- Use a custom router-link so we can have a click trigger on the link
+           while still allowing it to be an HTML anchor and be opened in a new
+           tab.
+      -->
+      <router-link
+        :to="previousPageRoute"
+        v-slot="{ href }"
+        custom
+      >
+        <a :href="href"
+           rel="prev"
+           class="pagination-previous"
+           :disabled="!hasPreviousPage"
+           @click.prevent="previousPage(startCursor)"
+        >Previous</a>
+      </router-link>
+      <router-link
+        :to="nextPageRoute"
+        v-slot="{ href }"
+        custom
+      >
+        <a :href="href"
+           rel="next"
+           class="pagination-next"
+           :disabled="!hasNextPage"
+           @click.prevent="nextPage(endCursor)"
+        >Next</a>
+      </router-link>
     </nav>
   </div>
 </template>
@@ -77,7 +93,9 @@ export default defineComponent({
 
     return {
       previousPage,
-      nextPage
+      previousPageRoute,
+      nextPage,
+      nextPageRoute
     };
   }
 });
