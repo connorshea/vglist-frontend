@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <!-- Don't render anything if there is more than one page. -->
+  <div v-if="hasPreviousPage || hasNextPage">
     <nav class="pagination is-centered mt-15" role="navigation" aria-label="pagination">
       <!-- Use a custom router-link so we can have a click trigger on the link
            while still allowing it to be an HTML anchor and be opened in a new
