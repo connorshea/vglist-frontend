@@ -8,6 +8,7 @@ query User($slug: String!) {
     privacy
     banned
     role
+    isFollowed
     followers {
       totalCount
     }

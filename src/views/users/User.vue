@@ -44,7 +44,7 @@
         </template>
       </ul>
     </div>
-    <router-view :user="data.user"></router-view>
+    <router-view :user="data.user" @refreshUserData="execute({ cachePolicy: 'network-only' })"></router-view>
   </div>
 </template>
 
@@ -66,7 +66,7 @@ export default defineComponent({
       return { slug: props.slug };
     });
 
-    const { data } = useQuery({
+    const { data, execute } = useQuery({
       query: UserDocument,
       variables: queryVariables
     });
@@ -121,6 +121,7 @@ export default defineComponent({
 
     return {
       data,
+      execute,
       isCurrentUser,
       isPublic,
       tabs
