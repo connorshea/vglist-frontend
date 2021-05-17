@@ -205,6 +205,7 @@ export default defineComponent({
       }
     }
 
+    // TODO: Add confirmation.
     const updateUserRole = (role: UserRole) => {
       const userId = props.user.id;
       // TODO: Error handling here?
@@ -215,6 +216,7 @@ export default defineComponent({
       }
     }
 
+    // TODO: Add confirmation.
     const removeUserAvatar = () => {
       const userId = props.user.id;
       // TODO: Error handling here?
@@ -225,6 +227,7 @@ export default defineComponent({
       }
     }
 
+    // TODO: Add confirmation.
     const banUser = () => {
       const userId = props.user.id;
       // TODO: Error handling here?
@@ -235,6 +238,7 @@ export default defineComponent({
       }
     }
 
+    // TODO: Add confirmation.
     const unbanUser = () => {
       const userId = props.user.id;
       // TODO: Error handling here?
