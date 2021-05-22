@@ -2,7 +2,7 @@
   <div>
     <h1 class="title">{{ title }}</h1>
 
-    <TextField
+    <text-field
       :form-class="formData.class"
       :attribute="formData.name.attribute"
       :label="formData.name.label"
@@ -10,7 +10,7 @@
       v-model="platform.name"
     />
 
-    <NumberField
+    <number-field
       :form-class="formData.class"
       :attribute="formData.wikidataId.attribute"
       :label="formData.wikidataId.label"
