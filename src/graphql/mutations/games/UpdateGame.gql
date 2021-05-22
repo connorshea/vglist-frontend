@@ -14,7 +14,7 @@ mutation UpdateGame(
   $mobygamesId: String,
   $giantbombId: String,
   $pcgamingwikiId: String,
-  $wikidataId: Int,
+  $wikidataId: ID,
   $igdbId: String
 ) {
   updateGame(
