@@ -1,0 +1,8 @@
+query SeriesSearch($query: String!) {
+  seriesSearch(query: $query) {
+    nodes {
+     	id
+      name
+    }
+  }
+}

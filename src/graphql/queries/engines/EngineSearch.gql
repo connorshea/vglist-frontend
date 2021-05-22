@@ -1,0 +1,8 @@
+query EngineSearch($query: String!) {
+  engineSearch(query: $query) {
+    nodes {
+     	id
+      name
+    }
+  }
+}

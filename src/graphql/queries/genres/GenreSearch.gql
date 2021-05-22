@@ -1,0 +1,8 @@
+query GenreSearch($query: String!) {
+  genreSearch(query: $query) {
+    nodes {
+     	id
+      name
+    }
+  }
+}
