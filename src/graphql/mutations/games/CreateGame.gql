@@ -1,0 +1,42 @@
+mutation CreateGame(
+  $name: String!,
+  $releaseDate: ISO8601Date,
+  $seriesId: ID,
+  $developerIds: [ID!],
+  $publisherIds: [ID!],
+  $platformIds: [ID!],
+  $engineIds: [ID!],
+  $genreIds: [ID!],
+  $steamAppIds: [Int!],
+  $gogId: String,
+  $epicGamesStoreId: String,
+  $mobygamesId: String,
+  $giantbombId: String,
+  $pcgamingwikiId: String,
+  $wikidataId: Int,
+  $igdbId: String
+) {
+  createGame(
+    name: $name,
+    releaseDate: $releaseDate,
+    seriesId: $seriesId,
+    developerIds: $developerIds,
+    publisherIds: $publisherIds,
+    platformIds: $platformIds,
+    engineIds: $engineIds,
+    genreIds: $genreIds,
+    steamAppIds: $steamAppIds,
+    gogId: $gogId,
+    epicGamesStoreId: $epicGamesStoreId,
+    mobygamesId: $mobygamesId,
+    giantbombId: $giantbombId
+    pcgamingwikiId: $pcgamingwikiId,
+    wikidataId: $wikidataId,
+    igdbId: $igdbId
+  ) {
+    game {
+      id
+      name
+    }
+  }
+}
