@@ -23,6 +23,8 @@ import EditEngine from '@/views/engines/EditEngine.vue';
 
 import Games from '@/views/games/Games.vue';
 import Game from '@/views/games/Game.vue';
+import CreateGame from '@/views/games/CreateGame.vue';
+import EditGame from '@/views/games/EditGame.vue';
 
 import Genre from '@/views/genres/Genre.vue';
 import Genres from '@/views/genres/Genres.vue';
@@ -197,6 +199,17 @@ const routes: Array<RouteConfig> = [
     path: '/games/:id',
     name: 'Game',
     component: Game,
+    props: true
+  },
+  {
+    path: '/games/new',
+    name: 'CreateGame',
+    component: CreateGame
+  },
+  {
+    path: '/games/:id/edit',
+    name: 'EditGame',
+    component: EditGame,
     props: true
   },
   {
