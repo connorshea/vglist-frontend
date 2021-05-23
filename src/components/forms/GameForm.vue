@@ -2,6 +2,17 @@
   <div>
     <h1 class="title">{{ title }}</h1>
 
+    <!-- Display errors if there are any. -->
+    <div class="notification errors-notification is-danger" v-if="errors.length > 0">
+      <p>
+        {{ errors.length > 1 ? 'Errors' : 'An error' }} prevented this game from
+        being saved:
+      </p>
+      <ul>
+        <li v-for="error in errors" :key="error">{{ error }}</li>
+      </ul>
+    </div>
+
     <text-field
       :form-class="formData.class"
       :attribute="formData.name.attribute"
@@ -118,7 +129,7 @@
     />
 
     <button
-      class="button is-primary mr-10 mr-0-mobile is-fullwidth-mobile"
+      class="button is-primary mr-10 mr-0-mobile is-fullwidth-mobile js-submit-button"
       value="Submit"
       @click.prevent="onSubmit"
     >Submit</button>
@@ -130,7 +141,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from '@vue/composition-api';
+import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
 import TextField from '@/components/fields/TextField.vue';
 import SingleSelect from '@/components/fields/SingleSelect.vue';
 import NumberField from '@/components/fields/NumberField.vue';
@@ -302,6 +313,8 @@ export default defineComponent({
       }
     };
 
+    const errors: Ref<string[]> = ref([]);
+
     const game = ref({
       id: props.id ?? null, 
       name: props.name ?? '',
@@ -379,8 +392,8 @@ export default defineComponent({
         if (createGameData.value.createGame?.game?.id) {
           context.root.$router.push({ name: 'Game', params: { id: createGameData.value.createGame.game.id }});
         } else {
-          // TODO: Error handling.
-          console.log(`Error: ${createGameErrors.value}`);
+          errors.value = createGameErrors.value.graphqlErrors?.map((error) => error.message) ?? [];
+          submitButtonErrorAnimation();
         }
       });
     };
@@ -432,10 +445,20 @@ export default defineComponent({
         if (updateGameData.value.updateGame?.game?.id) {
           context.root.$router.push({ name: 'Game', params: { id: props.id }});
         } else {
-          // TODO: Error handling.
-          console.log(`Error: ${updateGameErrors.value}`);
+          errors.value = updateGameErrors.value.graphqlErrors?.map((error) => error.message) ?? [];
+          submitButtonErrorAnimation();
         }
       });
+    };
+
+    // Basic function to trigger an animation on the submit button when
+    // there's a failure.
+    const submitButtonErrorAnimation = () => {
+      let submitButton = document.querySelector('.js-submit-button');
+      submitButton?.classList.add('js-submit-button-error');
+      setTimeout(() => {
+        submitButton?.classList.remove('js-submit-button-error');
+      }, 2000);
     };
 
     return {
@@ -450,7 +473,8 @@ export default defineComponent({
       EngineSearchDocument,
       GenreSearchDocument,
       PlatformSearchDocument,
-      SeriesSearchDocument
+      SeriesSearchDocument,
+      errors
     };
   }
 });
