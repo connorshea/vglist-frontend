@@ -2,16 +2,7 @@
   <div>
     <h1 class="title">{{ title }}</h1>
 
-    <!-- Display errors if there are any. -->
-    <div class="notification errors-notification is-danger" v-if="errors.length > 0">
-      <p>
-        {{ errors.length > 1 ? 'Errors' : 'An error' }} prevented this game from
-        being saved:
-      </p>
-      <ul>
-        <li v-for="error in errors" :key="error">{{ error }}</li>
-      </ul>
-    </div>
+    <error-box :errors="errors" />
 
     <text-field
       :form-class="formData.class"
@@ -148,6 +139,7 @@ import NumberField from '@/components/fields/NumberField.vue';
 import MultiSelect from '@/components/fields/MultiSelect.vue';
 import MultiSelectGeneric from '@/components/fields/MultiSelectGeneric.vue';
 import DateField from '@/components/fields/DateField.vue';
+import ErrorBox from '@/components/ErrorBox.vue';
 import { useMutation } from 'villus';
 import { UpdateGameDocument, CreateGameDocument, CompanySearchDocument, GenreSearchDocument, EngineSearchDocument, PlatformSearchDocument, SeriesSearchDocument } from '@/generated/graphql';
 
@@ -159,7 +151,8 @@ export default defineComponent({
     NumberField,
     MultiSelect,
     MultiSelectGeneric,
-    DateField
+    DateField,
+    ErrorBox
   },
   props: {
     id: {
@@ -392,7 +385,9 @@ export default defineComponent({
         if (createGameData.value.createGame?.game?.id) {
           context.root.$router.push({ name: 'Game', params: { id: createGameData.value.createGame.game.id }});
         } else {
-          errors.value = createGameErrors.value.graphqlErrors?.map((error) => error.message) ?? [];
+          // Multiple errors are returned as one string with comma separators,
+          // so we split them and then flatten the resulting array.
+          errors.value = createGameErrors.value.graphqlErrors?.map((error) => error.message.split(',')).flat() ?? [];
           submitButtonErrorAnimation();
         }
       });
@@ -445,7 +440,9 @@ export default defineComponent({
         if (updateGameData.value.updateGame?.game?.id) {
           context.root.$router.push({ name: 'Game', params: { id: props.id }});
         } else {
-          errors.value = updateGameErrors.value.graphqlErrors?.map((error) => error.message) ?? [];
+          // Multiple errors are returned as one string with comma separators,
+          // so we split them and then flatten the resulting array.
+          errors.value = updateGameErrors.value.graphqlErrors?.map((error) => error.message.split(',')).flat() ?? [];
           submitButtonErrorAnimation();
         }
       });
