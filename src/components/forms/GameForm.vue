@@ -167,7 +167,8 @@ export default defineComponent({
     },
     releaseDate: {
       type: Date,
-      required: false
+      required: false,
+      default: () => null
     },
     genres: {
       type: Array,
@@ -364,7 +365,7 @@ export default defineComponent({
 
       let executeVariables = {
         name: name,
-        releaseDate: releaseDate === null ? null : new Date(releaseDate).toISOString(),
+        releaseDate: coerceReleaseDate(releaseDate),
         wikidataId: wikidataId.toString(),
         seriesId: series?.id,
         genreIds: genres.map(genre => genre.id),
@@ -420,7 +421,7 @@ export default defineComponent({
       let executeVariables = {
         gameId: gameId,
         name: name,
-        releaseDate: releaseDate === null ? null : new Date(releaseDate).toISOString(),
+        releaseDate: coerceReleaseDate(releaseDate),
         wikidataId: wikidataId.toString(),
         seriesId: series?.id,
         genreIds: genres.map(genre => genre.id),
@@ -456,6 +457,17 @@ export default defineComponent({
       setTimeout(() => {
         submitButton?.classList.remove('js-submit-button-error');
       }, 2000);
+    };
+
+    /**
+     * Coerces the provided release date if possible into an ISO-formatted Date.
+     *
+     * @param date The release date to coerce into a string.
+     * @return the coerced release date in YYYY-MM-DD format, or `null`.
+     */
+    const coerceReleaseDate = (date: string | null) => {
+      if (date === '' || date === null) { return null; }
+      return new Date(date).toISOString();
     };
 
     return {

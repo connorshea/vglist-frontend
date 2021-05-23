@@ -88,7 +88,7 @@ export default defineComponent({
     executeQuery().then(({ data }) => {
       game.value.name = data?.game?.name ?? null;
       game.value.wikidataId = data?.game?.wikidataId ?? null;
-      game.value.releaseDate = new Date(data?.game?.releaseDate) ?? null;
+      game.value.releaseDate = data?.game?.releaseDate === null ? null : new Date(data?.game?.releaseDate);
       game.value.steamAppIds = data?.game?.steamAppIds ?? [];
       game.value.series = data?.game?.series === null ? null : { id: data?.game?.series?.id, name: data?.game?.series?.name } as BasicRecord;
       game.value.engines = data?.game?.engines?.nodes?.map(engine => {
