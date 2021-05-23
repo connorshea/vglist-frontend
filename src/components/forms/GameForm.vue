@@ -332,7 +332,7 @@ export default defineComponent({
     };
 
     const cancelRouterLink = computed(() => {
-      return props.formState === 'create' ? { name: 'Game' } : { name: 'Game', params: { id: props.id }};
+      return props.formState === 'create' ? { name: 'Games' } : { name: 'Game', params: { id: props.id }};
     });
 
     const { data: createGameData, execute: executeCreateGame, error: createGameErrors } = useMutation(CreateGameDocument);
