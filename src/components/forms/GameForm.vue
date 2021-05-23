@@ -305,7 +305,8 @@ export default defineComponent({
     const game = ref({
       id: props.id ?? null, 
       name: props.name ?? '',
-      releaseDate: props.releaseDate ?? null,
+      // Hack to format the release date in YYYY-MM-DD, without a time element.
+      releaseDate: props.releaseDate?.toISOString().split('T')[0] ?? null,
       wikidataId: props.wikidataId ?? '',
       series: props.series as { id: string, name: string } ,
       platforms: props.platforms as Array<{ id: string, name: string }>,
