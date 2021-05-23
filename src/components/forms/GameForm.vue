@@ -305,6 +305,7 @@ export default defineComponent({
     const game = ref({
       id: props.id ?? null, 
       name: props.name ?? '',
+      releaseDate: props.releaseDate ?? null,
       wikidataId: props.wikidataId ?? '',
       series: props.series as { id: string, name: string } ,
       platforms: props.platforms as Array<{ id: string, name: string }>,
@@ -335,9 +336,10 @@ export default defineComponent({
 
     const { data: createGameData, execute: executeCreateGame, error: createGameErrors } = useMutation(CreateGameDocument);
     let createGame = () => {
-      let { name, wikidataId, developers, publishers, engines, genres, platforms, series, steamAppIds, ...gameValues } = game.value;
+      let { name, releaseDate, wikidataId, developers, publishers, engines, genres, platforms, series, steamAppIds, ...gameValues } = game.value;
       let executeVariables = {
         name: name ?? '',
+        releaseDate: releaseDate === null ? null : new Date(releaseDate).toISOString(),
         wikidataId: wikidataId.toString(),
         seriesId: series?.id,
         genreIds: genres.map(genre => genre.id),
@@ -360,10 +362,11 @@ export default defineComponent({
 
     const { data: updateGameData, execute: executeUpdateGame, error: updateGameErrors } = useMutation(UpdateGameDocument);
     let updateGame = () => {
-      let { id: gameId, wikidataId, developers, publishers, engines, genres, platforms, series, steamAppIds, ...gameValues } = game.value;
+      let { id: gameId, releaseDate, wikidataId, developers, publishers, engines, genres, platforms, series, steamAppIds, ...gameValues } = game.value;
       if (gameId === null) { throw Error('Something went wrong and id is null.') }
       let executeVariables = {
         gameId: gameId,
+        releaseDate: releaseDate === null ? null : new Date(releaseDate).toISOString(),
         wikidataId: wikidataId.toString(),
         seriesId: series?.id,
         genreIds: genres.map(genre => genre.id),
