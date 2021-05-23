@@ -337,7 +337,26 @@ export default defineComponent({
 
     const { data: createGameData, execute: executeCreateGame, error: createGameErrors } = useMutation(CreateGameDocument);
     let createGame = () => {
-      let { name, releaseDate, wikidataId, developers, publishers, engines, genres, platforms, series, steamAppIds, ...gameValues } = game.value;
+      let {
+        name,
+        releaseDate,
+        wikidataId,
+        developers,
+        publishers,
+        engines,
+        genres,
+        platforms,
+        series,
+        steamAppIds,
+        epicGamesStoreId,
+        igdbId,
+        mobygamesId,
+        giantbombId,
+        pcgamingwikiId,
+        gogId,
+        ...gameValues
+      } = game.value;
+
       let executeVariables = {
         name: name ?? '',
         releaseDate: releaseDate === null ? null : new Date(releaseDate).toISOString(),
@@ -349,8 +368,15 @@ export default defineComponent({
         publisherIds: publishers.map(publisher => publisher.id),
         platformIds: platforms.map(platform => platform.id),
         steamAppIds: steamAppIds.map(appId => Number(appId)),
+        epicGamesStoreId: epicGamesStoreId === '' ? null : epicGamesStoreId,
+        igdbId: igdbId === '' ? null : igdbId,
+        mobygamesId: mobygamesId === '' ? null : mobygamesId,
+        giantbombId: giantbombId === '' ? null : giantbombId,
+        pcgamingwikiId: pcgamingwikiId === '' ? null : pcgamingwikiId,
+        gogId: gogId === '' ? null : gogId,
         ...gameValues
       };
+
       executeCreateGame(executeVariables).then(() => {
         if (createGameData.value.createGame?.game?.id) {
           context.root.$router.push({ name: 'Game', params: { id: createGameData.value.createGame.game.id }});
@@ -363,8 +389,28 @@ export default defineComponent({
 
     const { data: updateGameData, execute: executeUpdateGame, error: updateGameErrors } = useMutation(UpdateGameDocument);
     let updateGame = () => {
-      let { id: gameId, releaseDate, wikidataId, developers, publishers, engines, genres, platforms, series, steamAppIds, ...gameValues } = game.value;
+      let {
+        id: gameId,
+        releaseDate,
+        wikidataId,
+        developers,
+        publishers,
+        engines,
+        genres,
+        platforms,
+        series,
+        steamAppIds,
+        epicGamesStoreId,
+        igdbId,
+        mobygamesId,
+        giantbombId,
+        pcgamingwikiId,
+        gogId,
+        ...gameValues
+      } = game.value;
+
       if (gameId === null) { throw Error('Something went wrong and id is null.') }
+
       let executeVariables = {
         gameId: gameId,
         releaseDate: releaseDate === null ? null : new Date(releaseDate).toISOString(),
@@ -376,6 +422,12 @@ export default defineComponent({
         publisherIds: publishers.map(publisher => publisher.id),
         platformIds: platforms.map(platform => platform.id),
         steamAppIds: steamAppIds.map(appId => Number(appId)),
+        epicGamesStoreId: epicGamesStoreId === '' ? null : epicGamesStoreId,
+        igdbId: igdbId === '' ? null : igdbId,
+        mobygamesId: mobygamesId === '' ? null : mobygamesId,
+        giantbombId: giantbombId === '' ? null : giantbombId,
+        pcgamingwikiId: pcgamingwikiId === '' ? null : pcgamingwikiId,
+        gogId: gogId === '' ? null : gogId,
         ...gameValues
       };
       executeUpdateGame(executeVariables).then(() => {
