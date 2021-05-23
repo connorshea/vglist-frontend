@@ -20,9 +20,9 @@
 
       <div class="is-9 column">
         <div class="field buttons">
-          <!-- <% if policy(@games).create? %>
-            <%= link_to("Create a new game", new_game_path, class: 'button mr-0-mobile is-fullwidth-mobile') %>
-          <% end %> -->
+          <router-link :to="{ name: 'CreateGame' }" class="button is-fullwidth-mobile mb-10" v-if="userSignedIn">
+            Create a new game
+          </router-link>
         </div>
 
         <div class="game-card-list">
@@ -169,6 +169,8 @@ export default defineComponent({
       }
     ];
 
+    const userSignedIn = computed(() => context.root.$store.state.userSignedIn);
+
     return {
       data,
       sortOptions,
@@ -176,7 +178,8 @@ export default defineComponent({
       queryVariables,
       pageInfo,
       upcasedSortBy,
-      execute
+      execute,
+      userSignedIn
     };
   }
 });

@@ -1,0 +1,8 @@
+query CompanySearch($query: String!) {
+  companySearch(query: $query) {
+    nodes {
+     	id
+      name
+    }
+  }
+}

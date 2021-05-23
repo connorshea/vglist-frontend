@@ -13,7 +13,7 @@ mutation CreateGame(
   $mobygamesId: String,
   $giantbombId: String,
   $pcgamingwikiId: String,
-  $wikidataId: Int,
+  $wikidataId: ID,
   $igdbId: String
 ) {
   createGame(

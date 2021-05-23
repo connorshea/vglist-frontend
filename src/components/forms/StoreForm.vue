@@ -2,7 +2,7 @@
   <div>
     <h1 class="title">{{ title }}</h1>
 
-    <TextField
+    <text-field
       :form-class="formData.class"
       :attribute="formData.name.attribute"
       :label="formData.name.label"

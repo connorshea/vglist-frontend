@@ -30,8 +30,7 @@
 
           <div class="dropdown-menu is-fullwidth" id="actions-dropdown-menu" role="menu">
             <div class="dropdown-content">
-              <!-- TODO: Make this a link to the game edit page. -->
-              <a class="dropdown-item">Edit</a>
+              <router-link v-if="userSignedIn" :to="{ name: 'EditGame', params: { id: data.game.id }}" class="dropdown-item">Edit</router-link>
               <a v-if="userIsModeratorOrAdmin && canRemoveCover" class="dropdown-item has-text-danger" @click="removeCover">Remove cover</a>
               <a v-if="userIsModeratorOrAdmin && canAddToWikidataBlocklist" class="dropdown-item has-text-danger" @click="addGameToWikidataBlocklist">Add to Wikidata Blocklist</a>
               <a v-if="userIsAdmin" class="dropdown-item has-text-danger" @click="mergeGame">Merge</a>

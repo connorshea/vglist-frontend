@@ -18,7 +18,7 @@
           </ul>
         </div>
         <div v-if="gameSelected">
-          <SingleSelect
+          <single-select
             :label="formData.game.label"
             v-model="gamePurchase.game"
             :max-height="'150px'"
@@ -26,87 +26,87 @@
             @input="selectGame"
             :graphqlQuery="GameSearchDocument"
             :searchPath="'gameSearch'"
-          ></SingleSelect>
+          />
 
-          <StaticSingleSelect
+          <static-single-select
             :label="formData.completionStatus.label"
             v-model="gamePurchase.completionStatus"
             :options="formattedCompletionStatuses"
-          ></StaticSingleSelect>
+          />
 
-          <NumberField
+          <number-field
             :form-class="formData.class"
             :attribute="formData.rating.attribute"
             :label="formData.rating.label"
             :required="false"
             :max="100"
             v-model="gamePurchase.rating"
-          ></NumberField>
+          />
 
-          <NumberField
+          <number-field
             :form-class="formData.class"
             :attribute="formData.hoursPlayed.attribute"
             :label="formData.hoursPlayed.label"
             :required="false"
             v-model="gamePurchase.hoursPlayed"
-          ></NumberField>
+          />
 
-          <NumberField
+          <number-field
             :form-class="formData.class"
             :attribute="formData.replayCount.attribute"
             :label="formData.replayCount.label"
             :required="false"
             v-model="gamePurchase.replayCount"
-          ></NumberField>
+          />
 
-          <TextArea
+          <text-area
             :form-class="formData.class"
             :attribute="formData.comments.attribute"
             :label="formData.comments.label"
             :required="false"
             v-model="gamePurchase.comments"
-          ></TextArea>
+          />
 
-          <DateField
+          <date-field
             :form-class="formData.class"
             :attribute="formData.startDate.attribute"
             :label="formData.startDate.label"
             :required="false"
             v-model="gamePurchase.startDate"
-          ></DateField>
+          />
 
-          <DateField
+          <date-field
             :form-class="formData.class"
             :attribute="formData.completionDate.attribute"
             :label="formData.completionDate.label"
             :required="false"
             v-model="gamePurchase.completionDate"
-          ></DateField>
+          />
 
-          <MultiSelect
+          <multi-select
             :label="formData.platforms.label"
             v-model="gamePurchase.platforms"
             :search-path="'platformSearch'"
             :graphqlQuery="PlatformSearchDocument"
-          ></MultiSelect>
+          />
 
-          <MultiSelect
+          <multi-select
             :label="formData.stores.label"
             v-model="gamePurchase.stores"
             :search-path="'storeSearch'"
             :graphqlQuery="StoreSearchDocument"
-          ></MultiSelect>
+          />
         </div>
 
         <div v-else>
-          <SingleSelect
+          <single-select
             :label="formData.game.label"
             v-model="gamePurchase.game"
             :max-height="'150px'"
             @input="selectGame"
             :graphqlQuery="GameSearchDocument"
             :searchPath="'gameSearch'"
-          ></SingleSelect>
+          />
         </div>
       </section>
       <footer class="modal-card-foot">
