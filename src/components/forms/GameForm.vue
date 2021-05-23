@@ -353,12 +353,11 @@ export default defineComponent({
         mobygamesId,
         giantbombId,
         pcgamingwikiId,
-        gogId,
-        ...gameValues
+        gogId
       } = game.value;
 
       let executeVariables = {
-        name: name ?? '',
+        name: name,
         releaseDate: releaseDate === null ? null : new Date(releaseDate).toISOString(),
         wikidataId: wikidataId.toString(),
         seriesId: series?.id,
@@ -373,8 +372,7 @@ export default defineComponent({
         mobygamesId: mobygamesId === '' ? null : mobygamesId,
         giantbombId: giantbombId === '' ? null : giantbombId,
         pcgamingwikiId: pcgamingwikiId === '' ? null : pcgamingwikiId,
-        gogId: gogId === '' ? null : gogId,
-        ...gameValues
+        gogId: gogId === '' ? null : gogId
       };
 
       executeCreateGame(executeVariables).then(() => {
@@ -391,6 +389,7 @@ export default defineComponent({
     let updateGame = () => {
       let {
         id: gameId,
+        name,
         releaseDate,
         wikidataId,
         developers,
@@ -405,14 +404,14 @@ export default defineComponent({
         mobygamesId,
         giantbombId,
         pcgamingwikiId,
-        gogId,
-        ...gameValues
+        gogId
       } = game.value;
 
       if (gameId === null) { throw Error('Something went wrong and id is null.') }
 
       let executeVariables = {
         gameId: gameId,
+        name: name,
         releaseDate: releaseDate === null ? null : new Date(releaseDate).toISOString(),
         wikidataId: wikidataId.toString(),
         seriesId: series?.id,
@@ -427,8 +426,7 @@ export default defineComponent({
         mobygamesId: mobygamesId === '' ? null : mobygamesId,
         giantbombId: giantbombId === '' ? null : giantbombId,
         pcgamingwikiId: pcgamingwikiId === '' ? null : pcgamingwikiId,
-        gogId: gogId === '' ? null : gogId,
-        ...gameValues
+        gogId: gogId === '' ? null : gogId
       };
       executeUpdateGame(executeVariables).then(() => {
         if (updateGameData.value.updateGame?.game?.id) {
