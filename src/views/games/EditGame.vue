@@ -83,28 +83,28 @@ export default defineComponent({
     // sure we can pre-populate the form as necessary.
     const isLoaded = ref(false);
 
-    type VglistRecord = { id: string, name: string };
+    type BasicRecord = { id: string, name: string };
 
     executeQuery().then(({ data }) => {
       game.value.name = data?.game?.name ?? null;
       game.value.wikidataId = data?.game?.wikidataId ?? null;
       game.value.releaseDate = new Date(data?.game?.releaseDate) ?? null;
       game.value.steamAppIds = data?.game?.steamAppIds ?? [];
-      game.value.series = data?.game?.series === null ? null : { id: data?.game?.series?.id, name: data?.game?.series?.name } as VglistRecord;
+      game.value.series = data?.game?.series === null ? null : { id: data?.game?.series?.id, name: data?.game?.series?.name } as BasicRecord;
       game.value.engines = data?.game?.engines?.nodes?.map(engine => {
-        return { id: engine?.id, name: engine?.name } as VglistRecord;
+        return { id: engine?.id, name: engine?.name } as BasicRecord;
       }) ?? [];
       game.value.genres = data?.game?.genres?.nodes?.map(genre => {
-        return { id: genre?.id, name: genre?.name } as VglistRecord;
+        return { id: genre?.id, name: genre?.name } as BasicRecord;
       }) ?? [];
       game.value.developers = data?.game?.developers?.nodes?.map(developer => {
-        return { id: developer?.id, name: developer?.name } as VglistRecord;
+        return { id: developer?.id, name: developer?.name } as BasicRecord;
       }) ?? [];
       game.value.publishers = data?.game?.publishers?.nodes?.map(publisher => {
-        return { id: publisher?.id, name: publisher?.name } as VglistRecord;
+        return { id: publisher?.id, name: publisher?.name } as BasicRecord;
       }) ?? [];
       game.value.platforms = data?.game?.platforms?.nodes?.map(platform => {
-        return { id: platform?.id, name: platform?.name } as VglistRecord;
+        return { id: platform?.id, name: platform?.name } as BasicRecord;
       }) ?? [];
       game.value.steamAppIds = data?.game?.steamAppIds ?? [];
       game.value.epicGamesStoreId = data?.game?.epicGamesStoreId ?? null;

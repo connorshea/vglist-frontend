@@ -442,7 +442,7 @@ export type Game = {
   /** The series that the game belongs to. */
   series?: Maybe<Series>;
   /** Identifier for Steam games. Games can have more than one Steam App ID, but most will only have one. */
-  steamAppIds?: Maybe<Array<Scalars['Int']>>;
+  steamAppIds: Array<Scalars['Int']>;
   /** When this game was last updated. */
   updatedAt: Scalars['ISO8601DateTime'];
   /** Identifier for Wikidata. */
