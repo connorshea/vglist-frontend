@@ -2,6 +2,11 @@
   <div>
     <h1 class="title">{{ title }}</h1>
 
+    <error-box
+      :errors="errors"
+      :record-type="'engine'"
+    />
+
     <text-field
       :form-class="formData.class"
       :attribute="formData.name.attribute"
@@ -35,14 +40,17 @@
 import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
 import TextField from '@/components/fields/TextField.vue';
 import NumberField from '@/components/fields/NumberField.vue';
+import ErrorBox from '@/components/ErrorBox.vue';
 import { useMutation } from 'villus';
 import { UpdateEngineDocument, CreateEngineDocument } from '@/generated/graphql';
+import { submitButtonErrorAnimation } from '@/helpers/submitButtonErrorAnimation';
 
 export default defineComponent({
   name: 'EngineForm',
   components: {
     TextField,
-    NumberField
+    NumberField,
+    ErrorBox
   },
   props: {
     id: {
@@ -77,7 +85,9 @@ export default defineComponent({
         label: 'Wikidata ID',
         attribute: 'wikidata_id'
       }
-    }
+    };
+
+    const errors: Ref<string[]> = ref([]);
 
     const engine: Ref<{ id: string | null, name: string | null, wikidataId: string | null }> = ref({
       id: props.id ?? null, 
@@ -104,8 +114,10 @@ export default defineComponent({
         if (createEngineData.value.createEngine?.engine?.id) {
           context.root.$router.push({ name: 'Engine', params: { id: createEngineData.value.createEngine.engine.id }});
         } else {
-          // TODO: Error handling.
-          console.log(`Error: ${createEngineErrors.value}`);
+          // Multiple errors are returned as one string with comma separators,
+          // so we split them and then flatten the resulting array.
+          errors.value = createEngineErrors.value.graphqlErrors?.map((error) => error.message.split(',')).flat() ?? [];
+          submitButtonErrorAnimation();
         }
       });
     };
@@ -118,8 +130,10 @@ export default defineComponent({
         if (updateEngineData.value.updateEngine?.engine?.id) {
           context.root.$router.push({ name: 'Engine', params: { id: props.id }});
         } else {
-          // TODO: Error handling.
-          console.log(`Error: ${updateEngineErrors.value}`);
+          // Multiple errors are returned as one string with comma separators,
+          // so we split them and then flatten the resulting array.
+          errors.value = updateEngineErrors.value.graphqlErrors?.map((error) => error.message.split(',')).flat() ?? [];
+          submitButtonErrorAnimation();
         }
       });
     };
@@ -131,7 +145,8 @@ export default defineComponent({
       onSubmit,
       createEngine,
       updateEngine,
-      cancelRouterLink
+      cancelRouterLink,
+      errors
     };
   }
 });

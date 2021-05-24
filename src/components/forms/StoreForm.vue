@@ -2,6 +2,11 @@
   <div>
     <h1 class="title">{{ title }}</h1>
 
+    <error-box
+      :errors="errors"
+      :record-type="'store'"
+    />
+
     <text-field
       :form-class="formData.class"
       :attribute="formData.name.attribute"
@@ -25,13 +30,16 @@
 <script lang="ts">
 import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
 import TextField from '@/components/fields/TextField.vue';
+import ErrorBox from '@/components/ErrorBox.vue';
 import { useMutation } from 'villus';
 import { UpdateStoreDocument, CreateStoreDocument } from '@/generated/graphql';
+import { submitButtonErrorAnimation } from '@/helpers/submitButtonErrorAnimation';
 
 export default defineComponent({
   name: 'StoreForm',
   components: {
     TextField,
+    ErrorBox
   },
   props: {
     id: {
@@ -57,7 +65,9 @@ export default defineComponent({
         label: 'Store name',
         attribute: 'name'
       }
-    }
+    };
+
+    const errors: Ref<string[]> = ref([]);
 
     const store: Ref<{ id: string | null, name: string | null}> = ref({
       id: props.id ?? null, 
@@ -82,8 +92,10 @@ export default defineComponent({
         if (createStoreData.value.createStore?.store?.id) {
           context.root.$router.push({ name: 'Store', params: { id: createStoreData.value.createStore.store.id }});
         } else {
-          // TODO: Error handling.
-          console.log(`Error: ${createStoreErrors.value}`);
+          // Multiple errors are returned as one string with comma separators,
+          // so we split them and then flatten the resulting array.
+          errors.value = createStoreErrors.value.graphqlErrors?.map((error) => error.message.split(',')).flat() ?? [];
+          submitButtonErrorAnimation();
         }
       });
     };
@@ -96,8 +108,10 @@ export default defineComponent({
         if (updateStoreData.value.updateStore?.store?.id) {
           context.root.$router.push({ name: 'Store', params: { id: props.id }});
         } else {
-          // TODO: Error handling.
-          console.log(`Error: ${updateStoreErrors.value}`);
+          // Multiple errors are returned as one string with comma separators,
+          // so we split them and then flatten the resulting array.
+          errors.value = updateStoreErrors.value.graphqlErrors?.map((error) => error.message.split(',')).flat() ?? [];
+          submitButtonErrorAnimation();
         }
       });
     };
@@ -109,7 +123,8 @@ export default defineComponent({
       onSubmit,
       createStore,
       updateStore,
-      cancelRouterLink
+      cancelRouterLink,
+      errors
     };
   }
 });

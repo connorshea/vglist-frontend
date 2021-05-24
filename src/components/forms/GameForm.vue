@@ -2,7 +2,10 @@
   <div>
     <h1 class="title">{{ title }}</h1>
 
-    <error-box :errors="errors" />
+    <error-box
+      :errors="errors"
+      :record-type="'game'"
+    />
 
     <text-field
       :form-class="formData.class"
@@ -142,6 +145,7 @@ import DateField from '@/components/fields/DateField.vue';
 import ErrorBox from '@/components/ErrorBox.vue';
 import { useMutation } from 'villus';
 import { UpdateGameDocument, CreateGameDocument, CompanySearchDocument, GenreSearchDocument, EngineSearchDocument, PlatformSearchDocument, SeriesSearchDocument } from '@/generated/graphql';
+import { submitButtonErrorAnimation } from '@/helpers/submitButtonErrorAnimation';
 
 export default defineComponent({
   name: 'GameForm',
@@ -447,16 +451,6 @@ export default defineComponent({
           submitButtonErrorAnimation();
         }
       });
-    };
-
-    // Basic function to trigger an animation on the submit button when
-    // there's a failure.
-    const submitButtonErrorAnimation = () => {
-      let submitButton = document.querySelector('.js-submit-button');
-      submitButton?.classList.add('js-submit-button-error');
-      setTimeout(() => {
-        submitButton?.classList.remove('js-submit-button-error');
-      }, 2000);
     };
 
     /**
