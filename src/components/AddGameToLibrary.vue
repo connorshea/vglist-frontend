@@ -125,14 +125,16 @@ export default defineComponent({
     const { execute: executeRemoveGameFromLibrary } = useMutation(RemoveGameFromLibraryDocument);
 
     const removeGameFromLibrary = () => {
-      executeRemoveGameFromLibrary({ id: props.game.id });
-      context.emit('refresh');
+      if (confirm("Are you sure you want to remove this game from your library?")) {
+        executeRemoveGameFromLibrary({ id: props.game.id }).then(() => {
+          context.emit('refresh');
+        });
+      }
     };
 
     const onSubmit = (submittedGamePurchase: { id: string }) => {
       queryVariables.value = { id: submittedGamePurchase.id };
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      executeGamePurchase().then(({ data: _data, error: _error }) => {
+      executeGamePurchase().then(() => {
         // TODO: Error handling.
         context.emit('refresh');
       });
