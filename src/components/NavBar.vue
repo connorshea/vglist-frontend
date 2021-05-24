@@ -160,9 +160,12 @@ export default defineComponent({
       );
     };
 
+    // This is pretty much just a fake sign out for a user.
     const signOut = () => {
-      // This is pretty much just a fake sign out for a user.
-      context.root.$store.commit('signOut');
+      // Delay it by 50ms because otherwise clicking the "Sign out" button in
+      // the navbar will cause a page navigation to the API docs dropdown
+      // item instead.
+      setTimeout(() => context.root.$store.commit('signOut'), 50);
     };
 
     const oauthUrl = computed(() => {
