@@ -233,7 +233,7 @@ export default defineComponent({
           },
           {
             title: 'Changelog',
-            path: 'https://github.com/connorshea/vglist/blob/master/CHANGELOG.md',
+            path: 'https://github.com/connorshea/vglist/blob/main/CHANGELOG.md',
             router: false
           },
           {
@@ -243,7 +243,7 @@ export default defineComponent({
           },
           {
             title: 'API Docs',
-            path: 'https://github.com/connorshea/vglist/blob/master/API.md',
+            path: 'https://github.com/connorshea/vglist/blob/main/API.md',
             router: false
           },
           {
@@ -257,7 +257,7 @@ export default defineComponent({
             router: false
           }
         ]
-      )
+      );
 
       // Add `id` to all items in the items array so we can use it as the key.
       return items.map((item, i) => ({ id: i, ...item }));

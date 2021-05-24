@@ -5,7 +5,7 @@ An experimental frontend made entirely in Vue for [vglist](https://github.com/co
 ## Project setup
 
 - Install dependencies with `yarn install`.
-- Clone the vglist backend with `git clone https://github.com/connorshea/vglist.git` (probably in a separate directory), see the instructions in the [CONTRIBUTING.md](https://github.com/connorshea/vglist/blob/master/CONTRIBUTING.md) for the backend project to set it up.
+- Clone the vglist backend with `git clone https://github.com/connorshea/vglist.git` (probably in a separate directory), see the instructions in the [CONTRIBUTING.md](https://github.com/connorshea/vglist/blob/main/CONTRIBUTING.md) for the backend project to set it up.
 - Once the backend is set up and running, log in and go to Settings > Developer > [Applications > New Application](http://localhost:3000/settings/oauth/applications/new) and create an application with the following:
   - Name: Whatever you want, I use `Local vglist Vue frontend`
   - Redirect URI: `http://localhost:8080`
