@@ -93,7 +93,7 @@
         <p class="has-text-muted">No one has favorited this game yet.</p>
       </template>
 
-      <div class="card more-from-this-series-card mt-15" v-if="data.game.series.games.nodes.length > 1">
+      <div class="card more-from-this-series-card mt-15" v-if="data.game.series !== null && data.game.series.games.nodes.length > 1">
         <div class="card-content">
           <h3 class="title is-5 mb-15">
             <router-link :to="{ name: 'Series', params: { id: data.game.series.id } }">
