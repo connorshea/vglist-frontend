@@ -33,7 +33,7 @@
               <router-link v-if="userSignedIn" :to="{ name: 'EditGame', params: { id: data.game.id }}" class="dropdown-item">Edit</router-link>
               <a v-if="userIsModeratorOrAdmin && canRemoveCover" class="dropdown-item has-text-danger" @click="removeCover">Remove cover</a>
               <a v-if="userIsModeratorOrAdmin && canAddToWikidataBlocklist" class="dropdown-item has-text-danger" @click="addGameToWikidataBlocklist">Add to Wikidata Blocklist</a>
-              <a v-if="userIsAdmin" class="dropdown-item has-text-danger" @click="mergeGame">Merge</a>
+              <merge-games-button v-if="userIsAdmin" :game="data.game" />
               <a v-if="userIsModeratorOrAdmin" class="dropdown-item has-text-danger" @click="deleteGame">Delete</a>
             </div>
           </div>
@@ -124,13 +124,15 @@ import { useMutation, useQuery } from 'villus';
 import GameInfobox from '@/components/GameInfobox.vue';
 import AddGameToLibrary from '@/components/AddGameToLibrary.vue';
 import SvgIcon from '@/components/SvgIcon.vue';
+import MergeGamesButton from '@/components/MergeGamesButton.vue';
 
 export default defineComponent({
   name: 'Game',
   components: {
     GameInfobox,
     AddGameToLibrary,
-    SvgIcon
+    SvgIcon,
+    MergeGamesButton
   },
   props: {
     id: {
@@ -139,11 +141,13 @@ export default defineComponent({
     }
   },
   setup(props, context) {
+    const queryVariables = computed(() => {
+      return { id: props.id };
+    });
+
     const { data, execute } = useQuery({
       query: GameDocument,
-      variables: {
-        id: props.id
-      },
+      variables: queryVariables,
       cachePolicy: 'network-only'
     });
 
@@ -214,10 +218,6 @@ export default defineComponent({
       }
     };
 
-    const mergeGame = () => {
-      console.log('TODO');
-    };
-
     const deleteGame = () => {
       if (confirm("Are you sure you want to delete this game?")) {
         const gameId = data.value?.game?.id;
@@ -244,7 +244,6 @@ export default defineComponent({
       canRemoveCover,
       removeCover,
       addGameToWikidataBlocklist,
-      mergeGame,
       deleteGame
     };
   }
