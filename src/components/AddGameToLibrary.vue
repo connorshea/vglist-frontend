@@ -5,7 +5,7 @@
       @click="editGameInLibrary()"
       class="button is-fullwidth is-primary mr-5 mr-0-mobile"
     >
-      <SvgIcon :name="'pencil'" :classes="['icon']" :fill="'white'" :size="15"/>
+      <svg-icon :name="'pencil'" :classes="['icon']" :fill="'white'" :size="15"/>
       <span>Edit game in library</span>
     </button>
     <button
@@ -13,7 +13,7 @@
       @click="removeGameFromLibrary()"
       class="button is-fullwidth is-danger mr-5 mr-0-mobile"
     >
-      <SvgIcon :name="'remove'" :classes="['icon']" :fill="'white'" :size="15"/>
+      <svg-icon :name="'remove'" :classes="['icon']" :fill="'white'" :size="15"/>
       <span>Remove from library</span>
     </button>
     <button
@@ -21,11 +21,11 @@
       @click="addGameToLibrary()"
       class="button is-fullwidth is-primary mr-5 mr-0-mobile"
     >
-      <SvgIcon :name="'plus'" :classes="['icon']" :fill="'white'"/>
+      <svg-icon :name="'plus'" :classes="['icon']" :fill="'white'"/>
       <span>Add to library</span>
     </button>
 
-    <GameModal
+    <game-modal
       v-if="isModalActive"
       :isActive="isModalActive"
       :gameModalState="gameModalState"

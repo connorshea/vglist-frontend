@@ -59,7 +59,7 @@
             </span>
             <template v-if="eventDeletable">
               <a @click="deleteEvent" class="ml-5" title="Delete">
-                <SvgIcon :name="'trash'"
+                <svg-icon :name="'trash'"
                          :svg-classes="['has-fill-danger-hoverable']"
                          :css-style="'vertical-align: text-top;'"
                          :size="20"/>
