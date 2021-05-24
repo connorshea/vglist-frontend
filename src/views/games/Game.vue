@@ -93,26 +93,27 @@
         <p class="has-text-muted">No one has favorited this game yet.</p>
       </template>
 
-      <!-- <% if @games_in_series && @games_in_series.count.positive? %>
-        <div class="card more-from-this-series-card mt-15">
-          <div class="card-content">
-            <h3 class="title is-5 mb-15">
-              <%= link_to 'More from this series', series_path(@game.series) %>
-            </h3>
+      <div class="card more-from-this-series-card mt-15" v-if="data.game.series.games.nodes.length > 1">
+        <div class="card-content">
+          <h3 class="title is-5 mb-15">
+            <router-link :to="{ name: 'Series', params: { id: data.game.series.id } }">
+              More from this series
+            </router-link>
+          </h3>
 
-            <div class="games">
-              <% @games_in_series.each do |game| %>
-                <%= link_to(game_path(game.id)) do %>
-                  <figure class="game-cover">
-                    <%= game_cover(game, size: :medium) %>
-                    <p><%= game.name %></p>
-                  </figure>
-                <% end %>
-              <% end %>
-            </div>
+          <div class="games">
+            <template v-for="gameInSeries in data.game.series.games.nodes">
+              <router-link :to="{ name: 'Game', params: { id: gameInSeries.id } }" :key="gameInSeries.id" v-if="data.game.id !== gameInSeries.id">
+                <figure class="game-cover">
+                  <img v-if="gameInSeries.coverUrl !== null" :src="gameInSeries.coverUrl" />
+                  <img v-else src="@/assets/images/no-cover.png"/>
+                  <p>{{ gameInSeries.name }}</p>
+                </figure>
+              </router-link>
+            </template>
           </div>
         </div>
-      <% end %> -->
+      </div>
     </div>
   </div>
 </template>
