@@ -16,7 +16,7 @@
     />
 
     <button
-      class="button is-primary mr-10 mr-0-mobile is-fullwidth-mobile"
+      class="button is-primary mr-10 mr-0-mobile is-fullwidth-mobile js-submit-button"
       value="Submit"
       @click.prevent="onSubmit"
     >Submit</button>
