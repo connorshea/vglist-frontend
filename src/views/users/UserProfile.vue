@@ -205,47 +205,51 @@ export default defineComponent({
       }
     }
 
-    // TODO: Add confirmation.
     const updateUserRole = (role: UserRole) => {
       const userId = props.user.id;
       // TODO: Error handling here?
       if (typeof userId !== 'undefined') {
-        executeUpdateUserRole({ userId: userId, role: role }).then(() => {
-          context.emit('refreshUserData', null);
-        });
+        if (confirm("Are you sure you want to update this user's role?")) {
+          executeUpdateUserRole({ userId: userId, role: role }).then(() => {
+            context.emit('refreshUserData', null);
+          });
+        }
       }
     }
 
-    // TODO: Add confirmation.
     const removeUserAvatar = () => {
       const userId = props.user.id;
       // TODO: Error handling here?
       if (typeof userId !== 'undefined') {
-        executeRemoveUserAvatar({ userId: userId }).then(() => {
-          context.emit('refreshUserData', null);
-        });
+        if (confirm("Are you sure you want to remove this user's avatar?")) {
+          executeRemoveUserAvatar({ userId: userId }).then(() => {
+            context.emit('refreshUserData', null);
+          });
+        }
       }
     }
 
-    // TODO: Add confirmation.
     const banUser = () => {
       const userId = props.user.id;
       // TODO: Error handling here?
       if (typeof userId !== 'undefined') {
-        executeBanUser({ userId: userId }).then(() => {
-          context.emit('refreshUserData', null);
-        });
+        if (confirm("Are you sure you want to ban this user?")) {
+          executeBanUser({ userId: userId }).then(() => {
+            context.emit('refreshUserData', null);
+          });
+        }
       }
     }
 
-    // TODO: Add confirmation.
     const unbanUser = () => {
       const userId = props.user.id;
       // TODO: Error handling here?
       if (typeof userId !== 'undefined') {
-        executeUnbanUser({ userId: userId }).then(() => {
-          context.emit('refreshUserData', null);
-        });
+        if (confirm("Are you sure you want to unban this user?")) {
+          executeUnbanUser({ userId: userId }).then(() => {
+            context.emit('refreshUserData', null);
+          });
+        }
       }
     }
 
