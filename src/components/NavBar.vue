@@ -50,7 +50,8 @@
         <template v-if="userSignedIn">
           <div class="navbar-item has-dropdown is-hoverable is-hidden-touch">
             <a class="navbar-link">
-              <!-- userAvatar(currentUser, size: :small) -->
+              <img class="user-avatar" v-if="currentUser.avatarUrl !== null" :src="currentUser.avatarUrl" />
+              <img class="user-avatar" v-else src="@/assets/images/default-avatar.png"/>
               <span class='pl-10'>{{ currentUser.username }}</span>
             </a>
 
@@ -132,6 +133,8 @@
 import { computed, defineComponent } from '@vue/composition-api';
 import Search from '@/components/Search.vue';
 import { RawLocation } from 'vue-router';
+import { CurrentUserDocument } from '@/generated/graphql';
+import { useQuery } from 'villus';
 
 // Update this to include other valid click actions later.
 type clickAction = 'signOut';
@@ -142,14 +145,17 @@ export default defineComponent({
     Search
   },
   setup(_props, context) {
+    const { data: currentUserData } = useQuery({ query: CurrentUserDocument });
+
     const signIn = () => {
       // This is pretty much just a fake sign in for a user.
       context.root.$store.commit(
         'signIn',
         {
-          username: 'connor',
-          slug: 'connor',
-          role: 'ADMIN'
+          username: currentUserData.value?.currentUser?.username,
+          slug: currentUserData.value?.currentUser?.slug,
+          role: currentUserData.value?.currentUser?.role,
+          avatarUrl: currentUserData.value?.currentUser?.avatarUrl
         }
       );
     };

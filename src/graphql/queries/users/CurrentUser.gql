@@ -1,0 +1,9 @@
+query CurrentUser {
+  currentUser {
+    id
+    username
+    slug
+    avatarUrl(size: MEDIUM)
+    role
+  }
+}
