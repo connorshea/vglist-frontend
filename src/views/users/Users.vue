@@ -9,8 +9,8 @@
     ></sort-dropdown>
 
     <div class="user-card-list mt-20">
-      <template v-for="user in data.users.nodes">
-        <UserCard :user="user" :key="user.id"></UserCard>
+      <template v-for="user in data.users.nodes" :key="user.id">
+        <UserCard :user="user"/>
       </template>
     </div>
 

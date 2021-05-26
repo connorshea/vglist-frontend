@@ -19,8 +19,8 @@
       </div>
     </template>
 
-    <template v-for="event in data.activity.nodes">
-      <EventCard :event="event" :key="event.id" @refresh="execute"/>
+    <template v-for="event in data.activity.nodes" :key="event.id">
+      <EventCard :event="event" @refresh="execute"/>
     </template>
 
     <pagination

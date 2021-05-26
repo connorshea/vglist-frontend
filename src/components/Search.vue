@@ -26,10 +26,9 @@
                dropdown, since it's the best solution I could come up with. -->
           <hr class="navbar-divider">
           <p class="navbar-item navbar-dropdown-header">{{ plurals[type] }}</p>
-          <template v-for="result in searchResults[type]">
+          <template v-for="result in searchResults[type]" :key="result.id">
             <router-link 
               :to="searchResultToUrl(result)"
-              :key="result.id"
               custom
               v-slot="{ navigate, href }"
               class="navbar-item"

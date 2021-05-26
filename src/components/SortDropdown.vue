@@ -11,11 +11,10 @@
 
     <div class="dropdown-menu is-fullwidth" id="sort-dropdown-menu" role="menu">
       <div class="dropdown-content">
-        <template v-for="sortOption in sortOptions">
-          <a :key="sortOption.name"
-              class="dropdown-item"
-              :class="{ 'has-text-weight-bold': activeSortOption === sortOption.value }"
-              @click="setActiveSortOption(sortOption.value)"
+        <template v-for="sortOption in sortOptions" :key="sortOption.name">
+          <a class="dropdown-item"
+             :class="{ 'has-text-weight-bold': activeSortOption === sortOption.value }"
+             @click="setActiveSortOption(sortOption.value)"
           >
             {{ sortOption.name }}
           </a>

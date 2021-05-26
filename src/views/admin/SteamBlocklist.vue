@@ -11,8 +11,8 @@
           </tr>
         </thead>
         <tbody>
-          <template v-for="blocklistEntry in data.steamBlocklist.nodes">
-            <tr :key="blocklistEntry.id">
+          <template v-for="blocklistEntry in data.steamBlocklist.nodes" :key="blocklistEntry.id">
+            <tr>
               <th>
                 <a :href="steamUrl(blocklistEntry.steamAppId)">
                   {{ blocklistEntry.steamAppId }}
