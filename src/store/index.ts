@@ -1,9 +1,6 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createStore } from 'vuex';
 
 import { User } from '@/generated/graphql';
-
-Vue.use(Vuex);
 
 export type State = {
   clientId: string;
@@ -22,7 +19,7 @@ type AccessToken = {
   created_at: number;
 }
 
-export default new Vuex.Store<State>({
+export const store = createStore({
   strict: process.env.NODE_ENV !== 'production',
   state: {
     clientId: process.env.VUE_APP_OAUTH_CLIENT_ID,
@@ -30,7 +27,7 @@ export default new Vuex.Store<State>({
     accessToken: null,
     userSignedIn: false,
     currentUser: null
-  },
+  } as State,
   mutations: {
     accessToken(state, payload: string) {
       state.accessToken = payload;
@@ -95,4 +92,4 @@ export default new Vuex.Store<State>({
   },
   modules: {
   }
-})
+});

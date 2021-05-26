@@ -35,7 +35,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'Pagination',
@@ -75,20 +76,23 @@ export default defineComponent({
     const beforeWithPrefix = props.prefix === null ? 'before' : `${props.prefix}Before`;
     const afterWithPrefix = props.prefix === null ? 'after' : `${props.prefix}After`;
 
+    const route  = useRoute();
+    const router = useRouter();
+
     const previousPageRoute = computed(() => {
       // Get the current query params, other than before/after. This avoids
       // wiping out any other query parameters that are already present.
-      let { [beforeWithPrefix]: before, [afterWithPrefix]: after, ...currentQueryParams } = context.root.$route.query;
+      let { [beforeWithPrefix]: before, [afterWithPrefix]: after, ...currentQueryParams } = route.query;
       return { name: props.pageName, query: { [beforeWithPrefix]: props.startCursor, ...currentQueryParams } };
     });
     const nextPageRoute = computed(() => {
-      let { [beforeWithPrefix]: before, [afterWithPrefix]: after, ...currentQueryParams } = context.root.$route.query;
+      let { [beforeWithPrefix]: before, [afterWithPrefix]: after, ...currentQueryParams } = route.query;
       return { name: props.pageName, query: { [afterWithPrefix]: props.endCursor, ...currentQueryParams } };
     });
 
     const nextPage = (cursor: string) => {
       if (props.hasNextPage) {
-        context.root.$router.push(nextPageRoute.value).then(() => {
+        router.push(nextPageRoute.value).then(() => {
           window.scrollTo(0, 0);
           context.emit('cursorChanged', cursor);
         });
@@ -96,7 +100,7 @@ export default defineComponent({
     };
     const previousPage = (cursor: string) => {
       if (props.hasPreviousPage) {
-        context.root.$router.push(previousPageRoute.value).then(() => {
+        router.push(previousPageRoute.value).then(() => {
           window.scrollTo(0, 0);
           context.emit('cursorChanged', cursor);
         });

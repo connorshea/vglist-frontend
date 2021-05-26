@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { UserActivityDocument } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { useQuery } from 'villus';
 import EventCard from '@/components/EventCard.vue';
 import Pagination from '@/components/Pagination.vue';

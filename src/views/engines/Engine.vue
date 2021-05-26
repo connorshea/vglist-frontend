@@ -39,10 +39,12 @@
 
 <script lang="ts">
 import { DeleteEngineDocument, EngineDocument } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { useMutation, useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
 import Pagination from '@/components/Pagination.vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'Engine',
@@ -66,7 +68,7 @@ export default defineComponent({
       default: null
     }
   },
-  setup(props, context) {
+  setup(props) {
     const queryVariables = computed(() => {
       return {
         id: props.id,
@@ -83,6 +85,9 @@ export default defineComponent({
       query: EngineDocument,
       variables: queryVariables
     });
+
+    const router = useRouter();
+    const store = useStore();
 
     const pageInfo = computed(() => {
       return {
@@ -102,7 +107,7 @@ export default defineComponent({
       if (confirm("Are you sure you want to delete this engine?")) {
         executeDeleteEngine({ id: props.id }).then(() => {
           if (deleteEngineData.value?.deleteEngine?.deleted) {
-            context.root.$router.push({ name: 'Engines' });
+            router.push({ name: 'Engines' });
           } else {
             // TODO: Error handling.
             console.log(`Error: ${deleteEngineErrors.value}`);
@@ -111,12 +116,10 @@ export default defineComponent({
       }
     };
 
-    const userSignedIn = computed(() => {
-      return context.root.$store.state.userSignedIn;
-    });
+    const userSignedIn = computed(() => store.state.userSignedIn);
 
     const userCanEdit = userSignedIn;
-    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(context.root.$store.state.currentUser.role));
+    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(store.state.currentUser.role));
 
     return {
       data,

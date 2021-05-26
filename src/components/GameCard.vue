@@ -31,9 +31,10 @@
 
 <script lang="ts">
 import { Company, FavoriteGameDocument, Platform, UnfavoriteGameDocument } from '@/generated/graphql';
-import { computed, defineComponent, ref } from '@vue/composition-api';
+import { computed, defineComponent, ref } from 'vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { useMutation } from 'villus';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'GameCard',
@@ -46,7 +47,7 @@ export default defineComponent({
       type: Object
     }
   },
-  setup(props, context) {
+  setup(props) {
     const platforms = computed(() => {
       if (props.game.platforms.nodes.size === 0) { return null; }
       return props.game.platforms.nodes.map((p: Platform) => p.name).join(', ');
@@ -82,9 +83,8 @@ export default defineComponent({
 
     const toggleActive = () => isActive.value = !isActive.value;
 
-    const userSignedIn = computed(() => {
-      return context.root.$store.state.userSignedIn;
-    });
+    const store = useStore();
+    const userSignedIn = computed(() => store.state.userSignedIn);
 
     return {
       isActive,

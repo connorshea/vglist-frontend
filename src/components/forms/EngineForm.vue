@@ -37,13 +37,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
+import { computed, defineComponent, Ref, ref } from 'vue';
 import TextField from '@/components/fields/TextField.vue';
 import NumberField from '@/components/fields/NumberField.vue';
 import ErrorBox from '@/components/ErrorBox.vue';
 import { useMutation } from 'villus';
 import { UpdateEngineDocument, CreateEngineDocument } from '@/generated/graphql';
 import { submitButtonErrorAnimation } from '@/helpers/submitButtonErrorAnimation';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'EngineForm',
@@ -74,7 +75,7 @@ export default defineComponent({
       type: String
     }
   },
-  setup(props, context) {
+  setup(props) {
     const formData = {
       class: 'engine',
       name: {
@@ -86,6 +87,8 @@ export default defineComponent({
         attribute: 'wikidata_id'
       }
     };
+
+    const router = useRouter();
 
     const errors: Ref<string[]> = ref([]);
 
@@ -112,7 +115,7 @@ export default defineComponent({
       let { name, wikidataId } = engine.value;
       executeCreateEngine({ name: name ?? '', wikidataId }).then(() => {
         if (createEngineData.value.createEngine?.engine?.id) {
-          context.root.$router.push({ name: 'Engine', params: { id: createEngineData.value.createEngine.engine.id }});
+          router.push({ name: 'Engine', params: { id: createEngineData.value.createEngine.engine.id }});
         } else {
           // Multiple errors are returned as one string with comma separators,
           // so we split them and then flatten the resulting array.
@@ -128,7 +131,7 @@ export default defineComponent({
       if (id === null) { throw Error('Something went wrong and id is null.') }
       executeUpdateEngine({ id: id, ...engineValues }).then(() => {
         if (updateEngineData.value.updateEngine?.engine?.id) {
-          context.root.$router.push({ name: 'Engine', params: { id: props.id }});
+          router.push({ name: 'Engine', params: { id: props.id }});
         } else {
           // Multiple errors are returned as one string with comma separators,
           // so we split them and then flatten the resulting array.

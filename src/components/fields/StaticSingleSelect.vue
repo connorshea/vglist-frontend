@@ -19,7 +19,7 @@
 import vSelect from 'vue-select';
 import 'vue-select/dist/vue-select.css';
 import * as _ from 'lodash';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'StaticSingleSelect',

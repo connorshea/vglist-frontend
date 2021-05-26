@@ -17,8 +17,10 @@
 
 <script lang="ts">
 import { DeleteStoreDocument, StoreDocument } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { useMutation, useQuery } from 'villus';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'Store',
@@ -28,7 +30,7 @@ export default defineComponent({
       type: String
     }
   },
-  setup(props, context) {
+  setup(props) {
     const { data } = useQuery({
       query: StoreDocument,
       variables: {
@@ -36,12 +38,14 @@ export default defineComponent({
       }
     });
 
+    const router = useRouter();
+
     const { data: deleteStoreData, execute: executeDeleteStore, error: deleteStoreErrors } = useMutation(DeleteStoreDocument);
     let deleteStore = () => {
       if (confirm("Are you sure you want to delete this store?")) {
         executeDeleteStore({ id: props.id }).then(() => {
           if (deleteStoreData.value?.deleteStore?.deleted) {
-            context.root.$router.push({ name: 'Stores' });
+            router.push({ name: 'Stores' });
           } else {
             // TODO: Error handling.
             console.log(`Error: ${deleteStoreErrors.value}`);
@@ -50,12 +54,11 @@ export default defineComponent({
       }
     };
 
-    const userSignedIn = computed(() => {
-      return context.root.$store.state.userSignedIn;
-    });
+    const vuexStore = useStore();
+    const userSignedIn = computed(() => vuexStore.state.userSignedIn);
 
     const userCanEdit = userSignedIn;
-    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(context.root.$store.state.currentUser.role));
+    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(vuexStore.state.currentUser.role));
 
     return {
       data,

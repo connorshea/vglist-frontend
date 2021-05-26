@@ -20,11 +20,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
+import { computed, defineComponent, Ref, ref } from 'vue';
 import SingleSelect from '@/components/fields/SingleSelect.vue';
 import StaticSingleSelect from '@/components/fields/StaticSingleSelect.vue';
 import * as _ from 'lodash';
 import { Platform, PlatformSearchDocument } from '@/generated/graphql';
+import { useRoute, useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'games-filters',
@@ -44,31 +45,34 @@ export default defineComponent({
       default: null
     }
   },
-  setup(props, context) {
+  setup(props) {
     const filterData: Ref<{ platform: Platform | null, year: number | null}> = ref({
       platform: props.platform as Platform | null,
       year: props.year
     });
 
+    const route  = useRoute();
+    const router = useRouter();
+
     // Change the set platform on input, or remove it if it's deleted.
     const onPlatformInput = (platform: Platform | null) => {
-      let { platform_id, ...currentQueryParams } = context.root.$route.query;
+      let { platform_id, ...currentQueryParams } = route.query;
       let query = { ...currentQueryParams };
       if (platform !== null) {
         query.platform_id = platform.id;
       }
       filterData.value.platform = platform;
-      context.root.$router.push({ name: 'Games', query: query });
+      router.push({ name: 'Games', query: query });
     };
 
     const onYearInput = (year: string | null) => {
-      let { by_year, ...currentQueryParams } = context.root.$route.query;
+      let { by_year, ...currentQueryParams } = route.query;
       let query = { ...currentQueryParams };
       if (year !== null) {
         query.by_year = year;
       }
       filterData.value.year = year === null ? null : parseInt(year);
-      context.root.$router.push({ name: 'Games', query: query });
+      router.push({ name: 'Games', query: query });
     };
 
     const yearOptions = computed(() => {

@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from '@vue/composition-api';
+import { computed, defineComponent, ref } from 'vue';
 import GameModal from '@/components/GameModal.vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { GamePurchaseDocument, RemoveGameFromLibraryDocument } from '@/generated/graphql';

@@ -13,21 +13,23 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
+import { computed, defineComponent, Ref, ref } from 'vue';
 import GameForm from '@/components/forms/GameForm.vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'CreateGame',
   components: {
     GameForm
   },
-  setup(_props, context) {
+  setup() {
     const game: Ref<{ name: string | null, wikidataId: number | string | null }> = ref({
       name: null,
       wikidataId: null
     });
 
-    const userSignedIn = computed(() => context.root.$store.state.userSignedIn);
+    const store = useStore();
+    const userSignedIn = computed(() => store.state.userSignedIn);
 
     const userCanCreate = userSignedIn;
 

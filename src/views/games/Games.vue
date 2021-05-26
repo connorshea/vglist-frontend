@@ -46,12 +46,14 @@
 
 <script lang="ts">
 import { GamesDocument, GameSort } from '@/generated/graphql';
-import { computed, ComputedRef, defineComponent } from '@vue/composition-api';
+import { computed, ComputedRef, defineComponent } from 'vue';
 import { useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
 import GamesFilters from '@/components/GamesFilters.vue';
 import SortDropdown from '@/components/SortDropdown.vue';
 import Pagination from '@/components/Pagination.vue';
+import { useStore } from 'vuex';
+import { useRoute, useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'Games',
@@ -88,7 +90,7 @@ export default defineComponent({
       default: null
     }
   },
-  setup(props, context) {
+  setup(props) {
     type SortOptionsType = GameSort | null;
 
     // Upcase it so we can pass the capitalized version to the sort dropdown, to
@@ -114,6 +116,10 @@ export default defineComponent({
       variables: queryVariables
     });
 
+    const router = useRouter();
+    const route = useRoute();
+    const store = useStore();
+
     const pageInfo = computed(() => {
       return {
         startCursor: data.value?.games?.pageInfo.startCursor ?? null,
@@ -126,12 +132,12 @@ export default defineComponent({
     const updateSortValue = (sort: SortOptionsType) => {
       // Override the before and after values since we have to restart the
       // cursor when changing the sort.
-      let { sort_by, before, after, ...currentQueryParams } = context.root.$route.query;
+      let { sort_by, before, after, ...currentQueryParams } = route.query;
       let query = { ...currentQueryParams };
       if (sort !== null) {
         query.sort_by = sort.toLowerCase();
       }
-      context.root.$router.push({ name: 'Games', query: query });
+      router.push({ name: 'Games', query: query });
     };
 
     const sortOptions: Array<{ name: string, value: SortOptionsType }> = [
@@ -169,7 +175,7 @@ export default defineComponent({
       }
     ];
 
-    const userSignedIn = computed(() => context.root.$store.state.userSignedIn);
+    const userSignedIn = computed(() => store.state.userSignedIn);
 
     return {
       data,

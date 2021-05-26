@@ -19,14 +19,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'Admin',
-  setup(_props, context) {
-    const userSignedIn = computed(() => {
-      return context.root.$store.state.userSignedIn;
-    });
+  setup() {
+    const store = useStore();
+    const userSignedIn = computed(() => store.state.userSignedIn);
 
     const tabs = [
       {

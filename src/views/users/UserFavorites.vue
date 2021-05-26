@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import { UserFavoritesDocument } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
 import Pagination from '@/components/Pagination.vue';

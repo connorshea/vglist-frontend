@@ -36,10 +36,11 @@
 
 <script lang="ts">
 import { ActivityFeed, ActivityFeedDocument } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { useQuery } from 'villus';
 import EventCard from '@/components/EventCard.vue';
 import Pagination from '@/components/Pagination.vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'Activity',
@@ -59,7 +60,7 @@ export default defineComponent({
       default: null
     }
   },
-  setup(props, context) {
+  setup(props) {
     const queryVariables = computed(() => {
       return {
         feedType: ActivityFeed.Global,
@@ -87,9 +88,8 @@ export default defineComponent({
       };
     });
 
-    const userSignedIn = computed(() => {
-      return context.root.$store.state.userSignedIn;
-    });
+    const store = useStore();
+    const userSignedIn = computed(() => store.state.userSignedIn);
 
     return {
       data,

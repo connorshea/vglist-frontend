@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import { UserFollowersDocument } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { useQuery } from 'villus';
 import UserCard from '@/components/UserCard.vue';
 import Pagination from '@/components/Pagination.vue';

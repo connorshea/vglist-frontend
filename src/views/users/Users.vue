@@ -27,11 +27,12 @@
 
 <script lang="ts">
 import { UsersDocument, UserSort } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { useQuery } from 'villus';
 import UserCard from '@/components/UserCard.vue';
 import SortDropdown from '@/components/SortDropdown.vue';
 import Pagination from '@/components/Pagination.vue';
+import { useRoute, useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'Users',
@@ -57,8 +58,12 @@ export default defineComponent({
       default: null
     }
   },
-  setup(props, context) {
+  setup(props) {
     type SortOptionsType = UserSort | null;
+
+
+    const router = useRouter();
+    const route  = useRoute();
 
     // Upcase it so we can pass the capitalized version to the sort dropdown, to
     // ensure the default value works correctly.
@@ -93,12 +98,12 @@ export default defineComponent({
     const updateSortValue = (sort: SortOptionsType) => {
       // Override the before and after values since we have to restart the
       // cursor when changing the sort.
-      let { sort_by, before, after, ...currentQueryParams } = context.root.$route.query;
+      let { sort_by, before, after, ...currentQueryParams } = route.query;
       let query = { ...currentQueryParams };
       if (sort !== null) {
         query.sort_by = sort.toLowerCase();
       }
-      context.root.$router.push({ name: 'Users', query: query });
+      router.push({ name: 'Users', query: query });
     };
 
     const sortOptions: Array<{ name: string, value: SortOptionsType }> = [

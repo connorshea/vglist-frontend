@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import { SteamBlocklistDocument, RemoveFromSteamBlocklistDocument } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { useMutation, useQuery } from 'villus';
 import Pagination from '@/components/Pagination.vue';
 

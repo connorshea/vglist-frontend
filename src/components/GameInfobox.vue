@@ -112,7 +112,7 @@
 </template>
 
 <script lang="ts">
-import { computed, ComputedRef, defineComponent } from '@vue/composition-api';
+import { computed, ComputedRef, defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'GameInfobox',
