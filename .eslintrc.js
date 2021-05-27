@@ -18,7 +18,7 @@ module.exports = {
     'indent': ['warn', 2],
     // Ignore rest siblings so we can use the rest syntax to ignore attributes of an object.
     "@typescript-eslint/no-unused-vars": ['error', { 'ignoreRestSiblings': true }],
-    "vue/no-v-for-template-key": false
+    "vue/no-v-for-template-key": 0
   },
   // Ignore the generated GraphQL file.
   ignorePatterns: ["src/generated/graphql.ts"],

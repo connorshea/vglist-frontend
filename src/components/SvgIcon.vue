@@ -45,6 +45,7 @@ export default defineComponent({
     // https://medium.com/js-dojo/making-svg-icon-component-in-vue-cb7fac70e758
     // Plus some custom stuff using Template Refs. Apparently, Vue does weird
     // crap when given a comment at the start of the template... so that's fun.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const icon: any = this?.$refs?.icon;
     if (icon.firstElementChild?.nodeName === 'svg') {
       const svgElement = icon.firstElementChild;
