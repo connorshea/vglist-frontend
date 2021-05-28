@@ -2,22 +2,7 @@
   <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile" v-if="data">
     <h1 class="title">Activity</h1>
 
-    <template v-if="userSignedIn">
-      <div class="tabs">
-        <ul>
-          <router-link :to="{ name: 'FollowingActivity' }" custom v-slot="{ href, navigate, isExactActive }">
-            <li :class="[isExactActive && 'is-active']">
-              <a :href="href" @click="navigate">Following</a>
-            </li>
-          </router-link>
-          <router-link :to="{ name: 'Activity' }" custom v-slot="{ href, navigate, isExactActive }">
-            <li :class="[isExactActive && 'is-active']">
-              <a :href="href" @click="navigate">Global</a>
-            </li>
-          </router-link>
-        </ul>
-      </div>
-    </template>
+    <activity-tabs :user-signed-in="userSignedIn"/>
 
     <template v-for="event in data.activity.nodes" :key="event.id">
       <EventCard :event="event" @refresh="execute"/>
@@ -40,13 +25,15 @@ import { computed, defineComponent } from 'vue';
 import { useQuery } from 'villus';
 import EventCard from '@/components/EventCard.vue';
 import Pagination from '@/components/Pagination.vue';
+import ActivityTabs from '@/components/ActivityTabs.vue';
 import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'FollowingActivity',
   components: {
     EventCard,
-    Pagination
+    Pagination,
+    ActivityTabs
   },
   props: {
     after: {
