@@ -249,6 +249,12 @@ nav.navbar {
     overflow: clip;
     object-fit: cover;
   }
+
+  // For the vglist logo in the navbar. Have to set the width here for some
+  // reason.
+  img.navbar-logo {
+    width: 80px;
+  }
 }
 
 .v-select {
