@@ -45,6 +45,8 @@ import Stores from '@/views/stores/Stores.vue';
 import CreateStore from '@/views/stores/CreateStore.vue';
 import EditStore from '@/views/stores/EditStore.vue';
 
+import Settings from '@/views/settings/Settings.vue';
+
 import Users from '@/views/users/Users.vue';
 import User from '@/views/users/User.vue';
 import UserProfile from '@/views/users/UserProfile.vue';
@@ -298,6 +300,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'EditSeries',
     component: EditSeries,
     props: true
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: Settings
   },
   {
     path: '/stores',
