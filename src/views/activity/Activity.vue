@@ -5,12 +5,12 @@
     <template v-if="userSignedIn">
       <div class="tabs">
         <ul>
-          <router-link :to="{ name: 'FollowingActivity' }" v-slot="{ href, navigate, isExactActive }">
+          <router-link :to="{ name: 'FollowingActivity' }" custom v-slot="{ href, navigate, isExactActive }">
             <li :class="[isExactActive && 'is-active']">
               <a :href="href" @click="navigate">Following</a>
             </li>
           </router-link>
-          <router-link :to="{ name: 'Activity' }" v-slot="{ href, navigate, isExactActive }">
+          <router-link :to="{ name: 'Activity' }" custom v-slot="{ href, navigate, isExactActive }">
             <li :class="[isExactActive && 'is-active']">
               <a :href="href" @click="navigate">Global</a>
             </li>
