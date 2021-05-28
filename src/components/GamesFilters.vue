@@ -6,7 +6,7 @@
       :grandparent-class="'games-filter'"
       :placeholder="'Filter by platform'"
       :graphql-query="PlatformSearchDocument"
-      @input="onPlatformInput"
+      @update:modelValue="onPlatformInput"
     ></single-select>
 
     <static-single-select
@@ -14,7 +14,7 @@
       :placeholder="'Filter by year'"
       :grandparent-class="'year-filter'"
       :options="yearOptions"
-      @input="onYearInput"
+      @update:modelValue="onYearInput"
     ></static-single-select>
   </div>
 </template>

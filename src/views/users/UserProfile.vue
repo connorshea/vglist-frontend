@@ -79,6 +79,7 @@ export default defineComponent({
       type: Object
     }
   },
+  emits: ['refreshUserData'],
   setup(props, context) {
     const isFollowing = computed(() => props.user.isFollowed);
 

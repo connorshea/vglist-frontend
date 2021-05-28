@@ -1,16 +1,16 @@
 <template>
   <div class="field">
-    <label class="label" v-bind:for="dateFieldId">{{ label }}</label>
+    <label class="label" :for="dateFieldId">{{ label }}</label>
     <div class="control">
       <input
         autocomplete="off"
         class="input"
         type="date"
         :required="required"
-        v-bind:name="dateFieldName"
-        v-bind:id="dateFieldId"
-        v-bind:value="dataValue"
-        v-on:input="$emit('input', $event.target.value)"
+        :name="dateFieldName"
+        :id="dateFieldId"
+        :modelValue="dataValue"
+        @update:modelValue="$emit('update:modelValue', $event.target.value)"
       >
     </div>
   </div>
@@ -34,7 +34,7 @@ export default defineComponent({
       type: String,
       required: true
     },
-    value: {
+    modelValue: {
       type: String,
       required: false
     },
@@ -44,10 +44,11 @@ export default defineComponent({
       default: false
     }
   },
+  emits: ['update:modelValue'],
   setup(props) {
     const dateFieldName = computed(() => `${props.formClass}[${props.attribute}]`);
     const dateFieldId = computed(() => `${props.formClass}_${props.attribute}`);
-    const dataValue = ref(props.value);
+    const dataValue = ref(props.modelValue);
 
     return {
       dateFieldName,

@@ -24,7 +24,7 @@
             :search-path="'gameSearch'"
             :graphql-query="GameSearchDocument"
             :max-height="'150px'"
-            @input="selectGame"
+            @update:modelValue="selectGame"
             :customOptionFunc="customOptionLabel"
           ></single-select>
         </div>
@@ -60,6 +60,7 @@ export default defineComponent({
       required: true
     }
   },
+  emits: ['close'],
   setup(props, context) {
     const gameSelected = ref(false);
     const errors: Ref<string[]> = ref([]);

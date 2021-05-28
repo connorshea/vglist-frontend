@@ -91,6 +91,7 @@ export default defineComponent({
       type: Object
     }
   },
+  emits: ['refresh'],
   setup(props, context) {
     const relativeTimeAgo = computed(() => {
       return format(props.event.createdAt);

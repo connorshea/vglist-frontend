@@ -10,8 +10,8 @@
         label="name"
         :placeholder="placeholder"
         @change="onChange"
-        v-bind:value="value"
-        v-on:input="onInput"
+        :modelValue="modelValue"
+        @update:modelValue="onInput"
       ></v-select>
     </div>
   </div>
@@ -34,7 +34,7 @@ export default defineComponent({
       type: String,
       required: true
     },
-    value: {
+    modelValue: {
       type: Array,
       required: true
     },
@@ -52,6 +52,7 @@ export default defineComponent({
       required: true
     }
   },
+  emits: ['update:modelValue'],
   setup(props, context) {
     let variables = ref({ query: '' })
     const { data } = useQuery({
@@ -71,8 +72,9 @@ export default defineComponent({
       }
     });
 
-    const onInput = (event: unknown) => context.emit('input', event);
-    const onChange = (selectedItems: unknown[]) => context.emit('input', selectedItems);
+    // TODO: Figure out why this was passing an event and fix it so it works with the v-model changes.
+    const onInput = (event: unknown) => context.emit('update:modelValue', event);
+    const onChange = (selectedItems: unknown[]) => context.emit('update:modelValue', selectedItems);
 
     const onSearch = _.debounce((search: string) => {
       variables.value = { query: search };

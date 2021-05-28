@@ -8,8 +8,8 @@
         :inputId="inputId"
         :label="vSelectLabel"
         @change="onChange"
-        v-bind:value="value"
-        v-on:input="onInput"
+        :modelValue="modelValue"
+        @update:modelValue="onInput"
       ></v-select>
     </div>
   </div>
@@ -31,7 +31,7 @@ export default defineComponent({
       type: String,
       required: true
     },
-    value: {
+    modelValue: {
       type: Array,
       required: true
     },
@@ -41,12 +41,13 @@ export default defineComponent({
       default: "name"
     }
   },
+  emits: ['update:modelValue'],
   setup(props, context) {
     const inputId = computed(() => _.snakeCase(props.label));
     let options = ref([]);
 
-    const onChange = (selectedItems: Array<unknown>) => context.emit('input', selectedItems);
-    const onInput = (event: unknown) => context.emit('input', event);
+    const onChange = (selectedItems: Array<unknown>) => context.emit('update:modelValue', selectedItems);
+    const onInput = (event: unknown) => context.emit('update:modelValue', event);
 
     return {
       inputId,

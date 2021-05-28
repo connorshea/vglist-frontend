@@ -8,9 +8,9 @@
         @search="onSearch"
         label="name"
         :inputId="inputId"
-        v-bind:value="value"
         :placeholder="placeholder"
-        v-on:input="onInput"
+        :modelValue="modelValue"
+        @update:modelValue="onInput"
       ></v-select>
     </div>
   </div>
@@ -33,7 +33,7 @@ export default defineComponent({
       type: String,
       required: false
     },
-    value: {
+    modelValue: {
       type: Object,
       required: false
     },
@@ -72,6 +72,7 @@ export default defineComponent({
       required: true
     }
   },
+  emits: ['update:modelValue'],
   setup(props, context) {
     let variables = ref({ query: '' })
     const { data } = useQuery({
@@ -92,7 +93,7 @@ export default defineComponent({
       }
     });
 
-    const onInput = (event: unknown) => context.emit('input', event);
+    const onInput = (event: unknown) => context.emit('update:modelValue', event);
     const onSearch = _.debounce((search: string) => {
       variables.value = { query: search };
     }, 300);

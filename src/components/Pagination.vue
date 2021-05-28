@@ -71,6 +71,7 @@ export default defineComponent({
       default: null
     }
   },
+  emits: ['cursorChanged'],
   setup(props, context) {
     // If there's a prefix, we need to change the parameters a bit. Otherwise, just use 'before' and 'after'.
     const beforeWithPrefix = props.prefix === null ? 'before' : `${props.prefix}Before`;

@@ -44,6 +44,7 @@ export default defineComponent({
       default: null
     }
   },
+  emits: ['activeSortChanged'],
   setup(props, context) {
     const dropdownIsActive = ref(false);
     const toggleDropdown = () => dropdownIsActive.value = !dropdownIsActive.value;

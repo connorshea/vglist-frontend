@@ -23,7 +23,7 @@
             v-model="gamePurchase.game"
             :max-height="'150px'"
             :disabled="true"
-            @input="selectGame"
+            @update:modelValue="selectGame"
             :graphqlQuery="GameSearchDocument"
             :searchPath="'gameSearch'"
           />
@@ -103,7 +103,7 @@
             :label="formData.game.label"
             v-model="gamePurchase.game"
             :max-height="'150px'"
-            @input="selectGame"
+            @update:modelValue="selectGame"
             :graphqlQuery="GameSearchDocument"
             :searchPath="'gameSearch'"
           />
@@ -204,6 +204,11 @@ export default defineComponent({
       validator: (val: string) => ['create', 'update', 'createWithGame'].includes(val)
     }
   },
+  emits: [
+    'close',
+    'closeAndRefresh',
+    'create'
+  ],
   setup(props, context) {
     const formattedCompletionStatuses: Array<{ label: string, value: keyof typeof GamePurchaseCompletionStatus, enumValue: `${GamePurchaseCompletionStatus}` }> = [
       { label: "Unplayed", value: "Unplayed", enumValue: 'UNPLAYED' },

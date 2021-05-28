@@ -60,6 +60,7 @@ export default defineComponent({
       required: true
     }
   },
+  emits: ['refresh'],
   setup(props, context) {
     let gamePurchase = ref({});
     let isModalActive = ref(false);

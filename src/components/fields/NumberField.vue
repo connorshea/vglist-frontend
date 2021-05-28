@@ -10,10 +10,10 @@
         :min="min"
         :max="max"
         :required="required"
-        v-bind:name="numberFieldName"
-        v-bind:id="numberFieldId"
-        v-bind:value="dataValue"
-        v-on:input="$emit('input', $event.target.value)"
+        :name="numberFieldName"
+        :id="numberFieldId"
+        :modelValue="dataValue"
+        @update:modelValue="$emit('update:modelValue', $event.target.value)"
       />
     </div>
   </div>
@@ -47,7 +47,7 @@ export default defineComponent({
       required: false,
       default: ''
     },
-    value: {
+    modelValue: {
       type: [Number, String],
       required: false,
       default: ''
@@ -67,8 +67,9 @@ export default defineComponent({
       required: false
     }
   },
+  emits: ['update:modelValue'],
   setup(props) {
-    const dataValue = ref(props.value);
+    const dataValue = ref(props.modelValue);
 
     const numberFieldName = computed(() => `${props.formClass}[${props.attribute}]`);
     const numberFieldId = computed(() => `${props.formClass}_${props.attribute}`);
