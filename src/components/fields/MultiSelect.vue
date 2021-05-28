@@ -9,7 +9,6 @@
         :inputId="inputId"
         label="name"
         :placeholder="placeholder"
-        @change="onChange"
         :modelValue="modelValue"
         @update:modelValue="onInput"
       ></v-select>
@@ -74,7 +73,6 @@ export default defineComponent({
 
     // TODO: Figure out why this was passing an event and fix it so it works with the v-model changes.
     const onInput = (event: unknown) => context.emit('update:modelValue', event);
-    const onChange = (selectedItems: unknown[]) => context.emit('update:modelValue', selectedItems);
 
     const onSearch = _.debounce((search: string) => {
       variables.value = { query: search };
@@ -84,7 +82,6 @@ export default defineComponent({
       inputId,
       options,
       onInput,
-      onChange,
       onSearch
     };
   },

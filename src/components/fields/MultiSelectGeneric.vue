@@ -7,7 +7,6 @@
         :taggable="true"
         :inputId="inputId"
         :label="vSelectLabel"
-        @change="onChange"
         :modelValue="modelValue"
         @update:modelValue="onInput"
       ></v-select>
@@ -46,13 +45,11 @@ export default defineComponent({
     const inputId = computed(() => _.snakeCase(props.label));
     let options = ref([]);
 
-    const onChange = (selectedItems: Array<unknown>) => context.emit('update:modelValue', selectedItems);
     const onInput = (event: unknown) => context.emit('update:modelValue', event);
 
     return {
       inputId,
       options,
-      onChange,
       onInput
     }
   }
