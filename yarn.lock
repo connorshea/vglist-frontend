@@ -12825,9 +12825,9 @@ vue-router@^4.0.8:
   dependencies:
     "@vue/devtools-api" "^6.0.0-beta.10"
 
-"vue-select@https://github.com/wolfjagger/vue-select#tmp/vue-3-easy-install":
+"vue-select@https://github.com/connorshea/vue-select#tmp/vue-3-easy-install":
   version "3.11.2"
-  resolved "https://github.com/wolfjagger/vue-select#e75ce59471b441be078de6af39f5e83cc31029ae"
+  resolved "https://github.com/connorshea/vue-select#e75ce59471b441be078de6af39f5e83cc31029ae"
 
 vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
   version "4.1.3"
