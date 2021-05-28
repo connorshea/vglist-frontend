@@ -12,15 +12,15 @@
         :required="required"
         :name="numberFieldName"
         :id="numberFieldId"
-        :modelValue="dataValue"
-        @update:modelValue="$emit('update:modelValue', $event.target.value)"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
       />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue';
+import { computed, defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'NumberField',
@@ -69,15 +69,12 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup(props) {
-    const dataValue = ref(props.modelValue);
-
     const numberFieldName = computed(() => `${props.formClass}[${props.attribute}]`);
     const numberFieldId = computed(() => `${props.formClass}_${props.attribute}`);
 
     return {
       numberFieldName,
-      numberFieldId,
-      dataValue
+      numberFieldId
     }
   }
 });

@@ -9,8 +9,8 @@
         :required="required"
         :name="dateFieldName"
         :id="dateFieldId"
-        :modelValue="dataValue"
-        @update:modelValue="$emit('update:modelValue', $event.target.value)"
+        :value="dataValue"
+        @input="$emit('update:modelValue', $event.target.value)"
       >
     </div>
   </div>
