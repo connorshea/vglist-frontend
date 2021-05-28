@@ -71,7 +71,6 @@ export default defineComponent({
       }
     });
 
-    // TODO: Figure out why this was passing an event and fix it so it works with the v-model changes.
     const onInput = (event: unknown) => context.emit('update:modelValue', event);
 
     const onSearch = _.debounce((search: string) => {
