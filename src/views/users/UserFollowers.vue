@@ -2,8 +2,8 @@
   <div class="followers" v-if="data">
     <template v-if="data.user.followers.nodes.length > 0">
       <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile user-card-list">
-        <template v-for="user in data.user.followers.nodes" :key="user.id">
-          <UserCard :user="user" />
+        <template v-for="followerUser in data.user.followers.nodes" :key="followerUser.id">
+          <user-card :user="followerUser"/>
         </template>
       </div>
       <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile">
