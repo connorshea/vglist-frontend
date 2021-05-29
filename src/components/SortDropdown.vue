@@ -1,8 +1,8 @@
 <template>
-  <div class="dropdown is-fullwidth mr-0-mobile" :class="{ 'is-active': dropdownIsActive }">
+  <div class="dropdown is-fullwidth mr-0-mobile" :class="{ 'is-active': dropdownIsActive }" data-test-id="sort-dropdown-root">
     <div class="dropdown-trigger is-fullwidth-mobile" @click="toggleDropdown">
       <button class="button is-fullwidth" aria-haspopup="true" aria-controls="dropdown-menu">
-        <span>
+        <span data-test-id="active-sort-option">
           {{ activeSortOption === null ? "Sort" : `Sort by ${activeSortOption.toLowerCase().replaceAll('_', ' ')}` }}
         </span>
         <svg-icon :name="'chevron-down'" :size="15" :classes="['icon']"/>
