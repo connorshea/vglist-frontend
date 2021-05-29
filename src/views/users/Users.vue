@@ -61,7 +61,6 @@ export default defineComponent({
   setup(props) {
     type SortOptionsType = UserSort | null;
 
-
     const router = useRouter();
     const route  = useRoute();
 

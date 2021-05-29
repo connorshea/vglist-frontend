@@ -2,8 +2,8 @@
   <div class="user" v-if="data">
     <div class="hero-area">
       <div class="hero-image hero-image-150 user-avatar">
-        <img v-if="data.user.avatarUrl !== null" :src="data.user.avatarUrl" />
-        <img v-else src="@/assets/images/default-avatar.png"/>
+        <img v-if="data.user.avatarUrl !== null" :src="data.user.avatarUrl">
+        <img v-else src="@/assets/images/default-avatar.png">
       </div>
 
       <div class="text-block">
@@ -17,9 +17,9 @@
             {{ isCurrentUser ? 'You haven\'t added a bio yet.' : 'This user hasn\'t added a bio yet.' }}
           </h2>
 
-          <p class='has-text-weight-semibold' v-if="!isPublic">This user's account is private.</p>
+          <p class="has-text-weight-semibold" v-if="!isPublic">This user's account is private.</p>
 
-          <p class='tag is-medium has-text-weight-bold is-danger' v-if="data.user.banned === true">This user has been banned.</p>
+          <p class="tag is-medium has-text-weight-bold is-danger" v-if="data.user.banned === true">This user has been banned.</p>
         </template>
 
         <p v-if="data.user.role === 'ADMIN'">
@@ -44,7 +44,7 @@
         </template>
       </ul>
     </div>
-    <router-view :user="data.user" @refreshUserData="execute({ cachePolicy: 'network-only' })"></router-view>
+    <router-view :user="data.user" @refreshUserData="execute({ cachePolicy: 'network-only' })"/>
   </div>
 </template>
 

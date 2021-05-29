@@ -52,11 +52,11 @@
       <!-- User Statistics -->
       <!-- Library -->
     </template>
-    <template v-else-if='user.banned === true'>
-      <h2 class='subtitle has-text-centered has-text-weight-semibold mt-30'>This user's account has been banned.</h2>
+    <template v-else-if="user.banned === true">
+      <h2 class="subtitle has-text-centered has-text-weight-semibold mt-30">This user's account has been banned.</h2>
     </template>
     <template v-else>
-      <h2 class='subtitle has-text-centered has-text-weight-semibold mt-30'>This user's account is private.</h2>
+      <h2 class="subtitle has-text-centered has-text-weight-semibold mt-30">This user's account is private.</h2>
     </template>
   </div>
 </template>
