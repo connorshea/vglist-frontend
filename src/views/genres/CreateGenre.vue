@@ -1,7 +1,7 @@
 <template>
   <div class="create-genre">
     <template v-if="userCanCreate">
-      <GenreForm
+      <genre-form
         v-bind="genre"
         :form-state="'create'"
       />

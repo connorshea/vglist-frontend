@@ -1,7 +1,7 @@
 <template>
   <div class="create-engine">
     <template v-if="userCanCreate">
-      <EngineForm
+      <engine-form
         v-bind="engine"
         :form-state="'create'"
       />

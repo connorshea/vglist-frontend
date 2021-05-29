@@ -10,7 +10,7 @@
 
     <div class="user-card-list mt-20">
       <template v-for="user in data.users.nodes" :key="user.id">
-        <UserCard :user="user"/>
+        <user-card :user="user"/>
       </template>
     </div>
 

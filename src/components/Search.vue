@@ -14,7 +14,7 @@
           type="search"
           placeholder="Search"
         >
-        <SvgIcon :name="'search'" :classes="['icon', 'is-small', 'is-left']"/>
+        <svg-icon :name="'search'" :classes="['icon', 'is-small', 'is-left']"/>
       </p>
     </div>
 

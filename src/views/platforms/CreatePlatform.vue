@@ -1,7 +1,7 @@
 <template>
   <div class="create-platform">
     <template v-if="userCanCreate">
-      <PlatformForm
+      <platform-form
         v-bind="platform"
         :form-state="'create'"
       />

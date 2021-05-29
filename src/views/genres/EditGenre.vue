@@ -1,7 +1,7 @@
 <template>
   <div class="edit-genre" v-if="isLoaded">
     <template v-if="userCanEdit">
-      <GenreForm
+      <genre-form
         v-bind="genre"
         :form-state="'update'"
       />

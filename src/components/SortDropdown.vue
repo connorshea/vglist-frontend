@@ -5,7 +5,7 @@
         <span>
           {{ activeSortOption === null ? "Sort" : `Sort by ${activeSortOption.toLowerCase().replaceAll('_', ' ')}` }}
         </span>
-        <SvgIcon :name="'chevron-down'" :size="15" :classes="['icon']"/>
+        <svg-icon :name="'chevron-down'" :size="15" :classes="['icon']"/>
       </button>
     </div>
 

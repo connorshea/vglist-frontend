@@ -63,7 +63,7 @@
 
       <div class="game-card-list mt-20" v-if="gamesData">
         <div v-for="game in gamesData.games.nodes" :key="game.id">
-          <GameCard :game="game"/>
+          <game-card :game="game"/>
         </div>
       </div>
     </div>

@@ -16,7 +16,7 @@
     <div class="dropdown dropdown-dynamic game-card-dropdown is-right" :class="{ 'is-active': isActive }" v-if="userSignedIn">
       <div class="dropdown-trigger">
         <button class="button is-borderless is-shadowless" aria-haspopup="true" aria-controls="dropdown-menu" @click="toggleActive">
-          <SvgIcon :name="'chevron-down'" :classes="['icon']" :size="15" />
+          <svg-icon :name="'chevron-down'" :classes="['icon']" :size="15" />
         </button>
       </div>
       <div class="dropdown-menu" id="dropdown-menu" role="menu">

@@ -1,7 +1,7 @@
 <template>
   <div class="create-game">
     <template v-if="userCanCreate">
-      <GameForm
+      <game-form
         v-bind="game"
         :form-state="'create'"
       />

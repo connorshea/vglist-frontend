@@ -1,7 +1,7 @@
 <template>
   <div class="edit-store" v-if="isLoaded">
     <template v-if="userCanEdit">
-      <StoreForm
+      <store-form
         v-bind="store"
         :form-state="'update'"
       />

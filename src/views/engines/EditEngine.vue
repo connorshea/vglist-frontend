@@ -1,7 +1,7 @@
 <template>
   <div class="edit-engine" v-if="isLoaded">
     <template v-if="userCanEdit">
-      <EngineForm
+      <engine-form
         v-bind="engine"
         :form-state="'update'"
       />

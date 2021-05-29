@@ -1,7 +1,7 @@
 <template>
   <div class="create-store">
     <template v-if="userCanCreate">
-      <StoreForm
+      <store-form
         v-bind="store"
         :form-state="'create'"
       />

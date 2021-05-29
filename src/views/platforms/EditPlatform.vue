@@ -1,7 +1,7 @@
 <template>
   <div class="edit-platform" v-if="isLoaded">
     <template v-if="userCanEdit">
-      <PlatformForm
+      <platform-form
         v-bind="platform"
         :form-state="'update'"
       />

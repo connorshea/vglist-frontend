@@ -1,7 +1,7 @@
 <template>
   <div class="edit-company" v-if="isLoaded">
     <template v-if="userCanEdit">
-      <CompanyForm
+      <company-form
         v-bind="company"
         :form-state="'update'"
       />

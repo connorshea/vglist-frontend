@@ -8,23 +8,23 @@
 
       <div v-if="userSignedIn" class="field buttons buttons-vertical">
         <a v-show="data.game.isFavorited" class="button is-fullwidth toggle-icon-on-hover" @click="unfavoriteGame">
-          <SvgIcon :name="'heart-full'" :classes="['is-inline-flex']" :svg-classes="['icon-1']" :fill="'red'"/>
-          <SvgIcon :name="'heart-broken'" :classes="['is-inline-flex']" :svg-classes="['icon-2']" :fill="'red'"/>
+          <svg-icon :name="'heart-full'" :classes="['is-inline-flex']" :svg-classes="['icon-1']" :fill="'red'"/>
+          <svg-icon :name="'heart-broken'" :classes="['is-inline-flex']" :svg-classes="['icon-2']" :fill="'red'"/>
           <span class="ml-5">Unfavorite</span>
         </a>
         <a v-show="!data.game.isFavorited" class="button is-fullwidth toggle-icon-on-hover" @click="favoriteGame">
-          <SvgIcon :name="'heart'" :classes="['is-inline-flex']" :svg-classes="['icon-1']" :fill="'red'"/>
-          <SvgIcon :name="'heart-full'" :classes="['is-inline-flex']" :svg-classes="['icon-2']" :fill="'red'"/>
+          <svg-icon :name="'heart'" :classes="['is-inline-flex']" :svg-classes="['icon-1']" :fill="'red'"/>
+          <svg-icon :name="'heart-full'" :classes="['is-inline-flex']" :svg-classes="['icon-2']" :fill="'red'"/>
           <span class="ml-5">Favorite</span>
         </a>
-        <AddGameToLibrary :is-in-library="data.game.isInLibrary" :game="data.game" @refresh="refreshGame"/>
+        <add-game-to-library :is-in-library="data.game.isInLibrary" :game="data.game" @refresh="refreshGame"/>
 
         <!-- Actions dropdown -->
         <div id="actions-dropdown" class="dropdown is-fullwidth mr-0-mobile" :class="{ 'is-active': actionsDropdownIsActive }">
           <div class="dropdown-trigger is-fullwidth" @click="toggleActionsDropdown">
             <button class="button is-fullwidth" aria-haspopup="true" aria-controls="dropdown-menu">
               <span>Actions</span>
-              <SvgIcon :name="'chevron-down'" :size="15" :classes="['icon']"/>
+              <svg-icon :name="'chevron-down'" :size="15" :classes="['icon']"/>
             </button>
           </div>
 
@@ -44,7 +44,7 @@
     <div class="column">
       <div class="text-block mb-10-mobile">
         <h1 class="title">{{ data.game.name }}</h1>
-        <GameInfobox :game="data.game"/>
+        <game-infobox :game="data.game"/>
       </div>
 
       <template v-if="data.game.owners.totalCount > 0">

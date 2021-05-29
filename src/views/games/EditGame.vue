@@ -1,7 +1,7 @@
 <template>
   <div class="edit-game" v-if="isLoaded">
     <template v-if="userCanEdit">
-      <GameForm
+      <game-form
         v-bind="game"
         :form-state="'update'"
       />

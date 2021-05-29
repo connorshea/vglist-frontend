@@ -1,7 +1,7 @@
 <template>
   <div class="create-company">
     <template v-if="userCanCreate">
-      <CompanyForm
+      <company-form
         v-bind="company"
         :form-state="'create'"
       />

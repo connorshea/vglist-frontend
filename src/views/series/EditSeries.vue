@@ -1,7 +1,7 @@
 <template>
   <div class="edit-series" v-if="isLoaded">
     <template v-if="userCanEdit">
-      <SeriesForm
+      <series-form
         v-bind="series"
         :form-state="'update'"
       />

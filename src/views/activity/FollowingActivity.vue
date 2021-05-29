@@ -5,7 +5,7 @@
     <activity-tabs :user-signed-in="userSignedIn"/>
 
     <template v-for="event in data.activity.nodes" :key="event.id">
-      <EventCard :event="event" @refresh="execute"/>
+      <event-card :event="event" @refresh="execute"/>
     </template>
 
     <pagination

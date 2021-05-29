@@ -1,8 +1,8 @@
 <template>
   <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile" v-if="data">
     <template v-if="data.user.activity.nodes.length > 0">
-      <template v-for="event in data.user.activity.nodes" :key="event.id" >
-        <EventCard :event="event" @refresh="execute" />
+      <template v-for="event in data.user.activity.nodes" :key="event.id">
+        <event-card :event="event" @refresh="execute" />
       </template>
     </template>
     <template v-else>

@@ -3,7 +3,7 @@
     <template v-if="data.user.favoritedGames.nodes.length > 0">
       <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile game-card-list">
         <div v-for="game in data.user.favoritedGames.nodes" :key="game.id">
-          <GameCard :game="game"/>
+          <game-card :game="game"/>
         </div>
 
         <pagination

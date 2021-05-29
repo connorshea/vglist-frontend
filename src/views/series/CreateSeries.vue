@@ -1,7 +1,7 @@
 <template>
   <div class="create-series">
     <template v-if="userCanCreate">
-      <SeriesForm
+      <series-form
         v-bind="series"
         :form-state="'create'"
       />

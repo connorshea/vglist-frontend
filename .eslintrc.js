@@ -28,7 +28,8 @@ module.exports = {
         'component': 'always'
       }
     }],
-    'vue/multiline-html-element-content-newline': 0
+    'vue/multiline-html-element-content-newline': 0,
+    'vue/component-name-in-template-casing': ['warn', 'kebab-case'],
   },
   // Ignore the generated GraphQL file.
   ignorePatterns: ["src/generated/graphql.ts"],

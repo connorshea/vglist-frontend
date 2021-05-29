@@ -18,7 +18,7 @@
     <template v-if="data.engine.games.nodes.length > 0">
       <div class="game-card-list mt-20">
         <div v-for="game in data.engine.games.nodes" :key="game.id">
-          <GameCard :game="game"/>
+          <game-card :game="game"/>
         </div>
       </div>
 

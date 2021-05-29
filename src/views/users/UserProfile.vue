@@ -12,7 +12,7 @@
           class="button is-primary is-fullwidth-mobile mr-5 mr-0-mobile mt-10"
         >
           <span class="icon pl-5 mr-5">
-            <SvgIcon :name="'user-plus'" :classes="['icon']" :fill="'white'" :size="15"/>
+            <svg-icon :name="'user-plus'" :classes="['icon']" :fill="'white'" :size="15"/>
           </span>
           <span>Follow</span>
         </button>
@@ -22,7 +22,7 @@
           class="button is-danger is-fullwidth-mobile mr-5 mr-0-mobile mt-10"
         >
           <span class="icon pl-5 mr-5">
-            <SvgIcon :name="'user-minus'" :classes="['icon']" :fill="'white'" :size="15"/>
+            <svg-icon :name="'user-minus'" :classes="['icon']" :fill="'white'" :size="15"/>
           </span>
           <span>Unfollow</span>
         </button>
@@ -33,7 +33,7 @@
         <div class="dropdown-trigger is-fullwidth" @click="toggleActionsDropdown">
           <button class="button is-fullwidth" aria-haspopup="true" aria-controls="dropdown-menu">
             <span>Actions</span>
-            <SvgIcon :name="'chevron-down'" :size="15" :classes="['icon']"/>
+            <svg-icon :name="'chevron-down'" :size="15" :classes="['icon']"/>
           </button>
         </div>
 

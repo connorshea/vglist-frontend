@@ -27,7 +27,7 @@
 
         <div class="game-card-list">
           <div v-for="game in data.games.nodes" :key="game.id">
-            <GameCard :game="game"/>
+            <game-card :game="game"/>
           </div>
         </div>
 
