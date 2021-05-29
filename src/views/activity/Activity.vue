@@ -2,25 +2,10 @@
   <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile" v-if="data">
     <h1 class="title">Global Activity</h1>
 
-    <template v-if="userSignedIn">
-      <div class="tabs">
-        <ul>
-          <router-link :to="{ name: 'FollowingActivity' }" v-slot="{ href, navigate, isExactActive }">
-            <li :class="[isExactActive && 'is-active']">
-              <a :href="href" @click="navigate">Following</a>
-            </li>
-          </router-link>
-          <router-link :to="{ name: 'Activity' }" v-slot="{ href, navigate, isExactActive }">
-            <li :class="[isExactActive && 'is-active']">
-              <a :href="href" @click="navigate">Global</a>
-            </li>
-          </router-link>
-        </ul>
-      </div>
-    </template>
+    <activity-tabs :user-signed-in="userSignedIn"/>
 
-    <template v-for="event in data.activity.nodes">
-      <EventCard :event="event" :key="event.id" @refresh="execute"/>
+    <template v-for="event in data.activity.nodes" :key="event.id">
+      <event-card :event="event" @refresh="execute"/>
     </template>
 
     <pagination
@@ -36,16 +21,19 @@
 
 <script lang="ts">
 import { ActivityFeed, ActivityFeedDocument } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { useQuery } from 'villus';
 import EventCard from '@/components/EventCard.vue';
+import ActivityTabs from '@/components/ActivityTabs.vue';
 import Pagination from '@/components/Pagination.vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'Activity',
   components: {
     EventCard,
-    Pagination
+    Pagination,
+    ActivityTabs
   },
   props: {
     after: {
@@ -59,7 +47,7 @@ export default defineComponent({
       default: null
     }
   },
-  setup(props, context) {
+  setup(props) {
     const queryVariables = computed(() => {
       return {
         feedType: ActivityFeed.Global,
@@ -87,9 +75,8 @@ export default defineComponent({
       };
     });
 
-    const userSignedIn = computed(() => {
-      return context.root.$store.state.userSignedIn;
-    });
+    const store = useStore();
+    const userSignedIn = computed(() => store.state.userSignedIn);
 
     return {
       data,

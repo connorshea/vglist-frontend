@@ -39,10 +39,12 @@
 
 <script lang="ts">
 import { DeleteGenreDocument, GenreDocument } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { useMutation, useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
 import Pagination from '@/components/Pagination.vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'Genre',
@@ -66,7 +68,7 @@ export default defineComponent({
       default: null
     }
   },
-  setup(props, context) {
+  setup(props) {
     const queryVariables = computed(() => {
       return {
         id: props.id,
@@ -83,6 +85,9 @@ export default defineComponent({
       query: GenreDocument,
       variables: queryVariables
     });
+
+    const store = useStore();
+    const router = useRouter();
 
     const pageInfo = computed(() => {
       return {
@@ -101,7 +106,7 @@ export default defineComponent({
       if (confirm("Are you sure you want to delete this genre?")) {
         executeDeleteGenre({ id: props.id }).then(() => {
           if (deleteGenreData.value?.deleteGenre?.deleted) {
-            context.root.$router.push({ name: 'Genres' });
+            router.push({ name: 'Genres' });
           } else {
             // TODO: Error handling.
             console.log(`Error: ${deleteGenreErrors.value}`);
@@ -110,12 +115,10 @@ export default defineComponent({
       }
     };
 
-    const userSignedIn = computed(() => {
-      return context.root.$store.state.userSignedIn;
-    });
+    const userSignedIn = computed(() => store.state.userSignedIn);
 
     const userCanEdit = userSignedIn;
-    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(context.root.$store.state.currentUser.role));
+    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(store.state.currentUser.role));
 
     return {
       data,

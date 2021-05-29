@@ -67,10 +67,12 @@
 
 <script lang="ts">
 import { CompanyDocument, DeleteCompanyDocument } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { useMutation, useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
 import Pagination from '@/components/Pagination.vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'Company',
@@ -104,7 +106,7 @@ export default defineComponent({
       default: null
     }
   },
-  setup(props, context) {
+  setup(props) {
     const queryVariables = computed(() => {
       return {
         id: props.id,
@@ -124,6 +126,9 @@ export default defineComponent({
       query: CompanyDocument,
       variables: queryVariables
     });
+
+    const store = useStore();
+    const router = useRouter();
 
     const publishedPageInfo = computed(() => {
       return {
@@ -152,7 +157,7 @@ export default defineComponent({
       if (confirm("Are you sure you want to delete this company?")) {
         executeDeleteCompany({ id: props.id }).then(() => {
           if (deleteCompanyData.value?.deleteCompany?.deleted) {
-            context.root.$router.push({ name: 'Companies' });
+            router.push({ name: 'Companies' });
           } else {
             // TODO: Error handling.
             console.log(`Error: ${deleteCompanyErrors.value}`);
@@ -161,12 +166,10 @@ export default defineComponent({
       }
     };
 
-    const userSignedIn = computed(() => {
-      return context.root.$store.state.userSignedIn;
-    });
+    const userSignedIn = computed(() => store.state.userSignedIn);
 
     const userCanEdit = userSignedIn;
-    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(context.root.$store.state.currentUser.role));
+    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(store.state.currentUser.role));
 
     return {
       data,

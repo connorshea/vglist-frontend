@@ -74,10 +74,11 @@
 
 <script lang="ts">
 import { DeleteEventDocument } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { format } from 'timeago.js';
 import { useMutation } from 'villus';
 import SvgIcon from '@/components/SvgIcon.vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'EventCard',
@@ -90,6 +91,7 @@ export default defineComponent({
       type: Object
     }
   },
+  emits: ['refresh'],
   setup(props, context) {
     const relativeTimeAgo = computed(() => {
       return format(props.event.createdAt);
@@ -108,8 +110,10 @@ export default defineComponent({
       }
     });
 
+    const store = useStore();
+
     const eventDeletable = computed(() => {
-      return props.event.user.username === context.root.$store.state.currentUser?.username;
+      return props.event.user.username === store.state.currentUser?.username;
     });
 
     const { execute } = useMutation(DeleteEventDocument);

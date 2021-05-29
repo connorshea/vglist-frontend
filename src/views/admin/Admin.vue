@@ -2,10 +2,10 @@
   <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile" v-if="userSignedIn">
     <div class="tabs">
       <ul>
-        <template v-for="tab in tabs">
+        <template v-for="tab in tabs" :key="tab.id">
           <!-- The janky v-slot workaround is necessary for the parent <li> to
                have the active class applied to it. -->
-          <router-link :key="tab.id" :to="tab.path" v-slot="{ href, navigate, isExactActive }">
+          <router-link :to="tab.path" custom v-slot="{ href, navigate, isExactActive }">
             <li :class="[isExactActive && 'is-active']">
               <a :href="href" @click="navigate">{{ tab.name }}</a>
             </li>
@@ -19,14 +19,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'Admin',
-  setup(_props, context) {
-    const userSignedIn = computed(() => {
-      return context.root.$store.state.userSignedIn;
-    });
+  setup() {
+    const store = useStore();
+    const userSignedIn = computed(() => store.state.userSignedIn);
 
     const tabs = [
       {

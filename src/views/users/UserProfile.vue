@@ -62,10 +62,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from '@vue/composition-api';
+import { computed, defineComponent, ref } from 'vue';
 import { useMutation } from 'villus';
 import { FollowUserDocument, UnfollowUserDocument, BanUserDocument, UnbanUserDocument, RemoveUserAvatarDocument, UpdateUserRoleDocument, UserRole } from '@/generated/graphql';
 import SvgIcon from '@/components/SvgIcon.vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'UserProfile',
@@ -78,14 +79,14 @@ export default defineComponent({
       type: Object
     }
   },
+  emits: ['refreshUserData'],
   setup(props, context) {
     const isFollowing = computed(() => props.user.isFollowed);
 
-    const userSignedIn = computed(() => {
-      return context.root.$store.state.userSignedIn;
-    });
+    const store = useStore();
+    const userSignedIn = computed(() => store.state.userSignedIn);
 
-    const currentUserIsModeratorOrAdmin = computed(() => ['MODERATOR', 'ADMIN'].includes(context.root.$store.state.currentUser.role));
+    const currentUserIsModeratorOrAdmin = computed(() => ['MODERATOR', 'ADMIN'].includes(store.state.currentUser.role));
 
     const userIsBanned = computed(() => props.user.banned);
 
@@ -98,12 +99,12 @@ export default defineComponent({
       }
 
       // Moderators can only ban members.
-      if (context.root.$store.state.currentUser.role === 'MODERATOR' && props.user.role === 'MEMBER') {
+      if (store.state.currentUser.role === 'MODERATOR' && props.user.role === 'MEMBER') {
         return true;
       }
 
       // Admins can ban anyone.
-      if (context.root.$store.state.currentUser.role === 'ADMIN') {
+      if (store.state.currentUser.role === 'ADMIN') {
         return true;
       }
 
@@ -131,7 +132,7 @@ export default defineComponent({
     });
 
     // Whether the current user is the same as the user being viewed.
-    const currentUserIsUser = computed(() => context.root.$store.state.currentUser.slug === props.user.slug);
+    const currentUserIsUser = computed(() => store.state.currentUser.slug === props.user.slug);
 
     const canMakeMember = computed(() => {
       // Cannot make a user into a member if they already are.
@@ -140,7 +141,7 @@ export default defineComponent({
       }
 
       // Moderators cannot make other moderators or admins into members.
-      if (context.root.$store.state.currentUser.role === 'ADMIN') {
+      if (store.state.currentUser.role === 'ADMIN') {
         return true;
       }
 
@@ -154,7 +155,7 @@ export default defineComponent({
       }
 
       // Only admins can make moderators.
-      if (context.root.$store.state.currentUser.role === 'ADMIN') {
+      if (store.state.currentUser.role === 'ADMIN') {
         return true;
       }
 
@@ -169,7 +170,7 @@ export default defineComponent({
       }
 
       // Only admins can make other admins.
-      if (context.root.$store.state.currentUser.role === 'ADMIN') {
+      if (store.state.currentUser.role === 'ADMIN') {
         return true;
       }
 

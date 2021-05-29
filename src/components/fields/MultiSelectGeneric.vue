@@ -7,19 +7,18 @@
         :taggable="true"
         :inputId="inputId"
         :label="vSelectLabel"
-        @change="onChange"
-        v-bind:value="value"
-        v-on:input="onInput"
+        :modelValue="modelValue"
+        @update:modelValue="onInput"
       ></v-select>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import vSelect from 'vue-select';
-import 'vue-select/dist/vue-select.css';
+import vSelect from 'vue-select-connorshea';
+import 'vue-select-connorshea/dist/vue-select.css';
 import * as _ from 'lodash';
-import { computed, defineComponent, ref } from '@vue/composition-api';
+import { computed, defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'MultiSelectGeneric',
@@ -31,7 +30,7 @@ export default defineComponent({
       type: String,
       required: true
     },
-    value: {
+    modelValue: {
       type: Array,
       required: true
     },
@@ -41,17 +40,16 @@ export default defineComponent({
       default: "name"
     }
   },
+  emits: ['update:modelValue'],
   setup(props, context) {
     const inputId = computed(() => _.snakeCase(props.label));
     let options = ref([]);
 
-    const onChange = (selectedItems: Array<unknown>) => context.emit('input', selectedItems);
-    const onInput = (event: unknown) => context.emit('input', event);
+    const onInput = (event: unknown) => context.emit('update:modelValue', event);
 
     return {
       inputId,
       options,
-      onChange,
       onInput
     }
   }

@@ -33,10 +33,10 @@
 
     <div class="tabs" v-if="isPublic">
       <ul>
-        <template v-for="tab in tabs">
+        <template v-for="tab in tabs" :key="tab.id">
           <!-- The janky v-slot workaround is necessary for the parent <li> to
                have the active class applied to it. -->
-          <router-link :key="tab.id" :to="tab.path" v-slot="{ href, navigate, isExactActive }">
+          <router-link :to="tab.path" custom v-slot="{ href, navigate, isExactActive }">
             <li :class="[isExactActive && 'is-active']">
               <a :href="href" @click="navigate">{{ tab.name }}</a>
             </li>
@@ -50,8 +50,9 @@
 
 <script lang="ts">
 import { UserDocument } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { useQuery } from 'villus';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'User',
@@ -61,7 +62,7 @@ export default defineComponent({
       type: String
     }
   },
-  setup(props, context) {
+  setup(props) {
     const queryVariables = computed(() => {
       return { slug: props.slug };
     });
@@ -71,8 +72,10 @@ export default defineComponent({
       variables: queryVariables
     });
 
+    const store = useStore();
+
     const isCurrentUser = computed(() => {
-      return data.value?.user?.username === context.root.$store.state.currentUser?.username;
+      return data.value?.user?.username === store.state.currentUser?.username;
     });
 
     const isPublic = computed(() => {

@@ -26,10 +26,9 @@
                dropdown, since it's the best solution I could come up with. -->
           <hr class="navbar-divider">
           <p class="navbar-item navbar-dropdown-header">{{ plurals[type] }}</p>
-          <template v-for="result in searchResults[type]">
+          <template v-for="result in searchResults[type]" :key="result.id">
             <router-link 
               :to="searchResultToUrl(result)"
-              :key="result.id"
               custom
               v-slot="{ navigate, href }"
               class="navbar-item"
@@ -77,10 +76,11 @@
 
 <script lang="ts">
 import * as _ from 'lodash';
-import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
+import { computed, defineComponent, Ref, ref } from 'vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { CompanySearchResult, EngineSearchResult, GameSearchResult, GenreSearchResult, GlobalSearchDocument, PlatformSearchResult, SearchResultUnion, SeriesSearchResult, UserSearchResult } from '@/generated/graphql';
 import { useQuery } from 'villus';
+import { useRouter } from 'vue-router';
 
 type SearchResultName = 'Game' | 'Series' | 'Company' | 'Platform' | 'Engine' | 'Genre' | 'User';
 
@@ -109,7 +109,7 @@ export default defineComponent({
   components: {
     SvgIcon
   },
-  setup(_props, context) {
+  setup() {
     const query = ref('');
 
     // We run the search query manually to allow for debouncing, so we don't
@@ -121,6 +121,8 @@ export default defineComponent({
       variables: { query: '', cursor: '' },
       fetchOnMount: false
     });
+
+    const router = useRouter();
 
     const plurals = {
       'Game': 'Games',
@@ -173,7 +175,7 @@ export default defineComponent({
       if (activeItem !== null) {
         // This will push the full URL as the path, so we make the href a URL
         // and get just the pathname.
-        context.root.$router.push({ path: new URL(activeItem.href).pathname });
+        router.push({ path: new URL(activeItem.href).pathname });
         resetSearchResults();
       }
     };

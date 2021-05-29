@@ -14,9 +14,10 @@
 
 <script lang="ts">
 import { StoreDocument } from '@/generated/graphql';
-import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
+import { computed, defineComponent, Ref, ref } from 'vue';
 import { useQuery } from 'villus';
 import StoreForm from '@/components/forms/StoreForm.vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'EditStore',
@@ -29,7 +30,7 @@ export default defineComponent({
       type: String
     }
   },
-  setup(props, context) {
+  setup(props) {
     const { execute: executeQuery } = useQuery({
       query: StoreDocument,
       variables: {
@@ -52,7 +53,8 @@ export default defineComponent({
       isLoaded.value = true;
     });
 
-    const userSignedIn = computed(() => context.root.$store.state.userSignedIn);
+    const vuexStore = useStore();
+    const userSignedIn = computed(() => vuexStore.state.userSignedIn);
 
     const userCanEdit = userSignedIn;
 

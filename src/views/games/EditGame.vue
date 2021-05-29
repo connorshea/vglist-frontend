@@ -14,9 +14,10 @@
 
 <script lang="ts">
 import { GameDocument } from '@/generated/graphql';
-import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
+import { computed, defineComponent, Ref, ref } from 'vue';
 import { useQuery } from 'villus';
 import GameForm from '@/components/forms/GameForm.vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'EditGame',
@@ -29,7 +30,7 @@ export default defineComponent({
       type: String
     }
   },
-  setup(props, context) {
+  setup(props) {
     const { execute: executeQuery } = useQuery({
       query: GameDocument,
       variables: {
@@ -116,7 +117,8 @@ export default defineComponent({
       isLoaded.value = true;
     });
 
-    const userSignedIn = computed(() => context.root.$store.state.userSignedIn);
+    const store = useStore();
+    const userSignedIn = computed(() => store.state.userSignedIn);
 
     const userCanEdit = userSignedIn;
 

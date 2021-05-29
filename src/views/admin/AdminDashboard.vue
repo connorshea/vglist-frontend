@@ -163,7 +163,7 @@
 
 <script lang="ts">
 import { useQuery } from 'villus';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { LiveStatisticsDocument, SiteStatisticsDocument } from '@/generated/graphql';
 import Pagination from '@/components/Pagination.vue';
 import { startCase } from 'lodash';

@@ -72,7 +72,7 @@
 
 <script lang="ts">
 import { GamesDocument, HomeStatisticsDocument } from '@/generated/graphql';
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent } from 'vue';
 import { useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
 

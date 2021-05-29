@@ -15,7 +15,7 @@
 
     <div v-if="game.developers.nodes.length > 0" class="infobox-section">
       <p class="infobox-header has-text-weight-semibold">
-        {{ game.developers.nodes.length | pluralize('Developer') }}
+        {{ $filters.pluralize(game.developers.nodes.length, 'Developer') }}
       </p>
       <ul>
         <li v-for="developer in game.developers.nodes" :key="developer.id">
@@ -28,7 +28,7 @@
 
     <div v-if="game.publishers.nodes.length > 0" class="infobox-section">
       <p class="infobox-header has-text-weight-semibold">
-        {{ game.publishers.nodes.length | pluralize('Publisher') }}
+        {{ $filters.pluralize(game.publishers.nodes.length, 'Publisher') }}
       </p>
       <ul>
         <li v-for="publisher in game.publishers.nodes" :key="publisher.id">
@@ -41,7 +41,7 @@
 
     <div v-if="game.platforms.nodes.length > 0" class="infobox-section">
       <p class="infobox-header has-text-weight-semibold">
-        {{ game.platforms.nodes.length | pluralize('Platform') }}
+        {{ $filters.pluralize(game.platforms.nodes.length, 'Platform') }}
       </p>
       <ul>
         <li v-for="platform in game.platforms.nodes" :key="platform.id">
@@ -65,7 +65,7 @@
 
     <div v-if="game.genres.nodes.length > 0" class="infobox-section">
       <p class="infobox-header has-text-weight-semibold">
-        {{ game.genres.nodes.length | pluralize('Genre') }}
+        {{ $filters.pluralize(game.genres.nodes.length, 'Genre') }}
       </p>
       <ul>
         <li v-for="genre in game.genres.nodes" :key="genre.id">
@@ -78,7 +78,7 @@
 
     <div v-if="game.engines.nodes.length > 0" class="infobox-section">
       <p class="infobox-header has-text-weight-semibold">
-        {{ game.engines.nodes.length | pluralize('Engine') }}
+        {{ $filters.pluralize(game.engines.nodes.length, 'Engine') }}
       </p>
       <ul>
         <li v-for="engine in game.engines.nodes" :key="engine.id">
@@ -95,8 +95,8 @@
         <ul>
           <li v-if="game.wikidataId !== null"><a :href="wikidataUrl">Wikidata</a></li>
           <li v-if="game.pcgamingwikiId !== null"><a :href="pcgamingwikiUrl">PCGamingWiki</a></li>
-          <template v-for="(steamUrl, index) in steamUrls">
-            <li :key="steamUrl">
+          <template v-for="(steamUrl, index) in steamUrls" :key="steamUrl">
+            <li>
               <a :href="steamUrl">Steam {{ index > 0 ? '(alt)' : '' }}</a>
             </li>
           </template>
@@ -112,7 +112,7 @@
 </template>
 
 <script lang="ts">
-import { computed, ComputedRef, defineComponent } from '@vue/composition-api';
+import { computed, ComputedRef, defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'GameInfobox',

@@ -17,7 +17,8 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'indent': ['warn', 2],
     // Ignore rest siblings so we can use the rest syntax to ignore attributes of an object.
-    "@typescript-eslint/no-unused-vars": ['error', { 'ignoreRestSiblings': true }]
+    "@typescript-eslint/no-unused-vars": ['error', { 'ignoreRestSiblings': true }],
+    "vue/no-v-for-template-key": 0
   },
   // Ignore the generated GraphQL file.
   ignorePatterns: ["src/generated/graphql.ts"],

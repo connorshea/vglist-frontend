@@ -11,8 +11,8 @@
           </tr>
         </thead>
         <tbody>
-          <template v-for="blocklistEntry in data.wikidataBlocklist.nodes">
-            <tr :key="blocklistEntry.id">
+          <template v-for="blocklistEntry in data.wikidataBlocklist.nodes" :key="blocklistEntry.id">
+            <tr>
               <th>
                 <a :href="wikidataUrl(blocklistEntry.wikidataId)">
                   {{ blocklistEntry.wikidataId }}
@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import { RemoveFromWikidataBlocklistDocument, WikidataBlocklistDocument } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { useMutation, useQuery } from 'villus';
 import Pagination from '@/components/Pagination.vue';
 

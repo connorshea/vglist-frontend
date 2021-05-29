@@ -39,10 +39,12 @@
 
 <script lang="ts">
 import { DeletePlatformDocument, PlatformDocument } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { useMutation, useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
 import Pagination from '@/components/Pagination.vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'Platform',
@@ -66,7 +68,7 @@ export default defineComponent({
       default: null
     }
   },
-  setup(props, context) {
+  setup(props) {
     const queryVariables = computed(() => {
       return {
         id: props.id,
@@ -97,12 +99,14 @@ export default defineComponent({
       return `https://www.wikidata.org/wiki/Q${data.value?.platform?.wikidataId}`;
     });
 
+    const router = useRouter();
+
     const { data: deletePlatformData, execute: executeDeletePlatform, error: deletePlatformErrors } = useMutation(DeletePlatformDocument);
     let deletePlatform = () => {
       if (confirm("Are you sure you want to delete this platform?")) {
         executeDeletePlatform({ id: props.id }).then(() => {
           if (deletePlatformData.value?.deletePlatform?.deleted) {
-            context.root.$router.push({ name: 'Platforms' });
+            router.push({ name: 'Platforms' });
           } else {
             // TODO: Error handling.
             console.log(`Error: ${deletePlatformErrors.value}`);
@@ -111,12 +115,11 @@ export default defineComponent({
       }
     };
 
-    const userSignedIn = computed(() => {
-      return context.root.$store.state.userSignedIn;
-    });
+    const store = useStore();
+    const userSignedIn = computed(() => store.state.userSignedIn);
 
     const userCanEdit = userSignedIn;
-    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(context.root.$store.state.currentUser.role));
+    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(store.state.currentUser.role));
 
     return {
       data,

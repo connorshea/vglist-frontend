@@ -13,20 +13,22 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, Ref, ref } from '@vue/composition-api';
+import { computed, defineComponent, Ref, ref } from 'vue';
 import StoreForm from '@/components/forms/StoreForm.vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'CreateStore',
   components: {
     StoreForm
   },
-  setup(_props, context) {
+  setup() {
     const store: Ref<{ name: string | null }> = ref({
       name: null,
     });
 
-    const userSignedIn = computed(() => context.root.$store.state.userSignedIn);
+    const vuexStore = useStore();
+    const userSignedIn = computed(() => vuexStore.state.userSignedIn);
 
     const userCanCreate = userSignedIn;
 

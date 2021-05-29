@@ -9,18 +9,17 @@
         :inputId="inputId"
         label="name"
         :placeholder="placeholder"
-        @change="onChange"
-        v-bind:value="value"
-        v-on:input="onInput"
+        :modelValue="modelValue"
+        @update:modelValue="onInput"
       ></v-select>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from '@vue/composition-api';
-import vSelect from 'vue-select';
-import 'vue-select/dist/vue-select.css';
+import { computed, defineComponent, ref } from 'vue';
+import vSelect from 'vue-select-connorshea';
+import 'vue-select-connorshea/dist/vue-select.css';
 import * as _ from 'lodash';
 import { useQuery } from 'villus';
 
@@ -34,7 +33,7 @@ export default defineComponent({
       type: String,
       required: true
     },
-    value: {
+    modelValue: {
       type: Array,
       required: true
     },
@@ -52,6 +51,7 @@ export default defineComponent({
       required: true
     }
   },
+  emits: ['update:modelValue'],
   setup(props, context) {
     let variables = ref({ query: '' })
     const { data } = useQuery({
@@ -71,8 +71,7 @@ export default defineComponent({
       }
     });
 
-    const onInput = (event: unknown) => context.emit('input', event);
-    const onChange = (selectedItems: unknown[]) => context.emit('input', selectedItems);
+    const onInput = (event: unknown) => context.emit('update:modelValue', event);
 
     const onSearch = _.debounce((search: string) => {
       variables.value = { query: search };
@@ -82,7 +81,6 @@ export default defineComponent({
       inputId,
       options,
       onInput,
-      onChange,
       onSearch
     };
   },

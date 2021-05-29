@@ -24,7 +24,7 @@
             :search-path="'gameSearch'"
             :graphql-query="GameSearchDocument"
             :max-height="'150px'"
-            @input="selectGame"
+            @update:modelValue="selectGame"
             :customOptionFunc="customOptionLabel"
           ></single-select>
         </div>
@@ -38,11 +38,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, ref } from '@vue/composition-api';
+import { defineComponent, Ref, ref } from 'vue';
 import SingleSelect from '@/components/fields/SingleSelect.vue';
 import { GameSearchDocument, MergeGamesDocument } from '@/generated/graphql';
 import { submitButtonErrorAnimation } from '@/helpers/submitButtonErrorAnimation';
 import { useMutation } from 'villus';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'MergeGamesModal',
@@ -59,9 +60,12 @@ export default defineComponent({
       required: true
     }
   },
+  emits: ['close'],
   setup(props, context) {
     const gameSelected = ref(false);
     const errors: Ref<string[]> = ref([]);
+
+    const router = useRouter();
 
     const selectGame = () => {
       gameSelected.value = true;
@@ -85,7 +89,7 @@ export default defineComponent({
       if (gameToKeep.value === null) { return; }
       executeMergeGames({ gameToMergeId: props.game.id, gameToKeepId: gameToKeep.value?.id }).then((result) => {
         if (result.error === null && gameToKeep.value !== null) {
-          context.root.$router.push({ name: 'Game', params: { id: gameToKeep.value?.id }});
+          router.push({ name: 'Game', params: { id: gameToKeep.value?.id }});
           context.emit('close');
         } else {
           // Multiple errors are returned as one string with comma separators,

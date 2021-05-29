@@ -120,12 +120,14 @@
 
 <script lang="ts">
 import { AddGameToWikidataBlocklistDocument, DeleteGameDocument, FavoriteGameDocument, GameDocument, RemoveGameCoverDocument, UnfavoriteGameDocument } from '@/generated/graphql';
-import { computed, defineComponent, ref } from '@vue/composition-api';
+import { computed, defineComponent, ref } from 'vue';
 import { useMutation, useQuery } from 'villus';
 import GameInfobox from '@/components/GameInfobox.vue';
 import AddGameToLibrary from '@/components/AddGameToLibrary.vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 import MergeGamesButton from '@/components/MergeGamesButton.vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'Game',
@@ -141,7 +143,7 @@ export default defineComponent({
       type: String
     }
   },
-  setup(props, context) {
+  setup(props) {
     const queryVariables = computed(() => {
       return { id: props.id };
     });
@@ -152,9 +154,12 @@ export default defineComponent({
       cachePolicy: 'network-only'
     });
 
+    const store = useStore();
     const userSignedIn = computed(() => {
-      return context.root.$store.state.userSignedIn;
+      return store.state.userSignedIn;
     });
+
+    const router = useRouter();
 
     const { execute: executeFavoriteGame } = useMutation(FavoriteGameDocument);
     const { execute: executeUnfavoriteGame } = useMutation(UnfavoriteGameDocument);
@@ -187,8 +192,8 @@ export default defineComponent({
     const actionsDropdownIsActive = ref(false);
     const toggleActionsDropdown = () => actionsDropdownIsActive.value = !actionsDropdownIsActive.value;
 
-    const userIsAdmin = computed(() => context.root.$store.state.currentUser.role === 'ADMIN');
-    const userIsModeratorOrAdmin = computed(() => ['ADMIN', 'MODERATOR'].includes(context.root.$store.state.currentUser.role));
+    const userIsAdmin = computed(() => store.state.currentUser.role === 'ADMIN');
+    const userIsModeratorOrAdmin = computed(() => ['ADMIN', 'MODERATOR'].includes(store.state.currentUser.role));
 
     const canAddToWikidataBlocklist = computed(() => data.value?.game?.wikidataId !== null);
     const canRemoveCover = computed(() => data.value?.game?.coverUrl !== null);
@@ -225,7 +230,7 @@ export default defineComponent({
         if (typeof gameId !== 'undefined') {
           executeDeleteGame({ id: gameId }).then(() => {
             // Redirect to Games list page.
-            context.root.$router.push({ name: 'Games' });
+            router.push({ name: 'Games' });
           });
         }
       }

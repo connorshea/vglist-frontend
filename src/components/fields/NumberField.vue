@@ -10,17 +10,17 @@
         :min="min"
         :max="max"
         :required="required"
-        v-bind:name="numberFieldName"
-        v-bind:id="numberFieldId"
-        v-bind:value="dataValue"
-        v-on:input="$emit('input', $event.target.value)"
+        :name="numberFieldName"
+        :id="numberFieldId"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
       />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'NumberField',
@@ -47,7 +47,7 @@ export default defineComponent({
       required: false,
       default: ''
     },
-    value: {
+    modelValue: {
       type: [Number, String],
       required: false,
       default: ''
@@ -67,16 +67,14 @@ export default defineComponent({
       required: false
     }
   },
+  emits: ['update:modelValue'],
   setup(props) {
-    const dataValue = ref(props.value);
-
     const numberFieldName = computed(() => `${props.formClass}[${props.attribute}]`);
     const numberFieldId = computed(() => `${props.formClass}_${props.attribute}`);
 
     return {
       numberFieldName,
-      numberFieldId,
-      dataValue
+      numberFieldId
     }
   }
 });

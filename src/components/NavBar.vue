@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <router-link to="/" class="navbar-item has-text-weight-semibold" title='vglist Home'>
-        <img alt="vglist logo" src="@/assets/images/vglist-logo.svg" width="80px" class="mt-5" aria-hidden="true">
+      <router-link :to="{ name: 'Home' }" class="navbar-item has-text-weight-semibold" title='vglist Home'>
+        <img src="@/assets/images/vglist-logo.svg" class="mt-5 navbar-logo" aria-hidden="true" alt="vglist logo">
       </router-link>
       <!-- Hamburger menu for mobile -->
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
@@ -130,11 +130,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import Search from '@/components/Search.vue';
-import { RawLocation } from 'vue-router';
 import { CurrentUserDocument } from '@/generated/graphql';
 import { useQuery } from 'villus';
+import { useStore } from 'vuex';
 
 // Update this to include other valid click actions later.
 type clickAction = 'signOut';
@@ -144,12 +144,14 @@ export default defineComponent({
   components: {
     Search
   },
-  setup(_props, context) {
+  setup() {
     const { data: currentUserData } = useQuery({ query: CurrentUserDocument });
+
+    const store = useStore();
 
     const signIn = () => {
       // This is pretty much just a fake sign in for a user.
-      context.root.$store.commit(
+      store.commit(
         'signIn',
         {
           username: currentUserData.value?.currentUser?.username,
@@ -165,25 +167,25 @@ export default defineComponent({
       // Delay it by 50ms because otherwise clicking the "Sign out" button in
       // the navbar will cause a page navigation to the API docs dropdown
       // item instead.
-      setTimeout(() => context.root.$store.commit('signOut'), 50);
+      setTimeout(() => store.commit('signOut'), 50);
     };
 
     const oauthUrl = computed(() => {
-      return `${process.env.VUE_APP_VGLIST_HOST_URL}/settings/oauth/authorize?client_id=${context.root.$store.state.clientId}&redirect_uri=${context.root.$store.state.redirectUri}&response_type=code&scope=read+write`;
+      return `${process.env.VUE_APP_VGLIST_HOST_URL}/settings/oauth/authorize?client_id=${store.state.clientId}&redirect_uri=${store.state.redirectUri}&response_type=code&scope=read+write`;
     });
 
     /**
      * Whether to show the authenticate button.
      */
     const showAuthenticate = computed(() => {
-      return context.root.$store.state.accessToken === null;
+      return store.state.accessToken === null;
     });
 
-    const userSignedIn = computed(() => context.root.$store.state.userSignedIn);
-    const currentUser = computed(() => context.root.$store.state.currentUser);
+    const userSignedIn = computed(() => store.state.userSignedIn);
+    const currentUser = computed(() => store.state.currentUser);
 
     const navBarItems = computed(() => {
-      let items: Array<{ id?: number; title: string | null; path: RawLocation | null; clickAction?: clickAction; router: boolean }> = [];
+      let items: Array<{ id?: number; title: string | null; path: string | { path: string } | null; clickAction?: clickAction; router: boolean }> = [];
 
       // Include profile, admin, settings, and sign out if the user is logged in.
       if (userSignedIn.value === true) {

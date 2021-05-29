@@ -1,5 +1,4 @@
-import Vue from 'vue';
-import VueRouter, { RouteConfig } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
 import Home from '@/views/Home.vue';
 
@@ -46,6 +45,8 @@ import Stores from '@/views/stores/Stores.vue';
 import CreateStore from '@/views/stores/CreateStore.vue';
 import EditStore from '@/views/stores/EditStore.vue';
 
+import Settings from '@/views/settings/Settings.vue';
+
 import Users from '@/views/users/Users.vue';
 import User from '@/views/users/User.vue';
 import UserProfile from '@/views/users/UserProfile.vue';
@@ -54,9 +55,7 @@ import UserFavorites from '@/views/users/UserFavorites.vue';
 import UserFollowing from '@/views/users/UserFollowing.vue';
 import UserFollowers from '@/views/users/UserFollowers.vue';
 
-Vue.use(VueRouter);
-
-const routes: Array<RouteConfig> = [
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
@@ -303,6 +302,11 @@ const routes: Array<RouteConfig> = [
     props: true
   },
   {
+    path: '/settings',
+    name: 'Settings',
+    component: Settings
+  },
+  {
     path: '/stores',
     name: 'Stores',
     component: Stores,
@@ -388,9 +392,8 @@ const routes: Array<RouteConfig> = [
   }
 ];
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes
 });
 

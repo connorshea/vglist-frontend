@@ -8,18 +8,18 @@
         label="label"
         :placeholder="placeholder"
         :inputId="inputId"
-        v-bind:value="value"
-        v-on:input="$emit('input', $event)"
+        :modelValue="modelValue"
+        @update:modelValue="$emit('update:modelValue', $event)"
       ></v-select>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import vSelect from 'vue-select';
-import 'vue-select/dist/vue-select.css';
+import vSelect from 'vue-select-connorshea';
+import 'vue-select-connorshea/dist/vue-select.css';
 import * as _ from 'lodash';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'StaticSingleSelect',
@@ -36,7 +36,7 @@ export default defineComponent({
       required: false,
       default: ''
     },
-    value: {
+    modelValue: {
       type: [Object, Number, String],
       required: false
     },
@@ -55,6 +55,7 @@ export default defineComponent({
       default: false
     }
   },
+  emits: ['update:modelValue'],
   setup(props) {
     const inputId = computed(() => _.snakeCase(props.label));
 

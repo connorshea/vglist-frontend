@@ -7,17 +7,17 @@
         class="input"
         type="text"
         :required="required"
-        v-bind:name="textFieldName"
-        v-bind:id="textFieldId"
-        v-bind:value="dataValue"
-        v-on:input="$emit('input', $event.target.value)"
+        :name="textFieldName"
+        :id="textFieldId"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
       />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'TextField',
@@ -35,7 +35,7 @@ export default defineComponent({
       required: true
     },
     // Optional to allow for null.
-    value: {
+    modelValue: {
       type: String,
       required: false
     },
@@ -45,16 +45,14 @@ export default defineComponent({
       default: false
     }
   },
+  emits: ['update:modelValue'],
   setup(props) {
-    const dataValue = ref(props.value);
-
     const textFieldName = computed(() => `${props.formClass}[${props.attribute}]`);
     const textFieldId = computed(() => `${props.formClass}_${props.attribute}`);
 
     return {
       textFieldName,
-      textFieldId,
-      dataValue
+      textFieldId
     }
   }
 });

@@ -27,9 +27,10 @@
 
 <script lang="ts">
 import { PlatformsDocument } from '@/generated/graphql';
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { useQuery } from 'villus';
 import Pagination from '@/components/Pagination.vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'Platforms',
@@ -48,7 +49,7 @@ export default defineComponent({
       default: null
     }
   },
-  setup(props, context) {
+  setup(props) {
     const queryVariables = computed(() => {
       return {
         before: props.before,
@@ -73,7 +74,9 @@ export default defineComponent({
         hasNextPage: data.value?.platforms?.pageInfo.hasNextPage ?? false
       };
     });
-    const userSignedIn = computed(() => context.root.$store.state.userSignedIn);
+
+    const store = useStore();
+    const userSignedIn = computed(() => store.state.userSignedIn);
 
     return {
       data,

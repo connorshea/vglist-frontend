@@ -1,15 +1,26 @@
-import { createLocalVue, mount } from '@vue/test-utils'
-import GameCard from '@/components/GameCard.vue'
-
-const localVue = createLocalVue();
+import { mount } from '@vue/test-utils';
+import GameCard from '@/components/GameCard.vue';
+import { createStore } from 'vuex';
+import { createClient, VILLUS_CLIENT } from 'villus';
 
 describe('GameCard.vue', () => {
-  // Disabled for now because I can't figure out how to get Villus to work in tests.
-  xit('renders platforms and developers when passed', () => {
+  xit('renders platform when passed', () => {
+    const store = createStore({
+      state() {
+        return { userSignedIn: true };
+      }
+    });
+
     const wrapper = mount(GameCard, {
-      stubs: ['router-link', 'router-view'],
-      localVue,
-      propsData: {
+      global: {
+        plugins: [store],
+        provide: {
+          [VILLUS_CLIENT as symbol]: createClient({
+            url: 'http://test/graphql',
+          }),
+        }
+      },
+      props: {
         game: {
           id: 1,
           platforms: {
@@ -19,19 +30,11 @@ describe('GameCard.vue', () => {
                 name: 'Nintendo Switch'
               }
             ]
-          },
-          developers: {
-            nodes: [
-              {
-                id: 1,
-                name: 'Valve'
-              }
-            ]
-          },
-          isFavorited: true
+          }
         }
       }
-    })
-    expect(wrapper.text()).toMatch('Nintendo Switch')
-  })
-})
+    });
+
+    expect(wrapper.text()).toMatch('Nintendo Switch');
+  });
+});

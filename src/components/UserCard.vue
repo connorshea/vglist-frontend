@@ -14,7 +14,7 @@
           <span v-if="user.banned === true" class="tag is-danger has-text-weight-semibold ml-5">Banned</span>
         </p>
         <p class="has-text-muted">
-          {{ user.gamePurchases.totalCount }} {{ user.gamePurchases.totalCount | pluralize('Game') }}
+          {{ user.gamePurchases.totalCount }} {{ $filters.pluralize(user.gamePurchases.totalCount, 'Game') }}
         </p>
       </div>
     </router-link>
@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'UserCard',
