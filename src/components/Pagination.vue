@@ -8,25 +8,25 @@
       -->
       <router-link
         :to="previousPageRoute"
-        v-slot="{ href }"
         custom
+        v-slot="{ href }"
       >
         <a :href="href"
            rel="prev"
            class="pagination-previous"
-           :disabled="!hasPreviousPage"
+           :disabled="previousPageDisabled"
            @click.prevent="previousPage(startCursor)"
         >Previous</a>
       </router-link>
       <router-link
         :to="nextPageRoute"
-        v-slot="{ href }"
         custom
+        v-slot="{ href }"
       >
         <a :href="href"
            rel="next"
            class="pagination-next"
-           :disabled="!hasNextPage"
+           :disabled="nextPageDisabled"
            @click.prevent="nextPage(endCursor)"
         >Next</a>
       </router-link>
@@ -108,11 +108,21 @@ export default defineComponent({
       }
     };
 
+    const previousPageDisabled = computed(() => {
+      return props.hasPreviousPage ? null : true;
+    });
+
+    const nextPageDisabled = computed(() => {
+      return props.hasNextPage ? null : true;
+    });
+
     return {
       previousPage,
       previousPageRoute,
       nextPage,
-      nextPageRoute
+      nextPageRoute,
+      previousPageDisabled,
+      nextPageDisabled
     };
   }
 });
