@@ -5,11 +5,11 @@
       <v-select
         multiple
         :taggable="true"
-        :inputId="inputId"
+        :input-id="inputId"
         :label="vSelectLabel"
-        :modelValue="modelValue"
+        :model-value="modelValue"
         @update:modelValue="onInput"
-      ></v-select>
+      />
     </div>
   </div>
 </template>

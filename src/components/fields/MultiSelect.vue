@@ -6,12 +6,12 @@
         multiple
         :options="options"
         @search="onSearch"
-        :inputId="inputId"
+        :input-id="inputId"
         label="name"
         :placeholder="placeholder"
-        :modelValue="modelValue"
+        :model-value="modelValue"
         @update:modelValue="onInput"
-      ></v-select>
+      />
     </div>
   </div>
 </template>
@@ -39,7 +39,8 @@ export default defineComponent({
     },
     placeholder: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     graphqlQuery: {
       type: Object,

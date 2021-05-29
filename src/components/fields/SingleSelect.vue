@@ -7,11 +7,11 @@
         :disabled="disabled"
         @search="onSearch"
         label="name"
-        :inputId="inputId"
+        :input-id="inputId"
         :placeholder="placeholder"
-        :modelValue="modelValue"
+        :model-value="modelValue"
         @update:modelValue="onInput"
-      ></v-select>
+      />
     </div>
   </div>
 </template>
@@ -31,11 +31,13 @@ export default defineComponent({
   props: {
     label: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     modelValue: {
       type: Object,
-      required: false
+      required: false,
+      default: null
     },
     graphqlQuery: {
       type: Object,
@@ -58,13 +60,15 @@ export default defineComponent({
     },
     placeholder: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     // Can be used to rename labels in the component dropdown or make other
     // modifications to options.
     customOptionFunc: {
       type: Function,
-      required: false
+      required: false,
+      default: null
     },
     // The name of the search query in the GraphQL response, e.g. 'gameSearch'.
     searchPath: {

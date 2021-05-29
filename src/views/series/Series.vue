@@ -32,7 +32,7 @@
       />
     </template>
     <template v-else>
-      <p class='has-text-centered mt-50 has-text-muted'>This series doesn't have any games yet.</p>
+      <p class="has-text-centered mt-50 has-text-muted">This series doesn't have any games yet.</p>
     </template>
   </div>
 </template>

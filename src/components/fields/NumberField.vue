@@ -1,6 +1,6 @@
 <template>
   <div class="field" :class="fieldClass">
-    <label v-if="label" class="label" v-bind:for="numberFieldId">{{ label }}</label>
+    <label v-if="label" class="label" :for="numberFieldId">{{ label }}</label>
     <div class="control">
       <input
         autocomplete="off"
@@ -14,7 +14,7 @@
         :id="numberFieldId"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
-      />
+      >
     </div>
   </div>
 </template>
@@ -40,7 +40,8 @@ export default defineComponent({
     },
     label: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     placeholder: {
       type: String,
@@ -50,7 +51,7 @@ export default defineComponent({
     modelValue: {
       type: [Number, String],
       required: false,
-      default: ''
+      default: null
     },
     required: {
       type: Boolean,
@@ -64,7 +65,8 @@ export default defineComponent({
     },
     max: {
       type: Number,
-      required: false
+      required: false,
+      default: null
     }
   },
   emits: ['update:modelValue'],

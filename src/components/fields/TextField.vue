@@ -1,6 +1,6 @@
 <template>
   <div class="field">
-    <label class="label" v-bind:for="textFieldId">{{ label }}</label>
+    <label class="label" :for="textFieldId">{{ label }}</label>
     <div class="control">
       <input
         autocomplete="off"
@@ -11,7 +11,7 @@
         :id="textFieldId"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
-      />
+      >
     </div>
   </div>
 </template>
@@ -37,7 +37,8 @@ export default defineComponent({
     // Optional to allow for null.
     modelValue: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     required: {
       type: Boolean,

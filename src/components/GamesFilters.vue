@@ -7,7 +7,7 @@
       :placeholder="'Filter by platform'"
       :graphql-query="PlatformSearchDocument"
       @update:modelValue="onPlatformInput"
-    ></single-select>
+    />
 
     <static-single-select
       v-model="filterData.year"
@@ -15,7 +15,7 @@
       :grandparent-class="'year-filter'"
       :options="yearOptions"
       @update:modelValue="onYearInput"
-    ></static-single-select>
+    />
   </div>
 </template>
 
@@ -28,7 +28,7 @@ import { Platform, PlatformSearchDocument } from '@/generated/graphql';
 import { useRoute, useRouter } from 'vue-router';
 
 export default defineComponent({
-  name: 'games-filters',
+  name: 'GamesFilters',
   components: {
     SingleSelect,
     StaticSingleSelect

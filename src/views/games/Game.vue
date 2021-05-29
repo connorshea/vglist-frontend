@@ -2,22 +2,22 @@
   <div class="columns" v-if="data">
     <div class="game-sidebar column is-3-desktop is-5-tablet is-12-mobile">
       <div class="hero-image game-cover mb-10">
-        <img v-if="data.game.coverUrl !== null" :src="data.game.coverUrl" />
-        <img v-else src="@/assets/images/no-cover.png"/>
+        <img v-if="data.game.coverUrl !== null" :src="data.game.coverUrl">
+        <img v-else src="@/assets/images/no-cover.png">
       </div>
 
       <div v-if="userSignedIn" class="field buttons buttons-vertical">
         <a v-show="data.game.isFavorited" class="button is-fullwidth toggle-icon-on-hover" @click="unfavoriteGame">
           <SvgIcon :name="'heart-full'" :classes="['is-inline-flex']" :svg-classes="['icon-1']" :fill="'red'"/>
           <SvgIcon :name="'heart-broken'" :classes="['is-inline-flex']" :svg-classes="['icon-2']" :fill="'red'"/>
-          <span class='ml-5'>Unfavorite</span>
+          <span class="ml-5">Unfavorite</span>
         </a>
         <a v-show="!data.game.isFavorited" class="button is-fullwidth toggle-icon-on-hover" @click="favoriteGame">
           <SvgIcon :name="'heart'" :classes="['is-inline-flex']" :svg-classes="['icon-1']" :fill="'red'"/>
           <SvgIcon :name="'heart-full'" :classes="['is-inline-flex']" :svg-classes="['icon-2']" :fill="'red'"/>
-          <span class='ml-5'>Favorite</span>
+          <span class="ml-5">Favorite</span>
         </a>
-        <AddGameToLibrary :isInLibrary="data.game.isInLibrary" :game="data.game" @refresh="refreshGame"/>
+        <AddGameToLibrary :is-in-library="data.game.isInLibrary" :game="data.game" @refresh="refreshGame"/>
 
         <!-- Actions dropdown -->
         <div id="actions-dropdown" class="dropdown is-fullwidth mr-0-mobile" :class="{ 'is-active': actionsDropdownIsActive }">
@@ -44,20 +44,20 @@
     <div class="column">
       <div class="text-block mb-10-mobile">
         <h1 class="title">{{ data.game.name }}</h1>
-        <GameInfobox :game="data.game"></GameInfobox>
+        <GameInfobox :game="data.game"/>
       </div>
 
       <template v-if="data.game.owners.totalCount > 0">
         <h3 class="title is-5 mb-5 mt-15">Owners ({{ data.game.owners.totalCount }})</h3>
-        <ul class='avatar-image-grid mt-10'>
-          <li v-for="owner in data.game.owners.nodes" :key="owner.id" class='avatar-image-grid-item'>
+        <ul class="avatar-image-grid mt-10">
+          <li v-for="owner in data.game.owners.nodes" :key="owner.id" class="avatar-image-grid-item">
             <router-link :to="{ name: 'UserProfile', params: { slug: owner.slug }}" class="image">
-              <img v-if="owner.avatarUrl !== null" :src="owner.avatarUrl" :title="owner.username" />
-              <img v-else src="@/assets/images/default-avatar.png" />
+              <img v-if="owner.avatarUrl !== null" :src="owner.avatarUrl" :title="owner.username">
+              <img v-else src="@/assets/images/default-avatar.png">
             </router-link>
           </li>
           <template v-if="data.game.owners.totalCount > 10">
-            <li class='avatar-image-grid-item avatar-image-grid-item-overflow'>
+            <li class="avatar-image-grid-item avatar-image-grid-item-overflow">
               <p class="has-text-weight-semibold">
                 +{{ data.game.owners.totalCount - 10 }}
               </p>
@@ -72,15 +72,15 @@
 
       <template v-if="data.game.favoriters.totalCount > 0">
         <h3 class="title is-5 mb-5 mt-15">Favorites ({{ data.game.favoriters.totalCount }})</h3>
-        <ul class='avatar-image-grid mt-10'>
-          <li v-for="favoriter in data.game.favoriters.nodes" :key="favoriter.id" class='avatar-image-grid-item'>
+        <ul class="avatar-image-grid mt-10">
+          <li v-for="favoriter in data.game.favoriters.nodes" :key="favoriter.id" class="avatar-image-grid-item">
             <router-link :to="{ name: 'UserProfile', params: { slug: favoriter.slug }}" class="image">
-              <img v-if="favoriter.avatarUrl !== null" :src="favoriter.avatarUrl" :title="favoriter.username" />
-              <img v-else src="@/assets/images/default-avatar.png" />
+              <img v-if="favoriter.avatarUrl !== null" :src="favoriter.avatarUrl" :title="favoriter.username">
+              <img v-else src="@/assets/images/default-avatar.png">
             </router-link>
           </li>
           <template v-if="data.game.favoriters.totalCount > 10">
-            <li class='avatar-image-grid-item avatar-image-grid-item-overflow'>
+            <li class="avatar-image-grid-item avatar-image-grid-item-overflow">
               <p class="has-text-weight-semibold">
                 +{{ data.game.favoriters.totalCount - 10 }}
               </p>
@@ -105,8 +105,8 @@
             <template v-for="gameInSeries in data.game.series.games.nodes">
               <router-link :to="{ name: 'Game', params: { id: gameInSeries.id } }" :key="gameInSeries.id" v-if="data.game.id !== gameInSeries.id">
                 <figure class="game-cover">
-                  <img v-if="gameInSeries.coverUrl !== null" :src="gameInSeries.coverUrl" />
-                  <img v-else src="@/assets/images/no-cover.png"/>
+                  <img v-if="gameInSeries.coverUrl !== null" :src="gameInSeries.coverUrl">
+                  <img v-else src="@/assets/images/no-cover.png">
                   <p>{{ gameInSeries.name }}</p>
                 </figure>
               </router-link>

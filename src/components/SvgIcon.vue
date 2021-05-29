@@ -24,11 +24,13 @@ export default defineComponent({
     },
     fill: {
       type: String,
-      required: false
+      required: false,
+      default: undefined
     },
     cssStyle: {
       type: String,
-      required: false
+      required: false,
+      default: undefined
     },
     classes: {
       type: Array as () => Array<string>,

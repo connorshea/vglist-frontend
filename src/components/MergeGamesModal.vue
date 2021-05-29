@@ -25,8 +25,8 @@
             :graphql-query="GameSearchDocument"
             :max-height="'150px'"
             @update:modelValue="selectGame"
-            :customOptionFunc="customOptionLabel"
-          ></single-select>
+            :custom-option-func="customOptionLabel"
+          />
         </div>
       </section>
       <footer class="modal-card-foot">

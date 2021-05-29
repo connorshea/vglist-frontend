@@ -4,8 +4,8 @@
       <div class="media-left">
         <figure class="image is-64x64">
           <router-link :to="{ name: 'UserProfile', params: { slug: event.user.slug }}">
-            <img v-if="event.user.avatarUrl !== null" :src="event.user.avatarUrl" />
-            <img v-else src="@/assets/images/default-avatar.png"/>
+            <img v-if="event.user.avatarUrl !== null" :src="event.user.avatarUrl">
+            <img v-else src="@/assets/images/default-avatar.png">
           </router-link>
         </figure>
       </div>
@@ -60,9 +60,10 @@
             <template v-if="eventDeletable">
               <a @click="deleteEvent" class="ml-5" title="Delete">
                 <svg-icon :name="'trash'"
-                         :svg-classes="['has-fill-danger-hoverable']"
-                         :css-style="'vertical-align: text-top;'"
-                         :size="20"/>
+                          :svg-classes="['has-fill-danger-hoverable']"
+                          :css-style="'vertical-align: text-top;'"
+                          :size="20"
+                />
               </a>
             </template>
           </p>
