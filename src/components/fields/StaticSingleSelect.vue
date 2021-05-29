@@ -7,10 +7,10 @@
         :disabled="disabled"
         label="label"
         :placeholder="placeholder"
-        :inputId="inputId"
-        :modelValue="modelValue"
-        @update:modelValue="$emit('update:modelValue', $event)"
-      ></v-select>
+        :input-id="inputId"
+        :model-value="modelValue"
+        @update:model-value="$emit('update:modelValue', $event)"
+      />
     </div>
   </div>
 </template>

@@ -7,11 +7,11 @@
         :disabled="disabled"
         @search="onSearch"
         label="name"
-        :inputId="inputId"
+        :input-id="inputId"
         :placeholder="placeholder"
-        :modelValue="modelValue"
+        :model-value="modelValue"
         @update:modelValue="onInput"
-      ></v-select>
+      />
     </div>
   </div>
 </template>

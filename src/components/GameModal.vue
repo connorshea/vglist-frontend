@@ -24,8 +24,8 @@
             :max-height="'150px'"
             :disabled="true"
             @update:modelValue="selectGame"
-            :graphqlQuery="GameSearchDocument"
-            :searchPath="'gameSearch'"
+            :graphql-query="GameSearchDocument"
+            :search-path="'gameSearch'"
           />
 
           <static-single-select
@@ -87,14 +87,14 @@
             :label="formData.platforms.label"
             v-model="gamePurchase.platforms"
             :search-path="'platformSearch'"
-            :graphqlQuery="PlatformSearchDocument"
+            :graphql-query="PlatformSearchDocument"
           />
 
           <multi-select
             :label="formData.stores.label"
             v-model="gamePurchase.stores"
             :search-path="'storeSearch'"
-            :graphqlQuery="StoreSearchDocument"
+            :graphql-query="StoreSearchDocument"
           />
         </div>
 
@@ -104,8 +104,8 @@
             v-model="gamePurchase.game"
             :max-height="'150px'"
             @update:modelValue="selectGame"
-            :graphqlQuery="GameSearchDocument"
-            :searchPath="'gameSearch'"
+            :graphql-query="GameSearchDocument"
+            :search-path="'gameSearch'"
           />
         </div>
       </section>

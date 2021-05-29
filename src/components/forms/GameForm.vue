@@ -27,42 +27,42 @@
       :label="formData.genres.label"
       v-model="game.genres"
       :search-path="'genreSearch'"
-      :graphqlQuery="GenreSearchDocument"
+      :graphql-query="GenreSearchDocument"
     />
 
     <multi-select
       :label="formData.engines.label"
       v-model="game.engines"
       :search-path="'engineSearch'"
-      :graphqlQuery="EngineSearchDocument"
+      :graphql-query="EngineSearchDocument"
     />
 
     <multi-select
       :label="formData.developers.label"
       v-model="game.developers"
       :search-path="'companySearch'"
-      :graphqlQuery="CompanySearchDocument"
+      :graphql-query="CompanySearchDocument"
     />
 
     <multi-select
       :label="formData.publishers.label"
       v-model="game.publishers"
       :search-path="'companySearch'"
-      :graphqlQuery="CompanySearchDocument"
+      :graphql-query="CompanySearchDocument"
     />
 
     <multi-select
       :label="formData.platforms.label"
       v-model="game.platforms"
       :search-path="'platformSearch'"
-      :graphqlQuery="PlatformSearchDocument"
+      :graphql-query="PlatformSearchDocument"
     />
 
     <single-select
       :label="formData.series.label"
       v-model="game.series"
       :search-path="'seriesSearch'"
-      :graphqlQuery="SeriesSearchDocument"
+      :graphql-query="SeriesSearchDocument"
     />
 
     <number-field

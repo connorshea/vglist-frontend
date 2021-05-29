@@ -36,7 +36,7 @@
     </template>
     <template v-else>
       <h2 class="subtitle is-4 mt-40">Developed</h2>
-      <p class='has-text-centered mt-50 has-text-muted'>This company hasn't developed any games yet.</p>
+      <p class="has-text-centered mt-50 has-text-muted">This company hasn't developed any games yet.</p>
     </template>
 
     <template v-if="data.company.publishedGames.nodes.length > 0">
@@ -60,7 +60,7 @@
     </template>
     <template v-else>
       <h2 class="subtitle is-4 mt-40">Published</h2>
-      <p class='has-text-centered mt-50 has-text-muted'>This company hasn't published any games yet.</p>
+      <p class="has-text-centered mt-50 has-text-muted">This company hasn't published any games yet.</p>
     </template>
   </div>
 </template>

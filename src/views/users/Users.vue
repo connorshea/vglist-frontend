@@ -3,10 +3,10 @@
     <h1 class="title">Users</h1>
 
     <sort-dropdown
-      :sortOptions="sortOptions"
-      :initialSortOption="upcasedSortBy"
+      :sort-options="sortOptions"
+      :initial-sort-option="upcasedSortBy"
       @activeSortChanged="updateSortValue"
-    ></sort-dropdown>
+    />
 
     <div class="user-card-list mt-20">
       <template v-for="user in data.users.nodes" :key="user.id">

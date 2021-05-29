@@ -5,10 +5,10 @@
     <div class="columns">
       <div class="games-search-sidebar column is-3">
         <sort-dropdown
-          :sortOptions="sortOptions"
-          :initialSortOption="upcasedSortBy"
+          :sort-options="sortOptions"
+          :initial-sort-option="upcasedSortBy"
           @activeSortChanged="updateSortValue"
-        ></sort-dropdown>
+        />
 
         <div class="is-fullwidth-mobile">
           <games-filters
