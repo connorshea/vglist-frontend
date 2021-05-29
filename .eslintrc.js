@@ -5,7 +5,7 @@ module.exports = {
     browser: true
   },
   extends: [
-    'plugin:vue/essential',
+    'plugin:vue/vue3-essential',
     'eslint:recommended',
     '@vue/typescript/recommended'
   ],
@@ -17,8 +17,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'indent': ['warn', 2],
     // Ignore rest siblings so we can use the rest syntax to ignore attributes of an object.
-    "@typescript-eslint/no-unused-vars": ['error', { 'ignoreRestSiblings': true }],
-    "vue/no-v-for-template-key": 0
+    "@typescript-eslint/no-unused-vars": ['error', { 'ignoreRestSiblings': true }]
   },
   // Ignore the generated GraphQL file.
   ignorePatterns: ["src/generated/graphql.ts"],
