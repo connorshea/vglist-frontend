@@ -40,7 +40,8 @@ export default defineComponent({
     },
     label: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     placeholder: {
       type: String,
@@ -50,7 +51,7 @@ export default defineComponent({
     modelValue: {
       type: [Number, String],
       required: false,
-      default: ''
+      default: null
     },
     required: {
       type: Boolean,
@@ -64,7 +65,8 @@ export default defineComponent({
     },
     max: {
       type: Number,
-      required: false
+      required: false,
+      default: null
     }
   },
   emits: ['update:modelValue'],

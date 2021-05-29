@@ -162,7 +162,8 @@ export default defineComponent({
     },
     completionStatus: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     startDate: {
       type: String,

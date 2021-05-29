@@ -37,7 +37,8 @@ export default defineComponent({
     // Optional to allow for null.
     modelValue: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     required: {
       type: Boolean,

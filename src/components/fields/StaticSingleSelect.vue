@@ -29,7 +29,8 @@ export default defineComponent({
   props: {
     label: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     placeholder: {
       type: String,
@@ -38,7 +39,8 @@ export default defineComponent({
     },
     modelValue: {
       type: [Object, Number, String],
-      required: false
+      required: false,
+      default: null
     },
     options: {
       type: Array,

@@ -214,31 +214,38 @@ export default defineComponent({
     },
     epicGamesStoreId: {
       type: String,
-      required: false
+      required: false,
+      default: ''
     },
     gogId: {
       type: String,
-      required: false
+      required: false,
+      default: ''
     },
     igdbId: {
       type: String,
-      required: false
+      required: false,
+      default: ''
     },
     wikidataId: {
       type: Number,
-      required: false
+      required: false,
+      default: null
     },
     pcgamingwikiId: {
       type: String,
-      required: false
+      required: false,
+      default: ''
     },
     mobygamesId: {
       type: String,
-      required: false
+      required: false,
+      default: ''
     },
     giantbombId: {
       type: String,
-      required: false
+      required: false,
+      default: ''
     },
     // Should be either 'create' or 'update'
     formState: {
