@@ -27,12 +27,12 @@
 
     <game-modal
       v-if="isModalActive"
-      :isActive="isModalActive"
-      :gameModalState="gameModalState"
+      :is-active="isModalActive"
+      :game-modal-state="gameModalState"
       v-bind="gamePurchase"
-      v-on:close="deactivateModal"
-      v-on:closeAndRefresh="closeAndRefresh"
-      v-on:create="onSubmit"
+      @close="deactivateModal"
+      @closeAndRefresh="closeAndRefresh"
+      @create="onSubmit"
     />
   </div>
 </template>

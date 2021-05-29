@@ -27,7 +27,8 @@ module.exports = {
         'normal': 'never',
         'component': 'always'
       }
-    }]
+    }],
+    'vue/multiline-html-element-content-newline': 0
   },
   // Ignore the generated GraphQL file.
   ignorePatterns: ["src/generated/graphql.ts"],
