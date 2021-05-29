@@ -1,19 +1,17 @@
 <template>
-  <div>
-    <a
-      @click="activateModal"
-      class="dropdown-item has-text-danger js-merge-games-button"
-      data-game-id="gameId">
-      Merge
-    </a>
+  <a
+    @click="activateModal"
+    class="dropdown-item has-text-danger js-merge-games-button"
+    data-game-id="gameId">
+    Merge
+  </a>
 
-    <merge-games-modal
-      v-if="isModalActive"
-      :isActive="isModalActive"
-      :game="game"
-      @close="deactivateModal"
-    ></merge-games-modal>
-  </div>
+  <merge-games-modal
+    v-if="isModalActive"
+    :isActive="isModalActive"
+    :game="game"
+    @close="deactivateModal"
+  ></merge-games-modal>
 </template>
 
 <script lang="ts">
