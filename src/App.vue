@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <NavBar></NavBar>
+    <NavBar/>
 
     <!-- This is a bit of a hack to make it so the Home page uses a layout
          without padding/margins. -->

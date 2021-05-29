@@ -36,7 +36,8 @@
                 'is-active':
                   activeSearchResult !== -1 &&
                   flattenedSearchResults[activeSearchResult].searchableId === result.searchableId
-              }">
+              }"
+            >
               <a :href="href" @click="[navigate, resetSearchResults]">
                 <div class="media">
                   <figure class="media-left image is-48x48" v-if="type === 'Game' || type === 'User'">
