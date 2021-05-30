@@ -54,6 +54,7 @@ export default defineComponent({
     const setActiveSortOption = (sort: string) => {
       activeSortOption.value = sort;
       context.emit('activeSortChanged', sort);
+      toggleDropdown();
     };
 
     return {
