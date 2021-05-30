@@ -29,4 +29,10 @@ test('sorting with dropdown', async () => {
 
   // Now that we've clicked the dropdown, it's open and active.
   expect(wrapper.get('[data-test-id="sort-dropdown-root"]').classes()).toContain('is-active');
+
+  // Click the 'foo' (first) option.
+  await wrapper.findAll('.dropdown-item')[0].trigger('click');
+
+  // Changes the active sort option text.
+  expect(wrapper.get('[data-test-id="active-sort-option"]').text()).toMatch('Sort by foo');
 });
