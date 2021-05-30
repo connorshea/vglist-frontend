@@ -14,6 +14,7 @@ describe('GameCard.vue', () => {
     const wrapper = mount(GameCard, {
       global: {
         plugins: [store],
+        stubs: ['SvgIcon'],
         provide: {
           [VILLUS_CLIENT as symbol]: createClient({
             url: 'http://test/graphql',
