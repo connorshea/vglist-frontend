@@ -12,7 +12,7 @@ app.use(store);
 app.use(router);
 
 // Apply pluralize as a global filter.
-app.config.globalProperties.$filters = {}
+app.config.globalProperties.$filters = {};
 app.config.globalProperties.$filters.pluralize = pluralize;
 
 app.mount('#app');

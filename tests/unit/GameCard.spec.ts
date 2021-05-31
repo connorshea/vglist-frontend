@@ -3,7 +3,7 @@ import GameCard from '@/components/GameCard.vue';
 import { createStore } from 'vuex';
 import { createClient, VILLUS_CLIENT } from 'villus';
 import { createMemoryHistory, createRouter } from 'vue-router';
-import { routes } from '@/router/index';
+import { routes } from '@/router';
 import { Game } from '@/generated/graphql';
 
 describe('GameCard.vue', () => {
