@@ -86,7 +86,7 @@ export const store: Store<State> = createStore({
         .then((data: AccessToken) => {
           localStorage.setItem('vglistFrontend:accessToken', JSON.stringify(data));
           // `data` in this case is an object with an access_token, expires_in integer, etc.
-          commit('accessToken', data.access_token)
+          commit('accessToken', data.access_token);
         });
     }
   }
