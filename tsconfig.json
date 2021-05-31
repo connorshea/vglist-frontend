@@ -35,8 +35,7 @@
     "tests/**/*.tsx"
   ],
   "exclude": [
-    "node_modules",
-    "tests/**/*.spec.ts"
+    "node_modules"
   ],
   "typeAcquisition": {
     "enable": true

@@ -4,6 +4,7 @@ import { createStore } from 'vuex';
 import { createClient, VILLUS_CLIENT } from 'villus';
 import { createMemoryHistory, createRouter } from 'vue-router';
 import { routes } from '@/router/index';
+import { Game } from '@/generated/graphql';
 
 describe('GameCard.vue', () => {
   it('renders title, platforms, and developers', async () => {
@@ -54,7 +55,7 @@ describe('GameCard.vue', () => {
             ]
           },
           isFavorited: true
-        }
+        } as unknown as Game
       }
     });
 
