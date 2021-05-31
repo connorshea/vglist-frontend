@@ -135,6 +135,7 @@ import Search from '@/components/Search.vue';
 import { CurrentUserDocument } from '@/generated/graphql';
 import { useQuery } from 'villus';
 import { useStore } from 'vuex';
+import { State } from '@/store';
 
 // Update this to include other valid click actions later.
 type clickAction = 'signOut';
@@ -147,7 +148,7 @@ export default defineComponent({
   setup() {
     const { data: currentUserData } = useQuery({ query: CurrentUserDocument });
 
-    const store = useStore();
+    const store = useStore<State>();
 
     const signIn = () => {
       // This is pretty much just a fake sign in for a user.

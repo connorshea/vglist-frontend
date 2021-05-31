@@ -18,6 +18,7 @@ import { computed, defineComponent, Ref, ref } from 'vue';
 import { useQuery } from 'villus';
 import StoreForm from '@/components/forms/StoreForm.vue';
 import { useStore } from 'vuex';
+import { State } from '@/store';
 
 export default defineComponent({
   name: 'EditStore',
@@ -53,7 +54,7 @@ export default defineComponent({
       isLoaded.value = true;
     });
 
-    const vuexStore = useStore();
+    const vuexStore = useStore<State>();
     const userSignedIn = computed(() => vuexStore.state.userSignedIn);
 
     const userCanEdit = userSignedIn;

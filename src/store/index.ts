@@ -1,4 +1,4 @@
-import { createStore } from 'vuex';
+import { createStore, Store } from 'vuex';
 
 import { User } from '@/generated/graphql';
 
@@ -19,7 +19,7 @@ type AccessToken = {
   created_at: number;
 }
 
-export const store = createStore({
+export const store: Store<State> = createStore({
   strict: process.env.NODE_ENV !== 'production',
   state: {
     clientId: process.env.VUE_APP_OAUTH_CLIENT_ID,
@@ -89,7 +89,5 @@ export const store = createStore({
           commit('accessToken', data.access_token)
         });
     }
-  },
-  modules: {
   }
 });

@@ -24,6 +24,7 @@ import { useClient, defaultPlugins } from 'villus';
 import { authPlugin } from './auth-plugin';
 import { useStore } from 'vuex';
 import { useRoute, useRouter } from 'vue-router';
+import { State } from './store';
 
 export default defineComponent({
   name: 'App',
@@ -31,7 +32,7 @@ export default defineComponent({
     NavBar
   },
   setup() {
-    const store = useStore();
+    const store = useStore<State>();
     const route = useRoute();
     const router = useRouter();
     store.dispatch('acquireAccessToken').then(() => {
@@ -48,7 +49,7 @@ export default defineComponent({
     useClient({
       url: `${process.env.VUE_APP_VGLIST_HOST_URL}/graphql`,
       use: [
-        authPlugin({ accessToken: store.state.accessToken }),
+        authPlugin({ accessToken: store.state.accessToken, store: store }),
         ...defaultPlugins()
       ]
     });

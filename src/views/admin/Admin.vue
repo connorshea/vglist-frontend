@@ -19,13 +19,14 @@
 </template>
 
 <script lang="ts">
+import { State } from '@/store';
 import { computed, defineComponent } from 'vue';
 import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'Admin',
   setup() {
-    const store = useStore();
+    const store = useStore<State>();
     const userSignedIn = computed(() => store.state.userSignedIn);
 
     const tabs = [

@@ -128,6 +128,7 @@ import SvgIcon from '@/components/SvgIcon.vue';
 import MergeGamesButton from '@/components/MergeGamesButton.vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import { State } from '@/store';
 
 export default defineComponent({
   name: 'Game',
@@ -154,7 +155,7 @@ export default defineComponent({
       cachePolicy: 'network-only'
     });
 
-    const store = useStore();
+    const store = useStore<State>();
     const userSignedIn = computed(() => {
       return store.state.userSignedIn;
     });
@@ -192,8 +193,8 @@ export default defineComponent({
     const actionsDropdownIsActive = ref(false);
     const toggleActionsDropdown = () => actionsDropdownIsActive.value = !actionsDropdownIsActive.value;
 
-    const userIsAdmin = computed(() => store.state.currentUser.role === 'ADMIN');
-    const userIsModeratorOrAdmin = computed(() => ['ADMIN', 'MODERATOR'].includes(store.state.currentUser.role));
+    const userIsAdmin = computed(() => store.state.currentUser?.role === 'ADMIN');
+    const userIsModeratorOrAdmin = computed(() => ['ADMIN', 'MODERATOR'].includes(store.state.currentUser?.role ?? ''));
 
     const canAddToWikidataBlocklist = computed(() => data.value?.game?.wikidataId !== null);
     const canRemoveCover = computed(() => data.value?.game?.coverUrl !== null);

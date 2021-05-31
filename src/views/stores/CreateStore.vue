@@ -16,6 +16,7 @@
 import { computed, defineComponent, Ref, ref } from 'vue';
 import StoreForm from '@/components/forms/StoreForm.vue';
 import { useStore } from 'vuex';
+import { State } from '@/store';
 
 export default defineComponent({
   name: 'CreateStore',
@@ -27,7 +28,7 @@ export default defineComponent({
       name: null,
     });
 
-    const vuexStore = useStore();
+    const vuexStore = useStore<State>();
     const userSignedIn = computed(() => vuexStore.state.userSignedIn);
 
     const userCanCreate = userSignedIn;

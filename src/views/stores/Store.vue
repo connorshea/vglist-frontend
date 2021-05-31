@@ -21,6 +21,7 @@ import { computed, defineComponent } from 'vue';
 import { useMutation, useQuery } from 'villus';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import { State } from '@/store';
 
 export default defineComponent({
   name: 'Store',
@@ -54,11 +55,11 @@ export default defineComponent({
       }
     };
 
-    const vuexStore = useStore();
+    const vuexStore = useStore<State>();
     const userSignedIn = computed(() => vuexStore.state.userSignedIn);
 
     const userCanEdit = userSignedIn;
-    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(vuexStore.state.currentUser.role));
+    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(vuexStore.state.currentUser?.role ?? ''));
 
     return {
       data,

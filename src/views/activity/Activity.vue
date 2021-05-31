@@ -27,6 +27,7 @@ import EventCard from '@/components/EventCard.vue';
 import ActivityTabs from '@/components/ActivityTabs.vue';
 import Pagination from '@/components/Pagination.vue';
 import { useStore } from 'vuex';
+import { State } from '@/store';
 
 export default defineComponent({
   name: 'Activity',
@@ -75,7 +76,7 @@ export default defineComponent({
       };
     });
 
-    const store = useStore();
+    const store = useStore<State>();
     const userSignedIn = computed(() => store.state.userSignedIn);
 
     return {

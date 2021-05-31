@@ -54,6 +54,7 @@ import SortDropdown from '@/components/SortDropdown.vue';
 import Pagination from '@/components/Pagination.vue';
 import { useStore } from 'vuex';
 import { useRoute, useRouter } from 'vue-router';
+import { State } from '@/store';
 
 export default defineComponent({
   name: 'Games',
@@ -118,7 +119,7 @@ export default defineComponent({
 
     const router = useRouter();
     const route = useRoute();
-    const store = useStore();
+    const store = useStore<State>();
 
     const pageInfo = computed(() => {
       return {

@@ -73,6 +73,7 @@ import GameCard from '@/components/GameCard.vue';
 import Pagination from '@/components/Pagination.vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import { State } from '@/store';
 
 export default defineComponent({
   name: 'Company',
@@ -127,7 +128,7 @@ export default defineComponent({
       variables: queryVariables
     });
 
-    const store = useStore();
+    const store = useStore<State>();
     const router = useRouter();
 
     const publishedPageInfo = computed(() => {
@@ -169,7 +170,7 @@ export default defineComponent({
     const userSignedIn = computed(() => store.state.userSignedIn);
 
     const userCanEdit = userSignedIn;
-    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(store.state.currentUser.role));
+    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(store.state.currentUser?.role ?? ''));
 
     return {
       data,

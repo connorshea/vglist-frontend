@@ -53,6 +53,7 @@ import { UserDocument } from '@/generated/graphql';
 import { computed, defineComponent } from 'vue';
 import { useQuery } from 'villus';
 import { useStore } from 'vuex';
+import { State } from '@/store';
 
 export default defineComponent({
   name: 'User',
@@ -72,7 +73,7 @@ export default defineComponent({
       variables: queryVariables
     });
 
-    const store = useStore();
+    const store = useStore<State>();
 
     const isCurrentUser = computed(() => {
       return data.value?.user?.username === store.state.currentUser?.username;

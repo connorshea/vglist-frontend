@@ -45,6 +45,7 @@ import GameCard from '@/components/GameCard.vue';
 import Pagination from '@/components/Pagination.vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import { State } from '@/store';
 
 export default defineComponent({
   name: 'Series',
@@ -115,11 +116,11 @@ export default defineComponent({
       }
     };
 
-    const store = useStore();
+    const store = useStore<State>();
     const userSignedIn = computed(() => store.state.userSignedIn);
 
     const userCanEdit = userSignedIn;
-    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(store.state.currentUser.role));
+    const userCanDelete = computed(() => ['ADMIN', 'MODERATOR'].includes(store.state.currentUser?.role ?? ''));
 
     return {
       data,

@@ -18,6 +18,7 @@ import { computed, defineComponent, Ref, ref } from 'vue';
 import { useQuery } from 'villus';
 import GameForm from '@/components/forms/GameForm.vue';
 import { useStore } from 'vuex';
+import { State } from '@/store';
 
 export default defineComponent({
   name: 'EditGame',
@@ -117,7 +118,7 @@ export default defineComponent({
       isLoaded.value = true;
     });
 
-    const store = useStore();
+    const store = useStore<State>();
     const userSignedIn = computed(() => store.state.userSignedIn);
 
     const userCanEdit = userSignedIn;

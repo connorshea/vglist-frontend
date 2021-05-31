@@ -80,6 +80,7 @@ import { format } from 'timeago.js';
 import { useMutation } from 'villus';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { useStore } from 'vuex';
+import { State } from '@/store';
 
 export default defineComponent({
   name: 'EventCard',
@@ -111,7 +112,7 @@ export default defineComponent({
       }
     });
 
-    const store = useStore();
+    const store = useStore<State>();
 
     const eventDeletable = computed(() => {
       return props.event.user.username === store.state.currentUser?.username;

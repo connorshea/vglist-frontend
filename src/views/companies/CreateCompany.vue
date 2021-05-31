@@ -16,6 +16,7 @@
 import { computed, defineComponent, Ref, ref } from 'vue';
 import CompanyForm from '@/components/forms/CompanyForm.vue';
 import { useStore } from 'vuex';
+import { State } from '@/store';
 
 export default defineComponent({
   name: 'CreateCompany',
@@ -28,7 +29,7 @@ export default defineComponent({
       wikidataId: null
     });
 
-    const store = useStore();
+    const store = useStore<State>();
     const userSignedIn = computed(() => store.state.userSignedIn);
 
     const userCanCreate = userSignedIn;

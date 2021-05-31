@@ -41,6 +41,7 @@ import { computed, defineComponent, PropType, ref } from 'vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { useMutation } from 'villus';
 import { useStore } from 'vuex';
+import { State } from '@/store';
 
 export default defineComponent({
   name: 'GameCard',
@@ -89,7 +90,7 @@ export default defineComponent({
 
     const toggleActive = () => isActive.value = !isActive.value;
 
-    const store = useStore();
+    const store = useStore<State>();
     const userSignedIn = computed(() => store.state.userSignedIn);
 
     return {

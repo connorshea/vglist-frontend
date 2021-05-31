@@ -31,6 +31,7 @@ import { computed, defineComponent } from 'vue';
 import { useQuery } from 'villus';
 import Pagination from '@/components/Pagination.vue';
 import { useStore } from 'vuex';
+import { State } from '@/store';
 
 export default defineComponent({
   name: 'Stores',
@@ -75,7 +76,7 @@ export default defineComponent({
       };
     });
 
-    const vuexStore = useStore();
+    const vuexStore = useStore<State>();
     const userSignedIn = computed(() => vuexStore.state.userSignedIn);
 
     return {
