@@ -112,14 +112,15 @@
 </template>
 
 <script lang="ts">
-import { computed, ComputedRef, defineComponent } from 'vue';
+import { Game } from '@/generated/graphql';
+import { computed, ComputedRef, defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'GameInfobox',
   props: {
     game: {
       required: true,
-      type: Object
+      type: Object as PropType<Game>
     }
   },
   setup(props) {
