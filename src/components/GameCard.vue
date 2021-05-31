@@ -26,7 +26,7 @@
         </button>
       </div>
       <div class="dropdown-menu" id="dropdown-menu" role="menu">
-        <div class="dropdown-content">
+        <div class="dropdown-content" data-test-id="game-card-dropdown-actions">
           <a v-if="game.isFavorited || localIsFavorited" class="dropdown-item" @click="unfavoriteGame">Unfavorite</a>
           <a v-else class="dropdown-item" @click="favoriteGame">Favorite</a>
         </div>

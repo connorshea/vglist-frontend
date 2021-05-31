@@ -6,7 +6,7 @@ import { createMemoryHistory, createRouter } from 'vue-router';
 import { routes } from '@/router/index';
 
 describe('GameCard.vue', () => {
-  it('renders platforms and developers', async () => {
+  it('renders title, platforms, and developers', async () => {
     const store = createStore({
       state() {
         return { userSignedIn: true };
@@ -52,7 +52,8 @@ describe('GameCard.vue', () => {
                 name: 'Nintendo'
               }
             ]
-          }
+          },
+          isFavorited: true
         }
       }
     });
@@ -60,5 +61,8 @@ describe('GameCard.vue', () => {
     expect(wrapper.get('[data-test-id="game-card-title"').text()).toMatch("Kirby's Epic Yarn");
     expect(wrapper.get('[data-test-id="game-card-developers"').text()).toMatch('Nintendo');
     expect(wrapper.get('[data-test-id="game-card-platforms"').text()).toMatch('Nintendo Switch');
+    // Test that the correct text is displayed for the actions in the game card dropdown.
+    expect(wrapper.get('[data-test-id="game-card-dropdown-actions"').text()).toMatch('Unfavorite');
+    expect(wrapper.get('[data-test-id="game-card-dropdown-actions"').text()).not.toMatch('Favorite');
   });
 });
