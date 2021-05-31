@@ -74,8 +74,8 @@
 </template>
 
 <script lang="ts">
-import { DeleteEventDocument } from '@/generated/graphql';
-import { computed, defineComponent } from 'vue';
+import { DeleteEventDocument, Event } from '@/generated/graphql';
+import { computed, defineComponent, PropType } from 'vue';
 import { format } from 'timeago.js';
 import { useMutation } from 'villus';
 import SvgIcon from '@/components/SvgIcon.vue';
@@ -89,7 +89,7 @@ export default defineComponent({
   props: {
     event: {
       required: true,
-      type: Object
+      type: Object as PropType<Event>
     }
   },
   emits: ['refresh'],

@@ -38,9 +38,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, ref } from 'vue';
+import { defineComponent, PropType, Ref, ref } from 'vue';
 import SingleSelect from '@/components/fields/SingleSelect.vue';
-import { GameSearchDocument, MergeGamesDocument } from '@/generated/graphql';
+import { Game, GameSearchDocument, MergeGamesDocument } from '@/generated/graphql';
 import { submitButtonErrorAnimation } from '@/helpers/submitButtonErrorAnimation';
 import { useMutation } from 'villus';
 import { useRouter } from 'vue-router';
@@ -52,7 +52,7 @@ export default defineComponent({
   },
   props: {
     game: {
-      type: Object,
+      type: Object as PropType<Game>,
       required: true
     },
     isActive: {

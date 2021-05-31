@@ -38,10 +38,10 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue';
+import { computed, defineComponent, PropType, ref } from 'vue';
 import GameModal from '@/components/GameModal.vue';
 import SvgIcon from '@/components/SvgIcon.vue';
-import { GamePurchaseDocument, RemoveGameFromLibraryDocument } from '@/generated/graphql';
+import { Game, GamePurchaseDocument, RemoveGameFromLibraryDocument } from '@/generated/graphql';
 import { useMutation, useQuery } from 'villus';
 
 export default defineComponent({
@@ -52,7 +52,7 @@ export default defineComponent({
   },
   props: {
     game: {
-      type: Object,
+      type: Object as PropType<Game>,
       required: true
     },
     isInLibrary: {
