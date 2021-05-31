@@ -55,7 +55,7 @@ import UserFavorites from '@/views/users/UserFavorites.vue';
 import UserFollowing from '@/views/users/UserFollowing.vue';
 import UserFollowers from '@/views/users/UserFollowers.vue';
 
-const routes: Array<RouteRecordRaw> = [
+export const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
