@@ -20,8 +20,9 @@
 import { computed, defineComponent, ref } from 'vue';
 import vSelect from 'vue-select-connorshea';
 import 'vue-select-connorshea/dist/vue-select.css';
-import * as _ from 'lodash';
+import { debounce, snakeCase } from 'lodash';
 import { useQuery } from 'villus';
+import { DocumentNode } from 'graphql';
 
 export default defineComponent({
   name: 'MultiSelect',
@@ -56,13 +57,12 @@ export default defineComponent({
   setup(props, context) {
     let variables = ref({ query: '' })
     const { data } = useQuery({
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      query: props.graphqlQuery as any,
+      query: props.graphqlQuery as DocumentNode,
       variables,
       fetchOnMount: false
     });
 
-    const inputId = computed(() => _.snakeCase(props.label));
+    const inputId = computed(() => snakeCase(props.label));
 
     const options = computed(() => {
       if (data.value) {
@@ -74,7 +74,7 @@ export default defineComponent({
 
     const onInput = (event: unknown) => context.emit('update:modelValue', event);
 
-    const onSearch = _.debounce((search: string) => {
+    const onSearch = debounce((search: string) => {
       variables.value = { query: search };
     }, 300);
 

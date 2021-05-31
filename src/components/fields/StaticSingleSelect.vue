@@ -18,7 +18,7 @@
 <script lang="ts">
 import vSelect from 'vue-select-connorshea';
 import 'vue-select-connorshea/dist/vue-select.css';
-import * as _ from 'lodash';
+import { snakeCase } from 'lodash';
 import { computed, defineComponent } from 'vue';
 
 export default defineComponent({
@@ -59,7 +59,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup(props) {
-    const inputId = computed(() => _.snakeCase(props.label));
+    const inputId = computed(() => snakeCase(props.label));
 
     return { inputId }
   }

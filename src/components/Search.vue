@@ -78,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import * as _ from 'lodash';
+import { cloneDeep, debounce } from 'lodash';
 import { computed, defineComponent, Ref, ref } from 'vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { CompanySearchResult, EngineSearchResult, GameSearchResult, GenreSearchResult, GlobalSearchDocument, PlatformSearchResult, SearchResultUnion, SeriesSearchResult, UserSearchResult } from '@/generated/graphql';
@@ -193,7 +193,7 @@ export default defineComponent({
 
     // For use when a page is navigated, and in some other cases.
     const resetSearchResults = () => {
-      searchResults.value = _.cloneDeep(EMPTY_SEARCH_RESULTS);
+      searchResults.value = cloneDeep(EMPTY_SEARCH_RESULTS);
       activeSearchResult.value = -1;
       query.value = '';
       // Unfocus the search input if it's focused.
@@ -223,7 +223,7 @@ export default defineComponent({
       // the query value is empty, this doesn't currently seem to be an issue.
       if (query.value !== '') {
         executeSearch({ variables: { query: query.value, cursor: '' }}).then(() => {
-          let tempSearchData = _.cloneDeep(EMPTY_SEARCH_RESULTS);
+          let tempSearchData = cloneDeep(EMPTY_SEARCH_RESULTS);
 
           if (searchData.value?.globalSearch.pageInfo.hasNextPage === false) {
             moreGamesExist.value = false;
@@ -254,7 +254,7 @@ export default defineComponent({
 
     // Debounce the search request's execution when the search input's value
     // changes to prevent a bunch of unnecessary requests.
-    const debouncedOnSearch = _.debounce(onSearch, 400);
+    const debouncedOnSearch = debounce(onSearch, 400);
 
     // Load more game records and append them to the game search results.
     const loadMoreGames = () => {

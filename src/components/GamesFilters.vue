@@ -23,7 +23,7 @@
 import { computed, defineComponent, Ref, ref } from 'vue';
 import SingleSelect from '@/components/fields/SingleSelect.vue';
 import StaticSingleSelect from '@/components/fields/StaticSingleSelect.vue';
-import * as _ from 'lodash';
+import { range, reverse } from 'lodash';
 import { Platform, PlatformSearchDocument } from '@/generated/graphql';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -79,7 +79,7 @@ export default defineComponent({
       let currentYear = new Date().getFullYear();
       // Create an array from 1950 to the current year + 2.
       // (it's +3 because the range is exclusive rather than inclusive)
-      return _.reverse(_.range(1950, currentYear + 3));
+      return reverse(range(1950, currentYear + 3));
     });
 
     return {
