@@ -58,7 +58,8 @@ export default defineComponent({
     };
 
     const sortText = computed(() => {
-      return activeSortOption.value === null ? "Sort" : `Sort by ${activeSortOption.value.toLowerCase().replaceAll('_', ' ')}`;
+      // TODO: Replace `replace` with `replaceAll` once we upgrade to Node 15 or 16.
+      return activeSortOption.value === null ? "Sort" : `Sort by ${activeSortOption.value.toLowerCase().replace(/_/g, ' ')}`;
     });
 
     return {

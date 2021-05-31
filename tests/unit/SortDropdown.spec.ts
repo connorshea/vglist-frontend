@@ -15,7 +15,11 @@ test('sorting with dropdown', async () => {
         {
           name: 'Bar',
           value: 'bar',
-        }
+        },
+        {
+          name: 'Foo bar baz',
+          value: 'foo_bar_baz',
+        },
       ],
       initialSortOption: 'Bar'
     }
@@ -37,4 +41,11 @@ test('sorting with dropdown', async () => {
   expect(wrapper.get('[data-test-id="active-sort-option"]').text()).toMatch('Sort by foo');
   expect(wrapper.get('[data-test-id="sort-dropdown-root"]').classes()).not.toContain('is-active');
   expect(wrapper.emitted().activeSortChanged[0]).toEqual(['foo']);
+
+  await wrapper.find('.dropdown-trigger').trigger('click');
+  await wrapper.findAll('.dropdown-item')[2].trigger('click');
+
+  // Changes the active sort option text (ensure the underscore replacement logic works) and closes the dropdown.
+  expect(wrapper.get('[data-test-id="active-sort-option"]').text()).toMatch('Sort by foo bar baz');
+  expect(wrapper.get('[data-test-id="sort-dropdown-root"]').classes()).not.toContain('is-active');
 });
