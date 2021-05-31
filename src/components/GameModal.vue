@@ -118,9 +118,9 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue';
+import { computed, defineComponent, PropType, ref } from 'vue';
 import { useMutation } from 'villus';
-import { AddGameToLibraryDocument, GamePurchaseCompletionStatus, GameSearchDocument, PlatformSearchDocument, StoreSearchDocument, UpdateGameInLibraryDocument } from '@/generated/graphql';
+import { AddGameToLibraryDocument, Game, GamePurchaseCompletionStatus, GameSearchDocument, PlatformSearchDocument, StoreSearchDocument, UpdateGameInLibraryDocument } from '@/generated/graphql';
 
 import TextArea from '@/components/fields/TextArea.vue';
 import NumberField from '@/components/fields/NumberField.vue';
@@ -191,7 +191,7 @@ export default defineComponent({
       default: () => []
     },
     game: {
-      type: Object,
+      type: Object as PropType<Game>,
       required: false,
       default: () => { return {}; }
     },
