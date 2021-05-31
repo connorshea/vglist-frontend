@@ -1,19 +1,19 @@
 <template>
   <div class="box infobox">
-    <div class="infobox-section">
+    <div class="infobox-section" data-test-id="game-infobox-avg-rating">
       <p class="infobox-header has-text-weight-semibold">Average Rating</p>
       <p v-if="game.avgRating === null">No average rating yet</p>
       <p v-else><span class="has-text-weight-medium">{{ game.avgRating }}</span>/100</p>
     </div>
 
-    <div v-if="game.releaseDate !== null" class="infobox-section">
+    <div v-if="game.releaseDate !== null" class="infobox-section" data-test-id="game-infobox-release-date">
       <p class="infobox-header has-text-weight-semibold">Release Date</p>
       <ul>
         <li>{{ formattedReleaseDate }}</li>
       </ul>
     </div>
 
-    <div v-if="game.developers.nodes.length > 0" class="infobox-section">
+    <div v-if="game.developers.nodes.length > 0" class="infobox-section" data-test-id="game-infobox-developers">
       <p class="infobox-header has-text-weight-semibold">
         {{ $filters.pluralize(game.developers.nodes.length, 'Developer') }}
       </p>
@@ -26,7 +26,7 @@
       </ul>
     </div>
 
-    <div v-if="game.publishers.nodes.length > 0" class="infobox-section">
+    <div v-if="game.publishers.nodes.length > 0" class="infobox-section" data-test-id="game-infobox-publishers">
       <p class="infobox-header has-text-weight-semibold">
         {{ $filters.pluralize(game.publishers.nodes.length, 'Publisher') }}
       </p>
@@ -39,7 +39,7 @@
       </ul>
     </div>
 
-    <div v-if="game.platforms.nodes.length > 0" class="infobox-section">
+    <div v-if="game.platforms.nodes.length > 0" class="infobox-section" data-test-id="game-infobox-platforms">
       <p class="infobox-header has-text-weight-semibold">
         {{ $filters.pluralize(game.platforms.nodes.length, 'Platform') }}
       </p>
@@ -52,7 +52,7 @@
       </ul>
     </div>
 
-    <div v-if="game.series !== null" class="infobox-section">
+    <div v-if="game.series !== null" class="infobox-section" data-test-id="game-infobox-series">
       <p class="infobox-header has-text-weight-semibold">Series</p>
       <ul>
         <li>
@@ -63,7 +63,7 @@
       </ul>
     </div>
 
-    <div v-if="game.genres.nodes.length > 0" class="infobox-section">
+    <div v-if="game.genres.nodes.length > 0" class="infobox-section" data-test-id="game-infobox-genres">
       <p class="infobox-header has-text-weight-semibold">
         {{ $filters.pluralize(game.genres.nodes.length, 'Genre') }}
       </p>
@@ -76,7 +76,7 @@
       </ul>
     </div>
 
-    <div v-if="game.engines.nodes.length > 0" class="infobox-section">
+    <div v-if="game.engines.nodes.length > 0" class="infobox-section" data-test-id="game-infobox-engines">
       <p class="infobox-header has-text-weight-semibold">
         {{ $filters.pluralize(game.engines.nodes.length, 'Engine') }}
       </p>
@@ -90,7 +90,7 @@
     </div>
 
     <template v-if="externalIdsExist">
-      <div class="infobox-section">
+      <div class="infobox-section" data-test-id="game-infobox-external-links">
         <p class="infobox-header has-text-weight-semibold">External links</p>
         <ul>
           <li v-if="game.wikidataId !== null"><a :href="wikidataUrl">Wikidata</a></li>
