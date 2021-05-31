@@ -3,7 +3,7 @@
     <div class="dropdown-trigger is-fullwidth-mobile" @click="toggleDropdown">
       <button class="button is-fullwidth" aria-haspopup="true" aria-controls="dropdown-menu">
         <span data-test-id="active-sort-option">
-          {{ activeSortOption === null ? "Sort" : `Sort by ${activeSortOption.toLowerCase().replaceAll('_', ' ')}` }}
+          {{ sortText }}
         </span>
         <svg-icon :name="'chevron-down'" :size="15" :classes="['icon']"/>
       </button>
@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 
 export default defineComponent({
@@ -57,11 +57,16 @@ export default defineComponent({
       toggleDropdown();
     };
 
+    const sortText = computed(() => {
+      return activeSortOption.value === null ? "Sort" : `Sort by ${activeSortOption.value.toLowerCase().replaceAll('_', ' ')}`;
+    });
+
     return {
       activeSortOption,
       dropdownIsActive,
       toggleDropdown,
-      setActiveSortOption
+      setActiveSortOption,
+      sortText
     };
   }
 });
