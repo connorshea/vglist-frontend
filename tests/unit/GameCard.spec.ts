@@ -6,7 +6,7 @@ import { createMemoryHistory, createRouter } from 'vue-router';
 import { routes } from '@/router/index';
 
 describe('GameCard.vue', () => {
-  it('renders platform when passed', async () => {
+  it('renders platforms and developers', async () => {
     const store = createStore({
       state() {
         return { userSignedIn: true };
@@ -15,7 +15,7 @@ describe('GameCard.vue', () => {
 
     const router = createRouter({ 
       history: createMemoryHistory(),
-      routes 
+      routes
     });
     router.push("/");
     await router.isReady();
@@ -36,6 +36,7 @@ describe('GameCard.vue', () => {
       props: {
         game: {
           id: 1,
+          name: "Kirby's Epic Yarn",
           platforms: {
             nodes: [
               {
@@ -45,12 +46,19 @@ describe('GameCard.vue', () => {
             ]
           },
           developers: {
-            nodes: []
+            nodes: [
+              {
+                id: 2,
+                name: 'Nintendo'
+              }
+            ]
           }
         }
       }
     });
 
-    expect(wrapper.text()).toMatch('Nintendo Switch');
+    expect(wrapper.get('[data-test-id="game-card-title"').text()).toMatch("Kirby's Epic Yarn");
+    expect(wrapper.get('[data-test-id="game-card-developers"').text()).toMatch('Nintendo');
+    expect(wrapper.get('[data-test-id="game-card-platforms"').text()).toMatch('Nintendo Switch');
   });
 });

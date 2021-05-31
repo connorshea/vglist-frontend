@@ -6,9 +6,15 @@
         <img v-else src="@/assets/images/no-cover.png">
       </figure>
       <div class="card-content">
-        <p class="title is-4 mr-10">{{ game.name }}</p>
-        <p class="subtitle is-6" v-if="platforms !== null">{{ platforms }}</p>
-        <p class="subtitle is-6" v-if="developers !== null">{{ developers }}</p>
+        <p class="title is-4 mr-10" data-test-id="game-card-title">
+          {{ game.name }}
+        </p>
+        <p class="subtitle is-6" data-test-id="game-card-platforms" v-if="platforms !== null">
+          {{ platforms }}
+        </p>
+        <p class="subtitle is-6" data-test-id="game-card-developers" v-if="developers !== null">
+          {{ developers }}
+        </p>
       </div>
     </router-link>
 
