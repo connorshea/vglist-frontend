@@ -74,6 +74,7 @@ describe('viewing information about a game', () => {
     });
 
     expect(wrapper.find('[data-test-id="game-infobox-avg-rating"]').exists()).toBe(true);
+    expect(wrapper.find('[data-test-id="game-infobox-avg-rating"]').text()).toMatch('No average rating yet');
   });
 
   it("works when there's lots of information about the game", async () => {
@@ -107,7 +108,7 @@ describe('viewing information about a game', () => {
           developers: {
             nodes: [
               {
-                id: 2,
+                id: 1,
                 name: 'HAL'
               }
             ]
@@ -115,7 +116,7 @@ describe('viewing information about a game', () => {
           publishers: {
             nodes: [
               {
-                id: 1,
+                id: 2,
                 name: 'Nintendo'
               }
             ]
@@ -148,7 +149,7 @@ describe('viewing information about a game', () => {
           gogId: 'game/kirbys-epic-yarn',
           igdbId: 'kirbys-epic-yarn',
           steamAppIds: [123, 456],
-          releaseDate: null,
+          releaseDate: '2021-05-31',
           avgRating: 99
         } as unknown as Game
       }
@@ -161,7 +162,9 @@ describe('viewing information about a game', () => {
       'game-infobox-genres',
       'game-infobox-engines',
       'game-infobox-series',
-      'game-infobox-external-links'
+      'game-infobox-external-links',
+      'game-infobox-avg-rating',
+      'game-infobox-release-date'
     ];
 
     // Check that all these selectors are extant since they have data.
@@ -169,6 +172,19 @@ describe('viewing information about a game', () => {
       expect(wrapper.find(`[data-test-id="${selector}"]`).exists()).toBe(true);
     });
 
-    expect(wrapper.find('[data-test-id="game-infobox-release-date"]').exists()).toBe(false);
+    expect(wrapper.find('[data-test-id="game-infobox-developers"]').text()).toMatch('HAL');
+    expect(wrapper.find('[data-test-id="game-infobox-publishers"]').text()).toMatch('Nintendo');
+    expect(wrapper.find('[data-test-id="game-infobox-genres"]').text()).toMatch('Platformer');
+    expect(wrapper.find('[data-test-id="game-infobox-series"]').text()).toMatch('Kirby');
+    expect(wrapper.find('[data-test-id="game-infobox-platforms"]').text()).toMatch('Nintendo Switch');
+    expect(wrapper.find('[data-test-id="game-infobox-platforms"]').text()).toMatch('Nintendo Wii');
+    expect(wrapper.find('[data-test-id="game-infobox-engines"]').text()).toMatch('Unreal Engine');
+    expect(wrapper.find('[data-test-id="game-infobox-avg-rating"]').text()).toMatch('99/100');
+    expect(wrapper.find('[data-test-id="game-infobox-release-date"]').text()).toMatch('May 31, 2021');
+
+    // All of these external links should be present in the infobox.
+    ['Wikidata', 'PCGamingWiki', 'Steam', 'Epic Games Store', 'GOG.com', 'MobyGames', 'GiantBomb', 'IGDB'].forEach((externalLink) => {
+      expect(wrapper.find('[data-test-id="game-infobox-external-links"]').text()).toMatch(externalLink);
+    })
   });
 });
