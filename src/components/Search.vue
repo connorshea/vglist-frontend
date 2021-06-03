@@ -301,6 +301,8 @@ export default defineComponent({
         return `/genres/${result.searchableId}`;
       case 'UserSearchResult':
         return `/users/${result.slug}`;
+      default:
+        return undefined;
       }
     };
 
