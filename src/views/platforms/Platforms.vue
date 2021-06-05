@@ -2,11 +2,11 @@
   <div class="platforms" v-if="data">
     <h1 class="title">Platforms</h1>
 
-    <p v-if="userSignedIn">
+    <p v-if="userSignedIn" data-test-id="create-platform-button">
       <router-link :to="{ name: 'CreatePlatform' }" class="button is-fullwidth-mobile mb-10">Create a new platform</router-link>
     </p>
 
-    <ul>
+    <ul data-test-id="platforms-list">
       <li v-for="platform in data.platforms.nodes" :key="platform.id">
         <router-link :to="{ name: 'Platform', params: { id: platform.id }}">
           {{ platform.name }}
