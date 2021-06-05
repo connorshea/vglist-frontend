@@ -2,11 +2,11 @@
   <div class="series" v-if="data">
     <h1 class="title">Series</h1>
 
-    <p v-if="userSignedIn">
+    <p v-if="userSignedIn" data-test-id="create-series-button">
       <router-link :to="{ name: 'CreateSeries' }" class="button is-fullwidth-mobile mb-10">Create a new series</router-link>
     </p>
 
-    <ul>
+    <ul data-test-id="series-list">
       <li v-for="series in data.seriesList.nodes" :key="series.id">
         <router-link :to="{ name: 'Series', params: { id: series.id }}">
           {{ series.name }}
