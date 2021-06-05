@@ -7,6 +7,8 @@ import {
   DeletePlatformMutationVariables,
   DeleteSeriesMutation,
   DeleteSeriesMutationVariables,
+  DeleteStoreMutation,
+  DeleteStoreMutationVariables,
   EngineQuery,
   EngineQueryVariables,
   EngineSearchQuery,
@@ -33,6 +35,12 @@ import {
   SeriesQueryVariables,
   SeriesSearchQuery,
   SeriesSearchQueryVariables,
+  StoreQuery,
+  StoreQueryVariables,
+  StoreSearchQuery,
+  StoreSearchQueryVariables,
+  StoresQuery,
+  StoresQueryVariables,
   UnfavoriteGameMutation,
   UnfavoriteGameMutationVariables
 } from '@/generated/graphql';
@@ -525,6 +533,86 @@ export const handlers = [
       return res(
         ctx.data({
           deleteEngine: {
+            deleted: true
+          }
+        })
+      );
+    }
+  ),
+
+
+  graphql.query<StoresQuery, StoresQueryVariables>(
+    'Stores',
+    (req, res, ctx) => {
+      return res(
+        ctx.data({
+          stores: {
+            nodes: [
+              {
+                id: '1',
+                name: 'Nintendo eShop'
+              },
+              {
+                id: '2',
+                name: 'Steam'
+              }
+            ],
+            pageInfo: {
+              hasPreviousPage: false,
+              hasNextPage: false,
+              startCursor: 'mA',
+              endCursor: 'mB'
+            }
+          }
+        })
+      );
+    }
+  ),
+
+  graphql.query<StoreQuery, StoreQueryVariables>(
+    'Store',
+    (req, res, ctx) => {
+      const { id } = req.variables;
+
+      return res(
+        ctx.data({
+          store: {
+            id: id,
+            name: 'Nintendo eShop'
+          }
+        })
+      );
+    }
+  ),
+
+  graphql.query<StoreSearchQuery, StoreSearchQueryVariables>(
+    'StoreSearch',
+    (req, res, ctx) => {
+      return res(
+        ctx.data({
+          storeSearch: {
+            nodes: [
+              {
+                id: '1',
+                name: 'Nintendo eShop'
+              },
+              {
+                id: '2',
+                name: 'Steam'
+              }
+            ]
+          }
+        })
+      );
+    }
+  ),
+
+  graphql.mutation<DeleteStoreMutation, DeleteStoreMutationVariables>(
+    'DeleteStore',
+    (req, res, ctx) => {
+      return res(
+        ctx.data({
+          deleteStore: {
             deleted: true
           }
         })
