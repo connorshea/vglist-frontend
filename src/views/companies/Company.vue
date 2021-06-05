@@ -1,6 +1,6 @@
 <template>
   <div class="company" v-if="data">
-    <h1 class="title">{{ data.company.name }}</h1>
+    <h1 class="title" data-test-id="company-title">{{ data.company.name }}</h1>
 
     <div v-if="userSignedIn" class="field buttons">
       <template v-if="userCanEdit">
@@ -18,7 +18,7 @@
     <template v-if="data.company.developedGames.nodes.length > 0">
       <h2 class="subtitle is-4 mt-40">Developed</h2>
 
-      <div class="game-card-list mt-20">
+      <div class="game-card-list mt-20" data-test-id="developed-games-list">
         <div v-for="game in data.company.developedGames.nodes" :key="game.id">
           <game-card :game="game"/>
         </div>
@@ -42,7 +42,7 @@
     <template v-if="data.company.publishedGames.nodes.length > 0">
       <h2 class="subtitle is-4 mt-40">Published</h2>
 
-      <div class="game-card-list mt-20">
+      <div class="game-card-list mt-20" data-test-id="published-games-list">
         <div v-for="game in data.company.publishedGames.nodes" :key="game.id">
           <game-card :game="game"/>
         </div>
