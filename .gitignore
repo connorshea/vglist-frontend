@@ -25,3 +25,5 @@ pnpm-debug.log*
 # to work, but which we do not want to be in our codebase.
 schema.graphql
 graphql.schema.json
+
+coverage/

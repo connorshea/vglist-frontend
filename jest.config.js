@@ -10,5 +10,14 @@ module.exports = {
   // Ignore CSS files since Jest doesn't know what to do with them and doesn't need them.
   moduleNameMapper: {
     "\\.(css|scss)$": "<rootDir>/tests/mocks/styleMock.ts"
-  }
+  },
+  collectCoverage: true,
+  collectCoverageFrom: [
+    "**/*.{ts,vue}",
+    "!**/node_modules/**",
+    "!**/dist/**",
+    "!**/tests/**",
+    "!**/src/generated/**",
+    "!**/public/**"
+  ]
 }
