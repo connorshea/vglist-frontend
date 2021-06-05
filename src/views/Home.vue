@@ -10,7 +10,7 @@
     </div>
 
     <div class="section section-home-overlap-card" v-if="statsData">
-      <nav class="level card home-card stats-card column is-two-thirds m-auto">
+      <nav class="level card home-card stats-card column is-two-thirds m-auto" data-test-id="home-statistics">
         <div class="level-item has-text-centered">
           <div>
             <p class="title">{{ statsData.basicSiteStatistics.games.toLocaleString('en-US') }}</p>
@@ -61,7 +61,7 @@
         </div>
       </nav>
 
-      <div class="game-card-list mt-20" v-if="gamesData">
+      <div class="game-card-list mt-20" v-if="gamesData" data-test-id="home-games-list">
         <div v-for="game in gamesData.games.nodes" :key="game.id">
           <game-card :game="game"/>
         </div>
@@ -82,16 +82,8 @@ export default defineComponent({
     GameCard
   },
   setup() {
-    const { data: gamesData } = useQuery({
-      query: GamesDocument,
-      variables: {
-        after: ''
-      }
-    });
-
-    const { data: statsData } = useQuery({
-      query: HomeStatisticsDocument
-    });
+    const { data: gamesData } = useQuery({ query: GamesDocument });
+    const { data: statsData } = useQuery({ query: HomeStatisticsDocument });
 
     return {
       gamesData,

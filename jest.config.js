@@ -19,5 +19,9 @@ module.exports = {
     "!**/tests/**",
     "!**/src/generated/**",
     "!**/public/**"
-  ]
+  ],
+  // Make the timout 5.5 seconds instead of the default 5 seconds so that
+  // waitForExpect can give a proper error message rather than getting
+  // clobbered by Jest's timeout.
+  testTimeout: 5500
 }
