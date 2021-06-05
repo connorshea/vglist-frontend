@@ -2,11 +2,11 @@
   <div class="engines" v-if="data">
     <h1 class="title">Engines</h1>
 
-    <p v-if="userSignedIn">
+    <p v-if="userSignedIn" data-test-id="create-engine-button">
       <router-link :to="{ name: 'CreateEngine' }" class="button is-fullwidth-mobile mb-10">Create a new engine</router-link>
     </p>
 
-    <ul>
+    <ul data-test-id="engines-list">
       <li v-for="engine in data.engines.nodes" :key="engine.id">
         <router-link :to="{ name: 'Engine', params: { id: engine.id }}">
           {{ engine.name }}
