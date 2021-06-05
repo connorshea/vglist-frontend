@@ -54,6 +54,7 @@
     "sass-loader": "^8.0.2",
     "ts-jest": "^26.0.1",
     "typescript": "^4.3.2",
-    "vue-jest": "^5.0.0-alpha.9"
+    "vue-jest": "^5.0.0-alpha.9",
+    "wait-for-expect": "^3.0.2"
   }
 }
