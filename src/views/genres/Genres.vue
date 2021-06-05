@@ -2,11 +2,11 @@
   <div class="genres" v-if="data">
     <h1 class="title">Genres</h1>
 
-    <p v-if="userSignedIn">
+    <p v-if="userSignedIn" data-test-id="create-genre-button">
       <router-link :to="{ name: 'CreateGenre' }" class="button is-fullwidth-mobile mb-10">Create a new genre</router-link>
     </p>
 
-    <ul>
+    <ul data-test-id="genres-list">
       <li v-for="genre in data.genres.nodes" :key="genre.id">
         <router-link :to="{ name: 'Genre', params: { id: genre.id }}">
           {{ genre.name }}
