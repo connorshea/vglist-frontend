@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title">{{ title }}</h1>
+    <h1 class="title" data-test-id="form-title">{{ title }}</h1>
 
     <error-box
       :errors="errors"
@@ -66,7 +66,7 @@ export default defineComponent({
     },
     wikidataId: {
       required: false,
-      type: String,
+      type: [Number, String],
       default: null
     },
     // Should be either 'create' or 'update'
@@ -95,7 +95,7 @@ export default defineComponent({
     const series: Ref<{ id: string | null, name: string | null, wikidataId: string | null }> = ref({
       id: props.id ?? null, 
       name: props.name ?? '',
-      wikidataId: props.wikidataId ?? ''
+      wikidataId: props.wikidataId?.toString() ?? ''
     });
 
     const title = computed(() => {
