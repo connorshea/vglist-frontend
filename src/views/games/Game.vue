@@ -43,13 +43,13 @@
 
     <div class="column">
       <div class="text-block mb-10-mobile">
-        <h1 class="title">{{ data.game.name }}</h1>
+        <h1 class="title" data-test-id="game-title">{{ data.game.name }}</h1>
         <game-infobox :game="data.game"/>
       </div>
 
       <template v-if="data.game.owners.totalCount > 0">
         <h3 class="title is-5 mb-5 mt-15">Owners ({{ data.game.owners.totalCount }})</h3>
-        <ul class="avatar-image-grid mt-10">
+        <ul class="avatar-image-grid mt-10" data-test-id="game-owners">
           <li v-for="owner in data.game.owners.nodes" :key="owner.id" class="avatar-image-grid-item">
             <router-link :to="{ name: 'UserProfile', params: { slug: owner.slug }}" class="image">
               <img v-if="owner.avatarUrl !== null" :src="owner.avatarUrl" :title="owner.username">
@@ -67,12 +67,12 @@
       </template>
       <template v-else>
         <h3 class="title is-5 mb-5 mt-15">Owners</h3>
-        <p class="has-text-muted">No one has this game in their library yet.</p>
+        <p class="has-text-muted" data-test-id="game-owners">No one has this game in their library yet.</p>
       </template>
 
       <template v-if="data.game.favoriters.totalCount > 0">
         <h3 class="title is-5 mb-5 mt-15">Favorites ({{ data.game.favoriters.totalCount }})</h3>
-        <ul class="avatar-image-grid mt-10">
+        <ul class="avatar-image-grid mt-10" data-test-id="game-favorites">
           <li v-for="favoriter in data.game.favoriters.nodes" :key="favoriter.id" class="avatar-image-grid-item">
             <router-link :to="{ name: 'UserProfile', params: { slug: favoriter.slug }}" class="image">
               <img v-if="favoriter.avatarUrl !== null" :src="favoriter.avatarUrl" :title="favoriter.username">
@@ -90,7 +90,7 @@
       </template>
       <template v-else>
         <h3 class="title is-5 mb-5 mt-15">Favorites</h3>
-        <p class="has-text-muted">No one has favorited this game yet.</p>
+        <p class="has-text-muted" data-test-id="game-favorites">No one has favorited this game yet.</p>
       </template>
 
       <div class="card more-from-this-series-card mt-15" v-if="data.game.series !== null && data.game.series.games.nodes.length > 1">
@@ -101,7 +101,7 @@
             </router-link>
           </h3>
 
-          <div class="games">
+          <div class="games" data-test-id="game-others-in-series-card">
             <template v-for="gameInSeries in data.game.series.games.nodes">
               <router-link :to="{ name: 'Game', params: { id: gameInSeries.id } }" :key="gameInSeries.id" v-if="data.game.id !== gameInSeries.id">
                 <figure class="game-cover">

@@ -50,7 +50,43 @@ export const gameHandlers = [
             id: id,
             name: 'Half-Life 2',
             wikidataId: 123,
-            steamAppIds: []
+            steamAppIds: [],
+            releaseDate: null,
+            coverUrl: null,
+            avgRating: null,
+            genres: {
+              nodes: []
+            },
+            platforms: {
+              nodes: []
+            },
+            series: null,
+            developers: {
+              nodes: []
+            },
+            publishers: {
+              nodes: []
+            },
+            engines: {
+              nodes: []
+            },
+            owners: {
+              nodes: [],
+              totalCount: 0
+            },
+            favoriters: {
+              nodes: [],
+              totalCount: 0
+            },
+            igdbId: null,
+            gogId: null,
+            epicGamesStoreId: null,
+            mobygamesId: null,
+            pcgamingwikiId: null,
+            giantbombId: null,
+            isFavorited: false,
+            isInLibrary: false,
+            gamePurchaseId: null
           }
         })
       );
