@@ -27,7 +27,6 @@ describe('EditSeries.vue', () => {
           store,
           router
         ],
-        stubs: ['SvgIcon'],
         provide: {
           [VILLUS_CLIENT as symbol]: createClient({
             url: 'http://test/graphql',

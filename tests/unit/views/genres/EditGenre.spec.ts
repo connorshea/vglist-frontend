@@ -1,13 +1,13 @@
 import { mount } from '@vue/test-utils';
-import CreatePlatform from '@/views/platforms/CreatePlatform.vue';
+import EditGenre from '@/views/genres/EditGenre.vue';
 import { createStore } from 'vuex';
 import { createClient, VILLUS_CLIENT } from 'villus';
 import { createMemoryHistory, createRouter } from 'vue-router';
 import { routes } from '@/router';
 import waitForExpect from 'wait-for-expect';
 
-describe('CreatePlatform.vue', () => {
-  it('renders platform form', async () => {
+describe('EditGenre.vue', () => {
+  it('renders genre form', async () => {
     const store = createStore({
       state() {
         return { userSignedIn: true };
@@ -21,7 +21,7 @@ describe('CreatePlatform.vue', () => {
     router.push("/");
     await router.isReady();
 
-    const wrapper = mount(CreatePlatform, {
+    const wrapper = mount(EditGenre, {
       global: {
         plugins: [
           store,
@@ -32,11 +32,14 @@ describe('CreatePlatform.vue', () => {
             url: 'http://test/graphql',
           }),
         }
+      },
+      props: {
+        id: '1'
       }
     });
 
     await waitForExpect(() => {
-      expect(wrapper.get('[data-test-id="form-title"').text()).toMatch('Creating a new platform');
+      expect(wrapper.get('[data-test-id="form-title"').text()).toMatch('Editing first-person shooter');
     });
   });
 });
