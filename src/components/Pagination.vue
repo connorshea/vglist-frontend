@@ -16,6 +16,7 @@
            class="pagination-previous"
            :disabled="previousPageDisabled"
            @click.prevent="previousPage(startCursor)"
+           data-test-id="pagination-previous-button"
         >Previous</a>
       </router-link>
       <router-link
@@ -28,6 +29,7 @@
            class="pagination-next"
            :disabled="nextPageDisabled"
            @click.prevent="nextPage(endCursor)"
+           data-test-id="pagination-next-button"
         >Next</a>
       </router-link>
     </nav>
