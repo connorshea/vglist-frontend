@@ -10,7 +10,7 @@
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-test-id="steam-blocklist-table-body">
           <template v-for="blocklistEntry in data.steamBlocklist.nodes" :key="blocklistEntry.id">
             <tr>
               <th>

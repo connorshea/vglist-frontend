@@ -10,7 +10,7 @@
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-test-id="wikidata-blocklist-table-body">
           <template v-for="blocklistEntry in data.wikidataBlocklist.nodes" :key="blocklistEntry.id">
             <tr>
               <th>
