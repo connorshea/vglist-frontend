@@ -26,7 +26,6 @@ describe('Pagination.vue', () => {
       }
     });
 
-    // The dropdown defaults to having the text 'Sort by bar' and is closed.
     expect(wrapper.get('[data-test-id="pagination-previous-button"]').attributes()).toHaveProperty('disabled');
     expect(wrapper.get('[data-test-id="pagination-next-button"]').attributes()).not.toHaveProperty('disabled');
 
