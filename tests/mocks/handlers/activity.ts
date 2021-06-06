@@ -1,13 +1,12 @@
 import {
   ActivityFeedQuery,
-  ActivityFeedQueryVariables,
   EventCategory
 } from '@/generated/graphql';
 import { graphql } from 'msw';
 
 export const activityHandlers = [
   // This will be used for both the global and 'following' feed type.
-  graphql.query<ActivityFeedQuery, ActivityFeedQueryVariables>(
+  graphql.query<ActivityFeedQuery>(
     'ActivityFeed',
     (req, res, ctx) => {
       return res(
