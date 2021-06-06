@@ -20,12 +20,12 @@
 
       <div class="is-9 column">
         <div class="field buttons">
-          <router-link :to="{ name: 'CreateGame' }" class="button is-fullwidth-mobile mb-10" v-if="userSignedIn">
+          <router-link :to="{ name: 'CreateGame' }" class="button is-fullwidth-mobile mb-10" v-if="userSignedIn" data-test-id="create-game-button">
             Create a new game
           </router-link>
         </div>
 
-        <div class="game-card-list">
+        <div class="game-card-list" data-test-id="games-list">
           <div v-for="game in data.games.nodes" :key="game.id">
             <game-card :game="game"/>
           </div>
