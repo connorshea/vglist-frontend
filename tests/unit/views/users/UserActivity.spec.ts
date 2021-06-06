@@ -45,7 +45,7 @@ describe('UserActivity.vue', () => {
 
     await waitForExpect(() => {
       expect(wrapper.get('[data-test-id="user-events-list"').text()).toMatch('johndoe added Half-Life 2 to their library.');
-      expect(wrapper.get('[data-test-id="user-events-list"').text()).toMatch('johndoe created their account');
+      expect(wrapper.get('[data-test-id="user-events-list"').text()).toMatch('johndoe created their account.');
     });
   });
 });
