@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title">{{ title }}</h1>
+    <h1 class="title" data-test-id="form-title">{{ title }}</h1>
 
     <error-box
       :errors="errors"
