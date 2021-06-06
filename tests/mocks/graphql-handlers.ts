@@ -6,6 +6,7 @@ import { genreHandlers } from './handlers/genres';
 import { platformHandlers } from './handlers/platforms';
 import { seriesHandlers } from './handlers/series';
 import { storeHandlers } from './handlers/stores';
+import { userHandlers } from './handlers/users';
 import { miscHandlers } from './handlers/misc';
 
 export const handlers = [
@@ -17,5 +18,6 @@ export const handlers = [
   ...platformHandlers,
   ...seriesHandlers,
   ...storeHandlers,
+  ...userHandlers,
   ...miscHandlers
 ];

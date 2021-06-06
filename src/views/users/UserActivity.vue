@@ -1,15 +1,19 @@
 <template>
   <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile" v-if="data">
     <template v-if="data.user.activity.nodes.length > 0">
-      <template v-for="event in data.user.activity.nodes" :key="event.id">
-        <event-card :event="event" @refresh="execute" />
-      </template>
+      <div data-test-id="user-events-list">
+        <template v-for="event in data.user.activity.nodes" :key="event.id">
+          <event-card :event="event" @refresh="execute" />
+        </template>
+      </div>
     </template>
-    <template v-else>
-      <!-- This technically shouldn't be possible since there's an event for a
-          user's creation, but since users can delete events we include a
-          message, just in case. -->
-      <p class="has-text-centered has-text-muted">No activity for this user yet.</p>
+    <template v-else data-test-id="user-events-list">
+      <div data-test-id="user-events-list">
+        <!-- This technically shouldn't be possible since there's an event for a
+            user's creation, but since users can delete events we include a
+            message, just in case. -->
+        <p class="has-text-centered has-text-muted">No activity for this user yet.</p>
+      </div>
     </template>
 
     <pagination
