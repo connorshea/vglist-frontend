@@ -1,3 +1,5 @@
+import { activityHandlers } from './handlers/activity';
+import { adminHandlers } from './handlers/admin';
 import { companyHandlers } from './handlers/companies';
 import { engineHandlers } from './handlers/engines';
 import { favoriteHandlers } from './handlers/favorites';
@@ -10,6 +12,8 @@ import { userHandlers } from './handlers/users';
 import { miscHandlers } from './handlers/misc';
 
 export const handlers = [
+  ...activityHandlers,
+  ...adminHandlers,
   ...companyHandlers,
   ...engineHandlers,
   ...favoriteHandlers,

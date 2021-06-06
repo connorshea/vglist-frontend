@@ -4,9 +4,11 @@
 
     <activity-tabs :user-signed-in="userSignedIn"/>
 
-    <template v-for="event in data.activity.nodes" :key="event.id">
-      <event-card :event="event" @refresh="execute"/>
-    </template>
+    <div data-test-id="activity-events-list">
+      <template v-for="event in data.activity.nodes" :key="event.id">
+        <event-card :event="event" @refresh="execute"/>
+      </template>
+    </div>
 
     <pagination
       :page-name="'Activity'"
