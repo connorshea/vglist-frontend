@@ -1,7 +1,7 @@
 <template>
   <div class="favorites" v-if="data">
     <template v-if="data.user.favoritedGames.nodes.length > 0">
-      <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile game-card-list">
+      <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile game-card-list" data-test-id="user-favorites-list">
         <div v-for="game in data.user.favoritedGames.nodes" :key="game.id">
           <game-card :game="game"/>
         </div>
@@ -17,7 +17,7 @@
       </div>
     </template>
     <template v-else>
-      <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile">
+      <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile" data-test-id="user-favorites-list">
         <p class="has-text-centered has-text-muted">This user doesn't have any favorites yet.</p>
       </div>
     </template>

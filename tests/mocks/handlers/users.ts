@@ -1,18 +1,19 @@
 import {
   EventCategory,
   UserActivityQuery,
-  UserActivityQueryVariables,
+  UserFavoritesQuery,
+  UserFollowersQuery,
+  UserFollowingQuery,
   UserPrivacy,
   UserQuery,
   UserQueryVariables,
   UserRole,
-  UsersQuery,
-  UsersQueryVariables
+  UsersQuery
 } from '@/generated/graphql';
 import { graphql } from 'msw';
 
 export const userHandlers = [
-  graphql.query<UsersQuery, UsersQueryVariables>(
+  graphql.query<UsersQuery>(
     'Users',
     (req, res, ctx) => {
       return res(
@@ -87,7 +88,7 @@ export const userHandlers = [
     }
   ),
 
-  graphql.query<UserActivityQuery, UserActivityQueryVariables>(
+  graphql.query<UserActivityQuery>(
     'UserActivity',
     (req, res, ctx) => {
       return res(
@@ -125,6 +126,148 @@ export const userHandlers = [
                     __typename: 'User',
                     slug: 'johndoe',
                     username: 'johndoe'
+                  }
+                }
+              ],
+              pageInfo: {
+                hasPreviousPage: false,
+                hasNextPage: false,
+                startCursor: 'mA',
+                endCursor: 'mB'
+              }
+            }
+          }
+        })
+      );
+    }
+  ),
+
+  graphql.query<UserFavoritesQuery>(
+    'UserFavorites',
+    (req, res, ctx) => {
+      return res(
+        ctx.data({
+          user: {
+            favoritedGames: {
+              nodes: [
+                {
+                  id: '1',
+                  name: 'Half-Life 2',
+                  coverUrl: null,
+                  platforms: {
+                    nodes: []
+                  },
+                  developers: {
+                    nodes: []
+                  },
+                  isFavorited: true
+                },
+                {
+                  id: '2',
+                  name: 'Portal 2',
+                  coverUrl: null,
+                  platforms: {
+                    nodes: []
+                  },
+                  developers: {
+                    nodes: []
+                  },
+                  isFavorited: true
+                }
+              ],
+              pageInfo: {
+                hasPreviousPage: false,
+                hasNextPage: false,
+                startCursor: 'mA',
+                endCursor: 'mB'
+              }
+            }
+          }
+        })
+      );
+    }
+  ),
+
+  graphql.query<UserFollowingQuery>(
+    'UserFollowing',
+    (req, res, ctx) => {
+      return res(
+        ctx.data({
+          user: {
+            following: {
+              nodes: [
+                {
+                  id: '2',
+                  username: 'janedoe',
+                  slug: 'janedoe',
+                  bio: 'foo',
+                  avatarUrl: null,
+                  privacy: UserPrivacy.PublicAccount,
+                  banned: false,
+                  role: UserRole.Member,
+                  gamePurchases: {
+                    totalCount: 0
+                  }
+                },
+                {
+                  id: '3',
+                  username: 'gordon_freeman',
+                  slug: 'gordon_freeman',
+                  bio: 'foo',
+                  avatarUrl: null,
+                  privacy: UserPrivacy.PublicAccount,
+                  banned: false,
+                  role: UserRole.Moderator,
+                  gamePurchases: {
+                    totalCount: 3
+                  }
+                }
+              ],
+              pageInfo: {
+                hasPreviousPage: false,
+                hasNextPage: false,
+                startCursor: 'mA',
+                endCursor: 'mB'
+              }
+            }
+          }
+        })
+      );
+    }
+  ),
+
+  graphql.query<UserFollowersQuery>(
+    'UserFollowers',
+    (req, res, ctx) => {
+      return res(
+        ctx.data({
+          user: {
+            followers: {
+              nodes: [
+                {
+                  id: '2',
+                  username: 'janedoe',
+                  slug: 'janedoe',
+                  bio: 'foo',
+                  avatarUrl: null,
+                  privacy: UserPrivacy.PublicAccount,
+                  banned: false,
+                  role: UserRole.Member,
+                  gamePurchases: {
+                    totalCount: 0
+                  }
+                },
+                {
+                  id: '3',
+                  username: 'gordon_freeman',
+                  slug: 'gordon_freeman',
+                  bio: 'foo',
+                  avatarUrl: null,
+                  privacy: UserPrivacy.PublicAccount,
+                  banned: false,
+                  role: UserRole.Moderator,
+                  gamePurchases: {
+                    totalCount: 3
                   }
                 }
               ],

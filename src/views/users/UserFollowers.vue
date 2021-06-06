@@ -1,7 +1,7 @@
 <template>
   <div class="followers" v-if="data">
     <template v-if="data.user.followers.nodes.length > 0">
-      <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile user-card-list">
+      <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile user-card-list" data-test-id="user-followers-list">
         <template v-for="followerUser in data.user.followers.nodes" :key="followerUser.id">
           <user-card :user="followerUser"/>
         </template>
@@ -18,7 +18,7 @@
       </div>
     </template>
     <template v-else>
-      <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile">
+      <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile" data-test-id="user-followers-list"> 
         <p class="has-text-centered has-text-muted">This user doesn't have any followers yet.</p>
       </div>
     </template>
