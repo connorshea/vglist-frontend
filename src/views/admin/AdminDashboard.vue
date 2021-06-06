@@ -1,6 +1,6 @@
 <template>
   <div v-if="data">
-    <div class="card pt-15 pb-15">
+    <div class="card pt-15 pb-15" data-test-id="admin-dashboard-statistics-card">
       <div class="has-text-centered has-text-weight-bold mb-25">Statistics</div>
       <!-- Breaks the counts into two separate levels. -->
       <nav class="level" v-if="recordCountRows !== null">
