@@ -19,7 +19,7 @@
     "villus": "1.0.0-rc.17",
     "vue": "^3.1.1",
     "vue-router": "^4.0.8",
-    "vue-select-connorshea": "3.12.0",
+    "vue-select-connorshea": "3.12.1",
     "vuex": "^4.0.1"
   },
   "devDependencies": {
