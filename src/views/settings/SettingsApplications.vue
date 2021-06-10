@@ -1,0 +1,14 @@
+<template>
+  <div class="column">
+    <h1 class="title">Applications</h1>
+    <!-- TODO -->
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'SettingsApplications'
+});
+</script>

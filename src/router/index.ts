@@ -46,6 +46,12 @@ import CreateStore from '@/views/stores/CreateStore.vue';
 import EditStore from '@/views/stores/EditStore.vue';
 
 import Settings from '@/views/settings/Settings.vue';
+import SettingsProfile from '@/views/settings/SettingsProfile.vue';
+import SettingsAccount from '@/views/settings/SettingsAccount.vue';
+import SettingsApplications from '@/views/settings/SettingsApplications.vue';
+import SettingsDeveloper from '@/views/settings/SettingsDeveloper.vue';
+import SettingsImport from '@/views/settings/SettingsImport.vue';
+import SettingsExport from '@/views/settings/SettingsExport.vue';
 
 import Users from '@/views/users/Users.vue';
 import User from '@/views/users/User.vue';
@@ -304,7 +310,39 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: '/settings',
     name: 'Settings',
-    component: Settings
+    component: Settings,
+    children: [
+      {
+        path: '',
+        name: 'SettingsProfile',
+        component: SettingsProfile
+      },
+      {
+        path: 'account',
+        name: 'SettingsAccount',
+        component: SettingsAccount
+      },
+      {
+        path: 'import',
+        name: 'SettingsImport',
+        component: SettingsImport
+      },
+      {
+        path: 'export',
+        name: 'SettingsExport',
+        component: SettingsExport
+      },
+      {
+        path: 'applications',
+        name: 'SettingsApplications',
+        component: SettingsApplications
+      },
+      {
+        path: 'developer',
+        name: 'SettingsDeveloper',
+        component: SettingsDeveloper
+      }
+    ]
   },
   {
     path: '/stores',
