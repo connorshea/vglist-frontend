@@ -31,18 +31,19 @@
               :to="searchResultToUrl(result)"
               custom
               v-slot="{ navigate, href }"
-              class="navbar-item"
-              :class="{
-                'is-active':
-                  activeSearchResult !== -1 &&
-                  flattenedSearchResults[activeSearchResult].searchableId === result.searchableId
-              }"
             >
-              <a :href="href" @click="[navigate, resetSearchResults]">
+              <a :href="href"
+                 @click="[navigate, resetSearchResults]"
+                 class="navbar-item"
+                 :class="{
+                   'is-active': activeSearchResult !== -1 && flattenedSearchResults[activeSearchResult].searchableId === result.searchableId
+                 }"
+              >
                 <div class="media">
                   <figure class="media-left image is-48x48" v-if="type === 'Game' || type === 'User'">
                     <img v-if="result.imageUrl !== null" :src="result.imageUrl" width="48px" height="48px" class="game-cover">
-                    <img v-else :src="require(`@/assets/images/${type === 'Game' ? 'no-cover.png' : 'default-avatar.png'}`)" width="48px" height="48px" class="game-cover">
+                    <img v-else-if="type === 'Game'" src="@/assets/images/no-cover.png" width="48px" height="48px" class="game-cover">
+                    <img v-else-if="type === 'User'" src="@/assets/images/default-avatar.png" width="48px" height="48px" class="game-cover">
                   </figure>
                   <div class="media-content">
                     <p :class="{ 'has-text-weight-semibold': type === 'Game' }">{{ result.content }}</p>
