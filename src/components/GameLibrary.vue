@@ -2,8 +2,10 @@
   <div class="game-library-list" v-if="data">
     <template v-for="gamePurchase in data.user.gamePurchases.nodes" :key="gamePurchase.id">
       <div class="game-library-list-item">
-        <img v-if="gamePurchase.game.coverUrl !== null" :src="gamePurchase.game.coverUrl">
-        <img v-else src="@/assets/images/no-cover.png">
+        <router-link :to="{ name: 'Game', params: { id: gamePurchase.game.id } }">
+          <img v-if="gamePurchase.game.coverUrl !== null" :src="gamePurchase.game.coverUrl">
+          <img v-else src="@/assets/images/no-cover.png">
+        </router-link>
       </div>
     </template>
   </div>
@@ -43,6 +45,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 
 .game-library-list {
+  // Differ the number of columns depending on screen size.
   @media (max-width: 450px) {
     --game-library-columns: 1;
   }
@@ -74,7 +77,7 @@ export default defineComponent({
     img {
       width: 100%;
       height: 100%;
-      object-fit: fill;
+      object-fit: cover;
       object-position: center top;
     }
   }
