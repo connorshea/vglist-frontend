@@ -1,19 +1,19 @@
 <template>
-  <div v-if="data">
-    <ul>
-      <template v-for="gamePurchase in data.user.gamePurchases.nodes" :key="gamePurchase.id">
-        <li>{{ gamePurchase.game.name }}</li>
-      </template>
-    </ul>
+  <div class="game-library-list" v-if="data">
+    <template v-for="gamePurchase in data.user.gamePurchases.nodes" :key="gamePurchase.id">
+      <div class="game-library-list-item">
+        <img v-if="gamePurchase.game.coverUrl !== null" :src="gamePurchase.game.coverUrl">
+        <img v-else src="@/assets/images/no-cover.png">
+      </div>
+    </template>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { GameLibraryDocument } from '@/generated/graphql';
 import { useQuery } from 'villus';
-import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'GameLibrary',
@@ -33,8 +33,6 @@ export default defineComponent({
       variables
     });
 
-    const router = useRouter();
-
     return {
       data
     };
@@ -43,9 +41,22 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-// A bit of a hack to hide the navbar divider on the first search result
-// section that gets displayed.
-.navbar-search-dropdown-section-container:first-of-type hr.navbar-divider {
-  display: none;
+.game-library-list {
+  display: grid;
+  grid: auto-flow auto / repeat(4, minmax(auto, 25%));
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+}
+
+.game-library-list-item {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
 }
 </style>
