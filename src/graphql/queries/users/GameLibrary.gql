@@ -1,0 +1,35 @@
+query GameLibrary($id: ID) {
+  user(id: $id) {
+    gamePurchases {
+      nodes {
+        id
+        comments
+        completionDate
+        completionStatus
+        hoursPlayed
+        platforms {
+          nodes {
+            id
+            name
+          }
+        }
+        rating
+        startDate
+        completionDate
+        stores {
+          nodes {
+            id
+            name
+          }
+        }
+        replayCount
+        game {
+          ...gameCardFields
+        }
+      }
+      pageInfo {
+        ...paginationFields
+      }
+    }
+  }
+}

@@ -51,6 +51,7 @@
 
       <!-- User Statistics -->
       <!-- Library -->
+      <game-library :user-id="user.id"></game-library>
     </template>
     <template v-else-if="user.banned === true">
       <h2 class="subtitle has-text-centered has-text-weight-semibold mt-30">This user's account has been banned.</h2>
@@ -66,13 +67,15 @@ import { computed, defineComponent, ref } from 'vue';
 import { useMutation } from 'villus';
 import { FollowUserDocument, UnfollowUserDocument, BanUserDocument, UnbanUserDocument, RemoveUserAvatarDocument, UpdateUserRoleDocument, UserRole } from '@/generated/graphql';
 import SvgIcon from '@/components/SvgIcon.vue';
+import GameLibrary from '@/components/GameLibrary.vue';
 import { useStore } from 'vuex';
 import { State } from '@/store';
 
 export default defineComponent({
   name: 'UserProfile',
   components: {
-    SvgIcon
+    SvgIcon,
+    GameLibrary
   },
   props: {
     user: {
