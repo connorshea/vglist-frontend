@@ -41,22 +41,42 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+
 .game-library-list {
+  @media (max-width: 450px) {
+    --game-library-columns: 1;
+  }
+
+  @media (min-width: 450px) and (max-width: 900px) {
+    --game-library-columns: 3;
+  }
+
+  @media (min-width: 900px) and (max-width: 1200px) {
+    --game-library-columns: 4;
+  }
+
+  @media (min-width: 1200px) {
+    --game-library-columns: 5;
+  }
+
   display: grid;
-  grid: auto-flow auto / repeat(4, minmax(auto, 25%));
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
-}
+  grid: auto-flow auto / repeat(var(--game-library-columns), auto);
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
 
-.game-library-list-item {
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
+  .game-library-list-item {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    // TODO: Figure something out here
+    max-height: calc((100vw / var(--game-library-columns)) * 1.2);
 
-  img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      object-position: center top;
+    }
   }
 }
 </style>
