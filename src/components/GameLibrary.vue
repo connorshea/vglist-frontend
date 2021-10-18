@@ -68,6 +68,7 @@ export default defineComponent({
   grid-row-gap: 15px;
 
   .game-library-list-item {
+    transition: box-shadow 250ms;
     overflow: hidden;
     margin: 0;
     padding: 0;
@@ -79,6 +80,10 @@ export default defineComponent({
       height: 100%;
       object-fit: cover;
       object-position: center top;
+    }
+
+    &:hover {
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.05);
     }
   }
 }
