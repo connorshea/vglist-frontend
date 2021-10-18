@@ -65,11 +65,12 @@ export default defineComponent({
 
   display: grid;
   grid: auto-flow auto / repeat(var(--game-library-columns), auto);
-  grid-column-gap: 15px;
-  grid-row-gap: 15px;
+  gap: 25px;
 
   .game-library-list-item {
     transition: box-shadow 200ms;
+    transition: transform 200ms;
+    transform: scale(1);
     overflow: hidden;
     margin: 0;
     padding: 0;
@@ -88,7 +89,7 @@ export default defineComponent({
     .game-library-title {
       color: #fff;
       position: absolute;
-      top: 0;
+      bottom: 0;
       text-align: center;
       width: 100%;
       background: rgba(#5856d6, 0.9);
@@ -99,6 +100,7 @@ export default defineComponent({
 
     &:hover {
       box-shadow: 0 7px 18px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.05);
+      transform: scale(1.05);
 
       .game-library-title {
         opacity: 100%;
