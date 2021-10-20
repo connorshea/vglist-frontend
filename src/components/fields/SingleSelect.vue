@@ -18,8 +18,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-import vSelect from 'vue-select-connorshea';
-import 'vue-select-connorshea/dist/vue-select.css';
+import vSelect from 'vue-select';
+import 'vue-select/dist/vue-select.css';
 import { debounce, snakeCase} from 'lodash';
 import { useQuery } from 'villus';
 

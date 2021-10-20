@@ -15,8 +15,8 @@
 </template>
 
 <script lang="ts">
-import vSelect from 'vue-select-connorshea';
-import 'vue-select-connorshea/dist/vue-select.css';
+import vSelect from 'vue-select';
+import 'vue-select/dist/vue-select.css';
 import { snakeCase } from 'lodash';
 import { computed, defineComponent, ref } from 'vue';
 
