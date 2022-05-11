@@ -1,7 +1,7 @@
 # https://cli.vuejs.org/guide/deployment.html#gitlab-pages
 
 pages: # the job must be named pages
-  image: node:latest
+  image: node:16
   stage: deploy
   script:
     - yarn install --frozen-lockfile
