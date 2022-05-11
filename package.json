@@ -17,7 +17,7 @@
     "lodash": "^4.17.21",
     "timeago.js": "^4.0.2",
     "villus": "1.1.0",
-    "vue": "^3.1.2",
+    "vue": "^3.2.33",
     "vue-router": "^4.0.15",
     "vue-select-connorshea": "3.12.1",
     "vuex": "^4.0.2"
@@ -42,7 +42,6 @@
     "@vue/cli-plugin-unit-jest": "5.0.0-beta.1",
     "@vue/cli-plugin-vuex": "5.0.0-beta.1",
     "@vue/cli-service": "5.0.0-beta.1",
-    "@vue/compiler-sfc": "^3.1.1",
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^2.0.0-rc.6",
     "eslint": "^7.27.0",
