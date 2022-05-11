@@ -16,7 +16,7 @@
     "graphql-tag": "^2.12.4",
     "lodash": "^4.17.21",
     "timeago.js": "^4.0.2",
-    "villus": "1.0.0-rc.17",
+    "villus": "1.1.0",
     "vue": "^3.1.2",
     "vue-router": "^4.0.15",
     "vue-select-connorshea": "3.12.1",

@@ -11009,10 +11009,10 @@ vendors@^1.0.3:
   resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.4.tgz#e2b800a53e7a29b93506c3cf41100d16c4c4ad8e"
   integrity sha512-/juG65kTL4Cy2su4P8HjtkTxk6VmJDiOPBufWniqQ6wknac6jNiXS9vU+hO3wgusiyqWlzTbVHi0dyJqRONg3w==
 
-villus@1.0.0-rc.17:
-  version "1.0.0-rc.17"
-  resolved "https://registry.yarnpkg.com/villus/-/villus-1.0.0-rc.17.tgz#8cd252312f9021a3eda2a73246268331b246714b"
-  integrity sha512-ElD8aYxdq55Ps7O0zgCUUZWxQl3an4U8R2xfgdwqdbpfx34S08U9+PLHVm1X20oWh2Tbd6fNLVStgqte/sJXqg==
+villus@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/villus/-/villus-1.1.0.tgz#c628dac9eeecbcfb20f0e46de2f0c53b31e2b7df"
+  integrity sha512-l3wIbeyTrNFru/Tb8NoO7d8BlK3Pxj4SLP8z61E71qFdH1E7SUR+hEhirannmXIWi86x9X/zRy51r1TOlyHFDw==
 
 vue-eslint-parser@^7.0.0, vue-eslint-parser@^7.6.0:
   version "7.7.2"
