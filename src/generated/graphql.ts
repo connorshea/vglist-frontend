@@ -1,5 +1,6 @@
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -91,19 +92,19 @@ export type Company = {
 
 /** Video game developers and publishers */
 export type CompanyDevelopedGamesArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** Video game developers and publishers */
 export type CompanyPublishedGamesArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 /** The connection type for Company. */
@@ -266,10 +267,10 @@ export type Engine = {
 
 /** Video game engines */
 export type EngineGamesArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 /** The connection type for Engine. */
@@ -454,70 +455,70 @@ export type Game = {
 
 /** Video games */
 export type GameCoverUrlArgs = {
-  size?: Maybe<GameCoverSize>;
+  size?: InputMaybe<GameCoverSize>;
 };
 
 
 /** Video games */
 export type GameDevelopersArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** Video games */
 export type GameEnginesArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** Video games */
 export type GameFavoritersArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** Video games */
 export type GameGenresArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** Video games */
 export type GameOwnersArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** Video games */
 export type GamePlatformsArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** Video games */
 export type GamePublishersArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 /** The connection type for Game. */
@@ -599,10 +600,10 @@ export type GamePurchase = {
  * the user's rating for the game, comments, hours played, etc.
  */
 export type GamePurchasePlatformsArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -611,10 +612,10 @@ export type GamePurchasePlatformsArgs = {
  * the user's rating for the game, comments, hours played, etc.
  */
 export type GamePurchaseStoresArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 /** Completion Status options for game purchases (games in a user's library). */
@@ -679,7 +680,7 @@ export type GameSearchResult = SearchResultInterface & {
 
 /** A game search result. */
 export type GameSearchResultCoverUrlArgs = {
-  size?: Maybe<GameCoverSize>;
+  size?: InputMaybe<GameCoverSize>;
 };
 
 /** Options for sorting games. */
@@ -722,10 +723,10 @@ export type Genre = {
 
 /** Video game genres */
 export type GenreGamesArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 /** The connection type for Genre. */
@@ -762,8 +763,6 @@ export type GenreSearchResult = SearchResultInterface & {
   /** The type of the corresponding record. */
   searchableType: SearchableEnum;
 };
-
-
 
 /** Autogenerated return type of MergeGames */
 export type MergeGamesPayload = {
@@ -867,16 +866,16 @@ export type Mutation = {
 
 /** Mutations are GraphQL requests that can be used to create, update, or delete records on vglist. */
 export type MutationAddGameToLibraryArgs = {
-  comments?: Maybe<Scalars['String']>;
-  completionDate?: Maybe<Scalars['ISO8601Date']>;
-  completionStatus?: Maybe<GamePurchaseCompletionStatus>;
+  comments?: InputMaybe<Scalars['String']>;
+  completionDate?: InputMaybe<Scalars['ISO8601Date']>;
+  completionStatus?: InputMaybe<GamePurchaseCompletionStatus>;
   gameId: Scalars['ID'];
-  hoursPlayed?: Maybe<Scalars['Float']>;
-  platforms?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  rating?: Maybe<Scalars['Int']>;
-  replayCount?: Maybe<Scalars['Int']>;
-  startDate?: Maybe<Scalars['ISO8601Date']>;
-  stores?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  hoursPlayed?: InputMaybe<Scalars['Float']>;
+  platforms?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  rating?: InputMaybe<Scalars['Int']>;
+  replayCount?: InputMaybe<Scalars['Int']>;
+  startDate?: InputMaybe<Scalars['ISO8601Date']>;
+  stores?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 
@@ -903,56 +902,56 @@ export type MutationBanUserArgs = {
 /** Mutations are GraphQL requests that can be used to create, update, or delete records on vglist. */
 export type MutationCreateCompanyArgs = {
   name: Scalars['String'];
-  wikidataId?: Maybe<Scalars['ID']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 };
 
 
 /** Mutations are GraphQL requests that can be used to create, update, or delete records on vglist. */
 export type MutationCreateEngineArgs = {
   name: Scalars['String'];
-  wikidataId?: Maybe<Scalars['ID']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 };
 
 
 /** Mutations are GraphQL requests that can be used to create, update, or delete records on vglist. */
 export type MutationCreateGameArgs = {
-  developerIds?: Maybe<Array<Scalars['ID']>>;
-  engineIds?: Maybe<Array<Scalars['ID']>>;
-  epicGamesStoreId?: Maybe<Scalars['String']>;
-  genreIds?: Maybe<Array<Scalars['ID']>>;
-  giantbombId?: Maybe<Scalars['String']>;
-  gogId?: Maybe<Scalars['String']>;
-  igdbId?: Maybe<Scalars['String']>;
-  mobygamesId?: Maybe<Scalars['String']>;
+  developerIds?: InputMaybe<Array<Scalars['ID']>>;
+  engineIds?: InputMaybe<Array<Scalars['ID']>>;
+  epicGamesStoreId?: InputMaybe<Scalars['String']>;
+  genreIds?: InputMaybe<Array<Scalars['ID']>>;
+  giantbombId?: InputMaybe<Scalars['String']>;
+  gogId?: InputMaybe<Scalars['String']>;
+  igdbId?: InputMaybe<Scalars['String']>;
+  mobygamesId?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
-  pcgamingwikiId?: Maybe<Scalars['String']>;
-  platformIds?: Maybe<Array<Scalars['ID']>>;
-  publisherIds?: Maybe<Array<Scalars['ID']>>;
-  releaseDate?: Maybe<Scalars['ISO8601Date']>;
-  seriesId?: Maybe<Scalars['ID']>;
-  steamAppIds?: Maybe<Array<Scalars['Int']>>;
-  wikidataId?: Maybe<Scalars['ID']>;
+  pcgamingwikiId?: InputMaybe<Scalars['String']>;
+  platformIds?: InputMaybe<Array<Scalars['ID']>>;
+  publisherIds?: InputMaybe<Array<Scalars['ID']>>;
+  releaseDate?: InputMaybe<Scalars['ISO8601Date']>;
+  seriesId?: InputMaybe<Scalars['ID']>;
+  steamAppIds?: InputMaybe<Array<Scalars['Int']>>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 };
 
 
 /** Mutations are GraphQL requests that can be used to create, update, or delete records on vglist. */
 export type MutationCreateGenreArgs = {
   name: Scalars['String'];
-  wikidataId?: Maybe<Scalars['ID']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 };
 
 
 /** Mutations are GraphQL requests that can be used to create, update, or delete records on vglist. */
 export type MutationCreatePlatformArgs = {
   name: Scalars['String'];
-  wikidataId?: Maybe<Scalars['ID']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 };
 
 
 /** Mutations are GraphQL requests that can be used to create, update, or delete records on vglist. */
 export type MutationCreateSeriesArgs = {
   name: Scalars['String'];
-  wikidataId?: Maybe<Scalars['ID']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -1049,8 +1048,8 @@ export type MutationRemoveGameCoverArgs = {
 
 /** Mutations are GraphQL requests that can be used to create, update, or delete records on vglist. */
 export type MutationRemoveGameFromLibraryArgs = {
-  gameId?: Maybe<Scalars['ID']>;
-  gamePurchaseId?: Maybe<Scalars['ID']>;
+  gameId?: InputMaybe<Scalars['ID']>;
+  gamePurchaseId?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -1081,83 +1080,83 @@ export type MutationUnfollowUserArgs = {
 /** Mutations are GraphQL requests that can be used to create, update, or delete records on vglist. */
 export type MutationUpdateCompanyArgs = {
   companyId: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
-  wikidataId?: Maybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 };
 
 
 /** Mutations are GraphQL requests that can be used to create, update, or delete records on vglist. */
 export type MutationUpdateEngineArgs = {
   engineId: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
-  wikidataId?: Maybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 };
 
 
 /** Mutations are GraphQL requests that can be used to create, update, or delete records on vglist. */
 export type MutationUpdateGameArgs = {
-  developerIds?: Maybe<Array<Scalars['ID']>>;
-  engineIds?: Maybe<Array<Scalars['ID']>>;
-  epicGamesStoreId?: Maybe<Scalars['String']>;
+  developerIds?: InputMaybe<Array<Scalars['ID']>>;
+  engineIds?: InputMaybe<Array<Scalars['ID']>>;
+  epicGamesStoreId?: InputMaybe<Scalars['String']>;
   gameId: Scalars['ID'];
-  genreIds?: Maybe<Array<Scalars['ID']>>;
-  giantbombId?: Maybe<Scalars['String']>;
-  gogId?: Maybe<Scalars['String']>;
-  igdbId?: Maybe<Scalars['String']>;
-  mobygamesId?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  pcgamingwikiId?: Maybe<Scalars['String']>;
-  platformIds?: Maybe<Array<Scalars['ID']>>;
-  publisherIds?: Maybe<Array<Scalars['ID']>>;
-  releaseDate?: Maybe<Scalars['ISO8601Date']>;
-  seriesId?: Maybe<Scalars['ID']>;
-  steamAppIds?: Maybe<Array<Scalars['Int']>>;
-  wikidataId?: Maybe<Scalars['ID']>;
+  genreIds?: InputMaybe<Array<Scalars['ID']>>;
+  giantbombId?: InputMaybe<Scalars['String']>;
+  gogId?: InputMaybe<Scalars['String']>;
+  igdbId?: InputMaybe<Scalars['String']>;
+  mobygamesId?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  pcgamingwikiId?: InputMaybe<Scalars['String']>;
+  platformIds?: InputMaybe<Array<Scalars['ID']>>;
+  publisherIds?: InputMaybe<Array<Scalars['ID']>>;
+  releaseDate?: InputMaybe<Scalars['ISO8601Date']>;
+  seriesId?: InputMaybe<Scalars['ID']>;
+  steamAppIds?: InputMaybe<Array<Scalars['Int']>>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 };
 
 
 /** Mutations are GraphQL requests that can be used to create, update, or delete records on vglist. */
 export type MutationUpdateGameInLibraryArgs = {
-  comments?: Maybe<Scalars['String']>;
-  completionDate?: Maybe<Scalars['ISO8601Date']>;
-  completionStatus?: Maybe<GamePurchaseCompletionStatus>;
+  comments?: InputMaybe<Scalars['String']>;
+  completionDate?: InputMaybe<Scalars['ISO8601Date']>;
+  completionStatus?: InputMaybe<GamePurchaseCompletionStatus>;
   gamePurchaseId: Scalars['ID'];
-  hoursPlayed?: Maybe<Scalars['Float']>;
-  platforms?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  rating?: Maybe<Scalars['Int']>;
-  replayCount?: Maybe<Scalars['Int']>;
-  startDate?: Maybe<Scalars['ISO8601Date']>;
-  stores?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  hoursPlayed?: InputMaybe<Scalars['Float']>;
+  platforms?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  rating?: InputMaybe<Scalars['Int']>;
+  replayCount?: InputMaybe<Scalars['Int']>;
+  startDate?: InputMaybe<Scalars['ISO8601Date']>;
+  stores?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 
 /** Mutations are GraphQL requests that can be used to create, update, or delete records on vglist. */
 export type MutationUpdateGenreArgs = {
   genreId: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
-  wikidataId?: Maybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 };
 
 
 /** Mutations are GraphQL requests that can be used to create, update, or delete records on vglist. */
 export type MutationUpdatePlatformArgs = {
-  name?: Maybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
   platformId: Scalars['ID'];
-  wikidataId?: Maybe<Scalars['ID']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 };
 
 
 /** Mutations are GraphQL requests that can be used to create, update, or delete records on vglist. */
 export type MutationUpdateSeriesArgs = {
-  name?: Maybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
   seriesId: Scalars['ID'];
-  wikidataId?: Maybe<Scalars['ID']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 };
 
 
 /** Mutations are GraphQL requests that can be used to create, update, or delete records on vglist. */
 export type MutationUpdateStoreArgs = {
-  name?: Maybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
   storeId: Scalars['ID'];
 };
 
@@ -1203,10 +1202,10 @@ export type Platform = {
 
 /** Video game platforms, usually consoles or PC operating systems. */
 export type PlatformGamesArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 /** The connection type for Platform. */
@@ -1328,20 +1327,20 @@ export type Query = {
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryActivityArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  feedType?: Maybe<ActivityFeed>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  feedType?: InputMaybe<ActivityFeed>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryCompaniesArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -1353,10 +1352,10 @@ export type QueryCompanyArgs = {
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryCompanySearchArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   query: Scalars['String'];
 };
 
@@ -1369,34 +1368,34 @@ export type QueryEngineArgs = {
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryEngineSearchArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   query: Scalars['String'];
 };
 
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryEnginesArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryGameArgs = {
-  epicGamesStoreId?: Maybe<Scalars['String']>;
-  giantbombId?: Maybe<Scalars['String']>;
-  gogId?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['ID']>;
-  igdbId?: Maybe<Scalars['String']>;
-  mobygamesId?: Maybe<Scalars['String']>;
-  pcgamingwikiId?: Maybe<Scalars['String']>;
-  steamAppId?: Maybe<Scalars['Int']>;
-  wikidataId?: Maybe<Scalars['Int']>;
+  epicGamesStoreId?: InputMaybe<Scalars['String']>;
+  giantbombId?: InputMaybe<Scalars['String']>;
+  gogId?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  igdbId?: InputMaybe<Scalars['String']>;
+  mobygamesId?: InputMaybe<Scalars['String']>;
+  pcgamingwikiId?: InputMaybe<Scalars['String']>;
+  steamAppId?: InputMaybe<Scalars['Int']>;
+  wikidataId?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -1408,25 +1407,25 @@ export type QueryGamePurchaseArgs = {
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryGameSearchArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   query: Scalars['String'];
 };
 
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryGamesArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  byEngine?: Maybe<Scalars['ID']>;
-  byGenre?: Maybe<Scalars['ID']>;
-  byYear?: Maybe<Scalars['Int']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  onPlatform?: Maybe<Scalars['ID']>;
-  sortBy?: Maybe<GameSort>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  byEngine?: InputMaybe<Scalars['ID']>;
+  byGenre?: InputMaybe<Scalars['ID']>;
+  byYear?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  onPlatform?: InputMaybe<Scalars['ID']>;
+  sortBy?: InputMaybe<GameSort>;
 };
 
 
@@ -1438,31 +1437,31 @@ export type QueryGenreArgs = {
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryGenreSearchArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   query: Scalars['String'];
 };
 
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryGenresArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryGlobalSearchArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   query: Scalars['String'];
-  searchableTypes?: Maybe<Array<SearchableEnum>>;
+  searchableTypes?: InputMaybe<Array<SearchableEnum>>;
 };
 
 
@@ -1474,20 +1473,20 @@ export type QueryPlatformArgs = {
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryPlatformSearchArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   query: Scalars['String'];
 };
 
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryPlatformsArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -1499,39 +1498,39 @@ export type QuerySeriesArgs = {
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QuerySeriesListArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QuerySeriesSearchArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   query: Scalars['String'];
 };
 
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QuerySiteStatisticsArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  sortDirection?: Maybe<SortDirection>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  sortDirection?: InputMaybe<SortDirection>;
 };
 
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QuerySteamBlocklistArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -1543,57 +1542,57 @@ export type QueryStoreArgs = {
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryStoreSearchArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   query: Scalars['String'];
 };
 
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryStoresArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryUserArgs = {
-  id?: Maybe<Scalars['ID']>;
-  slug?: Maybe<Scalars['String']>;
-  username?: Maybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  slug?: InputMaybe<Scalars['String']>;
+  username?: InputMaybe<Scalars['String']>;
 };
 
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryUserSearchArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   query: Scalars['String'];
 };
 
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryUsersArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  sortBy?: Maybe<UserSort>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  sortBy?: InputMaybe<UserSort>;
 };
 
 
 /** Queries are GraphQL requests that can be used to request data from vglist's database. */
 export type QueryWikidataBlocklistArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 /** This represents the relationship between two users, where one user is following another. */
@@ -1721,10 +1720,10 @@ export type Series = {
 
 /** Video game series' */
 export type SeriesGamesArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 /** The connection type for Series. */
@@ -2071,52 +2070,52 @@ export type User = {
 
 /** User accounts on vglist */
 export type UserActivityArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** User accounts on vglist */
 export type UserAvatarUrlArgs = {
-  size?: Maybe<UserAvatarSize>;
+  size?: InputMaybe<UserAvatarSize>;
 };
 
 
 /** User accounts on vglist */
 export type UserFavoritedGamesArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** User accounts on vglist */
 export type UserFollowersArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** User accounts on vglist */
 export type UserFollowingArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
 /** User accounts on vglist */
 export type UserGamePurchasesArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 /** The size of the user avatar. */
@@ -2189,7 +2188,7 @@ export type UserSearchResult = SearchResultInterface & {
 
 /** A user search result. */
 export type UserSearchResultAvatarUrlArgs = {
-  size?: Maybe<UserAvatarSize>;
+  size?: InputMaybe<UserAvatarSize>;
 };
 
 /** Options for sorting users. */
@@ -2244,227 +2243,98 @@ export type WikidataBlocklistEntryEdge = {
   node?: Maybe<WikidataBlocklistEntry>;
 };
 
-export type EventCardFieldsFragment = (
-  { __typename?: 'Event' }
-  & Pick<Event, 'id' | 'eventCategory' | 'createdAt'>
-  & { user: (
-    { __typename?: 'User' }
-    & Pick<User, 'slug' | 'username' | 'avatarUrl'>
-  ), eventable: (
-    { __typename: 'FavoriteGame' }
-    & { game: (
-      { __typename?: 'Game' }
-      & Pick<Game, 'id' | 'name'>
-    ) }
-  ) | (
-    { __typename: 'GamePurchase' }
-    & { game: (
-      { __typename?: 'Game' }
-      & Pick<Game, 'id' | 'name'>
-    ) }
-  ) | (
-    { __typename: 'Relationship' }
-    & { followed: (
-      { __typename?: 'User' }
-      & Pick<User, 'username' | 'slug'>
-    ) }
-  ) | (
-    { __typename: 'User' }
-    & Pick<User, 'slug' | 'username'>
-  ) }
-);
+export type EventCardFieldsFragment = { __typename?: 'Event', id: string, eventCategory: EventCategory, createdAt: any, user: { __typename?: 'User', slug: string, username: string, avatarUrl?: string | null }, eventable: { __typename: 'FavoriteGame', game: { __typename?: 'Game', id: string, name: string } } | { __typename: 'GamePurchase', game: { __typename?: 'Game', id: string, name: string } } | { __typename: 'Relationship', followed: { __typename?: 'User', username: string, slug: string } } | { __typename: 'User', slug: string, username: string } };
 
-export type GameCardFieldsFragment = (
-  { __typename?: 'Game' }
-  & Pick<Game, 'id' | 'name' | 'coverUrl' | 'isFavorited'>
-  & { platforms?: Maybe<(
-    { __typename?: 'PlatformConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Platform' }
-      & Pick<Platform, 'name'>
-    )>>> }
-  )>, developers?: Maybe<(
-    { __typename?: 'CompanyConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Company' }
-      & Pick<Company, 'name'>
-    )>>> }
-  )> }
-);
+export type GameCardFieldsFragment = { __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms?: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null } | null, developers?: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } | null };
 
-export type PaginationFieldsFragment = (
-  { __typename?: 'PageInfo' }
-  & Pick<PageInfo, 'hasPreviousPage' | 'hasNextPage' | 'startCursor' | 'endCursor'>
-);
+export type PaginationFieldsFragment = { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null };
 
-export type UserCardFieldsFragment = (
-  { __typename?: 'User' }
-  & Pick<User, 'id' | 'username' | 'slug' | 'bio' | 'avatarUrl' | 'privacy' | 'banned' | 'role'>
-  & { gamePurchases?: Maybe<(
-    { __typename?: 'GamePurchaseConnection' }
-    & Pick<GamePurchaseConnection, 'totalCount'>
-  )> }
-);
+export type UserCardFieldsFragment = { __typename?: 'User', id: string, username: string, slug: string, bio?: string | null, avatarUrl?: string | null, privacy: UserPrivacy, banned: boolean, role: UserRole, gamePurchases?: { __typename?: 'GamePurchaseConnection', totalCount: number } | null };
 
 export type DeleteEventMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type DeleteEventMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteEvent?: Maybe<(
-    { __typename?: 'DeleteEventPayload' }
-    & Pick<DeleteEventPayload, 'deleted'>
-  )> }
-);
+export type DeleteEventMutation = { __typename?: 'Mutation', deleteEvent?: { __typename?: 'DeleteEventPayload', deleted: boolean } | null };
 
 export type RemoveFromSteamBlocklistMutationVariables = Exact<{
   blocklistEntryId: Scalars['ID'];
 }>;
 
 
-export type RemoveFromSteamBlocklistMutation = (
-  { __typename?: 'Mutation' }
-  & { removeFromSteamBlocklist?: Maybe<(
-    { __typename?: 'RemoveFromSteamBlocklistPayload' }
-    & Pick<RemoveFromSteamBlocklistPayload, 'deleted'>
-  )> }
-);
+export type RemoveFromSteamBlocklistMutation = { __typename?: 'Mutation', removeFromSteamBlocklist?: { __typename?: 'RemoveFromSteamBlocklistPayload', deleted: boolean } | null };
 
 export type RemoveFromWikidataBlocklistMutationVariables = Exact<{
   blocklistEntryId: Scalars['ID'];
 }>;
 
 
-export type RemoveFromWikidataBlocklistMutation = (
-  { __typename?: 'Mutation' }
-  & { removeFromWikidataBlocklist?: Maybe<(
-    { __typename?: 'RemoveFromWikidataBlocklistPayload' }
-    & Pick<RemoveFromWikidataBlocklistPayload, 'deleted'>
-  )> }
-);
+export type RemoveFromWikidataBlocklistMutation = { __typename?: 'Mutation', removeFromWikidataBlocklist?: { __typename?: 'RemoveFromWikidataBlocklistPayload', deleted: boolean } | null };
 
 export type CreateCompanyMutationVariables = Exact<{
   name: Scalars['String'];
-  wikidataId?: Maybe<Scalars['ID']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type CreateCompanyMutation = (
-  { __typename?: 'Mutation' }
-  & { createCompany?: Maybe<(
-    { __typename?: 'CreateCompanyPayload' }
-    & { company?: Maybe<(
-      { __typename?: 'Company' }
-      & Pick<Company, 'id'>
-    )> }
-  )> }
-);
+export type CreateCompanyMutation = { __typename?: 'Mutation', createCompany?: { __typename?: 'CreateCompanyPayload', company?: { __typename?: 'Company', id: string } | null } | null };
 
 export type DeleteCompanyMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type DeleteCompanyMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteCompany?: Maybe<(
-    { __typename?: 'DeleteCompanyPayload' }
-    & Pick<DeleteCompanyPayload, 'deleted'>
-  )> }
-);
+export type DeleteCompanyMutation = { __typename?: 'Mutation', deleteCompany?: { __typename?: 'DeleteCompanyPayload', deleted?: boolean | null } | null };
 
 export type UpdateCompanyMutationVariables = Exact<{
   id: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
-  wikidataId?: Maybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type UpdateCompanyMutation = (
-  { __typename?: 'Mutation' }
-  & { updateCompany?: Maybe<(
-    { __typename?: 'UpdateCompanyPayload' }
-    & { company: (
-      { __typename?: 'Company' }
-      & Pick<Company, 'id'>
-    ) }
-  )> }
-);
+export type UpdateCompanyMutation = { __typename?: 'Mutation', updateCompany?: { __typename?: 'UpdateCompanyPayload', company: { __typename?: 'Company', id: string } } | null };
 
 export type CreateEngineMutationVariables = Exact<{
   name: Scalars['String'];
-  wikidataId?: Maybe<Scalars['ID']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type CreateEngineMutation = (
-  { __typename?: 'Mutation' }
-  & { createEngine?: Maybe<(
-    { __typename?: 'CreateEnginePayload' }
-    & { engine?: Maybe<(
-      { __typename?: 'Engine' }
-      & Pick<Engine, 'id'>
-    )> }
-  )> }
-);
+export type CreateEngineMutation = { __typename?: 'Mutation', createEngine?: { __typename?: 'CreateEnginePayload', engine?: { __typename?: 'Engine', id: string } | null } | null };
 
 export type DeleteEngineMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type DeleteEngineMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteEngine?: Maybe<(
-    { __typename?: 'DeleteEnginePayload' }
-    & Pick<DeleteEnginePayload, 'deleted'>
-  )> }
-);
+export type DeleteEngineMutation = { __typename?: 'Mutation', deleteEngine?: { __typename?: 'DeleteEnginePayload', deleted?: boolean | null } | null };
 
 export type UpdateEngineMutationVariables = Exact<{
   id: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
-  wikidataId?: Maybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type UpdateEngineMutation = (
-  { __typename?: 'Mutation' }
-  & { updateEngine?: Maybe<(
-    { __typename?: 'UpdateEnginePayload' }
-    & { engine: (
-      { __typename?: 'Engine' }
-      & Pick<Engine, 'id'>
-    ) }
-  )> }
-);
+export type UpdateEngineMutation = { __typename?: 'Mutation', updateEngine?: { __typename?: 'UpdateEnginePayload', engine: { __typename?: 'Engine', id: string } } | null };
 
 export type AddGameToLibraryMutationVariables = Exact<{
   gameId: Scalars['ID'];
-  rating?: Maybe<Scalars['Int']>;
-  startDate?: Maybe<Scalars['ISO8601Date']>;
-  completionDate?: Maybe<Scalars['ISO8601Date']>;
-  completionStatus?: Maybe<GamePurchaseCompletionStatus>;
-  comments?: Maybe<Scalars['String']>;
-  hoursPlayed?: Maybe<Scalars['Float']>;
-  replayCount?: Maybe<Scalars['Int']>;
-  platforms?: Maybe<Array<Maybe<Scalars['ID']>> | Maybe<Scalars['ID']>>;
-  stores?: Maybe<Array<Maybe<Scalars['ID']>> | Maybe<Scalars['ID']>>;
+  rating?: InputMaybe<Scalars['Int']>;
+  startDate?: InputMaybe<Scalars['ISO8601Date']>;
+  completionDate?: InputMaybe<Scalars['ISO8601Date']>;
+  completionStatus?: InputMaybe<GamePurchaseCompletionStatus>;
+  comments?: InputMaybe<Scalars['String']>;
+  hoursPlayed?: InputMaybe<Scalars['Float']>;
+  replayCount?: InputMaybe<Scalars['Int']>;
+  platforms?: InputMaybe<Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>>;
+  stores?: InputMaybe<Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>>;
 }>;
 
 
-export type AddGameToLibraryMutation = (
-  { __typename?: 'Mutation' }
-  & { addGameToLibrary?: Maybe<(
-    { __typename?: 'AddGameToLibraryPayload' }
-    & { gamePurchase?: Maybe<(
-      { __typename?: 'GamePurchase' }
-      & Pick<GamePurchase, 'id'>
-    )> }
-  )> }
-);
+export type AddGameToLibraryMutation = { __typename?: 'Mutation', addGameToLibrary?: { __typename?: 'AddGameToLibraryPayload', gamePurchase?: { __typename?: 'GamePurchase', id: string } | null } | null };
 
 export type AddGameToWikidataBlocklistMutationVariables = Exact<{
   name: Scalars['String'];
@@ -2472,76 +2342,43 @@ export type AddGameToWikidataBlocklistMutationVariables = Exact<{
 }>;
 
 
-export type AddGameToWikidataBlocklistMutation = (
-  { __typename?: 'Mutation' }
-  & { addToWikidataBlocklist?: Maybe<(
-    { __typename?: 'AddToWikidataBlocklistPayload' }
-    & { wikidataBlocklistEntry?: Maybe<(
-      { __typename?: 'WikidataBlocklistEntry' }
-      & Pick<WikidataBlocklistEntry, 'id'>
-    )> }
-  )> }
-);
+export type AddGameToWikidataBlocklistMutation = { __typename?: 'Mutation', addToWikidataBlocklist?: { __typename?: 'AddToWikidataBlocklistPayload', wikidataBlocklistEntry?: { __typename?: 'WikidataBlocklistEntry', id: string } | null } | null };
 
 export type CreateGameMutationVariables = Exact<{
   name: Scalars['String'];
-  releaseDate?: Maybe<Scalars['ISO8601Date']>;
-  seriesId?: Maybe<Scalars['ID']>;
-  developerIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
-  publisherIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
-  platformIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
-  engineIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
-  genreIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
-  steamAppIds?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
-  gogId?: Maybe<Scalars['String']>;
-  epicGamesStoreId?: Maybe<Scalars['String']>;
-  mobygamesId?: Maybe<Scalars['String']>;
-  giantbombId?: Maybe<Scalars['String']>;
-  pcgamingwikiId?: Maybe<Scalars['String']>;
-  wikidataId?: Maybe<Scalars['ID']>;
-  igdbId?: Maybe<Scalars['String']>;
+  releaseDate?: InputMaybe<Scalars['ISO8601Date']>;
+  seriesId?: InputMaybe<Scalars['ID']>;
+  developerIds?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+  publisherIds?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+  platformIds?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+  engineIds?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+  genreIds?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+  steamAppIds?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
+  gogId?: InputMaybe<Scalars['String']>;
+  epicGamesStoreId?: InputMaybe<Scalars['String']>;
+  mobygamesId?: InputMaybe<Scalars['String']>;
+  giantbombId?: InputMaybe<Scalars['String']>;
+  pcgamingwikiId?: InputMaybe<Scalars['String']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
+  igdbId?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type CreateGameMutation = (
-  { __typename?: 'Mutation' }
-  & { createGame?: Maybe<(
-    { __typename?: 'CreateGamePayload' }
-    & { game?: Maybe<(
-      { __typename?: 'Game' }
-      & Pick<Game, 'id' | 'name'>
-    )> }
-  )> }
-);
+export type CreateGameMutation = { __typename?: 'Mutation', createGame?: { __typename?: 'CreateGamePayload', game?: { __typename?: 'Game', id: string, name: string } | null } | null };
 
 export type DeleteGameMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type DeleteGameMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteGame?: Maybe<(
-    { __typename?: 'DeleteGamePayload' }
-    & Pick<DeleteGamePayload, 'deleted'>
-  )> }
-);
+export type DeleteGameMutation = { __typename?: 'Mutation', deleteGame?: { __typename?: 'DeleteGamePayload', deleted?: boolean | null } | null };
 
 export type FavoriteGameMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type FavoriteGameMutation = (
-  { __typename?: 'Mutation' }
-  & { favoriteGame?: Maybe<(
-    { __typename?: 'FavoriteGamePayload' }
-    & { game?: Maybe<(
-      { __typename?: 'Game' }
-      & Pick<Game, 'id' | 'name'>
-    )> }
-  )> }
-);
+export type FavoriteGameMutation = { __typename?: 'Mutation', favoriteGame?: { __typename?: 'FavoriteGamePayload', game?: { __typename?: 'Game', id: string, name: string } | null } | null };
 
 export type MergeGamesMutationVariables = Exact<{
   gameToKeepId: Scalars['ID'];
@@ -2549,391 +2386,196 @@ export type MergeGamesMutationVariables = Exact<{
 }>;
 
 
-export type MergeGamesMutation = (
-  { __typename?: 'Mutation' }
-  & { mergeGames?: Maybe<(
-    { __typename?: 'MergeGamesPayload' }
-    & { game: (
-      { __typename?: 'Game' }
-      & Pick<Game, 'id' | 'name'>
-    ) }
-  )> }
-);
+export type MergeGamesMutation = { __typename?: 'Mutation', mergeGames?: { __typename?: 'MergeGamesPayload', game: { __typename?: 'Game', id: string, name: string } } | null };
 
 export type RemoveGameCoverMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type RemoveGameCoverMutation = (
-  { __typename?: 'Mutation' }
-  & { removeGameCover?: Maybe<(
-    { __typename?: 'RemoveGameCoverPayload' }
-    & { game: (
-      { __typename?: 'Game' }
-      & Pick<Game, 'name'>
-    ) }
-  )> }
-);
+export type RemoveGameCoverMutation = { __typename?: 'Mutation', removeGameCover?: { __typename?: 'RemoveGameCoverPayload', game: { __typename?: 'Game', name: string } } | null };
 
 export type RemoveGameFromLibraryMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type RemoveGameFromLibraryMutation = (
-  { __typename?: 'Mutation' }
-  & { removeGameFromLibrary?: Maybe<(
-    { __typename?: 'RemoveGameFromLibraryPayload' }
-    & { game?: Maybe<(
-      { __typename?: 'Game' }
-      & Pick<Game, 'id' | 'name'>
-    )> }
-  )> }
-);
+export type RemoveGameFromLibraryMutation = { __typename?: 'Mutation', removeGameFromLibrary?: { __typename?: 'RemoveGameFromLibraryPayload', game?: { __typename?: 'Game', id: string, name: string } | null } | null };
 
 export type UnfavoriteGameMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type UnfavoriteGameMutation = (
-  { __typename?: 'Mutation' }
-  & { unfavoriteGame?: Maybe<(
-    { __typename?: 'UnfavoriteGamePayload' }
-    & { game?: Maybe<(
-      { __typename?: 'Game' }
-      & Pick<Game, 'id' | 'name'>
-    )> }
-  )> }
-);
+export type UnfavoriteGameMutation = { __typename?: 'Mutation', unfavoriteGame?: { __typename?: 'UnfavoriteGamePayload', game?: { __typename?: 'Game', id: string, name: string } | null } | null };
 
 export type UpdateGameMutationVariables = Exact<{
   gameId: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
-  releaseDate?: Maybe<Scalars['ISO8601Date']>;
-  seriesId?: Maybe<Scalars['ID']>;
-  developerIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
-  publisherIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
-  platformIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
-  engineIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
-  genreIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
-  steamAppIds?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
-  gogId?: Maybe<Scalars['String']>;
-  epicGamesStoreId?: Maybe<Scalars['String']>;
-  mobygamesId?: Maybe<Scalars['String']>;
-  giantbombId?: Maybe<Scalars['String']>;
-  pcgamingwikiId?: Maybe<Scalars['String']>;
-  wikidataId?: Maybe<Scalars['ID']>;
-  igdbId?: Maybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  releaseDate?: InputMaybe<Scalars['ISO8601Date']>;
+  seriesId?: InputMaybe<Scalars['ID']>;
+  developerIds?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+  publisherIds?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+  platformIds?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+  engineIds?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+  genreIds?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+  steamAppIds?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
+  gogId?: InputMaybe<Scalars['String']>;
+  epicGamesStoreId?: InputMaybe<Scalars['String']>;
+  mobygamesId?: InputMaybe<Scalars['String']>;
+  giantbombId?: InputMaybe<Scalars['String']>;
+  pcgamingwikiId?: InputMaybe<Scalars['String']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
+  igdbId?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type UpdateGameMutation = (
-  { __typename?: 'Mutation' }
-  & { updateGame?: Maybe<(
-    { __typename?: 'UpdateGamePayload' }
-    & { game: (
-      { __typename?: 'Game' }
-      & Pick<Game, 'id' | 'name'>
-    ) }
-  )> }
-);
+export type UpdateGameMutation = { __typename?: 'Mutation', updateGame?: { __typename?: 'UpdateGamePayload', game: { __typename?: 'Game', id: string, name: string } } | null };
 
 export type UpdateGameInLibraryMutationVariables = Exact<{
   gamePurchaseId: Scalars['ID'];
-  rating?: Maybe<Scalars['Int']>;
-  startDate?: Maybe<Scalars['ISO8601Date']>;
-  completionDate?: Maybe<Scalars['ISO8601Date']>;
-  completionStatus?: Maybe<GamePurchaseCompletionStatus>;
-  comments?: Maybe<Scalars['String']>;
-  hoursPlayed?: Maybe<Scalars['Float']>;
-  replayCount?: Maybe<Scalars['Int']>;
-  platforms?: Maybe<Array<Maybe<Scalars['ID']>> | Maybe<Scalars['ID']>>;
-  stores?: Maybe<Array<Maybe<Scalars['ID']>> | Maybe<Scalars['ID']>>;
+  rating?: InputMaybe<Scalars['Int']>;
+  startDate?: InputMaybe<Scalars['ISO8601Date']>;
+  completionDate?: InputMaybe<Scalars['ISO8601Date']>;
+  completionStatus?: InputMaybe<GamePurchaseCompletionStatus>;
+  comments?: InputMaybe<Scalars['String']>;
+  hoursPlayed?: InputMaybe<Scalars['Float']>;
+  replayCount?: InputMaybe<Scalars['Int']>;
+  platforms?: InputMaybe<Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>>;
+  stores?: InputMaybe<Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>>;
 }>;
 
 
-export type UpdateGameInLibraryMutation = (
-  { __typename?: 'Mutation' }
-  & { updateGameInLibrary?: Maybe<(
-    { __typename?: 'UpdateGameInLibraryPayload' }
-    & { gamePurchase?: Maybe<(
-      { __typename?: 'GamePurchase' }
-      & Pick<GamePurchase, 'id'>
-    )> }
-  )> }
-);
+export type UpdateGameInLibraryMutation = { __typename?: 'Mutation', updateGameInLibrary?: { __typename?: 'UpdateGameInLibraryPayload', gamePurchase?: { __typename?: 'GamePurchase', id: string } | null } | null };
 
 export type CreateGenreMutationVariables = Exact<{
   name: Scalars['String'];
-  wikidataId?: Maybe<Scalars['ID']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type CreateGenreMutation = (
-  { __typename?: 'Mutation' }
-  & { createGenre?: Maybe<(
-    { __typename?: 'CreateGenrePayload' }
-    & { genre?: Maybe<(
-      { __typename?: 'Genre' }
-      & Pick<Genre, 'id'>
-    )> }
-  )> }
-);
+export type CreateGenreMutation = { __typename?: 'Mutation', createGenre?: { __typename?: 'CreateGenrePayload', genre?: { __typename?: 'Genre', id: string } | null } | null };
 
 export type DeleteGenreMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type DeleteGenreMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteGenre?: Maybe<(
-    { __typename?: 'DeleteGenrePayload' }
-    & Pick<DeleteGenrePayload, 'deleted'>
-  )> }
-);
+export type DeleteGenreMutation = { __typename?: 'Mutation', deleteGenre?: { __typename?: 'DeleteGenrePayload', deleted?: boolean | null } | null };
 
 export type UpdateGenreMutationVariables = Exact<{
   id: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
-  wikidataId?: Maybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type UpdateGenreMutation = (
-  { __typename?: 'Mutation' }
-  & { updateGenre?: Maybe<(
-    { __typename?: 'UpdateGenrePayload' }
-    & { genre: (
-      { __typename?: 'Genre' }
-      & Pick<Genre, 'id'>
-    ) }
-  )> }
-);
+export type UpdateGenreMutation = { __typename?: 'Mutation', updateGenre?: { __typename?: 'UpdateGenrePayload', genre: { __typename?: 'Genre', id: string } } | null };
 
 export type CreatePlatformMutationVariables = Exact<{
   name: Scalars['String'];
-  wikidataId?: Maybe<Scalars['ID']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type CreatePlatformMutation = (
-  { __typename?: 'Mutation' }
-  & { createPlatform?: Maybe<(
-    { __typename?: 'CreatePlatformPayload' }
-    & { platform?: Maybe<(
-      { __typename?: 'Platform' }
-      & Pick<Platform, 'id'>
-    )> }
-  )> }
-);
+export type CreatePlatformMutation = { __typename?: 'Mutation', createPlatform?: { __typename?: 'CreatePlatformPayload', platform?: { __typename?: 'Platform', id: string } | null } | null };
 
 export type DeletePlatformMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type DeletePlatformMutation = (
-  { __typename?: 'Mutation' }
-  & { deletePlatform?: Maybe<(
-    { __typename?: 'DeletePlatformPayload' }
-    & Pick<DeletePlatformPayload, 'deleted'>
-  )> }
-);
+export type DeletePlatformMutation = { __typename?: 'Mutation', deletePlatform?: { __typename?: 'DeletePlatformPayload', deleted?: boolean | null } | null };
 
 export type UpdatePlatformMutationVariables = Exact<{
   id: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
-  wikidataId?: Maybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type UpdatePlatformMutation = (
-  { __typename?: 'Mutation' }
-  & { updatePlatform?: Maybe<(
-    { __typename?: 'UpdatePlatformPayload' }
-    & { platform: (
-      { __typename?: 'Platform' }
-      & Pick<Platform, 'id'>
-    ) }
-  )> }
-);
+export type UpdatePlatformMutation = { __typename?: 'Mutation', updatePlatform?: { __typename?: 'UpdatePlatformPayload', platform: { __typename?: 'Platform', id: string } } | null };
 
 export type CreateSeriesMutationVariables = Exact<{
   name: Scalars['String'];
-  wikidataId?: Maybe<Scalars['ID']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type CreateSeriesMutation = (
-  { __typename?: 'Mutation' }
-  & { createSeries?: Maybe<(
-    { __typename?: 'CreateSeriesPayload' }
-    & { series?: Maybe<(
-      { __typename?: 'Series' }
-      & Pick<Series, 'id'>
-    )> }
-  )> }
-);
+export type CreateSeriesMutation = { __typename?: 'Mutation', createSeries?: { __typename?: 'CreateSeriesPayload', series?: { __typename?: 'Series', id: string } | null } | null };
 
 export type DeleteSeriesMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type DeleteSeriesMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteSeries?: Maybe<(
-    { __typename?: 'DeleteSeriesPayload' }
-    & Pick<DeleteSeriesPayload, 'deleted'>
-  )> }
-);
+export type DeleteSeriesMutation = { __typename?: 'Mutation', deleteSeries?: { __typename?: 'DeleteSeriesPayload', deleted?: boolean | null } | null };
 
 export type UpdateSeriesMutationVariables = Exact<{
   id: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
-  wikidataId?: Maybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+  wikidataId?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type UpdateSeriesMutation = (
-  { __typename?: 'Mutation' }
-  & { updateSeries?: Maybe<(
-    { __typename?: 'UpdateSeriesPayload' }
-    & { series: (
-      { __typename?: 'Series' }
-      & Pick<Series, 'id'>
-    ) }
-  )> }
-);
+export type UpdateSeriesMutation = { __typename?: 'Mutation', updateSeries?: { __typename?: 'UpdateSeriesPayload', series: { __typename?: 'Series', id: string } } | null };
 
 export type CreateStoreMutationVariables = Exact<{
   name: Scalars['String'];
 }>;
 
 
-export type CreateStoreMutation = (
-  { __typename?: 'Mutation' }
-  & { createStore?: Maybe<(
-    { __typename?: 'CreateStorePayload' }
-    & { store?: Maybe<(
-      { __typename?: 'Store' }
-      & Pick<Store, 'id'>
-    )> }
-  )> }
-);
+export type CreateStoreMutation = { __typename?: 'Mutation', createStore?: { __typename?: 'CreateStorePayload', store?: { __typename?: 'Store', id: string } | null } | null };
 
 export type DeleteStoreMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type DeleteStoreMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteStore?: Maybe<(
-    { __typename?: 'DeleteStorePayload' }
-    & Pick<DeleteStorePayload, 'deleted'>
-  )> }
-);
+export type DeleteStoreMutation = { __typename?: 'Mutation', deleteStore?: { __typename?: 'DeleteStorePayload', deleted?: boolean | null } | null };
 
 export type UpdateStoreMutationVariables = Exact<{
   id: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type UpdateStoreMutation = (
-  { __typename?: 'Mutation' }
-  & { updateStore?: Maybe<(
-    { __typename?: 'UpdateStorePayload' }
-    & { store: (
-      { __typename?: 'Store' }
-      & Pick<Store, 'id'>
-    ) }
-  )> }
-);
+export type UpdateStoreMutation = { __typename?: 'Mutation', updateStore?: { __typename?: 'UpdateStorePayload', store: { __typename?: 'Store', id: string } } | null };
 
 export type BanUserMutationVariables = Exact<{
   userId: Scalars['ID'];
 }>;
 
 
-export type BanUserMutation = (
-  { __typename?: 'Mutation' }
-  & { banUser?: Maybe<(
-    { __typename?: 'BanUserPayload' }
-    & { user?: Maybe<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'banned'>
-    )> }
-  )> }
-);
+export type BanUserMutation = { __typename?: 'Mutation', banUser?: { __typename?: 'BanUserPayload', user?: { __typename?: 'User', id: string, username: string, banned: boolean } | null } | null };
 
 export type FollowUserMutationVariables = Exact<{
   userId: Scalars['ID'];
 }>;
 
 
-export type FollowUserMutation = (
-  { __typename?: 'Mutation' }
-  & { followUser?: Maybe<(
-    { __typename?: 'FollowUserPayload' }
-    & { user?: Maybe<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'isFollowed'>
-    )> }
-  )> }
-);
+export type FollowUserMutation = { __typename?: 'Mutation', followUser?: { __typename?: 'FollowUserPayload', user?: { __typename?: 'User', id: string, username: string, isFollowed?: boolean | null } | null } | null };
 
 export type RemoveUserAvatarMutationVariables = Exact<{
   userId: Scalars['ID'];
 }>;
 
 
-export type RemoveUserAvatarMutation = (
-  { __typename?: 'Mutation' }
-  & { removeUserAvatar?: Maybe<(
-    { __typename?: 'RemoveUserAvatarPayload' }
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'avatarUrl'>
-    ) }
-  )> }
-);
+export type RemoveUserAvatarMutation = { __typename?: 'Mutation', removeUserAvatar?: { __typename?: 'RemoveUserAvatarPayload', user: { __typename?: 'User', id: string, username: string, avatarUrl?: string | null } } | null };
 
 export type UnbanUserMutationVariables = Exact<{
   userId: Scalars['ID'];
 }>;
 
 
-export type UnbanUserMutation = (
-  { __typename?: 'Mutation' }
-  & { unbanUser?: Maybe<(
-    { __typename?: 'UnbanUserPayload' }
-    & { user?: Maybe<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'banned'>
-    )> }
-  )> }
-);
+export type UnbanUserMutation = { __typename?: 'Mutation', unbanUser?: { __typename?: 'UnbanUserPayload', user?: { __typename?: 'User', id: string, username: string, banned: boolean } | null } | null };
 
 export type UnfollowUserMutationVariables = Exact<{
   userId: Scalars['ID'];
 }>;
 
 
-export type UnfollowUserMutation = (
-  { __typename?: 'Mutation' }
-  & { unfollowUser?: Maybe<(
-    { __typename?: 'UnfollowUserPayload' }
-    & { user?: Maybe<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'isFollowed'>
-    )> }
-  )> }
-);
+export type UnfollowUserMutation = { __typename?: 'Mutation', unfollowUser?: { __typename?: 'UnfollowUserPayload', user?: { __typename?: 'User', id: string, username: string, isFollowed?: boolean | null } | null } | null };
 
 export type UpdateUserRoleMutationVariables = Exact<{
   userId: Scalars['ID'];
@@ -2941,835 +2583,313 @@ export type UpdateUserRoleMutationVariables = Exact<{
 }>;
 
 
-export type UpdateUserRoleMutation = (
-  { __typename?: 'Mutation' }
-  & { updateUserRole?: Maybe<(
-    { __typename?: 'UpdateUserRolePayload' }
-    & { user?: Maybe<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'role'>
-    )> }
-  )> }
-);
+export type UpdateUserRoleMutation = { __typename?: 'Mutation', updateUserRole?: { __typename?: 'UpdateUserRolePayload', user?: { __typename?: 'User', id: string, username: string, role: UserRole } | null } | null };
 
 export type ActivityFeedQueryVariables = Exact<{
-  feedType?: Maybe<ActivityFeed>;
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  feedType?: InputMaybe<ActivityFeed>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type ActivityFeedQuery = (
-  { __typename?: 'Query' }
-  & { activity?: Maybe<(
-    { __typename?: 'EventConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Event' }
-      & EventCardFieldsFragment
-    )>>>, pageInfo: (
-      { __typename?: 'PageInfo' }
-      & PaginationFieldsFragment
-    ) }
-  )> }
-);
+export type ActivityFeedQuery = { __typename?: 'Query', activity?: { __typename?: 'EventConnection', nodes?: Array<{ __typename?: 'Event', id: string, eventCategory: EventCategory, createdAt: any, user: { __typename?: 'User', slug: string, username: string, avatarUrl?: string | null }, eventable: { __typename: 'FavoriteGame', game: { __typename?: 'Game', id: string, name: string } } | { __typename: 'GamePurchase', game: { __typename?: 'Game', id: string, name: string } } | { __typename: 'Relationship', followed: { __typename?: 'User', username: string, slug: string } } | { __typename: 'User', slug: string, username: string } } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type GamePurchaseQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GamePurchaseQuery = (
-  { __typename?: 'Query' }
-  & { gamePurchase?: Maybe<(
-    { __typename?: 'GamePurchase' }
-    & Pick<GamePurchase, 'rating' | 'startDate' | 'completionDate' | 'completionStatus' | 'comments' | 'hoursPlayed' | 'replayCount'>
-    & { platforms?: Maybe<(
-      { __typename?: 'PlatformConnection' }
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'Platform' }
-        & Pick<Platform, 'id' | 'name'>
-      )>>> }
-    )>, stores?: Maybe<(
-      { __typename?: 'StoreConnection' }
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'Store' }
-        & Pick<Store, 'id' | 'name'>
-      )>>> }
-    )> }
-  )> }
-);
+export type GamePurchaseQuery = { __typename?: 'Query', gamePurchase?: { __typename?: 'GamePurchase', rating?: number | null, startDate?: any | null, completionDate?: any | null, completionStatus?: GamePurchaseCompletionStatus | null, comments?: string | null, hoursPlayed?: number | null, replayCount: number, platforms?: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', id: string, name: string } | null> | null } | null, stores?: { __typename?: 'StoreConnection', nodes?: Array<{ __typename?: 'Store', id: string, name: string } | null> | null } | null } | null };
 
 export type GlobalSearchQueryVariables = Exact<{
   query: Scalars['String'];
-  cursor?: Maybe<Scalars['String']>;
+  cursor?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GlobalSearchQuery = (
-  { __typename?: 'Query' }
-  & { globalSearch: (
-    { __typename?: 'SearchResultUnionConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename: 'CompanySearchResult' }
-      & Pick<CompanySearchResult, 'id' | 'searchableId' | 'content'>
-    ) | (
-      { __typename: 'EngineSearchResult' }
-      & Pick<EngineSearchResult, 'id' | 'searchableId' | 'content'>
-    ) | (
-      { __typename: 'GameSearchResult' }
-      & Pick<GameSearchResult, 'id' | 'searchableId' | 'content' | 'releaseDate' | 'developerName'>
-      & { imageUrl: GameSearchResult['coverUrl'] }
-    ) | (
-      { __typename: 'GenreSearchResult' }
-      & Pick<GenreSearchResult, 'id' | 'searchableId' | 'content'>
-    ) | (
-      { __typename: 'PlatformSearchResult' }
-      & Pick<PlatformSearchResult, 'id' | 'searchableId' | 'content'>
-    ) | (
-      { __typename: 'SeriesSearchResult' }
-      & Pick<SeriesSearchResult, 'id' | 'searchableId' | 'content'>
-    ) | (
-      { __typename: 'UserSearchResult' }
-      & Pick<UserSearchResult, 'id' | 'searchableId' | 'content' | 'slug'>
-      & { imageUrl: UserSearchResult['avatarUrl'] }
-    )>>>, pageInfo: (
-      { __typename?: 'PageInfo' }
-      & Pick<PageInfo, 'hasNextPage' | 'endCursor'>
-    ) }
-  ) }
-);
+export type GlobalSearchQuery = { __typename?: 'Query', globalSearch: { __typename?: 'SearchResultUnionConnection', nodes?: Array<{ __typename: 'CompanySearchResult', id: string, searchableId: string, content: string } | { __typename: 'EngineSearchResult', id: string, searchableId: string, content: string } | { __typename: 'GameSearchResult', id: string, searchableId: string, content: string, releaseDate?: any | null, developerName?: string | null, imageUrl?: string | null } | { __typename: 'GenreSearchResult', id: string, searchableId: string, content: string } | { __typename: 'PlatformSearchResult', id: string, searchableId: string, content: string } | { __typename: 'SeriesSearchResult', id: string, searchableId: string, content: string } | { __typename: 'UserSearchResult', id: string, searchableId: string, content: string, slug: string, imageUrl?: string | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
 export type HomeStatisticsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HomeStatisticsQuery = (
-  { __typename?: 'Query' }
-  & { basicSiteStatistics: (
-    { __typename?: 'BasicSiteStatistic' }
-    & Pick<BasicSiteStatistic, 'companies' | 'engines' | 'games' | 'genres' | 'platforms' | 'series'>
-  ) }
-);
+export type HomeStatisticsQuery = { __typename?: 'Query', basicSiteStatistics: { __typename?: 'BasicSiteStatistic', companies: number, engines: number, games: number, genres: number, platforms: number, series: number } };
 
 export type LiveStatisticsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LiveStatisticsQuery = (
-  { __typename?: 'Query' }
-  & { liveStatistics: (
-    { __typename?: 'SiteStatistic' }
-    & Pick<SiteStatistic, 'users' | 'games' | 'platforms' | 'series' | 'engines' | 'companies' | 'genres' | 'stores' | 'events' | 'gamePurchases' | 'relationships' | 'gamesWithCovers' | 'gamesWithReleaseDates' | 'bannedUsers' | 'mobygamesIds' | 'pcgamingwikiIds' | 'wikidataIds' | 'giantbombIds' | 'steamAppIds' | 'epicGamesStoreIds' | 'gogIds' | 'igdbIds' | 'companyVersions' | 'gameVersions' | 'genreVersions' | 'engineVersions' | 'platformVersions' | 'seriesVersions'>
-  ) }
-);
+export type LiveStatisticsQuery = { __typename?: 'Query', liveStatistics: { __typename?: 'SiteStatistic', users: number, games: number, platforms: number, series: number, engines: number, companies: number, genres: number, stores: number, events: number, gamePurchases: number, relationships: number, gamesWithCovers: number, gamesWithReleaseDates: number, bannedUsers: number, mobygamesIds: number, pcgamingwikiIds: number, wikidataIds: number, giantbombIds: number, steamAppIds: number, epicGamesStoreIds: number, gogIds: number, igdbIds?: number | null, companyVersions?: number | null, gameVersions?: number | null, genreVersions?: number | null, engineVersions?: number | null, platformVersions?: number | null, seriesVersions?: number | null } };
 
 export type SiteStatisticsQueryVariables = Exact<{
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type SiteStatisticsQuery = (
-  { __typename?: 'Query' }
-  & { siteStatistics?: Maybe<(
-    { __typename?: 'SiteStatisticConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'SiteStatistic' }
-      & Pick<SiteStatistic, 'id' | 'timestamp' | 'users' | 'games' | 'platforms' | 'series' | 'engines' | 'companies' | 'genres' | 'stores' | 'events' | 'gamePurchases' | 'relationships' | 'gamesWithCovers' | 'gamesWithReleaseDates' | 'bannedUsers' | 'mobygamesIds' | 'pcgamingwikiIds' | 'wikidataIds' | 'giantbombIds' | 'steamAppIds' | 'epicGamesStoreIds' | 'gogIds' | 'igdbIds' | 'companyVersions' | 'gameVersions' | 'genreVersions' | 'engineVersions' | 'platformVersions' | 'seriesVersions'>
-    )>>>, pageInfo: (
-      { __typename?: 'PageInfo' }
-      & PaginationFieldsFragment
-    ) }
-  )> }
-);
+export type SiteStatisticsQuery = { __typename?: 'Query', siteStatistics?: { __typename?: 'SiteStatisticConnection', nodes?: Array<{ __typename?: 'SiteStatistic', id?: string | null, timestamp?: any | null, users: number, games: number, platforms: number, series: number, engines: number, companies: number, genres: number, stores: number, events: number, gamePurchases: number, relationships: number, gamesWithCovers: number, gamesWithReleaseDates: number, bannedUsers: number, mobygamesIds: number, pcgamingwikiIds: number, wikidataIds: number, giantbombIds: number, steamAppIds: number, epicGamesStoreIds: number, gogIds: number, igdbIds?: number | null, companyVersions?: number | null, gameVersions?: number | null, genreVersions?: number | null, engineVersions?: number | null, platformVersions?: number | null, seriesVersions?: number | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type SteamBlocklistQueryVariables = Exact<{
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type SteamBlocklistQuery = (
-  { __typename?: 'Query' }
-  & { steamBlocklist?: Maybe<(
-    { __typename?: 'SteamBlocklistEntryConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'SteamBlocklistEntry' }
-      & Pick<SteamBlocklistEntry, 'id' | 'name' | 'steamAppId' | 'createdAt'>
-      & { user?: Maybe<(
-        { __typename?: 'User' }
-        & Pick<User, 'username' | 'slug'>
-      )> }
-    )>>>, pageInfo: (
-      { __typename?: 'PageInfo' }
-      & PaginationFieldsFragment
-    ) }
-  )> }
-);
+export type SteamBlocklistQuery = { __typename?: 'Query', steamBlocklist?: { __typename?: 'SteamBlocklistEntryConnection', nodes?: Array<{ __typename?: 'SteamBlocklistEntry', id: string, name: string, steamAppId: number, createdAt: any, user?: { __typename?: 'User', username: string, slug: string } | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type WikidataBlocklistQueryVariables = Exact<{
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type WikidataBlocklistQuery = (
-  { __typename?: 'Query' }
-  & { wikidataBlocklist?: Maybe<(
-    { __typename?: 'WikidataBlocklistEntryConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'WikidataBlocklistEntry' }
-      & Pick<WikidataBlocklistEntry, 'id' | 'name' | 'wikidataId' | 'createdAt'>
-      & { user?: Maybe<(
-        { __typename?: 'User' }
-        & Pick<User, 'username' | 'slug'>
-      )> }
-    )>>>, pageInfo: (
-      { __typename?: 'PageInfo' }
-      & PaginationFieldsFragment
-    ) }
-  )> }
-);
+export type WikidataBlocklistQuery = { __typename?: 'Query', wikidataBlocklist?: { __typename?: 'WikidataBlocklistEntryConnection', nodes?: Array<{ __typename?: 'WikidataBlocklistEntry', id: string, name: string, wikidataId: number, createdAt: any, user?: { __typename?: 'User', username: string, slug: string } | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type CompaniesQueryVariables = Exact<{
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type CompaniesQuery = (
-  { __typename?: 'Query' }
-  & { companies?: Maybe<(
-    { __typename?: 'CompanyConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Company' }
-      & Pick<Company, 'id' | 'name'>
-    )>>>, pageInfo: (
-      { __typename?: 'PageInfo' }
-      & PaginationFieldsFragment
-    ) }
-  )> }
-);
+export type CompaniesQuery = { __typename?: 'Query', companies?: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', id: string, name: string } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type CompanyQueryVariables = Exact<{
   id: Scalars['ID'];
-  developedBefore?: Maybe<Scalars['String']>;
-  developedLast?: Maybe<Scalars['Int']>;
-  developedAfter?: Maybe<Scalars['String']>;
-  publishedBefore?: Maybe<Scalars['String']>;
-  publishedLast?: Maybe<Scalars['Int']>;
-  publishedAfter?: Maybe<Scalars['String']>;
+  developedBefore?: InputMaybe<Scalars['String']>;
+  developedLast?: InputMaybe<Scalars['Int']>;
+  developedAfter?: InputMaybe<Scalars['String']>;
+  publishedBefore?: InputMaybe<Scalars['String']>;
+  publishedLast?: InputMaybe<Scalars['Int']>;
+  publishedAfter?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type CompanyQuery = (
-  { __typename?: 'Query' }
-  & { company?: Maybe<(
-    { __typename?: 'Company' }
-    & Pick<Company, 'id' | 'name' | 'wikidataId'>
-    & { developedGames?: Maybe<(
-      { __typename?: 'GameConnection' }
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'Game' }
-        & GameCardFieldsFragment
-      )>>>, pageInfo: (
-        { __typename?: 'PageInfo' }
-        & PaginationFieldsFragment
-      ) }
-    )>, publishedGames?: Maybe<(
-      { __typename?: 'GameConnection' }
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'Game' }
-        & GameCardFieldsFragment
-      )>>>, pageInfo: (
-        { __typename?: 'PageInfo' }
-        & PaginationFieldsFragment
-      ) }
-    )> }
-  )> }
-);
+export type CompanyQuery = { __typename?: 'Query', company?: { __typename?: 'Company', id: string, name: string, wikidataId?: number | null, developedGames?: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms?: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null } | null, developers?: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null, publishedGames?: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms?: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null } | null, developers?: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null } | null };
 
 export type CompanySearchQueryVariables = Exact<{
   query: Scalars['String'];
 }>;
 
 
-export type CompanySearchQuery = (
-  { __typename?: 'Query' }
-  & { companySearch?: Maybe<(
-    { __typename?: 'CompanyConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Company' }
-      & Pick<Company, 'id' | 'name'>
-    )>>> }
-  )> }
-);
+export type CompanySearchQuery = { __typename?: 'Query', companySearch?: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', id: string, name: string } | null> | null } | null };
 
 export type EngineQueryVariables = Exact<{
   id: Scalars['ID'];
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type EngineQuery = (
-  { __typename?: 'Query' }
-  & { engine?: Maybe<(
-    { __typename?: 'Engine' }
-    & Pick<Engine, 'id' | 'name' | 'wikidataId'>
-    & { games?: Maybe<(
-      { __typename?: 'GameConnection' }
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'Game' }
-        & GameCardFieldsFragment
-      )>>>, pageInfo: (
-        { __typename?: 'PageInfo' }
-        & PaginationFieldsFragment
-      ) }
-    )> }
-  )> }
-);
+export type EngineQuery = { __typename?: 'Query', engine?: { __typename?: 'Engine', id: string, name: string, wikidataId?: number | null, games?: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms?: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null } | null, developers?: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null } | null };
 
 export type EngineSearchQueryVariables = Exact<{
   query: Scalars['String'];
 }>;
 
 
-export type EngineSearchQuery = (
-  { __typename?: 'Query' }
-  & { engineSearch?: Maybe<(
-    { __typename?: 'EngineConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Engine' }
-      & Pick<Engine, 'id' | 'name'>
-    )>>> }
-  )> }
-);
+export type EngineSearchQuery = { __typename?: 'Query', engineSearch?: { __typename?: 'EngineConnection', nodes?: Array<{ __typename?: 'Engine', id: string, name: string } | null> | null } | null };
 
 export type EnginesQueryVariables = Exact<{
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type EnginesQuery = (
-  { __typename?: 'Query' }
-  & { engines?: Maybe<(
-    { __typename?: 'EngineConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Engine' }
-      & Pick<Engine, 'id' | 'name'>
-    )>>>, pageInfo: (
-      { __typename?: 'PageInfo' }
-      & PaginationFieldsFragment
-    ) }
-  )> }
-);
+export type EnginesQuery = { __typename?: 'Query', engines?: { __typename?: 'EngineConnection', nodes?: Array<{ __typename?: 'Engine', id: string, name: string } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type GameQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GameQuery = (
-  { __typename?: 'Query' }
-  & { game?: Maybe<(
-    { __typename?: 'Game' }
-    & Pick<Game, 'id' | 'name' | 'releaseDate' | 'coverUrl' | 'avgRating' | 'wikidataId' | 'igdbId' | 'gogId' | 'steamAppIds' | 'epicGamesStoreId' | 'mobygamesId' | 'pcgamingwikiId' | 'giantbombId' | 'isFavorited' | 'isInLibrary' | 'gamePurchaseId'>
-    & { genres?: Maybe<(
-      { __typename?: 'GenreConnection' }
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'Genre' }
-        & Pick<Genre, 'id' | 'name'>
-      )>>> }
-    )>, platforms?: Maybe<(
-      { __typename?: 'PlatformConnection' }
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'Platform' }
-        & Pick<Platform, 'id' | 'name'>
-      )>>> }
-    )>, series?: Maybe<(
-      { __typename?: 'Series' }
-      & Pick<Series, 'id' | 'name'>
-      & { games?: Maybe<(
-        { __typename?: 'GameConnection' }
-        & { nodes?: Maybe<Array<Maybe<(
-          { __typename?: 'Game' }
-          & Pick<Game, 'id' | 'name' | 'coverUrl'>
-        )>>> }
-      )> }
-    )>, developers?: Maybe<(
-      { __typename?: 'CompanyConnection' }
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'Company' }
-        & Pick<Company, 'id' | 'name'>
-      )>>> }
-    )>, publishers?: Maybe<(
-      { __typename?: 'CompanyConnection' }
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'Company' }
-        & Pick<Company, 'id' | 'name'>
-      )>>> }
-    )>, engines?: Maybe<(
-      { __typename?: 'EngineConnection' }
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'Engine' }
-        & Pick<Engine, 'id' | 'name'>
-      )>>> }
-    )>, owners?: Maybe<(
-      { __typename?: 'UserConnection' }
-      & Pick<UserConnection, 'totalCount'>
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'username' | 'slug' | 'avatarUrl'>
-      )>>> }
-    )>, favoriters?: Maybe<(
-      { __typename?: 'UserConnection' }
-      & Pick<UserConnection, 'totalCount'>
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'username' | 'slug' | 'avatarUrl'>
-      )>>> }
-    )> }
-  )> }
-);
+export type GameQuery = { __typename?: 'Query', game?: { __typename?: 'Game', id: string, name: string, releaseDate?: any | null, coverUrl?: string | null, avgRating?: number | null, wikidataId?: number | null, igdbId?: string | null, gogId?: string | null, steamAppIds: Array<number>, epicGamesStoreId?: string | null, mobygamesId?: string | null, pcgamingwikiId?: string | null, giantbombId?: string | null, isFavorited?: boolean | null, isInLibrary?: boolean | null, gamePurchaseId?: string | null, genres?: { __typename?: 'GenreConnection', nodes?: Array<{ __typename?: 'Genre', id: string, name: string } | null> | null } | null, platforms?: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', id: string, name: string } | null> | null } | null, series?: { __typename?: 'Series', id: string, name: string, games?: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null } | null> | null } | null } | null, developers?: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', id: string, name: string } | null> | null } | null, publishers?: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', id: string, name: string } | null> | null } | null, engines?: { __typename?: 'EngineConnection', nodes?: Array<{ __typename?: 'Engine', id: string, name: string } | null> | null } | null, owners?: { __typename?: 'UserConnection', totalCount: number, nodes?: Array<{ __typename?: 'User', id: string, username: string, slug: string, avatarUrl?: string | null } | null> | null } | null, favoriters?: { __typename?: 'UserConnection', totalCount: number, nodes?: Array<{ __typename?: 'User', id: string, username: string, slug: string, avatarUrl?: string | null } | null> | null } | null } | null };
 
 export type GameSearchQueryVariables = Exact<{
   query: Scalars['String'];
 }>;
 
 
-export type GameSearchQuery = (
-  { __typename?: 'Query' }
-  & { gameSearch?: Maybe<(
-    { __typename?: 'GameConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Game' }
-      & Pick<Game, 'id' | 'name'>
-    )>>> }
-  )> }
-);
+export type GameSearchQuery = { __typename?: 'Query', gameSearch?: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string } | null> | null } | null };
 
 export type GamesQueryVariables = Exact<{
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  sortBy?: Maybe<GameSort>;
-  platformId?: Maybe<Scalars['ID']>;
-  byYear?: Maybe<Scalars['Int']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  sortBy?: InputMaybe<GameSort>;
+  platformId?: InputMaybe<Scalars['ID']>;
+  byYear?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type GamesQuery = (
-  { __typename?: 'Query' }
-  & { games?: Maybe<(
-    { __typename?: 'GameConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Game' }
-      & GameCardFieldsFragment
-    )>>>, pageInfo: (
-      { __typename?: 'PageInfo' }
-      & PaginationFieldsFragment
-    ) }
-  )> }
-);
+export type GamesQuery = { __typename?: 'Query', games?: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms?: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null } | null, developers?: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type GenreQueryVariables = Exact<{
   id: Scalars['ID'];
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GenreQuery = (
-  { __typename?: 'Query' }
-  & { genre?: Maybe<(
-    { __typename?: 'Genre' }
-    & Pick<Genre, 'id' | 'name' | 'wikidataId'>
-    & { games?: Maybe<(
-      { __typename?: 'GameConnection' }
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'Game' }
-        & GameCardFieldsFragment
-      )>>>, pageInfo: (
-        { __typename?: 'PageInfo' }
-        & PaginationFieldsFragment
-      ) }
-    )> }
-  )> }
-);
+export type GenreQuery = { __typename?: 'Query', genre?: { __typename?: 'Genre', id: string, name: string, wikidataId?: number | null, games?: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms?: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null } | null, developers?: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null } | null };
 
 export type GenreSearchQueryVariables = Exact<{
   query: Scalars['String'];
 }>;
 
 
-export type GenreSearchQuery = (
-  { __typename?: 'Query' }
-  & { genreSearch?: Maybe<(
-    { __typename?: 'GenreConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Genre' }
-      & Pick<Genre, 'id' | 'name'>
-    )>>> }
-  )> }
-);
+export type GenreSearchQuery = { __typename?: 'Query', genreSearch?: { __typename?: 'GenreConnection', nodes?: Array<{ __typename?: 'Genre', id: string, name: string } | null> | null } | null };
 
 export type GenresQueryVariables = Exact<{
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GenresQuery = (
-  { __typename?: 'Query' }
-  & { genres?: Maybe<(
-    { __typename?: 'GenreConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Genre' }
-      & Pick<Genre, 'id' | 'name'>
-    )>>>, pageInfo: (
-      { __typename?: 'PageInfo' }
-      & PaginationFieldsFragment
-    ) }
-  )> }
-);
+export type GenresQuery = { __typename?: 'Query', genres?: { __typename?: 'GenreConnection', nodes?: Array<{ __typename?: 'Genre', id: string, name: string } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type PlatformQueryVariables = Exact<{
   id: Scalars['ID'];
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type PlatformQuery = (
-  { __typename?: 'Query' }
-  & { platform?: Maybe<(
-    { __typename?: 'Platform' }
-    & Pick<Platform, 'id' | 'name' | 'wikidataId'>
-    & { games?: Maybe<(
-      { __typename?: 'GameConnection' }
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'Game' }
-        & GameCardFieldsFragment
-      )>>>, pageInfo: (
-        { __typename?: 'PageInfo' }
-        & PaginationFieldsFragment
-      ) }
-    )> }
-  )> }
-);
+export type PlatformQuery = { __typename?: 'Query', platform?: { __typename?: 'Platform', id: string, name: string, wikidataId?: number | null, games?: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms?: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null } | null, developers?: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null } | null };
 
 export type PlatformSearchQueryVariables = Exact<{
   query: Scalars['String'];
 }>;
 
 
-export type PlatformSearchQuery = (
-  { __typename?: 'Query' }
-  & { platformSearch?: Maybe<(
-    { __typename?: 'PlatformConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Platform' }
-      & Pick<Platform, 'id' | 'name'>
-    )>>> }
-  )> }
-);
+export type PlatformSearchQuery = { __typename?: 'Query', platformSearch?: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', id: string, name: string } | null> | null } | null };
 
 export type PlatformsQueryVariables = Exact<{
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type PlatformsQuery = (
-  { __typename?: 'Query' }
-  & { platforms?: Maybe<(
-    { __typename?: 'PlatformConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Platform' }
-      & Pick<Platform, 'id' | 'name'>
-    )>>>, pageInfo: (
-      { __typename?: 'PageInfo' }
-      & PaginationFieldsFragment
-    ) }
-  )> }
-);
+export type PlatformsQuery = { __typename?: 'Query', platforms?: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', id: string, name: string } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type SeriesQueryVariables = Exact<{
   id: Scalars['ID'];
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type SeriesQuery = (
-  { __typename?: 'Query' }
-  & { series?: Maybe<(
-    { __typename?: 'Series' }
-    & Pick<Series, 'id' | 'name' | 'wikidataId'>
-    & { games?: Maybe<(
-      { __typename?: 'GameConnection' }
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'Game' }
-        & GameCardFieldsFragment
-      )>>>, pageInfo: (
-        { __typename?: 'PageInfo' }
-        & PaginationFieldsFragment
-      ) }
-    )> }
-  )> }
-);
+export type SeriesQuery = { __typename?: 'Query', series?: { __typename?: 'Series', id: string, name: string, wikidataId?: number | null, games?: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms?: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null } | null, developers?: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null } | null };
 
 export type SeriesListQueryVariables = Exact<{
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type SeriesListQuery = (
-  { __typename?: 'Query' }
-  & { seriesList?: Maybe<(
-    { __typename?: 'SeriesConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Series' }
-      & Pick<Series, 'id' | 'name'>
-    )>>>, pageInfo: (
-      { __typename?: 'PageInfo' }
-      & PaginationFieldsFragment
-    ) }
-  )> }
-);
+export type SeriesListQuery = { __typename?: 'Query', seriesList?: { __typename?: 'SeriesConnection', nodes?: Array<{ __typename?: 'Series', id: string, name: string } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type SeriesSearchQueryVariables = Exact<{
   query: Scalars['String'];
 }>;
 
 
-export type SeriesSearchQuery = (
-  { __typename?: 'Query' }
-  & { seriesSearch?: Maybe<(
-    { __typename?: 'SeriesConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Series' }
-      & Pick<Series, 'id' | 'name'>
-    )>>> }
-  )> }
-);
+export type SeriesSearchQuery = { __typename?: 'Query', seriesSearch?: { __typename?: 'SeriesConnection', nodes?: Array<{ __typename?: 'Series', id: string, name: string } | null> | null } | null };
 
 export type StoreQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type StoreQuery = (
-  { __typename?: 'Query' }
-  & { store?: Maybe<(
-    { __typename?: 'Store' }
-    & Pick<Store, 'id' | 'name'>
-  )> }
-);
+export type StoreQuery = { __typename?: 'Query', store?: { __typename?: 'Store', id: string, name: string } | null };
 
 export type StoreSearchQueryVariables = Exact<{
   query: Scalars['String'];
 }>;
 
 
-export type StoreSearchQuery = (
-  { __typename?: 'Query' }
-  & { storeSearch?: Maybe<(
-    { __typename?: 'StoreConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Store' }
-      & Pick<Store, 'id' | 'name'>
-    )>>> }
-  )> }
-);
+export type StoreSearchQuery = { __typename?: 'Query', storeSearch?: { __typename?: 'StoreConnection', nodes?: Array<{ __typename?: 'Store', id: string, name: string } | null> | null } | null };
 
 export type StoresQueryVariables = Exact<{
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type StoresQuery = (
-  { __typename?: 'Query' }
-  & { stores?: Maybe<(
-    { __typename?: 'StoreConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'Store' }
-      & Pick<Store, 'id' | 'name'>
-    )>>>, pageInfo: (
-      { __typename?: 'PageInfo' }
-      & PaginationFieldsFragment
-    ) }
-  )> }
-);
+export type StoresQuery = { __typename?: 'Query', stores?: { __typename?: 'StoreConnection', nodes?: Array<{ __typename?: 'Store', id: string, name: string } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CurrentUserQuery = (
-  { __typename?: 'Query' }
-  & { currentUser?: Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'username' | 'slug' | 'avatarUrl' | 'role'>
-  )> }
-);
+export type CurrentUserQuery = { __typename?: 'Query', currentUser?: { __typename?: 'User', id: string, username: string, slug: string, avatarUrl?: string | null, role: UserRole } | null };
 
 export type UserQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
 
-export type UserQuery = (
-  { __typename?: 'Query' }
-  & { user?: Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'username' | 'slug' | 'bio' | 'avatarUrl' | 'privacy' | 'banned' | 'role' | 'isFollowed'>
-    & { followers?: Maybe<(
-      { __typename?: 'UserConnection' }
-      & Pick<UserConnection, 'totalCount'>
-    )>, following?: Maybe<(
-      { __typename?: 'UserConnection' }
-      & Pick<UserConnection, 'totalCount'>
-    )> }
-  )> }
-);
+export type UserQuery = { __typename?: 'Query', user?: { __typename?: 'User', id: string, username: string, slug: string, bio?: string | null, avatarUrl?: string | null, privacy: UserPrivacy, banned: boolean, role: UserRole, isFollowed?: boolean | null, followers?: { __typename?: 'UserConnection', totalCount: number } | null, following?: { __typename?: 'UserConnection', totalCount: number } | null } | null };
 
 export type UserActivityQueryVariables = Exact<{
   userId: Scalars['ID'];
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type UserActivityQuery = (
-  { __typename?: 'Query' }
-  & { user?: Maybe<(
-    { __typename?: 'User' }
-    & { activity?: Maybe<(
-      { __typename?: 'EventConnection' }
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'Event' }
-        & EventCardFieldsFragment
-      )>>>, pageInfo: (
-        { __typename?: 'PageInfo' }
-        & PaginationFieldsFragment
-      ) }
-    )> }
-  )> }
-);
+export type UserActivityQuery = { __typename?: 'Query', user?: { __typename?: 'User', activity?: { __typename?: 'EventConnection', nodes?: Array<{ __typename?: 'Event', id: string, eventCategory: EventCategory, createdAt: any, user: { __typename?: 'User', slug: string, username: string, avatarUrl?: string | null }, eventable: { __typename: 'FavoriteGame', game: { __typename?: 'Game', id: string, name: string } } | { __typename: 'GamePurchase', game: { __typename?: 'Game', id: string, name: string } } | { __typename: 'Relationship', followed: { __typename?: 'User', username: string, slug: string } } | { __typename: 'User', slug: string, username: string } } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null } | null };
 
 export type UserFavoritesQueryVariables = Exact<{
   userId: Scalars['ID'];
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type UserFavoritesQuery = (
-  { __typename?: 'Query' }
-  & { user?: Maybe<(
-    { __typename?: 'User' }
-    & { favoritedGames?: Maybe<(
-      { __typename?: 'GameConnection' }
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'Game' }
-        & GameCardFieldsFragment
-      )>>>, pageInfo: (
-        { __typename?: 'PageInfo' }
-        & PaginationFieldsFragment
-      ) }
-    )> }
-  )> }
-);
+export type UserFavoritesQuery = { __typename?: 'Query', user?: { __typename?: 'User', favoritedGames?: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms?: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null } | null, developers?: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null } | null };
 
 export type UserFollowersQueryVariables = Exact<{
   userId: Scalars['ID'];
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type UserFollowersQuery = (
-  { __typename?: 'Query' }
-  & { user?: Maybe<(
-    { __typename?: 'User' }
-    & { followers?: Maybe<(
-      { __typename?: 'UserConnection' }
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'User' }
-        & UserCardFieldsFragment
-      )>>>, pageInfo: (
-        { __typename?: 'PageInfo' }
-        & PaginationFieldsFragment
-      ) }
-    )> }
-  )> }
-);
+export type UserFollowersQuery = { __typename?: 'Query', user?: { __typename?: 'User', followers?: { __typename?: 'UserConnection', nodes?: Array<{ __typename?: 'User', id: string, username: string, slug: string, bio?: string | null, avatarUrl?: string | null, privacy: UserPrivacy, banned: boolean, role: UserRole, gamePurchases?: { __typename?: 'GamePurchaseConnection', totalCount: number } | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null } | null };
 
 export type UserFollowingQueryVariables = Exact<{
   userId: Scalars['ID'];
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type UserFollowingQuery = (
-  { __typename?: 'Query' }
-  & { user?: Maybe<(
-    { __typename?: 'User' }
-    & { following?: Maybe<(
-      { __typename?: 'UserConnection' }
-      & { nodes?: Maybe<Array<Maybe<(
-        { __typename?: 'User' }
-        & UserCardFieldsFragment
-      )>>>, pageInfo: (
-        { __typename?: 'PageInfo' }
-        & PaginationFieldsFragment
-      ) }
-    )> }
-  )> }
-);
+export type UserFollowingQuery = { __typename?: 'Query', user?: { __typename?: 'User', following?: { __typename?: 'UserConnection', nodes?: Array<{ __typename?: 'User', id: string, username: string, slug: string, bio?: string | null, avatarUrl?: string | null, privacy: UserPrivacy, banned: boolean, role: UserRole, gamePurchases?: { __typename?: 'GamePurchaseConnection', totalCount: number } | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null } | null };
 
 export type UsersQueryVariables = Exact<{
-  before?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  sortBy?: Maybe<UserSort>;
+  before?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  sortBy?: InputMaybe<UserSort>;
 }>;
 
 
-export type UsersQuery = (
-  { __typename?: 'Query' }
-  & { users?: Maybe<(
-    { __typename?: 'UserConnection' }
-    & { nodes?: Maybe<Array<Maybe<(
-      { __typename?: 'User' }
-      & UserCardFieldsFragment
-    )>>>, pageInfo: (
-      { __typename?: 'PageInfo' }
-      & PaginationFieldsFragment
-    ) }
-  )> }
-);
+export type UsersQuery = { __typename?: 'Query', users?: { __typename?: 'UserConnection', nodes?: Array<{ __typename?: 'User', id: string, username: string, slug: string, bio?: string | null, avatarUrl?: string | null, privacy: UserPrivacy, banned: boolean, role: UserRole, gamePurchases?: { __typename?: 'GamePurchaseConnection', totalCount: number } | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export const EventCardFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"eventCardFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Event"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"eventCategory"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"size"},"value":{"kind":"EnumValue","value":"SMALL"}}]}]}},{"kind":"Field","name":{"kind":"Name","value":"eventable"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"GamePurchase"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"game"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Relationship"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"followed"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FavoriteGame"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"game"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<EventCardFieldsFragment, unknown>;
 export const GameCardFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"gameCardFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Game"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"coverUrl"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"size"},"value":{"kind":"EnumValue","value":"MEDIUM"}}]},{"kind":"Field","name":{"kind":"Name","value":"platforms"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"3"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"developers"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"3"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"isFavorited"}}]}}]} as unknown as DocumentNode<GameCardFieldsFragment, unknown>;

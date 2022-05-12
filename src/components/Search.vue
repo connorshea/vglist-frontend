@@ -259,7 +259,7 @@ export default defineComponent({
 
     // Load more game records and append them to the game search results.
     const loadMoreGames = () => {
-      let queryVariables = { query: query.value, cursor: searchData.value?.globalSearch.pageInfo.endCursor };
+      let queryVariables = { query: query.value, cursor: searchData.value?.globalSearch.pageInfo.endCursor || '' };
       executeSearch({ variables: queryVariables }).then(() => {
         if (searchData.value?.globalSearch.pageInfo.hasNextPage === false) {
           moreGamesExist.value = false;

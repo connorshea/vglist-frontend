@@ -67,7 +67,7 @@ export default defineComponent({
 
     const gameModalState = computed(() => props.isInLibrary ? 'update' : 'createWithGame');
 
-    let queryVariables = ref({ id: props.game.gamePurchaseId });
+    let queryVariables = ref({ id: props.game.gamePurchaseId || '' });
     const { data: gamePurchaseData, execute: executeGamePurchase } = useQuery({
       query: GamePurchaseDocument,
       variables: queryVariables,
