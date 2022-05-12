@@ -12,7 +12,7 @@
   "dependencies": {
     "bulma": "https://github.com/connorshea/bulma#css-variables-with-fallback",
     "core-js": "^3.22.0",
-    "graphql": "^16.5.0",
+    "graphql": "^15.5.0",
     "graphql-tag": "^2.12.6",
     "lodash": "^4.17.21",
     "timeago.js": "^4.0.2",

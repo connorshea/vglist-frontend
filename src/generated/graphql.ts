@@ -437,6 +437,8 @@ export type Game = {
   platforms?: Maybe<PlatformConnection>;
   /** Publishers of the game. */
   publishers?: Maybe<CompanyConnection>;
+  /** The number of ratings across all game purchases associated to this game. */
+  ratingCount: Scalars['Int'];
   /** The release date of the game. */
   releaseDate?: Maybe<Scalars['ISO8601Date']>;
   /** The series that the game belongs to. */
@@ -532,9 +534,10 @@ export type GameConnection = {
 };
 
 /**
- * The size of the game cover. Game covers are downsized to fit within the
- * specified dimensions while retaining the original aspect ratio. Will only resize
- * the image if it's larger than the specified dimensions.
+ * The size of the game cover. Game covers are downsized to fit
+ * within the specified dimensions while retaining the original aspect
+ * ratio. Will only resize the image if it's larger than the specified
+ * dimensions.
  */
 export enum GameCoverSize {
   /** Game cover image with a maximum width of 500 and maximum height of 800. */
@@ -1417,6 +1420,8 @@ export type QueryGameSearchArgs = {
 export type QueryGamesArgs = {
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
+  byEngine?: Maybe<Scalars['ID']>;
+  byGenre?: Maybe<Scalars['ID']>;
   byYear?: Maybe<Scalars['Int']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -1823,6 +1828,8 @@ export type SiteStatistic = {
    * ever be `null` except in the LiveStatistics query.
    */
   timestamp?: Maybe<Scalars['ISO8601DateTime']>;
+  /** The number of Unmatched Games collected via imports from external services (e.g. Steam) at this point in time. */
+  unmatchedGames?: Maybe<Scalars['Int']>;
   /** The number of Users at this point in time. */
   users: Scalars['Int'];
   /** The number of Wikidata IDs at this point in time. */
