@@ -4,7 +4,7 @@ import { createStore } from 'vuex';
 import { createClient, VILLUS_CLIENT } from 'villus';
 import { createMemoryHistory, createRouter } from 'vue-router';
 import { routes } from '@/router';
-import waitForExpect from 'wait-for-expect';
+import { waitFor } from '@testing-library/vue';
 
 describe('Home.vue', () => {
   it('renders statistics and games', async () => {
@@ -36,7 +36,7 @@ describe('Home.vue', () => {
       }
     });
 
-    await waitForExpect(() => {
+    await waitFor(() => {
       expect(wrapper.get('[data-test-id="home-statistics"').text()).toMatch('1Companies');
       expect(wrapper.get('[data-test-id="home-statistics"').text()).toMatch('2Engines');
       expect(wrapper.get('[data-test-id="home-statistics"').text()).toMatch('3Games');

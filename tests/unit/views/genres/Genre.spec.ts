@@ -4,7 +4,7 @@ import { createStore } from 'vuex';
 import { createClient, VILLUS_CLIENT } from 'villus';
 import { createMemoryHistory, createRouter } from 'vue-router';
 import { routes } from '@/router';
-import waitForExpect from 'wait-for-expect';
+import { waitFor } from '@testing-library/vue';
 
 describe('Genre.vue', () => {
   it('renders games for genre', async () => {
@@ -39,7 +39,7 @@ describe('Genre.vue', () => {
       }
     });
 
-    await waitForExpect(() => {
+    await waitFor(() => {
       expect(wrapper.get('[data-test-id="genre-title"').text()).toMatch('first-person shooter');
       // Should list both games on the platform.
       expect(wrapper.get('[data-test-id="genre-games-list"').text()).toMatch('Half-Life 1');

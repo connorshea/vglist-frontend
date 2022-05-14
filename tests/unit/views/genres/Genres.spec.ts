@@ -4,7 +4,7 @@ import { createStore } from 'vuex';
 import { createClient, VILLUS_CLIENT } from 'villus';
 import { createMemoryHistory, createRouter } from 'vue-router';
 import { routes } from '@/router';
-import waitForExpect from 'wait-for-expect';
+import { waitFor } from '@testing-library/vue';
 
 describe('Genres.vue', () => {
   it('renders genres for genres list', async () => {
@@ -35,7 +35,7 @@ describe('Genres.vue', () => {
       }
     });
 
-    await waitForExpect(() => {
+    await waitFor(() => {
       expect(wrapper.find('[data-test-id="create-genre-button"').exists()).toBe(true);
       expect(wrapper.get('[data-test-id="genres-list"').text()).toMatch('first-person shooter');
       expect(wrapper.get('[data-test-id="genres-list"').text()).toMatch('third-person shooter');

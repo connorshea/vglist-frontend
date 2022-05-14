@@ -4,7 +4,7 @@ import { createStore } from 'vuex';
 import { createClient, VILLUS_CLIENT } from 'villus';
 import { createMemoryHistory, createRouter } from 'vue-router';
 import { routes } from '@/router';
-import waitForExpect from 'wait-for-expect';
+import { waitFor } from '@testing-library/vue';
 
 describe('Engine.vue', () => {
   it('renders games for engine', async () => {
@@ -39,7 +39,7 @@ describe('Engine.vue', () => {
       }
     });
 
-    await waitForExpect(() => {
+    await waitFor(() => {
       expect(wrapper.get('[data-test-id="engine-title"').text()).toMatch('Source Engine');
       // Should list both games on the engine.
       expect(wrapper.get('[data-test-id="engine-games-list"').text()).toMatch('Half-Life 2');

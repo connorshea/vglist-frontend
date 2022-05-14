@@ -4,7 +4,7 @@ import { createStore } from 'vuex';
 import { createClient, VILLUS_CLIENT } from 'villus';
 import { createMemoryHistory, createRouter } from 'vue-router';
 import { routes } from '@/router';
-import waitForExpect from 'wait-for-expect';
+import { waitFor } from '@testing-library/vue';
 
 describe('Activity.vue', () => {
   it('renders events', async () => {
@@ -38,7 +38,7 @@ describe('Activity.vue', () => {
       }
     });
 
-    await waitForExpect(() => {
+    await waitFor(() => {
       expect(wrapper.get('[data-test-id="activity-events-list"').text()).toMatch('johndoe added Half-Life 2 to their library.');
       expect(wrapper.get('[data-test-id="activity-events-list"').text()).toMatch('johndoe created their account.');
     });

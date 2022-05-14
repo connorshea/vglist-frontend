@@ -4,7 +4,7 @@ import { createStore } from 'vuex';
 import { createClient, VILLUS_CLIENT } from 'villus';
 import { createMemoryHistory, createRouter } from 'vue-router';
 import { routes } from '@/router';
-import waitForExpect from 'wait-for-expect';
+import { waitFor } from '@testing-library/vue';
 
 describe('Game.vue', () => {
   it('renders information about game', async () => {
@@ -44,7 +44,7 @@ describe('Game.vue', () => {
       }
     });
 
-    await waitForExpect(() => {
+    await waitFor(() => {
       expect(wrapper.get('[data-test-id="game-title"').text()).toMatch('Half-Life 2');
       // Should not display 'other games in this series' if there are no other games.
       expect(wrapper.find('[data-test-id="game-others-in-series-card"').exists()).toBe(false);
