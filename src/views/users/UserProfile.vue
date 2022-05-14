@@ -45,9 +45,9 @@
 
         <div class="dropdown-menu is-fullwidth" id="actions-dropdown-menu" role="menu">
           <div class="dropdown-content">
-            <a v-if="currentUserIsModeratorOrAdmin && canMakeMember" class="dropdown-item" @click="updateUserRole('MEMBER')">Make member</a>
-            <a v-if="currentUserIsModeratorOrAdmin && canMakeModerator" class="dropdown-item" @click="updateUserRole('MODERATOR')">Make moderator</a>
-            <a v-if="currentUserIsModeratorOrAdmin && canMakeAdmin" class="dropdown-item" @click="updateUserRole('ADMIN')">Make admin</a>
+            <a v-if="currentUserIsModeratorOrAdmin && canMakeMember" class="dropdown-item" @click="updateUserRole('Member')">Make member</a>
+            <a v-if="currentUserIsModeratorOrAdmin && canMakeModerator" class="dropdown-item" @click="updateUserRole('Moderator')">Make moderator</a>
+            <a v-if="currentUserIsModeratorOrAdmin && canMakeAdmin" class="dropdown-item" @click="updateUserRole('Admin')">Make admin</a>
             <a v-if="currentUserIsModeratorOrAdmin && canRemoveAvatar" class="dropdown-item has-text-danger" @click="removeUserAvatar">Remove avatar</a>
             <a v-if="currentUserIsModeratorOrAdmin && canBanUser && !userIsBanned" class="dropdown-item has-text-danger" @click="banUser">Ban user</a>
             <a v-if="currentUserIsModeratorOrAdmin && canBanUser && userIsBanned" class="dropdown-item has-text-danger" @click="unbanUser">Unban user</a>
@@ -68,9 +68,9 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue';
+import { computed, defineComponent, PropType, ref } from 'vue';
 import { useMutation } from 'villus';
-import { FollowUserDocument, UnfollowUserDocument, BanUserDocument, UnbanUserDocument, RemoveUserAvatarDocument, UpdateUserRoleDocument, UserRole } from '@/generated/graphql';
+import { FollowUserDocument, UnfollowUserDocument, BanUserDocument, UnbanUserDocument, RemoveUserAvatarDocument, UpdateUserRoleDocument, UserRole, User } from '@/generated/graphql';
 import SvgIcon from '@/components/SvgIcon.vue';
 import UserPlusIcon from '@/assets/icons/user-plus.svg';
 import UserMinusIcon from '@/assets/icons/user-minus.svg';
@@ -89,7 +89,7 @@ export default defineComponent({
   props: {
     user: {
       required: true,
-      type: Object
+      type: Object as PropType<User>
     }
   },
   emits: ['refreshUserData'],
@@ -115,6 +115,7 @@ export default defineComponent({
       if (store.state.currentUser?.role === 'MODERATOR' && props.user.role === 'MEMBER') {
         return true;
       }
+
 
       // Admins can ban anyone.
       if (store.state.currentUser?.role === 'ADMIN') {
@@ -219,12 +220,12 @@ export default defineComponent({
       }
     }
 
-    const updateUserRole = (role: UserRole) => {
+    const updateUserRole = (role: keyof typeof UserRole) => {
       const userId = props.user.id;
       // TODO: Error handling here?
       if (typeof userId !== 'undefined') {
         if (confirm("Are you sure you want to update this user's role?")) {
-          executeUpdateUserRole({ userId: userId, role: role }).then(() => {
+          executeUpdateUserRole({ userId: userId, role: UserRole[role] }).then(() => {
             context.emit('refreshUserData', null);
           });
         }
