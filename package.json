@@ -20,6 +20,7 @@
     "vue": "^3.2.33",
     "vue-router": "^4.0.15",
     "vue-select-connorshea": "3.12.1",
+    "vue-svg-loader": "^0.17.0-beta.2",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

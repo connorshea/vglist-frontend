@@ -8,13 +8,21 @@
 
       <div v-if="userSignedIn" class="field buttons buttons-vertical">
         <a v-show="data.game.isFavorited" class="button is-fullwidth toggle-icon-on-hover" @click="unfavoriteGame">
-          <svg-icon :name="'heart-full'" :classes="['is-inline-flex']" :svg-classes="['icon-1']" :fill="'red'"/>
-          <svg-icon :name="'heart-broken'" :classes="['is-inline-flex']" :svg-classes="['icon-2']" :fill="'red'"/>
+          <svg-icon :name="'heart-full'" :classes="['is-inline-flex']" :svg-classes="['icon-1']" :fill="'red'">
+            <heart-full-icon/>
+          </svg-icon>
+          <svg-icon :name="'heart-broken'" :classes="['is-inline-flex']" :svg-classes="['icon-2']" :fill="'red'">
+            <heart-broken-icon/>
+          </svg-icon>
           <span class="ml-5">Unfavorite</span>
         </a>
         <a v-show="!data.game.isFavorited" class="button is-fullwidth toggle-icon-on-hover" @click="favoriteGame">
-          <svg-icon :name="'heart'" :classes="['is-inline-flex']" :svg-classes="['icon-1']" :fill="'red'"/>
-          <svg-icon :name="'heart-full'" :classes="['is-inline-flex']" :svg-classes="['icon-2']" :fill="'red'"/>
+          <svg-icon :name="'heart'" :classes="['is-inline-flex']" :svg-classes="['icon-1']" :fill="'red'">
+            <heart-icon/>
+          </svg-icon>
+          <svg-icon :name="'heart-full'" :classes="['is-inline-flex']" :svg-classes="['icon-2']" :fill="'red'">
+            <heart-full-icon/>
+          </svg-icon>
           <span class="ml-5">Favorite</span>
         </a>
         <add-game-to-library :is-in-library="data.game.isInLibrary" :game="data.game" @refresh="refreshGame"/>
@@ -24,7 +32,9 @@
           <div class="dropdown-trigger is-fullwidth" @click="toggleActionsDropdown">
             <button class="button is-fullwidth" aria-haspopup="true" aria-controls="dropdown-menu">
               <span>Actions</span>
-              <svg-icon :name="'chevron-down'" :size="15" :classes="['icon']"/>
+              <svg-icon :name="'chevron-down'" :size="15" :classes="['icon']">
+                <chevron-down-icon/>
+              </svg-icon>
             </button>
           </div>
 
@@ -125,6 +135,10 @@ import { useMutation, useQuery } from 'villus';
 import GameInfobox from '@/components/GameInfobox.vue';
 import AddGameToLibrary from '@/components/AddGameToLibrary.vue';
 import SvgIcon from '@/components/SvgIcon.vue';
+import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
+import HeartIcon from '@/assets/icons/heart.svg';
+import HeartFullIcon from '@/assets/icons/heart-full.svg';
+import HeartBrokenIcon from '@/assets/icons/heart-broken.svg';
 import MergeGamesButton from '@/components/MergeGamesButton.vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
@@ -136,6 +150,10 @@ export default defineComponent({
     GameInfobox,
     AddGameToLibrary,
     SvgIcon,
+    ChevronDownIcon,
+    HeartIcon,
+    HeartFullIcon,
+    HeartBrokenIcon,
     MergeGamesButton
   },
   props: {

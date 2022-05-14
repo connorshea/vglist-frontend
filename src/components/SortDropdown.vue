@@ -5,7 +5,9 @@
         <span data-test-id="active-sort-option">
           {{ sortText }}
         </span>
-        <svg-icon :name="'chevron-down'" :size="15" :classes="['icon']"/>
+        <svg-icon :name="'chevron-down'" :size="15" :classes="['icon']">
+          <chevron-down-icon/>
+        </svg-icon>
       </button>
     </div>
 
@@ -27,11 +29,13 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
 import SvgIcon from '@/components/SvgIcon.vue';
+import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 
 export default defineComponent({
   name: 'SortDropdown',
   components: {
-    SvgIcon
+    SvgIcon,
+    ChevronDownIcon
   },
   props: {
     sortOptions: {
