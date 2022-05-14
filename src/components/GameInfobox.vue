@@ -56,8 +56,8 @@
       <p class="infobox-header has-text-weight-semibold">Series</p>
       <ul>
         <li>
-          <router-link :to="{ name: 'Series', params: { id: game.series.id }}">
-            {{ game.series.name }}
+          <router-link :to="{ name: 'Series', params: { id: game.series!.id }}">
+            {{ game.series!.name }}
           </router-link>
         </li>
       </ul>

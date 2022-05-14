@@ -103,21 +103,21 @@
         <p class="has-text-muted" data-test-id="game-favorites">No one has favorited this game yet.</p>
       </template>
 
-      <div class="card more-from-this-series-card mt-15" v-if="data.game.series !== null && data.game.series.games.nodes.length > 1">
+      <div class="card more-from-this-series-card mt-15" v-if="data.game.series !== null && (data.game.series?.games?.nodes?.length || 0) > 1">
         <div class="card-content">
           <h3 class="title is-5 mb-15">
-            <router-link :to="{ name: 'Series', params: { id: data.game.series.id } }">
+            <router-link :to="{ name: 'Series', params: { id: data.game.series!.id } }">
               More from this series
             </router-link>
           </h3>
 
           <div class="games" data-test-id="game-others-in-series-card">
-            <template v-for="gameInSeries in data.game.series.games.nodes">
-              <router-link :to="{ name: 'Game', params: { id: gameInSeries.id } }" :key="gameInSeries.id" v-if="data.game.id !== gameInSeries.id">
+            <template v-for="gameInSeries in data.game.series!.games.nodes">
+              <router-link :to="{ name: 'Game', params: { id: gameInSeries!.id } }" :key="gameInSeries!.id" v-if="data.game.id !== gameInSeries!.id">
                 <figure class="game-cover">
-                  <img v-if="gameInSeries.coverUrl !== null" :src="gameInSeries.coverUrl">
+                  <img v-if="gameInSeries!.coverUrl !== null" :src="gameInSeries!.coverUrl">
                   <img v-else src="@/assets/images/no-cover.png">
-                  <p>{{ gameInSeries.name }}</p>
+                  <p>{{ gameInSeries!.name }}</p>
                 </figure>
               </router-link>
             </template>
@@ -129,7 +129,7 @@
 </template>
 
 <script lang="ts">
-import { AddGameToWikidataBlocklistDocument, DeleteGameDocument, FavoriteGameDocument, GameDocument, RemoveGameCoverDocument, UnfavoriteGameDocument } from '@/generated/graphql';
+import { AddGameToWikidataBlocklistDocument, DeleteGameDocument, FavoriteGameDocument, GameDocument, GameQuery, RemoveGameCoverDocument, UnfavoriteGameDocument } from '@/generated/graphql';
 import { computed, defineComponent, ref } from 'vue';
 import { useMutation, useQuery } from 'villus';
 import GameInfobox from '@/components/GameInfobox.vue';
@@ -142,7 +142,10 @@ import HeartBrokenIcon from '@/assets/icons/heart-broken.svg';
 import MergeGamesButton from '@/components/MergeGamesButton.vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import { State } from '@/store';
+import { State, store } from '@/store';
+import router from '@/router';
+import { execute } from 'graphql';
+import { data } from 'msw/lib/types/context';
 
 export default defineComponent({
   name: 'Game',

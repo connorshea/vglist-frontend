@@ -16,8 +16,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
 import MergeGamesModal from '@/components/MergeGamesModal.vue';
+import { Game } from '@/generated/graphql';
 
 export default defineComponent({
   name: 'MergeGamesButton',
@@ -26,7 +27,7 @@ export default defineComponent({
   },
   props: {
     game: {
-      type: Object,
+      type: Object as PropType<Game>,
       required: true
     }
   },
