@@ -56,13 +56,17 @@ export const companyHandlers = [
                   id: '1',
                   name: 'Portal 2',
                   coverUrl: null,
-                  isFavorited: false
+                  isFavorited: false,
+                  developers: { nodes: [] },
+                  platforms: { nodes: [] }
                 },
                 {
                   id: '2',
                   name: 'Half-Life 2',
                   coverUrl: null,
-                  isFavorited: false
+                  isFavorited: false,
+                  developers: { nodes: [] },
+                  platforms: { nodes: [] }
                 }
               ],
               pageInfo: {
@@ -78,13 +82,17 @@ export const companyHandlers = [
                   id: '3',
                   name: 'Minecraft',
                   coverUrl: null,
-                  isFavorited: false
+                  isFavorited: false,
+                  developers: { nodes: [] },
+                  platforms: { nodes: [] }
                 },
                 {
                   id: '4',
                   name: 'Hexcells',
                   coverUrl: null,
-                  isFavorited: false
+                  isFavorited: false,
+                  developers: { nodes: [] },
+                  platforms: { nodes: [] }
                 }
               ],
               pageInfo: {
