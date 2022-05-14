@@ -4,7 +4,7 @@ import { createStore } from 'vuex';
 import { createClient, VILLUS_CLIENT } from 'villus';
 import { createMemoryHistory, createRouter } from 'vue-router';
 import { routes } from '@/router';
-import waitForExpect from 'wait-for-expect';
+import { waitFor } from '@testing-library/vue';
 
 describe('Series.vue', () => {
   it('renders games for series', async () => {
@@ -39,7 +39,7 @@ describe('Series.vue', () => {
       }
     });
 
-    await waitForExpect(() => {
+    await waitFor(() => {
       expect(wrapper.get('[data-test-id="series-title"').text()).toMatch('Half-Life');
       // Should list both games in the series.
       expect(wrapper.get('[data-test-id="series-games-list"').text()).toMatch('Half-Life 1');
