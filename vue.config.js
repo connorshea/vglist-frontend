@@ -12,13 +12,16 @@ module.exports = {
     const svgRule = config.module.rule('svg');
     svgRule.uses.clear();
 
+    // https://github.com/vuejs/vue-cli/issues/6785
+    svgRule.delete('type');
+    svgRule.delete('generator');
+
     svgRule
       .use('vue-loader')
       .loader('vue-loader')
       .end()
       .use('vue-svg-loader')
       .loader('vue-svg-loader');
-
   },
   // For properly setting the base path in 'production' with GitLab Pages.
   publicPath: process.env.NODE_ENV === 'production' ? '/' + process.env.CI_PROJECT_NAME + '/' : '/'
