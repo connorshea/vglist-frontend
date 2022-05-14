@@ -2,7 +2,7 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <router-link :to="{ name: 'Home' }" class="navbar-item has-text-weight-semibold" title="vglist Home">
-        <img src="@/assets/images/vglist-logo.svg" class="mt-5 navbar-logo" aria-hidden="true" alt="vglist logo">
+        <img :src="vglistLogoPath" class="mt-5 navbar-logo" aria-hidden="true" alt="vglist logo">
       </router-link>
       <!-- Hamburger menu for mobile -->
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
@@ -276,7 +276,8 @@ export default defineComponent({
       showAuthenticate,
       userSignedIn,
       currentUser,
-      navBarItems
+      navBarItems,
+      vglistLogoPath: `${process.env.BASE_URL}vglist-logo.svg`
     }
   },
   methods: {

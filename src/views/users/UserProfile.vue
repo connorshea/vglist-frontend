@@ -12,7 +12,9 @@
           class="button is-primary is-fullwidth-mobile mr-5 mr-0-mobile mt-10"
         >
           <span class="icon pl-5 mr-5">
-            <svg-icon :name="'user-plus'" :classes="['icon']" :fill="'white'" :size="15"/>
+            <svg-icon :name="'user-plus'" :classes="['icon']" :fill="'white'" :size="15">
+              <user-plus-icon/>
+            </svg-icon>
           </span>
           <span>Follow</span>
         </button>
@@ -22,7 +24,9 @@
           class="button is-danger is-fullwidth-mobile mr-5 mr-0-mobile mt-10"
         >
           <span class="icon pl-5 mr-5">
-            <svg-icon :name="'user-minus'" :classes="['icon']" :fill="'white'" :size="15"/>
+            <svg-icon :name="'user-minus'" :classes="['icon']" :fill="'white'" :size="15">
+              <user-minus-icon/>
+            </svg-icon>
           </span>
           <span>Unfollow</span>
         </button>
@@ -33,7 +37,9 @@
         <div class="dropdown-trigger is-fullwidth" @click="toggleActionsDropdown">
           <button class="button is-fullwidth" aria-haspopup="true" aria-controls="dropdown-menu">
             <span>Actions</span>
-            <svg-icon :name="'chevron-down'" :size="15" :classes="['icon']"/>
+            <svg-icon :name="'chevron-down'" :size="15" :classes="['icon']">
+              <chevron-down-icon/>
+            </svg-icon>
           </button>
         </div>
 
@@ -66,13 +72,19 @@ import { computed, defineComponent, ref } from 'vue';
 import { useMutation } from 'villus';
 import { FollowUserDocument, UnfollowUserDocument, BanUserDocument, UnbanUserDocument, RemoveUserAvatarDocument, UpdateUserRoleDocument, UserRole } from '@/generated/graphql';
 import SvgIcon from '@/components/SvgIcon.vue';
+import UserPlusIcon from '@/assets/icons/user-plus.svg';
+import UserMinusIcon from '@/assets/icons/user-minus.svg';
+import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 import { useStore } from 'vuex';
 import { State } from '@/store';
 
 export default defineComponent({
   name: 'UserProfile',
   components: {
-    SvgIcon
+    SvgIcon,
+    UserPlusIcon,
+    UserMinusIcon,
+    ChevronDownIcon
   },
   props: {
     user: {

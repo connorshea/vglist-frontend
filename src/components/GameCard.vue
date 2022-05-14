@@ -22,7 +22,9 @@
     <div class="dropdown dropdown-dynamic game-card-dropdown is-right" :class="{ 'is-active': isActive }" v-if="userSignedIn">
       <div class="dropdown-trigger">
         <button class="button is-borderless is-shadowless" aria-haspopup="true" aria-controls="dropdown-menu" @click="toggleActive">
-          <svg-icon :name="'chevron-down'" :classes="['icon']" :size="15" />
+          <svg-icon :name="'chevron-down'" :classes="['icon']" :size="15">
+            <chevron-down-icon/>
+          </svg-icon>
         </button>
       </div>
       <div class="dropdown-menu" id="dropdown-menu" role="menu">
@@ -39,6 +41,7 @@
 import { FavoriteGameDocument, Game, UnfavoriteGameDocument } from '@/generated/graphql';
 import { computed, defineComponent, PropType, ref } from 'vue';
 import SvgIcon from '@/components/SvgIcon.vue';
+import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 import { useMutation } from 'villus';
 import { useStore } from 'vuex';
 import { State } from '@/store';
@@ -46,7 +49,8 @@ import { State } from '@/store';
 export default defineComponent({
   name: 'GameCard',
   components: {
-    SvgIcon
+    SvgIcon,
+    ChevronDownIcon
   },
   props: {
     game: {

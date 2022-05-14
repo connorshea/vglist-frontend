@@ -14,7 +14,9 @@
           type="search"
           placeholder="Search"
         >
-        <svg-icon :name="'search'" :classes="['icon', 'is-small', 'is-left']"/>
+        <svg-icon :name="'search'" :classes="['icon', 'is-small', 'is-left']">
+          <search-icon/>
+        </svg-icon>
       </p>
     </div>
 
@@ -82,6 +84,7 @@
 import { cloneDeep, debounce } from 'lodash';
 import { computed, defineComponent, Ref, ref } from 'vue';
 import SvgIcon from '@/components/SvgIcon.vue';
+import SearchIcon from '@/assets/icons/search.svg';
 import { CompanySearchResult, EngineSearchResult, GameSearchResult, GenreSearchResult, GlobalSearchDocument, PlatformSearchResult, SearchResultUnion, SeriesSearchResult, UserSearchResult } from '@/generated/graphql';
 import { useQuery } from 'villus';
 import { useRouter } from 'vue-router';
@@ -111,7 +114,8 @@ const EMPTY_SEARCH_RESULTS: SearchResults = {
 export default defineComponent({
   name: 'Search',
   components: {
-    SvgIcon
+    SvgIcon,
+    SearchIcon
   },
   setup() {
     const query = ref('');

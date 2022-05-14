@@ -3,7 +3,7 @@
     <div class="section home-section">
       <div class="container is-fluid">
         <div class="content is-size-5 has-text-centered column is-two-thirds m-auto">
-          <img src="@/assets/images/vglist-logo.svg" width="250px" class="home-logo" alt="vglist logo">
+          <img :src="vglistLogoPath" width="250px" class="home-logo" alt="vglist logo">
           <h4 class="subtitle has-text-weight-normal">Track your entire video game library across every store and platform.</h4>
         </div>
       </div>
@@ -87,7 +87,8 @@ export default defineComponent({
 
     return {
       gamesData,
-      statsData
+      statsData,
+      vglistLogoPath: `${process.env.BASE_URL}vglist-logo.svg`
     };
   }
 });

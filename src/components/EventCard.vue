@@ -63,7 +63,9 @@
                           :svg-classes="['has-fill-danger-hoverable']"
                           :css-style="'vertical-align: text-top;'"
                           :size="20"
-                />
+                >
+                  <trash-icon/>
+                </svg-icon>
               </a>
             </template>
           </p>
@@ -79,13 +81,15 @@ import { computed, defineComponent, PropType } from 'vue';
 import { format } from 'timeago.js';
 import { useMutation } from 'villus';
 import SvgIcon from '@/components/SvgIcon.vue';
+import TrashIcon from '@/assets/icons/trash.svg';
 import { useStore } from 'vuex';
 import { State } from '@/store';
 
 export default defineComponent({
   name: 'EventCard',
   components: {
-    SvgIcon
+    SvgIcon,
+    TrashIcon
   },
   props: {
     event: {

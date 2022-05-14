@@ -5,7 +5,9 @@
       @click="editGameInLibrary()"
       class="button is-fullwidth is-primary mr-5 mr-0-mobile"
     >
-      <svg-icon :name="'pencil'" :classes="['icon']" :fill="'white'" :size="15"/>
+      <svg-icon :name="'pencil'" :classes="['icon']" :fill="'white'" :size="15">
+        <pencil-icon/>
+      </svg-icon>
       <span>Edit game in library</span>
     </button>
     <button
@@ -13,7 +15,9 @@
       @click="removeGameFromLibrary()"
       class="button is-fullwidth is-danger mr-5 mr-0-mobile"
     >
-      <svg-icon :name="'remove'" :classes="['icon']" :fill="'white'" :size="15"/>
+      <svg-icon :name="'remove'" :classes="['icon']" :fill="'white'" :size="15">
+        <remove-icon/>
+      </svg-icon>
       <span>Remove from library</span>
     </button>
     <button
@@ -21,7 +25,9 @@
       @click="addGameToLibrary()"
       class="button is-fullwidth is-primary mr-5 mr-0-mobile"
     >
-      <svg-icon :name="'plus'" :classes="['icon']" :fill="'white'"/>
+      <svg-icon :name="'plus'" :classes="['icon']" :fill="'white'">
+        <plus-icon/>
+      </svg-icon>
       <span>Add to library</span>
     </button>
 
@@ -41,6 +47,9 @@
 import { computed, defineComponent, PropType, ref } from 'vue';
 import GameModal from '@/components/GameModal.vue';
 import SvgIcon from '@/components/SvgIcon.vue';
+import PlusIcon from '@/assets/icons/plus.svg';
+import PencilIcon from '@/assets/icons/pencil.svg';
+import RemoveIcon from '@/assets/icons/remove.svg';
 import { Game, GamePurchaseDocument, RemoveGameFromLibraryDocument } from '@/generated/graphql';
 import { useMutation, useQuery } from 'villus';
 
@@ -48,6 +57,9 @@ export default defineComponent({
   name: 'AddGameToLibrary',
   components: {
     SvgIcon,
+    PencilIcon,
+    PlusIcon,
+    RemoveIcon,
     GameModal
   },
   props: {

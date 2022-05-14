@@ -2,9 +2,11 @@
   <!-- This is a bit of a hack to load it with the HTML Loader.
        https://stackoverflow.com/questions/50834598/inline-svg-in-vuejs-component
   -->
-  <span ref="icon" :class="classes"
-        v-html="require(`!html-loader!@/assets/icons/${name}.svg`)"
-  ></span>
+  <span ref="icon" :class="classes">
+    <slot>
+      FOO
+    </slot>
+  </span>
 </template>
 
 <script lang="ts">

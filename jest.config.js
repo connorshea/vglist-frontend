@@ -7,9 +7,10 @@ module.exports = {
     // process `*.vue` files with `vue3-jest`
     ".*\\.(vue)$": "@vue/vue3-jest"
   },
-  // Ignore CSS files since Jest doesn't know what to do with them and doesn't need them.
+  // Ignore CSS and SVG files since Jest doesn't know what to do with them and doesn't need them.
   moduleNameMapper: {
-    "\\.(css|scss)$": "<rootDir>/tests/mocks/styleMock.ts"
+    "\\.(css|scss)$": "<rootDir>/tests/mocks/styleMock.ts",
+    '^.+\\.svg$': "<rootDir>/tests/mocks/styleMock.ts"
   },
   collectCoverage: true,
   collectCoverageFrom: [
