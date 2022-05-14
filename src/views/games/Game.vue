@@ -1,5 +1,5 @@
 <template>
-  <div class="columns" v-if="data">
+  <div class="columns" v-if="data && data.game">
     <div class="game-sidebar column is-3-desktop is-5-tablet is-12-mobile">
       <div class="hero-image game-cover mb-10">
         <img v-if="data.game.coverUrl !== null" :src="data.game.coverUrl">

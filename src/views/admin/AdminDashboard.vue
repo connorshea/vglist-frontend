@@ -1,12 +1,12 @@
 <template>
-  <div v-if="data">
+  <div v-if="data && data.siteStatistics">
     <div class="card pt-15 pb-15" data-test-id="admin-dashboard-statistics-card">
       <div class="has-text-centered has-text-weight-bold mb-25">Statistics</div>
       <!-- Breaks the counts into two separate levels. -->
       <nav class="level" v-if="recordCountRows !== null">
         <div class="level-item has-text-centered" v-for="(count, key) in recordCountRows[0]" :key="key">
           <div>
-            <p class="heading">{{ startCase(key) }}</p>
+            <p class="heading">{{ startCase(key.toString()) }}</p>
             <p class="title">{{ count }}</p>
           </div>
         </div>
@@ -15,7 +15,7 @@
       <nav class="level" v-if="recordCountRows !== null">
         <div class="level-item has-text-centered" v-for="(count, key) in recordCountRows[1]" :key="key">
           <div>
-            <p class="heading">{{ startCase(key) }}</p>
+            <p class="heading">{{ startCase(key.toString()) }}</p>
             <p class="title">{{ count }}</p>
           </div>
         </div>
@@ -27,7 +27,7 @@
       <nav class="level" v-if="externalIdCounts !== null">
         <div class="level-item has-text-centered" v-for="(count, key) in externalIdCounts" :key="key">
           <div>
-            <p class="heading">{{ startCase(key) }}</p>
+            <p class="heading">{{ startCase(key.toString()) }}</p>
             <p class="title">{{ count }}</p>
           </div>
         </div>
@@ -39,7 +39,7 @@
       <nav class="level" v-if="versionCounts !== null">
         <div class="level-item has-text-centered" v-for="(count, key) in versionCounts" :key="key">
           <div>
-            <p class="heading">{{ startCase(key) }}</p>
+            <p class="heading">{{ startCase(key.toString()) }}</p>
             <p class="title">{{ count }}</p>
           </div>
         </div>
