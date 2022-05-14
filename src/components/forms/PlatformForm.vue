@@ -92,7 +92,7 @@ export default defineComponent({
 
     const errors: Ref<string[]> = ref([]);
 
-    const platform: Ref<{ id: string | null, name: string | null, wikidataId: string | null }> = ref({
+    const platform: Ref<{ id: string | null, name: string, wikidataId: string }> = ref({
       id: props.id ?? null, 
       name: props.name ?? '',
       wikidataId: props.wikidataId?.toString() ?? ''

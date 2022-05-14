@@ -25,7 +25,7 @@
           </svg-icon>
           <span class="ml-5">Favorite</span>
         </a>
-        <add-game-to-library :is-in-library="data.game.isInLibrary" :game="data.game" @refresh="refreshGame"/>
+        <add-game-to-library :is-in-library="data.game.isInLibrary ?? false" :game="data.game" @refresh="refreshGame"/>
 
         <!-- Actions dropdown -->
         <div id="actions-dropdown" class="dropdown is-fullwidth mr-0-mobile" :class="{ 'is-active': actionsDropdownIsActive }">
@@ -60,9 +60,9 @@
       <template v-if="data.game.owners.totalCount > 0">
         <h3 class="title is-5 mb-5 mt-15">Owners ({{ data.game.owners.totalCount }})</h3>
         <ul class="avatar-image-grid mt-10" data-test-id="game-owners">
-          <li v-for="owner in data.game.owners.nodes" :key="owner.id" class="avatar-image-grid-item">
-            <router-link :to="{ name: 'UserProfile', params: { slug: owner.slug }}" class="image">
-              <img v-if="owner.avatarUrl !== null" :src="owner.avatarUrl" :title="owner.username">
+          <li v-for="owner in data.game.owners.nodes" :key="owner!.id" class="avatar-image-grid-item">
+            <router-link :to="{ name: 'UserProfile', params: { slug: owner!.slug }}" class="image">
+              <img v-if="owner!.avatarUrl !== null" :src="owner!.avatarUrl" :title="owner!.username">
               <img v-else src="@/assets/images/default-avatar.png">
             </router-link>
           </li>
@@ -83,9 +83,9 @@
       <template v-if="data.game.favoriters.totalCount > 0">
         <h3 class="title is-5 mb-5 mt-15">Favorites ({{ data.game.favoriters.totalCount }})</h3>
         <ul class="avatar-image-grid mt-10" data-test-id="game-favorites">
-          <li v-for="favoriter in data.game.favoriters.nodes" :key="favoriter.id" class="avatar-image-grid-item">
-            <router-link :to="{ name: 'UserProfile', params: { slug: favoriter.slug }}" class="image">
-              <img v-if="favoriter.avatarUrl !== null" :src="favoriter.avatarUrl" :title="favoriter.username">
+          <li v-for="favoriter in data.game.favoriters.nodes" :key="favoriter!.id" class="avatar-image-grid-item">
+            <router-link :to="{ name: 'UserProfile', params: { slug: favoriter!.slug }}" class="image">
+              <img v-if="favoriter!.avatarUrl !== null" :src="favoriter!.avatarUrl" :title="favoriter!.username">
               <img v-else src="@/assets/images/default-avatar.png">
             </router-link>
           </li>
@@ -142,10 +142,7 @@ import HeartBrokenIcon from '@/assets/icons/heart-broken.svg';
 import MergeGamesButton from '@/components/MergeGamesButton.vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import { State, store } from '@/store';
-import router from '@/router';
-import { execute } from 'graphql';
-import { data } from 'msw/lib/types/context';
+import { State, } from '@/store';
 
 export default defineComponent({
   name: 'Game',

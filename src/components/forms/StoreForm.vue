@@ -72,7 +72,7 @@ export default defineComponent({
 
     const errors: Ref<string[]> = ref([]);
 
-    const store: Ref<{ id: string | null, name: string | null}> = ref({
+    const store: Ref<{ id: string | null, name: string }> = ref({
       id: props.id ?? null, 
       name: props.name ?? ''
     });
