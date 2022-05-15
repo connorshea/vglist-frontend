@@ -1,9 +1,9 @@
-name: Lint and test
+name: Lint, test, and typecheck
 
 on: [push]
 
 jobs:
-  test-and-lint:
+  lint:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -16,7 +16,33 @@ jobs:
       run: yarn install --frozen-lockfile
     - name: Lint
       run: yarn run lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16.x'
+    - name: Install
+      run: yarn install --frozen-lockfile
     - name: Build
       run: yarn run build
     - name: Test
       run: yarn run test:unit
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16.x'
+    - name: Install
+      run: yarn install --frozen-lockfile
+    - name: Compile TypeScript
+      run: yarn run tsc --noEmit
+    - name: Compile Vue TypeScript
+      run: yarn run vue-tsc --noEmit
