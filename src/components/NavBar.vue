@@ -50,18 +50,18 @@
         <template v-if="userSignedIn">
           <div class="navbar-item has-dropdown is-hoverable is-hidden-touch">
             <a class="navbar-link">
-              <img class="user-avatar" v-if="currentUser.avatarUrl !== null" :src="currentUser.avatarUrl">
+              <img class="user-avatar" v-if="currentUser?.avatarUrl" :src="currentUser?.avatarUrl">
               <img class="user-avatar" v-else src="@/assets/images/default-avatar.png">
-              <span class="pl-10">{{ currentUser.username }}</span>
+              <span class="pl-10">{{ currentUser?.username }}</span>
             </a>
 
             <div class="navbar-dropdown is-right">
               <div v-for="navBarItem in navBarItems" :key="navBarItem.id">
                 <hr class="navbar-divider" v-if="navBarItem.title === null">
-                <a class="navbar-item" v-else-if="navBarItem.clickAction !== undefined" @click="resolveClickAction(navBarItem.clickAction)">
+                <a class="navbar-item" v-else-if="navBarItem.clickAction !== undefined" @click="resolveClickAction(navBarItem.clickAction!)">
                   {{ navBarItem.title }}
                 </a>
-                <a class="navbar-item" v-else-if="navBarItem.router === false" :href="navBarItem.path">
+                <a class="navbar-item" v-else-if="navBarItem.router === false" :href="(navBarItem.path as string)">
                   {{ navBarItem.title }}
                 </a>
                 <router-link :to="navBarItem.path" class="navbar-item" v-else>
@@ -73,10 +73,10 @@
 
           <div v-for="navBarItem in navBarItems" :key="navBarItem.id">
             <template v-if="navBarItem.title !== null">
-              <a class="navbar-item is-hidden-desktop" v-if="navBarItem.clickAction !== undefined" @click="resolveClickAction(navBarItem.clickAction)">
+              <a class="navbar-item is-hidden-desktop" v-if="navBarItem.clickAction !== undefined" @click="resolveClickAction(navBarItem.clickAction!)">
                 {{ navBarItem.title }}
               </a>
-              <a class="navbar-item is-hidden-desktop" v-else-if="navBarItem.router === false" :href="navBarItem.path">
+              <a class="navbar-item is-hidden-desktop" v-else-if="navBarItem.router === false" :href="(navBarItem.path as string)">
                 {{ navBarItem.title }}
               </a>
               <router-link :to="navBarItem.path" class="navbar-item is-hidden-desktop" v-else>
@@ -94,10 +94,10 @@
           <a class="navbar-item" @click="signIn">Sign in</a>
           <div v-for="navBarItem in navBarItems" :key="navBarItem.id">
             <template v-if="navBarItem.title !== null">
-              <a class="navbar-item is-hidden-desktop" v-if="navBarItem.clickAction !== undefined" @click="resolveClickAction(navBarItem.clickAction)">
+              <a class="navbar-item is-hidden-desktop" v-if="navBarItem.clickAction !== undefined" @click="resolveClickAction(navBarItem.clickAction!)">
                 {{ navBarItem.title }}
               </a>
-              <a class="navbar-item is-hidden-desktop" v-else-if="navBarItem.router === false" :href="navBarItem.path">
+              <a class="navbar-item is-hidden-desktop" v-else-if="navBarItem.router === false" :href="(navBarItem.path as string)">
                 {{ navBarItem.title }}
               </a>
               <router-link :to="navBarItem.path" class="navbar-item is-hidden-desktop" v-else>
@@ -111,10 +111,10 @@
             <div id="navbar-dropdown-more-desktop" class="navbar-dropdown is-right">
               <div v-for="navBarItem in navBarItems" :key="navBarItem.id">
                 <hr class="navbar-divider" v-if="navBarItem.title === null">
-                <a class="navbar-item" v-else-if="navBarItem.clickAction !== undefined" @click="resolveClickAction(navBarItem.clickAction)">
+                <a class="navbar-item" v-else-if="navBarItem.clickAction !== undefined" @click="resolveClickAction(navBarItem.clickAction!)">
                   {{ navBarItem.title }}
                 </a>
-                <a class="navbar-item" v-else-if="navBarItem.router === false" :href="navBarItem.path">
+                <a class="navbar-item" v-else-if="navBarItem.router === false" :href="(navBarItem.path as string)">
                   {{ navBarItem.title }}
                 </a>
                 <router-link :to="navBarItem.path" class="navbar-item" v-else>
@@ -136,6 +136,7 @@ import { CurrentUserDocument } from '@/generated/graphql';
 import { useQuery } from 'villus';
 import { useStore } from 'vuex';
 import { State } from '@/store';
+import { RouteLocationRaw } from 'vue-router';
 
 // Update this to include other valid click actions later.
 type clickAction = 'signOut';
@@ -186,7 +187,7 @@ export default defineComponent({
     const currentUser = computed(() => store.state.currentUser);
 
     const navBarItems = computed(() => {
-      let items: Array<{ id?: number; title: string | null; path: string | { path: string } | null; clickAction?: clickAction; router: boolean }> = [];
+      let items: Array<{ id?: number; title: string | null; path: string | RouteLocationRaw | null; clickAction?: clickAction; router: boolean }> = [];
 
       // Include profile, admin, settings, and sign out if the user is logged in.
       if (userSignedIn.value === true) {
