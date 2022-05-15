@@ -113,7 +113,7 @@ export type CompanyConnection = {
   /** A list of edges. */
   edges?: Maybe<Array<Maybe<CompanyEdge>>>;
   /** A list of nodes. */
-  nodes?: Maybe<Array<Maybe<Company>>>;
+  nodes: Array<Company>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The total number of records returned by this query. */
@@ -279,7 +279,7 @@ export type EngineConnection = {
   /** A list of edges. */
   edges?: Maybe<Array<Maybe<EngineEdge>>>;
   /** A list of nodes. */
-  nodes?: Maybe<Array<Maybe<Engine>>>;
+  nodes: Array<Engine>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The total number of records returned by this query. */
@@ -345,7 +345,7 @@ export type EventConnection = {
   /** A list of edges. */
   edges?: Maybe<Array<Maybe<EventEdge>>>;
   /** A list of nodes. */
-  nodes?: Maybe<Array<Maybe<Event>>>;
+  nodes: Array<Event>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The total number of records returned by this query. */
@@ -527,7 +527,7 @@ export type GameConnection = {
   /** A list of edges. */
   edges?: Maybe<Array<Maybe<GameEdge>>>;
   /** A list of nodes. */
-  nodes?: Maybe<Array<Maybe<Game>>>;
+  nodes: Array<Game>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The total number of records returned by this query. */
@@ -642,7 +642,7 @@ export type GamePurchaseConnection = {
   /** A list of edges. */
   edges?: Maybe<Array<Maybe<GamePurchaseEdge>>>;
   /** A list of nodes. */
-  nodes?: Maybe<Array<Maybe<GamePurchase>>>;
+  nodes: Array<GamePurchase>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The total number of records returned by this query. */
@@ -735,7 +735,7 @@ export type GenreConnection = {
   /** A list of edges. */
   edges?: Maybe<Array<Maybe<GenreEdge>>>;
   /** A list of nodes. */
-  nodes?: Maybe<Array<Maybe<Genre>>>;
+  nodes: Array<Genre>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The total number of records returned by this query. */
@@ -1277,7 +1277,7 @@ export type PlatformConnection = {
   /** A list of edges. */
   edges?: Maybe<Array<Maybe<PlatformEdge>>>;
   /** A list of nodes. */
-  nodes?: Maybe<Array<Maybe<Platform>>>;
+  nodes: Array<Platform>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The total number of records returned by this query. */
@@ -1729,7 +1729,7 @@ export type SearchResultUnionConnection = {
   /** A list of edges. */
   edges?: Maybe<Array<Maybe<SearchResultUnionEdge>>>;
   /** A list of nodes. */
-  nodes?: Maybe<Array<Maybe<SearchResultUnion>>>;
+  nodes: Array<SearchResultUnion>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The total number of records returned by this query. */
@@ -1795,7 +1795,7 @@ export type SeriesConnection = {
   /** A list of edges. */
   edges?: Maybe<Array<Maybe<SeriesEdge>>>;
   /** A list of nodes. */
-  nodes?: Maybe<Array<Maybe<Series>>>;
+  nodes: Array<Series>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The total number of records returned by this query. */
@@ -1901,7 +1901,7 @@ export type SiteStatisticConnection = {
   /** A list of edges. */
   edges?: Maybe<Array<Maybe<SiteStatisticEdge>>>;
   /** A list of nodes. */
-  nodes?: Maybe<Array<Maybe<SiteStatistic>>>;
+  nodes: Array<SiteStatistic>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The total number of records returned by this query. */
@@ -2014,7 +2014,7 @@ export type SteamBlocklistEntryConnection = {
   /** A list of edges. */
   edges?: Maybe<Array<Maybe<SteamBlocklistEntryEdge>>>;
   /** A list of nodes. */
-  nodes?: Maybe<Array<Maybe<SteamBlocklistEntry>>>;
+  nodes: Array<SteamBlocklistEntry>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The total number of records returned by this query. */
@@ -2049,7 +2049,7 @@ export type StoreConnection = {
   /** A list of edges. */
   edges?: Maybe<Array<Maybe<StoreEdge>>>;
   /** A list of nodes. */
-  nodes?: Maybe<Array<Maybe<Store>>>;
+  nodes: Array<Store>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The total number of records returned by this query. */
@@ -2256,7 +2256,7 @@ export type UserConnection = {
   /** A list of edges. */
   edges?: Maybe<Array<Maybe<UserEdge>>>;
   /** A list of nodes. */
-  nodes?: Maybe<Array<Maybe<User>>>;
+  nodes: Array<User>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The total number of records returned by this query. */
@@ -2349,7 +2349,7 @@ export type WikidataBlocklistEntryConnection = {
   /** A list of edges. */
   edges?: Maybe<Array<Maybe<WikidataBlocklistEntryEdge>>>;
   /** A list of nodes. */
-  nodes?: Maybe<Array<Maybe<WikidataBlocklistEntry>>>;
+  nodes: Array<WikidataBlocklistEntry>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The total number of records returned by this query. */
@@ -2367,7 +2367,7 @@ export type WikidataBlocklistEntryEdge = {
 
 export type EventCardFieldsFragment = { __typename?: 'Event', id: string, eventCategory: EventCategory, createdAt: any, user: { __typename?: 'User', slug: string, username: string, avatarUrl?: string | null }, eventable: { __typename: 'FavoriteGame', game: { __typename?: 'Game', id: string, name: string } } | { __typename: 'GamePurchase', game: { __typename?: 'Game', id: string, name: string } } | { __typename: 'Relationship', followed: { __typename?: 'User', username: string, slug: string } } | { __typename: 'User', slug: string, username: string } };
 
-export type GameCardFieldsFragment = { __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null }, developers: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } };
+export type GameCardFieldsFragment = { __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes: Array<{ __typename?: 'Platform', name: string }> }, developers: { __typename?: 'CompanyConnection', nodes: Array<{ __typename?: 'Company', name: string }> } };
 
 export type PaginationFieldsFragment = { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null };
 
@@ -2715,14 +2715,14 @@ export type ActivityFeedQueryVariables = Exact<{
 }>;
 
 
-export type ActivityFeedQuery = { __typename?: 'Query', activity?: { __typename?: 'EventConnection', nodes?: Array<{ __typename?: 'Event', id: string, eventCategory: EventCategory, createdAt: any, user: { __typename?: 'User', slug: string, username: string, avatarUrl?: string | null }, eventable: { __typename: 'FavoriteGame', game: { __typename?: 'Game', id: string, name: string } } | { __typename: 'GamePurchase', game: { __typename?: 'Game', id: string, name: string } } | { __typename: 'Relationship', followed: { __typename?: 'User', username: string, slug: string } } | { __typename: 'User', slug: string, username: string } } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
+export type ActivityFeedQuery = { __typename?: 'Query', activity?: { __typename?: 'EventConnection', nodes: Array<{ __typename?: 'Event', id: string, eventCategory: EventCategory, createdAt: any, user: { __typename?: 'User', slug: string, username: string, avatarUrl?: string | null }, eventable: { __typename: 'FavoriteGame', game: { __typename?: 'Game', id: string, name: string } } | { __typename: 'GamePurchase', game: { __typename?: 'Game', id: string, name: string } } | { __typename: 'Relationship', followed: { __typename?: 'User', username: string, slug: string } } | { __typename: 'User', slug: string, username: string } }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type GamePurchaseQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GamePurchaseQuery = { __typename?: 'Query', gamePurchase?: { __typename?: 'GamePurchase', rating?: number | null, startDate?: any | null, completionDate?: any | null, completionStatus?: GamePurchaseCompletionStatus | null, comments?: string | null, hoursPlayed?: number | null, replayCount: number, platforms: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', id: string, name: string } | null> | null }, stores: { __typename?: 'StoreConnection', nodes?: Array<{ __typename?: 'Store', id: string, name: string } | null> | null } } | null };
+export type GamePurchaseQuery = { __typename?: 'Query', gamePurchase?: { __typename?: 'GamePurchase', rating?: number | null, startDate?: any | null, completionDate?: any | null, completionStatus?: GamePurchaseCompletionStatus | null, comments?: string | null, hoursPlayed?: number | null, replayCount: number, platforms: { __typename?: 'PlatformConnection', nodes: Array<{ __typename?: 'Platform', id: string, name: string }> }, stores: { __typename?: 'StoreConnection', nodes: Array<{ __typename?: 'Store', id: string, name: string }> } } | null };
 
 export type GlobalSearchQueryVariables = Exact<{
   query: Scalars['String'];
@@ -2730,7 +2730,7 @@ export type GlobalSearchQueryVariables = Exact<{
 }>;
 
 
-export type GlobalSearchQuery = { __typename?: 'Query', globalSearch: { __typename?: 'SearchResultUnionConnection', nodes?: Array<{ __typename: 'CompanySearchResult', id: string, searchableId: string, content: string } | { __typename: 'EngineSearchResult', id: string, searchableId: string, content: string } | { __typename: 'GameSearchResult', id: string, searchableId: string, content: string, releaseDate?: any | null, developerName?: string | null, imageUrl?: string | null } | { __typename: 'GenreSearchResult', id: string, searchableId: string, content: string } | { __typename: 'PlatformSearchResult', id: string, searchableId: string, content: string } | { __typename: 'SeriesSearchResult', id: string, searchableId: string, content: string } | { __typename: 'UserSearchResult', id: string, searchableId: string, content: string, slug: string, imageUrl?: string | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
+export type GlobalSearchQuery = { __typename?: 'Query', globalSearch: { __typename?: 'SearchResultUnionConnection', nodes: Array<{ __typename: 'CompanySearchResult', id: string, searchableId: string, content: string } | { __typename: 'EngineSearchResult', id: string, searchableId: string, content: string } | { __typename: 'GameSearchResult', id: string, searchableId: string, content: string, releaseDate?: any | null, developerName?: string | null, imageUrl?: string | null } | { __typename: 'GenreSearchResult', id: string, searchableId: string, content: string } | { __typename: 'PlatformSearchResult', id: string, searchableId: string, content: string } | { __typename: 'SeriesSearchResult', id: string, searchableId: string, content: string } | { __typename: 'UserSearchResult', id: string, searchableId: string, content: string, slug: string, imageUrl?: string | null }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
 export type HomeStatisticsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2749,7 +2749,7 @@ export type SiteStatisticsQueryVariables = Exact<{
 }>;
 
 
-export type SiteStatisticsQuery = { __typename?: 'Query', siteStatistics?: { __typename?: 'SiteStatisticConnection', nodes?: Array<{ __typename?: 'SiteStatistic', id: string, timestamp: any, users: number, games: number, platforms: number, series: number, engines: number, companies: number, genres: number, stores: number, events: number, gamePurchases: number, relationships: number, gamesWithCovers: number, gamesWithReleaseDates: number, bannedUsers: number, mobygamesIds: number, pcgamingwikiIds: number, wikidataIds: number, giantbombIds: number, steamAppIds: number, epicGamesStoreIds: number, gogIds: number, igdbIds?: number | null, companyVersions?: number | null, gameVersions?: number | null, genreVersions?: number | null, engineVersions?: number | null, platformVersions?: number | null, seriesVersions?: number | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
+export type SiteStatisticsQuery = { __typename?: 'Query', siteStatistics?: { __typename?: 'SiteStatisticConnection', nodes: Array<{ __typename?: 'SiteStatistic', id: string, timestamp: any, users: number, games: number, platforms: number, series: number, engines: number, companies: number, genres: number, stores: number, events: number, gamePurchases: number, relationships: number, gamesWithCovers: number, gamesWithReleaseDates: number, bannedUsers: number, mobygamesIds: number, pcgamingwikiIds: number, wikidataIds: number, giantbombIds: number, steamAppIds: number, epicGamesStoreIds: number, gogIds: number, igdbIds?: number | null, companyVersions?: number | null, gameVersions?: number | null, genreVersions?: number | null, engineVersions?: number | null, platformVersions?: number | null, seriesVersions?: number | null }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type SteamBlocklistQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']>;
@@ -2758,7 +2758,7 @@ export type SteamBlocklistQueryVariables = Exact<{
 }>;
 
 
-export type SteamBlocklistQuery = { __typename?: 'Query', steamBlocklist?: { __typename?: 'SteamBlocklistEntryConnection', nodes?: Array<{ __typename?: 'SteamBlocklistEntry', id: string, name: string, steamAppId: number, createdAt: any, user?: { __typename?: 'User', username: string, slug: string } | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
+export type SteamBlocklistQuery = { __typename?: 'Query', steamBlocklist?: { __typename?: 'SteamBlocklistEntryConnection', nodes: Array<{ __typename?: 'SteamBlocklistEntry', id: string, name: string, steamAppId: number, createdAt: any, user?: { __typename?: 'User', username: string, slug: string } | null }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type WikidataBlocklistQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']>;
@@ -2767,7 +2767,7 @@ export type WikidataBlocklistQueryVariables = Exact<{
 }>;
 
 
-export type WikidataBlocklistQuery = { __typename?: 'Query', wikidataBlocklist?: { __typename?: 'WikidataBlocklistEntryConnection', nodes?: Array<{ __typename?: 'WikidataBlocklistEntry', id: string, name: string, wikidataId: number, createdAt: any, user?: { __typename?: 'User', username: string, slug: string } | null } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
+export type WikidataBlocklistQuery = { __typename?: 'Query', wikidataBlocklist?: { __typename?: 'WikidataBlocklistEntryConnection', nodes: Array<{ __typename?: 'WikidataBlocklistEntry', id: string, name: string, wikidataId: number, createdAt: any, user?: { __typename?: 'User', username: string, slug: string } | null }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type CompaniesQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']>;
@@ -2776,7 +2776,7 @@ export type CompaniesQueryVariables = Exact<{
 }>;
 
 
-export type CompaniesQuery = { __typename?: 'Query', companies?: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', id: string, name: string } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
+export type CompaniesQuery = { __typename?: 'Query', companies?: { __typename?: 'CompanyConnection', nodes: Array<{ __typename?: 'Company', id: string, name: string }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type CompanyQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -2789,14 +2789,14 @@ export type CompanyQueryVariables = Exact<{
 }>;
 
 
-export type CompanyQuery = { __typename?: 'Query', company?: { __typename?: 'Company', id: string, name: string, wikidataId?: number | null, developedGames: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null }, developers: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } }, publishedGames: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null }, developers: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
+export type CompanyQuery = { __typename?: 'Query', company?: { __typename?: 'Company', id: string, name: string, wikidataId?: number | null, developedGames: { __typename?: 'GameConnection', nodes: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes: Array<{ __typename?: 'Platform', name: string }> }, developers: { __typename?: 'CompanyConnection', nodes: Array<{ __typename?: 'Company', name: string }> } }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } }, publishedGames: { __typename?: 'GameConnection', nodes: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes: Array<{ __typename?: 'Platform', name: string }> }, developers: { __typename?: 'CompanyConnection', nodes: Array<{ __typename?: 'Company', name: string }> } }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
 
 export type CompanySearchQueryVariables = Exact<{
   query: Scalars['String'];
 }>;
 
 
-export type CompanySearchQuery = { __typename?: 'Query', companySearch?: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', id: string, name: string } | null> | null } | null };
+export type CompanySearchQuery = { __typename?: 'Query', companySearch?: { __typename?: 'CompanyConnection', nodes: Array<{ __typename?: 'Company', id: string, name: string }> } | null };
 
 export type EngineQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -2806,14 +2806,14 @@ export type EngineQueryVariables = Exact<{
 }>;
 
 
-export type EngineQuery = { __typename?: 'Query', engine?: { __typename?: 'Engine', id: string, name: string, wikidataId?: number | null, games: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null }, developers: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
+export type EngineQuery = { __typename?: 'Query', engine?: { __typename?: 'Engine', id: string, name: string, wikidataId?: number | null, games: { __typename?: 'GameConnection', nodes: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes: Array<{ __typename?: 'Platform', name: string }> }, developers: { __typename?: 'CompanyConnection', nodes: Array<{ __typename?: 'Company', name: string }> } }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
 
 export type EngineSearchQueryVariables = Exact<{
   query: Scalars['String'];
 }>;
 
 
-export type EngineSearchQuery = { __typename?: 'Query', engineSearch?: { __typename?: 'EngineConnection', nodes?: Array<{ __typename?: 'Engine', id: string, name: string } | null> | null } | null };
+export type EngineSearchQuery = { __typename?: 'Query', engineSearch?: { __typename?: 'EngineConnection', nodes: Array<{ __typename?: 'Engine', id: string, name: string }> } | null };
 
 export type EnginesQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']>;
@@ -2822,21 +2822,21 @@ export type EnginesQueryVariables = Exact<{
 }>;
 
 
-export type EnginesQuery = { __typename?: 'Query', engines?: { __typename?: 'EngineConnection', nodes?: Array<{ __typename?: 'Engine', id: string, name: string } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
+export type EnginesQuery = { __typename?: 'Query', engines?: { __typename?: 'EngineConnection', nodes: Array<{ __typename?: 'Engine', id: string, name: string }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type GameQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GameQuery = { __typename?: 'Query', game?: { __typename?: 'Game', id: string, name: string, releaseDate?: any | null, coverUrl?: string | null, avgRating?: number | null, wikidataId?: number | null, igdbId?: string | null, gogId?: string | null, steamAppIds: Array<number>, epicGamesStoreId?: string | null, mobygamesId?: string | null, pcgamingwikiId?: string | null, giantbombId?: string | null, isFavorited?: boolean | null, isInLibrary?: boolean | null, gamePurchaseId?: string | null, genres: { __typename?: 'GenreConnection', nodes?: Array<{ __typename?: 'Genre', id: string, name: string } | null> | null }, platforms: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', id: string, name: string } | null> | null }, series?: { __typename?: 'Series', id: string, name: string, games: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null } | null> | null } } | null, developers: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', id: string, name: string } | null> | null }, publishers: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', id: string, name: string } | null> | null }, engines: { __typename?: 'EngineConnection', nodes?: Array<{ __typename?: 'Engine', id: string, name: string } | null> | null }, owners: { __typename?: 'UserConnection', totalCount: number, nodes?: Array<{ __typename?: 'User', id: string, username: string, slug: string, avatarUrl?: string | null } | null> | null }, favoriters: { __typename?: 'UserConnection', totalCount: number, nodes?: Array<{ __typename?: 'User', id: string, username: string, slug: string, avatarUrl?: string | null } | null> | null } } | null };
+export type GameQuery = { __typename?: 'Query', game?: { __typename?: 'Game', id: string, name: string, releaseDate?: any | null, coverUrl?: string | null, avgRating?: number | null, wikidataId?: number | null, igdbId?: string | null, gogId?: string | null, steamAppIds: Array<number>, epicGamesStoreId?: string | null, mobygamesId?: string | null, pcgamingwikiId?: string | null, giantbombId?: string | null, isFavorited?: boolean | null, isInLibrary?: boolean | null, gamePurchaseId?: string | null, genres: { __typename?: 'GenreConnection', nodes: Array<{ __typename?: 'Genre', id: string, name: string }> }, platforms: { __typename?: 'PlatformConnection', nodes: Array<{ __typename?: 'Platform', id: string, name: string }> }, series?: { __typename?: 'Series', id: string, name: string, games: { __typename?: 'GameConnection', nodes: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null }> } } | null, developers: { __typename?: 'CompanyConnection', nodes: Array<{ __typename?: 'Company', id: string, name: string }> }, publishers: { __typename?: 'CompanyConnection', nodes: Array<{ __typename?: 'Company', id: string, name: string }> }, engines: { __typename?: 'EngineConnection', nodes: Array<{ __typename?: 'Engine', id: string, name: string }> }, owners: { __typename?: 'UserConnection', totalCount: number, nodes: Array<{ __typename?: 'User', id: string, username: string, slug: string, avatarUrl?: string | null }> }, favoriters: { __typename?: 'UserConnection', totalCount: number, nodes: Array<{ __typename?: 'User', id: string, username: string, slug: string, avatarUrl?: string | null }> } } | null };
 
 export type GameSearchQueryVariables = Exact<{
   query: Scalars['String'];
 }>;
 
 
-export type GameSearchQuery = { __typename?: 'Query', gameSearch?: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string } | null> | null } | null };
+export type GameSearchQuery = { __typename?: 'Query', gameSearch?: { __typename?: 'GameConnection', nodes: Array<{ __typename?: 'Game', id: string, name: string }> } | null };
 
 export type GamesQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']>;
@@ -2848,7 +2848,7 @@ export type GamesQueryVariables = Exact<{
 }>;
 
 
-export type GamesQuery = { __typename?: 'Query', games?: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null }, developers: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
+export type GamesQuery = { __typename?: 'Query', games?: { __typename?: 'GameConnection', nodes: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes: Array<{ __typename?: 'Platform', name: string }> }, developers: { __typename?: 'CompanyConnection', nodes: Array<{ __typename?: 'Company', name: string }> } }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type GenreQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -2858,14 +2858,14 @@ export type GenreQueryVariables = Exact<{
 }>;
 
 
-export type GenreQuery = { __typename?: 'Query', genre?: { __typename?: 'Genre', id: string, name: string, wikidataId?: number | null, games: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null }, developers: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
+export type GenreQuery = { __typename?: 'Query', genre?: { __typename?: 'Genre', id: string, name: string, wikidataId?: number | null, games: { __typename?: 'GameConnection', nodes: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes: Array<{ __typename?: 'Platform', name: string }> }, developers: { __typename?: 'CompanyConnection', nodes: Array<{ __typename?: 'Company', name: string }> } }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
 
 export type GenreSearchQueryVariables = Exact<{
   query: Scalars['String'];
 }>;
 
 
-export type GenreSearchQuery = { __typename?: 'Query', genreSearch?: { __typename?: 'GenreConnection', nodes?: Array<{ __typename?: 'Genre', id: string, name: string } | null> | null } | null };
+export type GenreSearchQuery = { __typename?: 'Query', genreSearch?: { __typename?: 'GenreConnection', nodes: Array<{ __typename?: 'Genre', id: string, name: string }> } | null };
 
 export type GenresQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']>;
@@ -2874,7 +2874,7 @@ export type GenresQueryVariables = Exact<{
 }>;
 
 
-export type GenresQuery = { __typename?: 'Query', genres?: { __typename?: 'GenreConnection', nodes?: Array<{ __typename?: 'Genre', id: string, name: string } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
+export type GenresQuery = { __typename?: 'Query', genres?: { __typename?: 'GenreConnection', nodes: Array<{ __typename?: 'Genre', id: string, name: string }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type PlatformQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -2884,14 +2884,14 @@ export type PlatformQueryVariables = Exact<{
 }>;
 
 
-export type PlatformQuery = { __typename?: 'Query', platform?: { __typename?: 'Platform', id: string, name: string, wikidataId?: number | null, games: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null }, developers: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
+export type PlatformQuery = { __typename?: 'Query', platform?: { __typename?: 'Platform', id: string, name: string, wikidataId?: number | null, games: { __typename?: 'GameConnection', nodes: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes: Array<{ __typename?: 'Platform', name: string }> }, developers: { __typename?: 'CompanyConnection', nodes: Array<{ __typename?: 'Company', name: string }> } }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
 
 export type PlatformSearchQueryVariables = Exact<{
   query: Scalars['String'];
 }>;
 
 
-export type PlatformSearchQuery = { __typename?: 'Query', platformSearch?: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', id: string, name: string } | null> | null } | null };
+export type PlatformSearchQuery = { __typename?: 'Query', platformSearch?: { __typename?: 'PlatformConnection', nodes: Array<{ __typename?: 'Platform', id: string, name: string }> } | null };
 
 export type PlatformsQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']>;
@@ -2900,7 +2900,7 @@ export type PlatformsQueryVariables = Exact<{
 }>;
 
 
-export type PlatformsQuery = { __typename?: 'Query', platforms?: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', id: string, name: string } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
+export type PlatformsQuery = { __typename?: 'Query', platforms?: { __typename?: 'PlatformConnection', nodes: Array<{ __typename?: 'Platform', id: string, name: string }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type SeriesQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -2910,7 +2910,7 @@ export type SeriesQueryVariables = Exact<{
 }>;
 
 
-export type SeriesQuery = { __typename?: 'Query', series?: { __typename?: 'Series', id: string, name: string, wikidataId?: number | null, games: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null }, developers: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
+export type SeriesQuery = { __typename?: 'Query', series?: { __typename?: 'Series', id: string, name: string, wikidataId?: number | null, games: { __typename?: 'GameConnection', nodes: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes: Array<{ __typename?: 'Platform', name: string }> }, developers: { __typename?: 'CompanyConnection', nodes: Array<{ __typename?: 'Company', name: string }> } }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
 
 export type SeriesListQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']>;
@@ -2919,14 +2919,14 @@ export type SeriesListQueryVariables = Exact<{
 }>;
 
 
-export type SeriesListQuery = { __typename?: 'Query', seriesList?: { __typename?: 'SeriesConnection', nodes?: Array<{ __typename?: 'Series', id: string, name: string } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
+export type SeriesListQuery = { __typename?: 'Query', seriesList?: { __typename?: 'SeriesConnection', nodes: Array<{ __typename?: 'Series', id: string, name: string }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type SeriesSearchQueryVariables = Exact<{
   query: Scalars['String'];
 }>;
 
 
-export type SeriesSearchQuery = { __typename?: 'Query', seriesSearch?: { __typename?: 'SeriesConnection', nodes?: Array<{ __typename?: 'Series', id: string, name: string } | null> | null } | null };
+export type SeriesSearchQuery = { __typename?: 'Query', seriesSearch?: { __typename?: 'SeriesConnection', nodes: Array<{ __typename?: 'Series', id: string, name: string }> } | null };
 
 export type StoreQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -2940,7 +2940,7 @@ export type StoreSearchQueryVariables = Exact<{
 }>;
 
 
-export type StoreSearchQuery = { __typename?: 'Query', storeSearch?: { __typename?: 'StoreConnection', nodes?: Array<{ __typename?: 'Store', id: string, name: string } | null> | null } | null };
+export type StoreSearchQuery = { __typename?: 'Query', storeSearch?: { __typename?: 'StoreConnection', nodes: Array<{ __typename?: 'Store', id: string, name: string }> } | null };
 
 export type StoresQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']>;
@@ -2949,7 +2949,7 @@ export type StoresQueryVariables = Exact<{
 }>;
 
 
-export type StoresQuery = { __typename?: 'Query', stores?: { __typename?: 'StoreConnection', nodes?: Array<{ __typename?: 'Store', id: string, name: string } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
+export type StoresQuery = { __typename?: 'Query', stores?: { __typename?: 'StoreConnection', nodes: Array<{ __typename?: 'Store', id: string, name: string }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2971,7 +2971,7 @@ export type UserActivityQueryVariables = Exact<{
 }>;
 
 
-export type UserActivityQuery = { __typename?: 'Query', user?: { __typename?: 'User', activity: { __typename?: 'EventConnection', nodes?: Array<{ __typename?: 'Event', id: string, eventCategory: EventCategory, createdAt: any, user: { __typename?: 'User', slug: string, username: string, avatarUrl?: string | null }, eventable: { __typename: 'FavoriteGame', game: { __typename?: 'Game', id: string, name: string } } | { __typename: 'GamePurchase', game: { __typename?: 'Game', id: string, name: string } } | { __typename: 'Relationship', followed: { __typename?: 'User', username: string, slug: string } } | { __typename: 'User', slug: string, username: string } } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
+export type UserActivityQuery = { __typename?: 'Query', user?: { __typename?: 'User', activity: { __typename?: 'EventConnection', nodes: Array<{ __typename?: 'Event', id: string, eventCategory: EventCategory, createdAt: any, user: { __typename?: 'User', slug: string, username: string, avatarUrl?: string | null }, eventable: { __typename: 'FavoriteGame', game: { __typename?: 'Game', id: string, name: string } } | { __typename: 'GamePurchase', game: { __typename?: 'Game', id: string, name: string } } | { __typename: 'Relationship', followed: { __typename?: 'User', username: string, slug: string } } | { __typename: 'User', slug: string, username: string } }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
 
 export type UserFavoritesQueryVariables = Exact<{
   userId: Scalars['ID'];
@@ -2981,7 +2981,7 @@ export type UserFavoritesQueryVariables = Exact<{
 }>;
 
 
-export type UserFavoritesQuery = { __typename?: 'Query', user?: { __typename?: 'User', favoritedGames: { __typename?: 'GameConnection', nodes?: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes?: Array<{ __typename?: 'Platform', name: string } | null> | null }, developers: { __typename?: 'CompanyConnection', nodes?: Array<{ __typename?: 'Company', name: string } | null> | null } } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
+export type UserFavoritesQuery = { __typename?: 'Query', user?: { __typename?: 'User', favoritedGames: { __typename?: 'GameConnection', nodes: Array<{ __typename?: 'Game', id: string, name: string, coverUrl?: string | null, isFavorited?: boolean | null, platforms: { __typename?: 'PlatformConnection', nodes: Array<{ __typename?: 'Platform', name: string }> }, developers: { __typename?: 'CompanyConnection', nodes: Array<{ __typename?: 'Company', name: string }> } }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
 
 export type UserFollowersQueryVariables = Exact<{
   userId: Scalars['ID'];
@@ -2991,7 +2991,7 @@ export type UserFollowersQueryVariables = Exact<{
 }>;
 
 
-export type UserFollowersQuery = { __typename?: 'Query', user?: { __typename?: 'User', followers: { __typename?: 'UserConnection', nodes?: Array<{ __typename?: 'User', id: string, username: string, slug: string, bio?: string | null, avatarUrl?: string | null, privacy: UserPrivacy, banned: boolean, role: UserRole, gamePurchases: { __typename?: 'GamePurchaseConnection', totalCount: number } } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
+export type UserFollowersQuery = { __typename?: 'Query', user?: { __typename?: 'User', followers: { __typename?: 'UserConnection', nodes: Array<{ __typename?: 'User', id: string, username: string, slug: string, bio?: string | null, avatarUrl?: string | null, privacy: UserPrivacy, banned: boolean, role: UserRole, gamePurchases: { __typename?: 'GamePurchaseConnection', totalCount: number } }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
 
 export type UserFollowingQueryVariables = Exact<{
   userId: Scalars['ID'];
@@ -3001,7 +3001,7 @@ export type UserFollowingQueryVariables = Exact<{
 }>;
 
 
-export type UserFollowingQuery = { __typename?: 'Query', user?: { __typename?: 'User', following: { __typename?: 'UserConnection', nodes?: Array<{ __typename?: 'User', id: string, username: string, slug: string, bio?: string | null, avatarUrl?: string | null, privacy: UserPrivacy, banned: boolean, role: UserRole, gamePurchases: { __typename?: 'GamePurchaseConnection', totalCount: number } } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
+export type UserFollowingQuery = { __typename?: 'Query', user?: { __typename?: 'User', following: { __typename?: 'UserConnection', nodes: Array<{ __typename?: 'User', id: string, username: string, slug: string, bio?: string | null, avatarUrl?: string | null, privacy: UserPrivacy, banned: boolean, role: UserRole, gamePurchases: { __typename?: 'GamePurchaseConnection', totalCount: number } }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
 
 export type UsersQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']>;
@@ -3011,7 +3011,7 @@ export type UsersQueryVariables = Exact<{
 }>;
 
 
-export type UsersQuery = { __typename?: 'Query', users?: { __typename?: 'UserConnection', nodes?: Array<{ __typename?: 'User', id: string, username: string, slug: string, bio?: string | null, avatarUrl?: string | null, privacy: UserPrivacy, banned: boolean, role: UserRole, gamePurchases: { __typename?: 'GamePurchaseConnection', totalCount: number } } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
+export type UsersQuery = { __typename?: 'Query', users?: { __typename?: 'UserConnection', nodes: Array<{ __typename?: 'User', id: string, username: string, slug: string, bio?: string | null, avatarUrl?: string | null, privacy: UserPrivacy, banned: boolean, role: UserRole, gamePurchases: { __typename?: 'GamePurchaseConnection', totalCount: number } }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
 
 export const EventCardFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"eventCardFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Event"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"eventCategory"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"size"},"value":{"kind":"EnumValue","value":"SMALL"}}]}]}},{"kind":"Field","name":{"kind":"Name","value":"eventable"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"GamePurchase"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"game"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Relationship"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"followed"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FavoriteGame"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"game"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<EventCardFieldsFragment, unknown>;
 export const GameCardFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"gameCardFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Game"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"coverUrl"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"size"},"value":{"kind":"EnumValue","value":"MEDIUM"}}]},{"kind":"Field","name":{"kind":"Name","value":"platforms"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"3"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"developers"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"3"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"isFavorited"}}]}}]} as unknown as DocumentNode<GameCardFieldsFragment, unknown>;
