@@ -1,5 +1,5 @@
 <template>
-  <div class="games" v-if="data">
+  <div class="games" v-if="data?.games">
     <h1 class="title">Games</h1>
 
     <div class="columns">
@@ -26,7 +26,7 @@
         </div>
 
         <div class="game-card-list" data-test-id="games-list">
-          <div v-for="game in data.games.nodes" :key="game.id">
+          <div v-for="game in data.games.nodes" :key="game!.id">
             <game-card :game="game"/>
           </div>
         </div>

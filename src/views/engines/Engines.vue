@@ -1,5 +1,5 @@
 <template>
-  <div class="engines" v-if="data">
+  <div class="engines" v-if="data?.engines">
     <h1 class="title">Engines</h1>
 
     <p v-if="userSignedIn" data-test-id="create-engine-button">
@@ -7,9 +7,9 @@
     </p>
 
     <ul data-test-id="engines-list">
-      <li v-for="engine in data.engines.nodes" :key="engine.id">
-        <router-link :to="{ name: 'Engine', params: { id: engine.id }}">
-          {{ engine.name }}
+      <li v-for="engine in data.engines.nodes" :key="engine!.id">
+        <router-link :to="{ name: 'Engine', params: { id: engine!.id }}">
+          {{ engine!.name }}
         </router-link>
       </li>
     </ul>

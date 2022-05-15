@@ -1,5 +1,5 @@
 <template>
-  <div class="series" v-if="data">
+  <div class="series" v-if="data?.seriesList">
     <h1 class="title">Series</h1>
 
     <p v-if="userSignedIn" data-test-id="create-series-button">
@@ -7,9 +7,9 @@
     </p>
 
     <ul data-test-id="series-list">
-      <li v-for="series in data.seriesList.nodes" :key="series.id">
-        <router-link :to="{ name: 'Series', params: { id: series.id }}">
-          {{ series.name }}
+      <li v-for="series in data.seriesList.nodes" :key="series!.id">
+        <router-link :to="{ name: 'Series', params: { id: series!.id }}">
+          {{ series!.name }}
         </router-link>
       </li>
     </ul>

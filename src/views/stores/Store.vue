@@ -1,5 +1,5 @@
 <template>
-  <div class="store" v-if="data">
+  <div class="store" v-if="data?.store">
     <h1 class="title" data-test-id="store-title">{{ data.store.name }}</h1>
 
     <div v-if="userSignedIn" class="field buttons">

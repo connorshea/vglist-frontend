@@ -1,5 +1,5 @@
 <template>
-  <div class="platform" v-if="data">
+  <div class="platform" v-if="data?.platform">
     <h1 class="title" data-test-id="platform-title">{{ data.platform.name }}</h1>
 
     <div v-if="userSignedIn" class="field buttons">
@@ -15,9 +15,9 @@
 
     <a v-if="data.platform.wikidataId !== null" :href="wikidataUrl">Wikidata</a>
 
-    <template v-if="data.platform.games.nodes.length > 0">
+    <template v-if="(data.platform.games.nodes?.length ?? 0) > 0">
       <div class="game-card-list mt-20" data-test-id="platform-games-list">
-        <div v-for="game in data.platform.games.nodes" :key="game.id">
+        <div v-for="game in data.platform.games.nodes" :key="game!.id">
           <game-card :game="game"/>
         </div>
       </div>

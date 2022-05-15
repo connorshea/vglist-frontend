@@ -1,5 +1,5 @@
 <template>  
-  <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile" v-if="data">
+  <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile" v-if="data?.activity">
     <h1 class="title">Global Activity</h1>
 
     <activity-tabs :user-signed-in="userSignedIn"/>

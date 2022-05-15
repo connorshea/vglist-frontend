@@ -1,5 +1,5 @@
 <template>
-  <div class="platforms" v-if="data">
+  <div class="platforms" v-if="data?.platforms">
     <h1 class="title">Platforms</h1>
 
     <p v-if="userSignedIn" data-test-id="create-platform-button">
@@ -7,9 +7,9 @@
     </p>
 
     <ul data-test-id="platforms-list">
-      <li v-for="platform in data.platforms.nodes" :key="platform.id">
-        <router-link :to="{ name: 'Platform', params: { id: platform.id }}">
-          {{ platform.name }}
+      <li v-for="platform in data.platforms.nodes" :key="platform!.id">
+        <router-link :to="{ name: 'Platform', params: { id: platform!.id }}">
+          {{ platform!.name }}
         </router-link>
       </li>
     </ul>

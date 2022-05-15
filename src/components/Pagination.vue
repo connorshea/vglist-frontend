@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, PropType } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 export default defineComponent({
@@ -48,12 +48,12 @@ export default defineComponent({
       required: true
     },
     startCursor: {
-      type: String,
+      type: Object as PropType<String | null>,
       required: false,
       default: null
     },
     endCursor: {
-      type: String,
+      type: Object as PropType<String | null>,
       required: false,
       default: null
     },
