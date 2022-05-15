@@ -1,5 +1,5 @@
 <template>
-  <div v-if="data">
+  <div v-if="data?.wikidataBlocklist">
     <div class="table-container">
       <table class="table is-fullwidth">
         <thead>
@@ -20,7 +20,7 @@
               </th>
               <td>{{ blocklistEntry.name }}</td>
               <td>
-                <router-link v-if="blocklistEntry.user !== null" :to="{ name: 'UserProfile', params: { slug: blocklistEntry.user.slug } }">
+                <router-link v-if="blocklistEntry.user" :to="{ name: 'UserProfile', params: { slug: blocklistEntry.user.slug } }">
                   {{ blocklistEntry.user.username }}
                 </router-link>
               </td>

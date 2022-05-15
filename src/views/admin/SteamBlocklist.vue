@@ -20,8 +20,8 @@
               </th>
               <td>{{ blocklistEntry.name }}</td>
               <td>
-                <router-link v-if="blocklistEntry.user !== null" :to="{ name: 'UserProfile', params: { slug: blocklistEntry.user.slug } }">
-                  {{ blocklistEntry.user?.username }}
+                <router-link v-if="blocklistEntry.user" :to="{ name: 'UserProfile', params: { slug: blocklistEntry.user.slug } }">
+                  {{ blocklistEntry.user.username }}
                 </router-link>
               </td>
               <td>
