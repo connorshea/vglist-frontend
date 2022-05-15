@@ -94,16 +94,15 @@ export default defineComponent({
       if (loadGamePurchase) {
         executeGamePurchase().then(() => {
           if (gamePurchaseData.value !== null) {
-            // Doing it this way because the spread operator won't work correctly for some reason.
-            let gamePurchaseValues = Object.assign({}, gamePurchaseData.value?.gamePurchase);
-            delete gamePurchaseValues['stores'];
-            delete gamePurchaseValues['platforms'];
+            // Pull out stores and platforms because we want to use the nodes,
+            // not the attributes themselves.
+            let { stores, platforms, ...gamePurchaseValues } = Object.assign({}, gamePurchaseData.value?.gamePurchase);
 
             gamePurchase.value = {
               id: props.game.gamePurchaseId,
               game: game,
-              platforms: gamePurchaseData.value?.gamePurchase?.platforms?.nodes,
-              stores: gamePurchaseData.value?.gamePurchase?.stores?.nodes,
+              platforms: platforms.nodes,
+              stores: stores.nodes,
               ...gamePurchaseValues
             };
           } else {
