@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, Ref, ref } from 'vue';
+import { computed, defineComponent, PropType, Ref, ref } from 'vue';
 import SingleSelect from '@/components/fields/SingleSelect.vue';
 import StaticSingleSelect from '@/components/fields/StaticSingleSelect.vue';
 import { range, reverse } from 'lodash';
@@ -35,7 +35,7 @@ export default defineComponent({
   },
   props: {
     platform: {
-      type: Object,
+      type: Object as PropType<Platform | string>,
       required: false,
       default: null
     },
