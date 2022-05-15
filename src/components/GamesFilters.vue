@@ -46,8 +46,8 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const filterData: Ref<{ platform: Platform | null, year: number | null }> = ref({
-      platform: props.platform as Platform | null,
+    const filterData: Ref<{ platform: Platform | undefined, year: number | undefined }> = ref({
+      platform: props.platform as Platform | undefined,
       year: props.year
     });
 
@@ -61,7 +61,7 @@ export default defineComponent({
       if (platform !== null) {
         query.platform_id = platform.id;
       }
-      filterData.value.platform = platform;
+      filterData.value.platform = platform ?? undefined;
       router.push({ name: 'Games', query: query });
     };
 
@@ -71,7 +71,7 @@ export default defineComponent({
       if (year !== null) {
         query.by_year = year;
       }
-      filterData.value.year = year === null ? null : parseInt(year);
+      filterData.value.year = year === null ? undefined : parseInt(year);
       router.push({ name: 'Games', query: query });
     };
 

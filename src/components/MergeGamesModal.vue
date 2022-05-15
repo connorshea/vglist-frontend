@@ -86,8 +86,8 @@ export default defineComponent({
 
     const mergeGames = () => {
       // Bail out early if the game we're trying to merge into is null.
-      if (gameToKeep.value === null) { return; }
-      executeMergeGames({ gameToMergeId: props.game.id, gameToKeepId: gameToKeep.value?.id }).then((result) => {
+      if (gameToKeep.value === undefined) { return; }
+      executeMergeGames({ gameToMergeId: props.game.id, gameToKeepId: gameToKeep.value.id }).then((result) => {
         if (result.error === null && gameToKeep.value !== null) {
           router.push({ name: 'Game', params: { id: gameToKeep.value?.id }});
           context.emit('close');
@@ -100,7 +100,7 @@ export default defineComponent({
       });
     };
 
-    const gameToKeep: Ref<{ id: string, name: string } | null> = ref(null);
+    const gameToKeep: Ref<{ id: string, name: string } | undefined> = ref(undefined);
 
     return {
       gameSelected,
