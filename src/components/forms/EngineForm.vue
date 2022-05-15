@@ -56,12 +56,12 @@ export default defineComponent({
   props: {
     id: {
       required: false,
-      type: String as PropType<string | null>,
+      type: String,
       default: null
     },
     name: {
       required: false,
-      type: String,
+      type: String as PropType<string | null>,
       default: ''
     },
     wikidataId: {
