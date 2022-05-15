@@ -6,6 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
+    "typecheck": "tsc --noEmit && vue-tsc --noEmit",
     "lint": "vue-cli-service lint --no-fix",
     "generate": "graphql-codegen --config codegen.yml"
   },
