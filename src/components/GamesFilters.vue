@@ -46,7 +46,7 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const filterData: Ref<{ platform: Platform | null, year: number | null}> = ref({
+    const filterData: Ref<{ platform: Platform | null, year: number | null }> = ref({
       platform: props.platform as Platform | null,
       year: props.year
     });
