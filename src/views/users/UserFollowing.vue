@@ -1,5 +1,5 @@
 <template>
-  <div class="following" v-if="data">
+  <div class="following" v-if="data?.user">
     <template v-if="data.user.following.nodes.length > 0">
       <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile user-card-list" data-test-id="user-following-list">
         <template v-for="followingUser in data.user.following.nodes" :key="followingUser.id">

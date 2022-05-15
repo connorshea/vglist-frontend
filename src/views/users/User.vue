@@ -1,5 +1,5 @@
 <template>
-  <div class="user" v-if="data">
+  <div class="user" v-if="data?.user">
     <div class="hero-area">
       <div class="hero-image hero-image-150 user-avatar">
         <img v-if="data.user.avatarUrl !== null" :src="data.user.avatarUrl">

@@ -15,9 +15,9 @@
 
     <a v-if="data.genre.wikidataId !== null" :href="wikidataUrl">Wikidata</a>
 
-    <template v-if="(data.genre.games.nodes?.length ?? 0) > 0">
+    <template v-if="data.genre.games.nodes.length > 0">
       <div class="game-card-list mt-20" data-test-id="genre-games-list">
-        <div v-for="game in data.genre.games.nodes" :key="game!.id">
+        <div v-for="game in data.genre.games.nodes" :key="game.id">
           <game-card :game="game"/>
         </div>
       </div>

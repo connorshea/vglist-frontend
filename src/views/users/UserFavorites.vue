@@ -1,5 +1,5 @@
 <template>
-  <div class="favorites" v-if="data">
+  <div class="favorites" v-if="data?.user">
     <template v-if="data.user.favoritedGames.nodes.length > 0">
       <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile game-card-list" data-test-id="user-favorites-list">
         <div v-for="game in data.user.favoritedGames.nodes" :key="game.id">

@@ -7,12 +7,10 @@
     </p>
 
     <ul data-test-id="series-list">
-      <li v-for="series in data.seriesList.nodes" :key="series!.id">
-        <template v-if="series">
-          <router-link :to="{ name: 'Series', params: { id: series.id }}">
-            {{ series.name }}
-          </router-link>
-        </template>
+      <li v-for="series in data.seriesList.nodes" :key="series.id">
+        <router-link :to="{ name: 'Series', params: { id: series.id }}">
+          {{ series.name }}
+        </router-link>
       </li>
     </ul>
 

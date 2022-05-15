@@ -15,9 +15,9 @@
 
     <a v-if="data.platform.wikidataId !== null" :href="wikidataUrl">Wikidata</a>
 
-    <template v-if="(data.platform.games.nodes?.length ?? 0) > 0">
+    <template v-if="data.platform.games.nodes.length > 0">
       <div class="game-card-list mt-20" data-test-id="platform-games-list">
-        <div v-for="game in data.platform.games.nodes" :key="game!.id">
+        <div v-for="game in data.platform.games.nodes" :key="game.id">
           <game-card :game="game"/>
         </div>
       </div>

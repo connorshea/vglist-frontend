@@ -236,18 +236,16 @@ export default defineComponent({
             // Set moreGamesExist to true if there are any games in the current
             // page of results. Otherwise, we can assume that there are no more
             // games to find with this search query.
-            moreGamesExist.value = searchData.value?.globalSearch.nodes?.some((node) => {
-              return node?.__typename === 'GameSearchResult';
+            moreGamesExist.value = searchData.value?.globalSearch.nodes.some((node) => {
+              return node.__typename === 'GameSearchResult';
             }) ?? false;
           }
 
-          searchData.value?.globalSearch.nodes?.forEach((node) => {
-            if (node !== null) {
-              // TypeScript isn't smart enough for this code, and doesn't know
-              // this is safe to do.
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              tempSearchData[node.__typename.replace('SearchResult', '') as SearchResultName].push(node as any);
-            }
+          searchData.value?.globalSearch.nodes.forEach((node) => {
+            // TypeScript isn't smart enough for this code, and doesn't know
+            // this is safe to do.
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            tempSearchData[node.__typename.replace('SearchResult', '') as SearchResultName].push(node as any);
           });
 
           searchResults.value = tempSearchData;
@@ -271,13 +269,13 @@ export default defineComponent({
           // Set moreGamesExist to true if there are any games in the current
           // page of results. Otherwise, we can assume that there are no more
           // games to find with this search query.
-          moreGamesExist.value = searchData.value?.globalSearch.nodes?.some((node) => {
-            return node?.__typename === 'GameSearchResult';
+          moreGamesExist.value = searchData.value?.globalSearch.nodes.some((node) => {
+            return node.__typename === 'GameSearchResult';
           }) ?? false;
         }
 
-        searchData.value?.globalSearch.nodes?.forEach((node) => {
-          if (node?.__typename === 'GameSearchResult') {
+        searchData.value?.globalSearch.nodes.forEach((node) => {
+          if (node.__typename === 'GameSearchResult') {
             // TypeScript isn't smart enough for this code, and doesn't know
             // this is safe to do.
             // eslint-disable-next-line @typescript-eslint/no-explicit-any

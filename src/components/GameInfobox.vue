@@ -52,12 +52,12 @@
       </ul>
     </div>
 
-    <div v-if="game.series !== null" class="infobox-section" data-test-id="game-infobox-series">
+    <div v-if="game.series" class="infobox-section" data-test-id="game-infobox-series">
       <p class="infobox-header has-text-weight-semibold">Series</p>
       <ul>
         <li>
-          <router-link :to="{ name: 'Series', params: { id: game.series!.id }}">
-            {{ game.series!.name }}
+          <router-link :to="{ name: 'Series', params: { id: game.series.id }}">
+            {{ game.series.name }}
           </router-link>
         </li>
       </ul>

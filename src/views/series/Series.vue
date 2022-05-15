@@ -17,7 +17,7 @@
 
     <template v-if="data.series.games.nodes.length > 0">
       <div class="game-card-list mt-20" data-test-id="series-games-list">
-        <div v-for="game in data.series.games.nodes" :key="game!.id">
+        <div v-for="game in data.series.games.nodes" :key="game.id">
           <game-card :game="game"/>
         </div>
       </div>

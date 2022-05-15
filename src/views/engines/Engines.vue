@@ -7,12 +7,10 @@
     </p>
 
     <ul data-test-id="engines-list">
-      <li v-for="engine in data.engines.nodes" :key="engine!.id">
-        <template v-if="engine">
-          <router-link :to="{ name: 'Engine', params: { id: engine.id }}">
-            {{ engine.name }}
-          </router-link>
-        </template>
+      <li v-for="engine in data.engines.nodes" :key="engine.id">
+        <router-link :to="{ name: 'Engine', params: { id: engine.id }}">
+          {{ engine.name }}
+        </router-link>
       </li>
     </ul>
 

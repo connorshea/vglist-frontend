@@ -12,13 +12,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'ErrorBox',
   props: {
     errors: {
-      type: Array,
+      type: Array as PropType<string[]>,
       required: false,
       default: () => []
     },

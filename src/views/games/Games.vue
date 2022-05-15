@@ -26,7 +26,7 @@
         </div>
 
         <div class="game-card-list" data-test-id="games-list">
-          <div v-for="game in data.games.nodes" :key="game!.id">
+          <div v-for="game in data.games.nodes" :key="game.id">
             <game-card :game="game"/>
           </div>
         </div>

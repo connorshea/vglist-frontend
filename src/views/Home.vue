@@ -62,7 +62,7 @@
       </nav>
 
       <div class="game-card-list mt-20" v-if="gamesData?.games" data-test-id="home-games-list">
-        <div v-for="game in gamesData.games.nodes" :key="game!.id">
+        <div v-for="game in gamesData.games.nodes" :key="game.id">
           <game-card :game="game"/>
         </div>
       </div>

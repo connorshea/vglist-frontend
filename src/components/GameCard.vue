@@ -60,12 +60,12 @@ export default defineComponent({
   },
   setup(props) {
     const platforms = computed(() => {
-      if (props.game.platforms?.nodes?.length === 0) { return null; }
-      return props.game.platforms?.nodes?.map((p) => p?.name).join(', ');
+      if (props.game.platforms.nodes.length === 0) { return null; }
+      return props.game.platforms.nodes.map((p) => p?.name).join(', ');
     });
     const developers = computed(() => {
-      if (props.game.developers?.nodes?.length === 0) { return null; }
-      return props.game.developers?.nodes?.map((d) => d?.name).join(', ');
+      if (props.game.developers.nodes.length === 0) { return null; }
+      return props.game.developers.nodes.map((d) => d?.name).join(', ');
     });
 
     const { execute: executeFavoriteGame } = useMutation(FavoriteGameDocument);

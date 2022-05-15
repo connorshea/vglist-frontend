@@ -7,12 +7,10 @@
     </p>
 
     <ul data-test-id="genres-list">
-      <li v-for="genre in data.genres.nodes" :key="genre!.id">
-        <template v-if="genre">
-          <router-link :to="{ name: 'Genre', params: { id: genre.id }}">
-            {{ genre.name }}
-          </router-link>
-        </template>
+      <li v-for="genre in data.genres.nodes" :key="genre.id">
+        <router-link :to="{ name: 'Genre', params: { id: genre.id }}">
+          {{ genre.name }}
+        </router-link>
       </li>
     </ul>
 

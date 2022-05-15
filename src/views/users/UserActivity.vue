@@ -1,5 +1,5 @@
 <template>
-  <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile" v-if="data">
+  <div class="ml-50 mr-50 mr-0-mobile ml-0-mobile" v-if="data?.user">
     <template v-if="data.user.activity.nodes.length > 0">
       <div data-test-id="user-events-list">
         <template v-for="event in data.user.activity.nodes" :key="event.id">
