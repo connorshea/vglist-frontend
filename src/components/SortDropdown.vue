@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue';
+import { computed, defineComponent, PropType, ref } from 'vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 
@@ -39,7 +39,7 @@ export default defineComponent({
   },
   props: {
     sortOptions: {
-      type: Array,
+      type: Array as PropType<{ name: string, value: string }[]>,
       required: true
     },
     initialSortOption: {
