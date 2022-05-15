@@ -129,7 +129,7 @@
 </template>
 
 <script lang="ts">
-import { AddGameToWikidataBlocklistDocument, DeleteGameDocument, FavoriteGameDocument, GameDocument, GameQuery, RemoveGameCoverDocument, UnfavoriteGameDocument } from '@/generated/graphql';
+import { AddGameToWikidataBlocklistDocument, DeleteGameDocument, FavoriteGameDocument, GameDocument, RemoveGameCoverDocument, UnfavoriteGameDocument } from '@/generated/graphql';
 import { computed, defineComponent, ref } from 'vue';
 import { useMutation, useQuery } from 'villus';
 import GameInfobox from '@/components/GameInfobox.vue';
