@@ -27,9 +27,10 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref } from 'vue';
+import { computed, defineComponent, PropType, Ref, ref } from 'vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
+import { GameSort, UserSort } from '@/generated/graphql';
 
 export default defineComponent({
   name: 'SortDropdown',
@@ -39,7 +40,7 @@ export default defineComponent({
   },
   props: {
     sortOptions: {
-      type: Array as PropType<{ name: string, value: string }[]>,
+      type: Array as PropType<{ name: string, value: string | GameSort | UserSort | null }[]>,
       required: true
     },
     initialSortOption: {
@@ -53,9 +54,9 @@ export default defineComponent({
     const dropdownIsActive = ref(false);
     const toggleDropdown = () => dropdownIsActive.value = !dropdownIsActive.value;
 
-    const activeSortOption = ref(props.initialSortOption);
+    const activeSortOption: Ref<string | null> = ref(props.initialSortOption);
 
-    const setActiveSortOption = (sort: string) => {
+    const setActiveSortOption = (sort: string | null) => {
       activeSortOption.value = sort;
       context.emit('activeSortChanged', sort);
       toggleDropdown();

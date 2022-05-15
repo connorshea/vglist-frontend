@@ -50,7 +50,7 @@ import SvgIcon from '@/components/SvgIcon.vue';
 import PlusIcon from '@/assets/icons/plus.svg';
 import PencilIcon from '@/assets/icons/pencil.svg';
 import RemoveIcon from '@/assets/icons/remove.svg';
-import { Game, GamePurchaseDocument, RemoveGameFromLibraryDocument } from '@/generated/graphql';
+import { GamePurchaseDocument, GameQuery, RemoveGameFromLibraryDocument } from '@/generated/graphql';
 import { useMutation, useQuery } from 'villus';
 
 export default defineComponent({
@@ -64,7 +64,7 @@ export default defineComponent({
   },
   props: {
     game: {
-      type: Object as PropType<Game>,
+      type: Object as PropType<NonNullable<GameQuery['game']>>,
       required: true
     },
     isInLibrary: {
