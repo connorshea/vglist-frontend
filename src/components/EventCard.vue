@@ -76,7 +76,7 @@
 </template>
 
 <script lang="ts">
-import { DeleteEventDocument, Event, EventableUnion, FavoriteGame, GamePurchase, Relationship, User } from '@/generated/graphql';
+import { DeleteEventDocument, Event, EventableUnion, EventCardFieldsFragment, FavoriteGame, GamePurchase, Relationship, User } from '@/generated/graphql';
 import { computed, defineComponent, PropType } from 'vue';
 import { format } from 'timeago.js';
 import { useMutation } from 'villus';
@@ -94,7 +94,7 @@ export default defineComponent({
   props: {
     event: {
       required: true,
-      type: Object as PropType<Event>
+      type: Object as PropType<EventCardFieldsFragment>
     }
   },
   emits: ['refresh'],

@@ -112,7 +112,7 @@
 </template>
 
 <script lang="ts">
-import { Game } from '@/generated/graphql';
+import { Game, GameQuery } from '@/generated/graphql';
 import { computed, ComputedRef, defineComponent, PropType } from 'vue';
 
 export default defineComponent({
@@ -120,7 +120,7 @@ export default defineComponent({
   props: {
     game: {
       required: true,
-      type: Object as PropType<Game>
+      type: Object as PropType<NonNullable<GameQuery['game']>>
     }
   },
   setup(props) {
