@@ -12,7 +12,7 @@
       <div class="media-content">
         <div class="content">
 
-          <p v-if="event.eventCategory === 'ADD_TO_LIBRARY'">
+          <p v-if="isGamePurchase(event.eventable) && event.eventCategory === 'ADD_TO_LIBRARY'">
             <router-link :to="{ name: 'UserProfile', params: { slug: event.user.slug }}">
               {{ event.user.username }}
             </router-link>
@@ -23,7 +23,7 @@
             to their library.
           </p>
 
-          <p v-else-if="event.eventCategory === 'FAVORITE_GAME'">
+          <p v-else-if="isFavoriteGame(event.eventable) && event.eventCategory === 'FAVORITE_GAME'">
             <router-link :to="{ name: 'UserProfile', params: { slug: event.user.slug }}">
               {{ event.user.username }}
             </router-link>
@@ -34,14 +34,14 @@
             />.
           </p>
 
-          <p v-else-if="event.eventCategory === 'NEW_USER'">
+          <p v-else-if="isUser(event.eventable) && event.eventCategory === 'NEW_USER'">
             <router-link :to="{ name: 'UserProfile', params: { slug: event.user.slug }}">
               {{ event.user.username }}
             </router-link>
             created their account.
           </p>
 
-          <p v-else-if="event.eventCategory === 'FOLLOWING'">
+          <p v-else-if="isRelationship(event.eventable) && event.eventCategory === 'FOLLOWING'">
             <router-link :to="{ name: 'UserProfile', params: { slug: event.user.slug }}">
               {{ event.user.username }}
             </router-link>
@@ -76,7 +76,7 @@
 </template>
 
 <script lang="ts">
-import { DeleteEventDocument, Event } from '@/generated/graphql';
+import { DeleteEventDocument, Event, EventableUnion, FavoriteGame, GamePurchase, Relationship, User } from '@/generated/graphql';
 import { computed, defineComponent, PropType } from 'vue';
 import { format } from 'timeago.js';
 import { useMutation } from 'villus';
@@ -131,12 +131,34 @@ export default defineComponent({
           context.emit('refresh');
         });
       }
-    }
+    };
+
+    // Use type predicates to narrow the type of the event.
+    // https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates
+    const isGamePurchase = (eventable: EventableUnion): eventable is GamePurchase => {
+      return (eventable as GamePurchase).game !== undefined;
+    };
+
+    const isFavoriteGame = (eventable: EventableUnion): eventable is FavoriteGame => {
+      return (eventable as FavoriteGame).game !== undefined;
+    };
+
+    const isRelationship = (eventable: EventableUnion): eventable is Relationship => {
+      return (eventable as Relationship).followed !== undefined;
+    };
+
+    const isUser = (eventable: EventableUnion): eventable is User => {
+      return (eventable as User).slug !== undefined;
+    };
 
     return {
       relativeTimeAgo,
       handleable,
       eventDeletable,
+      isGamePurchase,
+      isFavoriteGame,
+      isRelationship,
+      isUser,
       deleteEvent
     };
   }
