@@ -21,14 +21,14 @@ export const gameHandlers = [
               {
                 id: '1',
                 name: 'Half-Life 2',
-                developers: { nodes: [] },
-                platforms: { nodes: [] }
+                developers: { nodes: [], totalCount: 0 },
+                platforms: { nodes: [], totalCount: 0 }
               },
               {
                 id: '2',
                 name: 'Portal 2',
-                developers: { nodes: [] },
-                platforms: { nodes: [] }
+                developers: { nodes: [], totalCount: 0 },
+                platforms: { nodes: [], totalCount: 0 }
               }
             ],
             pageInfo: {

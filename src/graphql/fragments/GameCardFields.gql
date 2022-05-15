@@ -6,11 +6,13 @@ fragment gameCardFields on Game {
     nodes {
       name
     }
+    totalCount
   }
   developers(first: 3) {
     nodes {
       name
     }
+    totalCount
   }
   isFavorited
 }

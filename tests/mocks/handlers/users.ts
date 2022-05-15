@@ -155,10 +155,12 @@ export const userHandlers = [
                   name: 'Half-Life 2',
                   coverUrl: null,
                   platforms: {
-                    nodes: []
+                    nodes: [],
+                    totalCount: 0
                   },
                   developers: {
-                    nodes: []
+                    nodes: [],
+                    totalCount: 0
                   },
                   isFavorited: true
                 },
@@ -167,10 +169,12 @@ export const userHandlers = [
                   name: 'Portal 2',
                   coverUrl: null,
                   platforms: {
-                    nodes: []
+                    nodes: [],
+                    totalCount: 0
                   },
                   developers: {
-                    nodes: []
+                    nodes: [],
+                    totalCount: 0
                   },
                   isFavorited: true
                 }

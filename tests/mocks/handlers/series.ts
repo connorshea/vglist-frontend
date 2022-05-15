@@ -57,10 +57,12 @@ export const seriesHandlers = [
                   name: 'Half-Life 1',
                   coverUrl: null,
                   platforms: {
-                    nodes: [{ name: 'Windows' }]
+                    nodes: [{ name: 'Windows' }],
+                    totalCount: 1
                   },
                   developers: {
-                    nodes: [{ name: 'Valve' }]
+                    nodes: [{ name: 'Valve' }],
+                    totalCount: 1
                   },
                   isFavorited: false
                 },
@@ -69,10 +71,12 @@ export const seriesHandlers = [
                   name: 'Half-Life 2',
                   coverUrl: null,
                   platforms: {
-                    nodes: [{ name: 'Windows' }]
+                    nodes: [{ name: 'Windows' }],
+                    totalCount: 1
                   },
                   developers: {
-                    nodes: [{ name: 'Valve' }]
+                    nodes: [{ name: 'Valve' }],
+                    totalCount: 1
                   },
                   isFavorited: false
                 }

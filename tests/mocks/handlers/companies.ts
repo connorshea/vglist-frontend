@@ -57,16 +57,16 @@ export const companyHandlers = [
                   name: 'Portal 2',
                   coverUrl: null,
                   isFavorited: false,
-                  developers: { nodes: [] },
-                  platforms: { nodes: [] }
+                  developers: { nodes: [], totalCount: 0 },
+                  platforms: { nodes: [], totalCount: 0 }
                 },
                 {
                   id: '2',
                   name: 'Half-Life 2',
                   coverUrl: null,
                   isFavorited: false,
-                  developers: { nodes: [] },
-                  platforms: { nodes: [] }
+                  developers: { nodes: [], totalCount: 0 },
+                  platforms: { nodes: [], totalCount: 0 }
                 }
               ],
               pageInfo: {
@@ -83,16 +83,16 @@ export const companyHandlers = [
                   name: 'Minecraft',
                   coverUrl: null,
                   isFavorited: false,
-                  developers: { nodes: [] },
-                  platforms: { nodes: [] }
+                  developers: { nodes: [], totalCount: 0 },
+                  platforms: { nodes: [], totalCount: 0 }
                 },
                 {
                   id: '4',
                   name: 'Hexcells',
                   coverUrl: null,
                   isFavorited: false,
-                  developers: { nodes: [] },
-                  platforms: { nodes: [] }
+                  developers: { nodes: [], totalCount: 0 },
+                  platforms: { nodes: [], totalCount: 0 }
                 }
               ],
               pageInfo: {
