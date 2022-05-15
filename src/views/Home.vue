@@ -71,7 +71,7 @@
 </template>
 
 <script lang="ts">
-import { GamesDocument, HomeStatisticsDocument } from '@/generated/graphql';
+import { GamesDocument, GameSort, HomeStatisticsDocument } from '@/generated/graphql';
 import { defineComponent } from 'vue';
 import { useQuery } from 'villus';
 import GameCard from '@/components/GameCard.vue';
@@ -82,7 +82,7 @@ export default defineComponent({
     GameCard
   },
   setup() {
-    const { data: gamesData } = useQuery({ query: GamesDocument });
+    const { data: gamesData } = useQuery({ query: GamesDocument, variables: { sortBy: GameSort.RecentlyUpdated } });
     const { data: statsData } = useQuery({ query: HomeStatisticsDocument });
 
     return {
