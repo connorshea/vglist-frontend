@@ -1,0 +1,33 @@
+name: Lint
+
+on: [push]
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16.x'
+    - name: Install
+      run: yarn install --frozen-lockfile
+    - name: Lint
+      run: yarn run lint
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16.x'
+    - name: Install
+      run: yarn install --frozen-lockfile
+    - name: Compile TypeScript
+      run: yarn run tsc --noEmit
+    - name: Compile Vue TypeScript
+      run: yarn run vue-tsc --noEmit

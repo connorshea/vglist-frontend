@@ -1,9 +1,9 @@
-name: Lint and test
+name: Test
 
 on: [push]
 
 jobs:
-  test-and-lint:
+  jest:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -14,8 +14,6 @@ jobs:
         node-version: '16.x'
     - name: Install
       run: yarn install --frozen-lockfile
-    - name: Lint
-      run: yarn run lint
     - name: Build
       run: yarn run build
     - name: Test
