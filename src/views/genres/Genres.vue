@@ -1,5 +1,5 @@
 <template>
-  <div class="genres" v-if="data">
+  <div class="genres" v-if="data?.genres">
     <h1 class="title">Genres</h1>
 
     <p v-if="userSignedIn" data-test-id="create-genre-button">
@@ -7,10 +7,12 @@
     </p>
 
     <ul data-test-id="genres-list">
-      <li v-for="genre in data.genres.nodes" :key="genre.id">
-        <router-link :to="{ name: 'Genre', params: { id: genre.id }}">
-          {{ genre.name }}
-        </router-link>
+      <li v-for="genre in data.genres.nodes" :key="genre!.id">
+        <template v-if="genre">
+          <router-link :to="{ name: 'Genre', params: { id: genre.id }}">
+            {{ genre.name }}
+          </router-link>
+        </template>
       </li>
     </ul>
 

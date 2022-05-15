@@ -26,7 +26,7 @@ export default defineComponent({
   setup() {
     const engine: Ref<{ name: string | null, wikidataId: number | string | null }> = ref({
       name: null,
-      wikidataId: null
+      wikidataId: null,
     });
 
     const store = useStore<State>();

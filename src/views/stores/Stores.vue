@@ -8,9 +8,11 @@
 
     <ul data-test-id="stores-list">
       <li v-for="store in data.stores.nodes" :key="store!.id">
-        <router-link :to="{ name: 'Store', params: { id: store!.id }}">
-          {{ store!.name }}
-        </router-link>
+        <template v-if="store">
+          <router-link :to="{ name: 'Store', params: { id: store.id }}">
+            {{ store.name }}
+          </router-link>
+        </template>
       </li>
     </ul>
 

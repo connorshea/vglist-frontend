@@ -8,9 +8,11 @@
 
     <ul data-test-id="platforms-list">
       <li v-for="platform in data.platforms.nodes" :key="platform!.id">
-        <router-link :to="{ name: 'Platform', params: { id: platform!.id }}">
-          {{ platform!.name }}
-        </router-link>
+        <template v-if="platform">
+          <router-link :to="{ name: 'Platform', params: { id: platform.id }}">
+            {{ platform.name }}
+          </router-link>
+        </template>
       </li>
     </ul>
 

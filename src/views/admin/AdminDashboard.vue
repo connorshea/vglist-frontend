@@ -69,22 +69,24 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="statistic in data.siteStatistics.nodes.slice()" :key="statistic.id">
-            <td>{{ formatTimestamp(statistic.timestamp) }}</td>
-            <td>{{ statistic.users }}</td>
-            <td>{{ statistic.games }}</td>
-            <td>{{ statistic.platforms }}</td>
-            <td>{{ statistic.series }}</td>
-            <td>{{ statistic.engines }}</td>
-            <td>{{ statistic.companies }}</td>
-            <td>{{ statistic.genres }}</td>
-            <td>{{ statistic.stores }}</td>
-            <td>{{ statistic.events }}</td>
-            <td>{{ statistic.gamePurchases }}</td>
-            <td>{{ statistic.relationships }}</td>
-            <td>{{ statistic.gamesWithCovers }}</td>
-            <td>{{ statistic.gamesWithReleaseDates }}</td>
-            <td>{{ statistic.bannedUsers }}</td>
+          <tr v-for="statistic in data.siteStatistics.nodes?.slice()" :key="statistic!.id">
+            <template v-if="statistic">
+              <td>{{ formatTimestamp(statistic.timestamp) }}</td>
+              <td>{{ statistic.users }}</td>
+              <td>{{ statistic.games }}</td>
+              <td>{{ statistic.platforms }}</td>
+              <td>{{ statistic.series }}</td>
+              <td>{{ statistic.engines }}</td>
+              <td>{{ statistic.companies }}</td>
+              <td>{{ statistic.genres }}</td>
+              <td>{{ statistic.stores }}</td>
+              <td>{{ statistic.events }}</td>
+              <td>{{ statistic.gamePurchases }}</td>
+              <td>{{ statistic.relationships }}</td>
+              <td>{{ statistic.gamesWithCovers }}</td>
+              <td>{{ statistic.gamesWithReleaseDates }}</td>
+              <td>{{ statistic.bannedUsers }}</td>
+            </template>
           </tr>
         </tbody>
       </table>
@@ -107,16 +109,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="statistic in data.siteStatistics.nodes.slice()" :key="statistic.id">
-            <td>{{ formatTimestamp(statistic.timestamp) }}</td>
-            <td>{{ statistic.mobygamesIds }}</td>
-            <td>{{ statistic.pcgamingwikiIds }}</td>
-            <td>{{ statistic.wikidataIds }}</td>
-            <td>{{ statistic.giantbombIds }}</td>
-            <td>{{ statistic.steamAppIds }}</td>
-            <td>{{ statistic.epicGamesStoreIds }}</td>
-            <td>{{ statistic.gogIds }}</td>
-            <td>{{ statistic.igdbIds }}</td>
+          <tr v-for="statistic in data.siteStatistics.nodes?.slice()" :key="statistic!.id">
+            <template v-if="statistic">
+              <td>{{ formatTimestamp(statistic.timestamp) }}</td>
+              <td>{{ statistic.mobygamesIds }}</td>
+              <td>{{ statistic.pcgamingwikiIds }}</td>
+              <td>{{ statistic.wikidataIds }}</td>
+              <td>{{ statistic.giantbombIds }}</td>
+              <td>{{ statistic.steamAppIds }}</td>
+              <td>{{ statistic.epicGamesStoreIds }}</td>
+              <td>{{ statistic.gogIds }}</td>
+              <td>{{ statistic.igdbIds }}</td>
+            </template>
           </tr>
         </tbody>
       </table>
@@ -137,14 +141,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="statistic in data.siteStatistics.nodes.slice()" :key="statistic.id">
-            <td>{{ formatTimestamp(statistic.timestamp) }}</td>
-            <td>{{ statistic.companyVersions }}</td>
-            <td>{{ statistic.gameVersions }}</td>
-            <td>{{ statistic.genreVersions }}</td>
-            <td>{{ statistic.engineVersions }}</td>
-            <td>{{ statistic.platformVersions }}</td>
-            <td>{{ statistic.seriesVersions }}</td>
+          <tr v-for="statistic in data.siteStatistics.nodes?.slice()" :key="statistic!.id">
+            <template v-if="statistic">
+              <td>{{ formatTimestamp(statistic.timestamp) }}</td>
+              <td>{{ statistic.companyVersions }}</td>
+              <td>{{ statistic.gameVersions }}</td>
+              <td>{{ statistic.genreVersions }}</td>
+              <td>{{ statistic.engineVersions }}</td>
+              <td>{{ statistic.platformVersions }}</td>
+              <td>{{ statistic.seriesVersions }}</td>
+            </template>
           </tr>
         </tbody>
       </table>

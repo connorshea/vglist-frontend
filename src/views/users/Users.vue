@@ -1,5 +1,5 @@
 <template>
-  <div class="users" v-if="data">
+  <div class="users" v-if="data?.users">
     <h1 class="title">Users</h1>
 
     <sort-dropdown

@@ -8,9 +8,11 @@
 
     <ul data-test-id="companies-list">
       <li v-for="company in data.companies.nodes" :key="company!.id">
-        <router-link :to="{ name: 'Company', params: { id: company!.id }}">
-          {{ company!.name }}
-        </router-link>
+        <template v-if="company">
+          <router-link :to="{ name: 'Company', params: { id: company.id }}">
+            {{ company.name }}
+          </router-link>
+        </template>
       </li>
     </ul>
 

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="data">
+  <div v-if="data?.steamBlocklist">
     <div class="table-container">
       <table class="table is-fullwidth">
         <thead>
@@ -12,7 +12,7 @@
         </thead>
         <tbody data-test-id="steam-blocklist-table-body">
           <template v-for="blocklistEntry in data.steamBlocklist.nodes" :key="blocklistEntry.id">
-            <tr>
+            <tr v-if="blocklistEntry">
               <th>
                 <a :href="steamUrl(blocklistEntry.steamAppId)">
                   {{ blocklistEntry.steamAppId }}
@@ -21,7 +21,7 @@
               <td>{{ blocklistEntry.name }}</td>
               <td>
                 <router-link v-if="blocklistEntry.user !== null" :to="{ name: 'UserProfile', params: { slug: blocklistEntry.user.slug } }">
-                  {{ blocklistEntry.user.username }}
+                  {{ blocklistEntry.user?.username }}
                 </router-link>
               </td>
               <td>
@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import { SteamBlocklistDocument, RemoveFromSteamBlocklistDocument } from '@/generated/graphql';
+import { SteamBlocklistDocument, RemoveFromSteamBlocklistDocument, SteamBlocklistEntry } from '@/generated/graphql';
 import { computed, defineComponent } from 'vue';
 import { useMutation, useQuery } from 'villus';
 import Pagination from '@/components/Pagination.vue';

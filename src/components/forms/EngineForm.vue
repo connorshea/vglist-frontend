@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, Ref, ref } from 'vue';
+import { computed, defineComponent, PropType, Ref, ref } from 'vue';
 import TextField from '@/components/fields/TextField.vue';
 import NumberField from '@/components/fields/NumberField.vue';
 import ErrorBox from '@/components/ErrorBox.vue';
@@ -56,7 +56,7 @@ export default defineComponent({
   props: {
     id: {
       required: false,
-      type: String,
+      type: Object as PropType<string | null>,
       default: null
     },
     name: {
@@ -66,8 +66,8 @@ export default defineComponent({
     },
     wikidataId: {
       required: false,
-      type: [Number, String],
-      default: null
+      type: Object as PropType<number | string | null>,
+      default: ''
     },
     // Should be either 'create' or 'update'
     formState: {
