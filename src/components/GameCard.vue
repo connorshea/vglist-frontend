@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { FavoriteGameDocument, Game, UnfavoriteGameDocument } from '@/generated/graphql';
+import { Company, FavoriteGameDocument, GameCardFieldsFragment, Platform, UnfavoriteGameDocument } from '@/generated/graphql';
 import { computed, defineComponent, PropType, ref } from 'vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
@@ -55,7 +55,7 @@ export default defineComponent({
   props: {
     game: {
       required: true,
-      type: Object as PropType<Game>
+      type: Object as PropType<GameCardFieldsFragment>
     }
   },
   setup(props) {

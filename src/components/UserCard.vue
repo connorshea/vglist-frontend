@@ -22,14 +22,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { UserCardFieldsFragment } from '@/generated/graphql';
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'UserCard',
   props: {
     user: {
       required: true,
-      type: Object
+      type: Object as PropType<UserCardFieldsFragment>
     }
   }
 });
