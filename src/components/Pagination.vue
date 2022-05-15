@@ -15,7 +15,7 @@
            rel="prev"
            class="pagination-previous"
            :disabled="previousPageDisabled"
-           @click.prevent="previousPage(startCursor)"
+           @click.prevent="previousPage(startCursor!)"
            data-test-id="pagination-previous-button"
         >Previous</a>
       </router-link>
@@ -28,7 +28,7 @@
            rel="next"
            class="pagination-next"
            :disabled="nextPageDisabled"
-           @click.prevent="nextPage(endCursor)"
+           @click.prevent="nextPage(endCursor!)"
            data-test-id="pagination-next-button"
         >Next</a>
       </router-link>
@@ -48,12 +48,12 @@ export default defineComponent({
       required: true
     },
     startCursor: {
-      type: Object as PropType<String | null>,
+      type: String as PropType<string | null>,
       required: false,
       default: null
     },
     endCursor: {
-      type: Object as PropType<String | null>,
+      type: String as PropType<string | null>,
       required: false,
       default: null
     },

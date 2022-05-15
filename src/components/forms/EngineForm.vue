@@ -56,7 +56,7 @@ export default defineComponent({
   props: {
     id: {
       required: false,
-      type: Object as PropType<string | null>,
+      type: String as PropType<string | null>,
       default: null
     },
     name: {
@@ -66,7 +66,7 @@ export default defineComponent({
     },
     wikidataId: {
       required: false,
-      type: Object as PropType<number | string | null>,
+      type: [String, Number] as PropType<number | string | null>,
       default: ''
     },
     // Should be either 'create' or 'update'
