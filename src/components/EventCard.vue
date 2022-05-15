@@ -12,7 +12,7 @@
       <div class="media-content">
         <div class="content">
 
-          <p v-if="isGamePurchase(event.eventable) && event.eventCategory === 'ADD_TO_LIBRARY'">
+          <p v-if="event.eventable.__typename === 'GamePurchase'">
             <router-link :to="{ name: 'UserProfile', params: { slug: event.user.slug }}">
               {{ event.user.username }}
             </router-link>
@@ -23,7 +23,7 @@
             to their library.
           </p>
 
-          <p v-else-if="isFavoriteGame(event.eventable) && event.eventCategory === 'FAVORITE_GAME'">
+          <p v-else-if="event.eventable.__typename === 'FavoriteGame'">
             <router-link :to="{ name: 'UserProfile', params: { slug: event.user.slug }}">
               {{ event.user.username }}
             </router-link>
@@ -34,14 +34,14 @@
             />.
           </p>
 
-          <p v-else-if="isUser(event.eventable) && event.eventCategory === 'NEW_USER'">
+          <p v-else-if="event.eventable.__typename === 'User'">
             <router-link :to="{ name: 'UserProfile', params: { slug: event.user.slug }}">
               {{ event.user.username }}
             </router-link>
             created their account.
           </p>
 
-          <p v-else-if="isRelationship(event.eventable) && event.eventCategory === 'FOLLOWING'">
+          <p v-else-if="event.eventable.__typename === 'Relationship'">
             <router-link :to="{ name: 'UserProfile', params: { slug: event.user.slug }}">
               {{ event.user.username }}
             </router-link>
@@ -133,32 +133,10 @@ export default defineComponent({
       }
     };
 
-    // Use type predicates to narrow the type of the event.
-    // https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates
-    const isGamePurchase = (eventable: EventableUnion): eventable is GamePurchase => {
-      return (eventable as GamePurchase).game !== undefined;
-    };
-
-    const isFavoriteGame = (eventable: EventableUnion): eventable is FavoriteGame => {
-      return (eventable as FavoriteGame).game !== undefined;
-    };
-
-    const isRelationship = (eventable: EventableUnion): eventable is Relationship => {
-      return (eventable as Relationship).followed !== undefined;
-    };
-
-    const isUser = (eventable: EventableUnion): eventable is User => {
-      return (eventable as User).slug !== undefined;
-    };
-
     return {
       relativeTimeAgo,
       handleable,
       eventDeletable,
-      isGamePurchase,
-      isFavoriteGame,
-      isRelationship,
-      isUser,
       deleteEvent
     };
   }
