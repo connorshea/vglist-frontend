@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, Ref, ref } from 'vue';
+import { computed, defineComponent, PropType, Ref, ref } from 'vue';
 import TextField from '@/components/fields/TextField.vue';
 import ErrorBox from '@/components/ErrorBox.vue';
 import { useMutation } from 'villus';
@@ -50,7 +50,7 @@ export default defineComponent({
     },
     name: {
       required: false,
-      type: String,
+      type: String as PropType<string | null>,
       default: ''
     },
     // Should be either 'create' or 'update'

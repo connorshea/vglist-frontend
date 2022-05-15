@@ -25,7 +25,7 @@ export default defineComponent({
   },
   setup() {
     const store: Ref<{ name: string | null }> = ref({
-      name: null,
+      name: null
     });
 
     const vuexStore = useStore<State>();
