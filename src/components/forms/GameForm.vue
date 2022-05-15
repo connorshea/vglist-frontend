@@ -135,7 +135,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, Ref, ref } from 'vue';
+import { computed, defineComponent, PropType, Ref, ref } from 'vue';
 import TextField from '@/components/fields/TextField.vue';
 import SingleSelect from '@/components/fields/SingleSelect.vue';
 import NumberField from '@/components/fields/NumberField.vue';
@@ -167,11 +167,11 @@ export default defineComponent({
     },
     name: {
       required: false,
-      type: String,
+      type: String as PropType<string | null>,
       default: ''
     },
     releaseDate: {
-      type: Date,
+      type: Date as PropType<Date | null>,
       required: false,
       default: () => null
     },
@@ -201,7 +201,7 @@ export default defineComponent({
       default: () => []
     },
     series: {
-      type: Object,
+      type: Object as PropType<{ name: string } | null>,
       required: false,
       default: () => {
         return { name: '' };
@@ -213,37 +213,37 @@ export default defineComponent({
       default: () => []
     },
     epicGamesStoreId: {
-      type: String,
+      type: String as PropType<string | null>,
       required: false,
       default: ''
     },
     gogId: {
-      type: String,
+      type: String as PropType<string | null>,
       required: false,
       default: ''
     },
     igdbId: {
-      type: String,
+      type: String as PropType<string | null>,
       required: false,
       default: ''
     },
     wikidataId: {
-      type: Number,
+      type: [String, Number] as PropType<string | number | null>,
       required: false,
       default: null
     },
     pcgamingwikiId: {
-      type: String,
+      type: String as PropType<string | null>,
       required: false,
       default: ''
     },
     mobygamesId: {
-      type: String,
+      type: String as PropType<string | null>,
       required: false,
       default: ''
     },
     giantbombId: {
-      type: String,
+      type: String as PropType<string | null>,
       required: false,
       default: ''
     },
@@ -328,7 +328,7 @@ export default defineComponent({
       name: props.name ?? '',
       // Hack to format the release date in YYYY-MM-DD, without a time element.
       releaseDate: props.releaseDate?.toISOString().split('T')[0] ?? null,
-      wikidataId: props.wikidataId ?? '',
+      wikidataId: props.wikidataId?.toString() ?? '',
       series: props.series as { id: string, name: string } ,
       platforms: props.platforms as Array<{ id: string, name: string }>,
       engines: props.engines as Array<{ id: string, name: string }>,
