@@ -76,7 +76,7 @@
 </template>
 
 <script lang="ts">
-import { DeleteEventDocument, Event, EventableUnion, EventCardFieldsFragment, FavoriteGame, GamePurchase, Relationship, User } from '@/generated/graphql';
+import { DeleteEventDocument, EventCardFieldsFragment } from '@/generated/graphql';
 import { computed, defineComponent, PropType } from 'vue';
 import { format } from 'timeago.js';
 import { useMutation } from 'villus';

@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { Company, FavoriteGameDocument, GameCardFieldsFragment, Platform, UnfavoriteGameDocument } from '@/generated/graphql';
+import { FavoriteGameDocument, GameCardFieldsFragment, UnfavoriteGameDocument } from '@/generated/graphql';
 import { computed, defineComponent, PropType, ref } from 'vue';
 import SvgIcon from '@/components/SvgIcon.vue';
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
