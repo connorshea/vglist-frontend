@@ -120,7 +120,7 @@
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from 'vue';
 import { useMutation } from 'villus';
-import { AddGameToLibraryDocument, Game, GamePurchaseCompletionStatus, GameSearchDocument, PlatformSearchDocument, StoreSearchDocument, UpdateGameInLibraryDocument } from '@/generated/graphql';
+import { AddGameToLibraryDocument, GamePurchaseCompletionStatus, GameQuery, GameSearchDocument, PlatformSearchDocument, StoreSearchDocument, UpdateGameInLibraryDocument } from '@/generated/graphql';
 
 import TextArea from '@/components/fields/TextArea.vue';
 import NumberField from '@/components/fields/NumberField.vue';
@@ -191,7 +191,7 @@ export default defineComponent({
       default: () => []
     },
     game: {
-      type: Object as PropType<Game>,
+      type: Object as PropType<NonNullable<GameQuery['game']>>,
       required: false,
       default: () => { return {}; }
     },

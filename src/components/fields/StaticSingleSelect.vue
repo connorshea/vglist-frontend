@@ -19,7 +19,7 @@
 import vSelect from 'vue-select-connorshea';
 import 'vue-select-connorshea/dist/vue-select.css';
 import { snakeCase } from 'lodash';
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'StaticSingleSelect',
@@ -38,7 +38,7 @@ export default defineComponent({
       default: ''
     },
     modelValue: {
-      type: [Object, Number, String],
+      type: [Object, Number, String] as PropType<Record<string, unknown> | string | number | null>,
       required: false,
       default: null
     },

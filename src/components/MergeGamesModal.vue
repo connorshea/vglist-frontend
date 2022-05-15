@@ -40,7 +40,7 @@
 <script lang="ts">
 import { defineComponent, PropType, Ref, ref } from 'vue';
 import SingleSelect from '@/components/fields/SingleSelect.vue';
-import { Game, GameSearchDocument, MergeGamesDocument } from '@/generated/graphql';
+import { GameQuery, GameSearchDocument, MergeGamesDocument } from '@/generated/graphql';
 import { submitButtonErrorAnimation } from '@/helpers/submitButtonErrorAnimation';
 import { useMutation } from 'villus';
 import { useRouter } from 'vue-router';
@@ -52,7 +52,7 @@ export default defineComponent({
   },
   props: {
     game: {
-      type: Object as PropType<Game>,
+      type: Object as PropType<NonNullable<GameQuery['game']>>,
       required: true
     },
     isActive: {
