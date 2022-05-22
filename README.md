@@ -52,6 +52,8 @@ yarn lint
 
 ### Updating the generated GraphQL types
 
+Note: Instead of these manual steps, you can instead use `bundle exec rake graphql:copy_to_frontend` in your `vglist` directory to generate and copy the files.
+
 - In your copy of the `vglist` Rails app, run `bundle exec rake graphql:schema:dump` to generate a dump of the GraphQL schema.
 - Copy the newly-generated `schema.graphql` file to the vglist-frontend directory, probably with `cp schema.graphql ../vglist-frontend`.
 - In vglist-frontend, run `yarn run generate` to regenerate the GraphQL types.
